@@ -1,0 +1,97 @@
+{% extends "base-titlebar.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class='uk-container uk-margin-top'>
+		<div hidden id="error-message" class="uk-alert uk-alert-danger">
+			<p>Sorry Something went wrong try again, or reload page</p>
+		</div>
+		 <div hidden id="publish-message" class="uk-alert uk-alert-success">
+			<p>Article has been published!</p>
+		</div>
+		 <div hidden id="unpublish-message" class="uk-alert uk-alert-success">
+			<p>Article has been unpublished!</p>
+		</div>
+		<div uk-grid>
+			<div class="uk-width-1-2">
+				<h4>Article Title: {{ article.title }}</h4>
+			</div>
+			 <div class="uk-width-1-2">
+				<h4>by: {{ post.contributor.user_profile.user.first_name }} {{ post.contributor.user_profile.user.last_name }}</h4>
+			</div>
+		</div>
+		<br>
+		<form method="post" action=".">{% csrf_token %}
+			{% if is_user_article %}
+				<div uk-grid>
+					<div class="uk-width-1-3">
+						{% if post.isPublished %}
+							<button class="uk-button uk-button-primary" value="Make Live" type="submit" name="change_publish_false">Unpublish Article</button>
+						{% else %}
+							<button class="uk-button uk-button-success" value="Make Live" type="submit" name="change_publish_true">Make Live</button>
+						{% endif %}
+                        <button id='preview-btn' type="button" class="uk-button uk-button-secondary"
+                                 uk-toggle="target: #preview-modal">
+                             Preview
+                         </button>
+					</div>
+					<div class="uk-width-1-3">
+						<button class="uk-button uk-button-danger" onclick="confirmDeletion()">Remove</button>
+					</div>
+				<hr>
+				</div>
+			{% endif %}
+			<div class="uk-grid">
+				<div class="uk-width-1-3">
+					<h3>Views: {{ post.views }}</h3>
+				</div>
+				<div class="uk-width-1-3">
+					<h3>Likes: {{ post.likes }}</h3>
+				</div>
+			</div>
+		</form>
+		{% with a=article p=post %}
+			{% include 'partials/article_partial.html' %}
+		{% endwith %}
+        <div id="preview-modal" uk-modal>
+            {% include 'previews/article_preview.html' %}
+        </div>
+	<script>
+		function confirmDeletion(){
+			var message = "Are you sure you want to delete this article?";
+			if(confirm(message)){
+				removeArticle();
+			}
+		}
+		function removeArticle()
+		{
+			$.ajaxSetup({
+				data: {csrfmiddlewaretoken: '{{ csrf_token }}'}
+			});
+			var slug_var = '{{ post.slug }}';
+			$.ajax({
+				url: "{% url 'contribution:post_remove' %}",
+				type: "POST",
+				data: { slug: slug_var },
+				success: function(data)
+				{
+					var res_data = JSON.parse(data);
+					if (res_data.deleted == true){
+						window.location.replace('{% url 'contribution:all_posts' %}');
+					}
+					else{
+						$("#error-message").show();
+						console.log("something went wrong" + res_data.deleted);
+					}
+				},
+				error: function(xhr)
+				{
+					// $("#error-message").text(xhr.responseText).show();
+					$("#error-message").show();
+					console.log("ERROR: " + xhr.responseText);
+				}
+			})
+		}
+	</script>
+</div>
+{% endblock %}

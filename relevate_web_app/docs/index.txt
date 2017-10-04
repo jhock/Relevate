@@ -1,0 +1,66 @@
+.. Relevate documentation master file, created by
+   sphinx-quickstart on Tue Jan 17 12:35:47 2017.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Welcome to Relevate's documentation!
+====================================
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Basic:
+
+   Basic Views <base/base_views>
+   About Page Views <aboutpage/about_views>
+   About Page Model <aboutpage/about_person_model>
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Profile Views:
+
+   Adviser <advisers/adviser_views>
+   Contributor <contributors/contributor_views>
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Profile Models:
+   
+   Adviser <advisers/adviser_models>
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Post Views:
+
+   Article <articles/article_views>
+   Infographic <infographics/infographic_views>
+   Link <links/link_views>
+   Post <posts/post_views>
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Post Models:
+
+   Article <articles/article_models>
+   Infographic <infographics/infographic_model>
+   Link <links/link_model>
+   Post <posts/post_models>
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Utilities:
+
+   Link Utils <modules/contribution/link_util>
+   Infographic Utils <modules/contribution/infographic_util>
+   Contributor Utils <modules/profiles/contributor_utils>
+   Search Utils <modules/contribution/search_util>
+   Post Utils <modules/contribution/post_util>
+   Authentication Views <authentication/authentication_views>
+
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
+

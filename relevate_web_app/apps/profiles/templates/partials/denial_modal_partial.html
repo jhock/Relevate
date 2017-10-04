@@ -1,0 +1,18 @@
+<div id="postDeny{{p.id}}" class='uk-modal-container' uk-modal>
+	<div class="uk-modal-dialog">
+		<div class="uk-modal-body">
+			<h3 class='uk-modal-title'>Reason for Denial:</h3>
+			<p><i>This will be emailed to your advisee</i></p>
+			<p id="warning-tag-{{ p.id }}" style="display: none; color: red;">
+				A reason is required</p>
+			<textarea id="text-area-{{ p.id }}" cols="120" rows="10"
+			style="font-size: 18px;"> </textarea>
+			<br>
+			<br>
+			<button name="{{ p.id }}" class="uk-button-danger uk-button-large post-deny-btn">Deny</button>
+			<br>
+			<br>
+			<p style="dislay:none;"></p>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,28 @@
+<div class="uk-card uk-card-default uk-box-shadow-large">
+	<div class='uk-card-body'>
+		<div class='uk-clearfix'>
+			<div class='uk-float-right'>
+				<button name='{{ p.id }}' class='uk-button-large uk-button-success post-approve-btn'>Approve</button>
+				<button type='button'  uk-toggle="target: #postDeny{{ p.id }};" class="uk-button uk-button-large uk-button-danger" style='color: white;'>Deny</button>
+			</div>
+			<div class='uk-card-title'>
+				<a href="{% url 'contribution:article_view' p.slug %}" class='uk-panel-title'>{{ a.title }}</a>
+			</div>
+		</div>
+		<div class='uk-margin-top'>
+			<img class='post-img uk-align-center' src="{{ a.image.url }}">
+		</div>
+		<p class="">{{ a.content|safe }}</p>
+		<hr>
+		<div class="uk-grid">
+		<div class="uk-width-1-1">
+			<small>Topics: </small>
+		</div>
+			{% for topic in a.article_topics.all %}
+				<div class="uk-width-1-6">
+					<button class="uk-button-link"><small>{{ topic.name }}</small></button>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>

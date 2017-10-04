@@ -1,0 +1,52 @@
+{% extends "base-titlebar.html" %}
+{% load staticfiles %}
+
+{% block head %}
+	{{ block.super }}
+	<link rel="stylesheet" href="{% static 'uikit/css/components/accordion.min.css' %}"/>
+	<link rel="stylesheet" href="{% static 'uikit/css/components/accordion.almost-flat.min.css' %}"/>
+	<link rel="stylesheet" href="{% static 'uikit/css/components/accordion.gradient.min.css' %}"/>
+
+	<script src="{% static 'uikit/js/components/accordion.min.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class='uk-container'>
+	<div class="uk-width-1-2 uk-push-8-10">
+		<a class="uk-button uk-button-primary" href="{% url 'contribution:infographic_create_view' %}">
+			<span style="color: white">Add New Infographic Article</span></a>
+	</div>
+	<hr>
+	{% for a in info_list %}
+		<div class="uk-grid">
+			<div class="uk-width-1-2">
+				<a href="{% url 'contribution:article_view' a.slug %}"><h4>{{ a.title }}</h4></a>
+			</div>
+			<div class="uk-width-1-2 uk-push-1-3">
+				<a href="{% url 'contribution:article_update' a.slug %}"><h4>Edit</h4></a>
+			</div>
+		</div>
+		<div class="uk-panel-box">
+			<p class="">{{ a.content|safe }}</p>
+		</div>
+		<div class="uk-panel">
+			<div class="uk-grid">
+			<div class="">
+				<small>Infographic Topics: </small>
+			</div>
+				{% for topic in a.topics.all %}
+					<div class="uk-width-1-6 uk-button-dropdown" data-uk-dropdown>
+						<button class="uk-button-link"><small>{{ topic.name }}</small></button>
+						<div class="uk-dropdown uk-dropdown-small">
+							<span>
+								{{ topic.description }}
+							</span>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+		<hr>
+	{% endfor %}
+</div>
+{% endblock %}

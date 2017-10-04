@@ -1,0 +1,18 @@
+{% extends "base-titlebar.html" %}
+{% load staticfiles %}
+
+{% block content %}
+	<div class="uk-vertical-align uk-text-center uk-height-1-1">
+		<div class="uk-vertical-align-middle" style="width: 300px; border: 1px solid #2BA2D9; border-radius: 6px">
+            Your account has not yet been confirmed. Click here to resend the confirmation code to your email.
+			<form action="{% url 'profile:confirmation' %}"
+				  class="uk-form uk-panel uk-panel-box" method="post">
+				{% csrf_token %}
+				<div class="uk-form-row">
+					<button type="submit" class="uk-width-1-1 uk-button uk-button-primary">Submit</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<script src="{% static 'js/main.js' %}"></script>
+{% endblock %}

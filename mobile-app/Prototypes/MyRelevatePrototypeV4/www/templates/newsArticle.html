@@ -1,0 +1,45 @@
+<ion-view view-title="{{newsArticle.title}}">
+  <ion-content class="page">
+    <div class="item item-avatar newsArticle">
+        <img src="{{contributors[newsArticle.author - 1].profilePic}}">
+                <div class="row">
+          <div class="col-50">
+        <h2>{{newsArticle.title}}</h2>
+        <h3><a href='#/app/contributors/{{contributors[newsArticle.author - 1].id}}'> by {{contributors[newsArticle.author - 1].name}}</a></h3>
+        <p>{{newsArticle.date | date : 'dd-M-yy'}}</p>
+      </div>
+      <div class="col-25">
+        <button id="article_{{newsArticle.id}}" class="button button-small button-assertive" style="float:right;">
+              <i class="icon ion-heart"></i>
+               </button>
+        </div>
+        <div class="col-25">
+        <button id="article_{{newsArticle.id}}" class="button button-small button-positive" style="float:right;">
+              <i class="icon ion-android-share-alt"></i>
+               </button>
+        </div>
+     </div>
+   </div>
+      <div class="item
+ item-body" ng-click= "OpenPDF(newsArticle.pdf)">
+        <img class="image" src="{{newsArticle.image}}">
+        <p>
+          {{newsArticle.descshort}}
+        </p>
+       </div>
+
+      <div class="item tabs tabs-secondary newsArticle" style="width:10000px;">
+         <div class="button-bar" style="overflow-x: auto; overflow-y:hidden; -webkit-overflow-scrolling: touch; white-space:nowrap;">
+            <div class="tab-item" style="width:100%; padding-right:25%;">
+               <button class="button" style="white-space:normal;">
+                Tags
+               </button>
+               <button class="button button-positive" style="white-space:normal;" ng-repeat="tag in tagList[newsArticle.id]">
+            {{tag.name}}
+              </button>
+            </div>
+          </div>
+      </div>
+
+  </ion-content>
+</ion-view>

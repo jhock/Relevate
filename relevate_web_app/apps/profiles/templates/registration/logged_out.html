@@ -1,0 +1,13 @@
+{% extends "base-titlebar.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class='uk-container uk-width-1-1 uk-margin-top'>
+	<div class='uk-flex uk-flex-center uk-text-center'>
+		<div style="width: 40%; border: 5px solid #2FA6F5; border-radius: 6px; padding: 15px; background:#FFFFFF">
+                <p>{% trans "Logged out" %}</p>
+                <a href="{% url 'contribution:home' %}">Home</a></li>
+        </div>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+<div class='uk-card uk-card-default uk-box-shadow-large'>
+	<div class='uk-card-body'>
+		<div class='uk-clearfix uk-grid'>
+			<div class='uk-panel-title uk-width-1-2'>
+				<h3>Link: <a target="_blank" href="{{ l.url }}">{{ l.title }}</a></h3>
+			</div>
+			<div class='uk-width-1-2'>
+				{% if p.contributor == contrib_prof or superuser_override %}
+				<form class='uk-float-right' action="{% url 'contribution:post_remove' p.pk %}" method="post">
+					{% csrf_token %}
+					<a style='color: white;' class='uk-button uk-button-primary' href="{% url 'contribution:link_update' p.slug %}">
+						Edit
+					</a>
+					<input style='color: white; background-color: red;' class='uk-button uk-button-primary' type="submit" value="Delete" />
+				</form>
+				{% endif %}
+			</div>
+		</div>
+		<br>
+        <div>
+            <a href="{{ l.url }}">
+                <img src="{{ l.image.url }}">
+            </a>
+        </div>
+		<p>{{ l.description | safe }}<a class='uk-text-primary' target="_blank" href="{{ l.url }}"> Read more...</a></p>
+		<hr>
+		<small>Topics: </small>
+		<div uk-grid>	
+			{% for topic in l.topics.all %}
+				<div class='uk-width-1-6'>
+					<a href="#"><small>{{ topic.name }}</small></a>
+					<div class="uk-dropdown uk-dropdown-small">
+						<span>{{ topic.description }}</span>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>

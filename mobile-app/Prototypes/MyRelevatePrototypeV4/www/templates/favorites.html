@@ -1,0 +1,43 @@
+<ion-view view-title="Favorites">
+  <ion-content class="page">
+    <div class="list card" ng-repeat="newsArticle in news">
+      <div class="item item-avatar newsArticle">
+        <img src="{{contributors[newsArticle.author - 1].profilePic}}">
+                <div class="row">
+          <div class="col-50">
+        <h2>{{newsArticle.title}}</h2>
+        <h3><a href='#/app/contributors/{{contributors[newsArticle.author - 1].id}}'> by {{contributors[newsArticle.author - 1].name}}</a></h3>
+        <p>{{newsArticle.date | date : 'dd-M-yy'}}</p>
+      </div>
+      <div class="col-25">
+        <button id="article_{{newsArticle.id}}" class="button button-small button-assertive" style="float:right;" ng-click="RemoveFavorite(newsArticle.id)">
+              <i ng-show="!isFavorited(newsArticle.id)" class="icon ion-heart"></i>
+              <i ng-show="isFavorited(newsArticle.id)" class="icon ion-close-round"></i>
+          </button>
+        </div>
+        <div class="col-25">
+        <button id="article_{{newsArticle.id}}" class="button button-small button-positive" style="float:right;">
+              <i class="icon ion-android-share-alt"></i>
+               </button>
+        </div>
+     </div>
+   </div>
+
+      <div class="item item-body" ng-click= "OpenPDF(newsArticle.content)">
+        <img class="image" src="{{newsArticle.image}}">
+        <p>
+          {{newsArticle.descshort}}
+        </p>
+       </div>
+
+      <div class="item tabs tabs-secondary newsArticle" style="width:10000px;">
+         <ion-content direction="x" style="width:100*{{tagList.length}}; height: 100px">
+            <button class="button button-positive" style="white-space:normal;" ng-repeat="tag in tagList[newsArticle.id]">
+            {{tag.name}}
+              </button>
+          </ion-content>
+      </div>
+
+    </div>
+  </ion-content>
+</ion-view>

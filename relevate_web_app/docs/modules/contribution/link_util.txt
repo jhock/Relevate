@@ -1,0 +1,9 @@
+Link Utilities Documentation
+============================
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+.. module :: apps.contribution.modules.link_util
+.. autofunction :: get_link_screenshot

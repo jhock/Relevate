@@ -1,0 +1,17 @@
+Article View Documentation
+============================
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+.. module :: apps.contribution.views.article_views
+
+.. autoclass :: ArticleCreateView
+	:members: get, post
+.. autoclass :: ArticleRemoveView
+	:members: post
+.. autoclass :: ArticleUpdateView
+	:members: get, post
+.. autoclass :: ArticleIndividualView
+	:members: get, post

@@ -1,0 +1,30 @@
+{% extends "base-titlebar.html" %}
+
+{% block content %}
+
+<div class='uk-container uk-margin-top'>
+	<div class="uk-float-right">
+		<button id="update-btn" class="uk-button uk-button-primary">Update Profile</button>
+	</div>
+	<h1 class="orange">{{ adviser.contributor_profile.user_profile.user.first_name }} 
+		{{ adviser.contributor_profile.user_profile.user.last_name }}</h1>
+	<h3 class="blue">Maximum Number of Mentees:</h3>
+	<p>
+		{{ adviser.max_num_advisees }}
+	</p>
+	<h3 class="blue">Reason For Being a Mentor</h3>
+	<div class="uk-panel-scrollable uk-height-small uk-height-max-small">
+		{{ adviser.description | safe }}
+	</div>
+</div>
+
+<script>
+
+	$("#update-btn").click(function()
+	{
+		location.href = "{% url 'profile:adviser_update' %}"
+	})
+
+</script>
+
+{% endblock %}

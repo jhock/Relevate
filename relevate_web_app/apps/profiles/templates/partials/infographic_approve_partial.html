@@ -1,0 +1,40 @@
+{% load staticfiles %}
+<div class='uk-card uk-card-default uk-box-shadow-large'>
+	<div class='uk-card-body'>
+		<div class='uk-clearfix'>
+			<div class='uk-float-right'>
+				<button name= '{{ p.id }}' id='approve-{{ p.id }}' class='uk-button-large uk-button-success post-approve-btn'>Approve</button>
+				<button class="uk-button uk-button-large uk-button-danger post-modal-btn" uk-toggle='target: #postDeny{{ p.id }}'>
+					Deny
+				</button>
+			</div>
+			<a href="{% url 'contribution:infographic_view' p.slug %}" class='uk-card-title'>{{ i.title }}</a>
+		</div>
+		<br>
+		<a href="{% url 'contribution:infographic_view' p.slug %}">
+			{% if i.is_image %}
+				<div class="uk-container-center">
+				<img src="{{ i.thumbnail }}">
+				</div>
+			{% else %}
+				<object data="{{ i.image.url }}" type="application/pdf"
+							width="1100" height="1000">
+				</object>
+			{% endif %}
+		</a>
+		<div class='uk-margin-top'>
+			<a href="{% url 'contribution:infographic_view' p.slug %}">Read more...</a>
+		</div>
+		<hr>
+		<div class="uk-grid">
+		<div class="uk-width-1-1">
+			<small>Topics: </small>
+		</div>
+			{% for topic in i.topics.all %}
+				<div class="uk-width-1-6">
+					<button class="uk-button-link"><small>{{ topic.name }}</small></button>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>

@@ -1,0 +1,45 @@
+<ion-view view-title="Register">
+	<ion-content class="page">
+	<div>
+    <div id="clouds">
+  <div class="cloud x1"></div>
+  <!-- Time for multiple clouds to dance around -->
+  <div class="cloud x2"></div>
+  <div class="cloud x3"></div>
+  <div class="cloud x4"></div>
+  <div class="cloud x5"></div>
+</div>
+		<div class="loginContent" style="width:100%;">
+			<img src = 'img/RelevateLogoXL.png'>
+			<div class="card-view">
+        <h2 ng-if = 'errorMessage != null' style="color:red;">{{errorMessage}}</h2>
+        		<div class="item item-input myDataEntry card-view">
+                 <label class="item item-input card-view" style="width:100%;">
+            			<input type="email" name="email" ng-model="email" placeholder="Email">
+           			 </label>
+       				 </div>
+       			 <div class="item item-input myDataEntry card-view">
+                <label class="item item-input card-view" style="width:100%">
+            			<input type="password" name="password" ng-model="password" placeholder="Password (Minimum 9 Characters)">
+           			 </label>
+        		</div>
+            <div class="item item-input myDataEntry card-view">
+                <label class="item item-input card-view" style="width:100%;">
+                  <input type="password" name="confirmPass" ng-model="confirmPass" placeholder="Confirm Password">
+                 </label>
+            </div>
+        		 <div class = "submit" style="margin:2%;">
+        			<button class="button button-positive" ng-click="Confirm(email,password,confirmPass)" style="width:100%;">
+  					Confirm
+					</button>
+        </div>
+              <div class ="register" style="margin:2%;">
+          <button class="button button-positive" ng-click="ToLogin()" style="width:100%;">Back To Login</button>
+				</div>
+
+
+		</div>
+	</div>
+</div>
+	</ion-content>
+</ion-view>

@@ -1,0 +1,552 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    position: relative;
+}
+
+a, a:link, a:visited, a:hover {
+    color: inherit;
+    text-decoration: none !important;
+}
+
+hr{
+    margin: 5px 0px !important;
+}
+
+
+
+/* hide sub menu links */
+ul.sub-menu {
+    display: none;
+    width: 100%;
+}
+
+.row{
+    margin: 0 !important;
+}
+
+#main{
+    background: #c9dbe9;
+    background: -webkit-linear-gradient(top, #c9dbe9 0%, #fff 100%);
+    background: linear-gradient(top, #c9dbe9 0%, #fff 100%);
+    background: -moz-linear-gradient(top, #c9dbe9 0%, #fff 100%);
+}
+
+.relevate-blue {
+    color: #2BA2D9;
+    display: inline;
+}
+
+.title-bar {
+    background-color: #2BA2D9;
+    color: #fff;
+    display: inline-block;
+    height: 100%;
+    padding: 10px 0 !important;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+}
+
+.title-bar-2 {
+    background: #fff;
+    color: #999;
+    box-shadow: 0 1px 1px #2BA2D9;
+    padding: 10px 40px;
+
+}
+
+.title-bar-3 {
+    background: #fff;
+    color: #999;
+    box-shadow: 0 1px 1px #2BA2D9;
+    padding: 10px 30px;
+
+}
+
+#title-text {
+    color: #999;
+}
+
+.title-bar-2 ul > li:hover, #title-text:hover {
+    color: #55595d;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.right, .title-bar .links-wrapper {
+    float: right;
+}
+
+.left, .title-bar .links-wrapper > div {
+    float: left;
+}
+
+.title-bar div > a {
+    color: #fff;
+    font-size: medium;
+    font-weight: 700;
+    margin: 0;
+    padding: 0 20px 10px 0;
+    text-decoration: none;
+}
+
+.container {
+    margin: 0 0 15px 0;
+}
+
+ul.createAccount {
+    list-style-type: none;
+    text-align: left;
+}
+
+ul.qualifications {
+    text-align: center;
+}
+
+.overflow {
+    height: 100%;
+    overflow: auto;
+}
+
+.contributor-menu {
+    background-color: #f5f5f5;
+    padding-top: 25px;
+}
+
+#studentAccess{
+    border: 1px solid #808080;
+}
+
+.register {
+    color: #0f0f0f;
+    display: block;
+    margin-right: 30px;
+}
+
+.form {
+    margin-right: 100px;
+}
+
+.text-center1 {
+    text-align: center;
+    margin-top: 60px;
+}
+
+.btn-black {
+    background-color: #0f0f0f;
+}
+
+.button {
+    background-color: #e7e7e7;
+    border: none;
+    color: black;
+    padding: 15px 40px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    border-radius: 8px;
+    margin-right: 5px;
+    /*width: 285px;
+    height: 85px;*/
+}
+
+.orange {
+    color: #ed7d31;
+}
+
+.blue {
+    color: #00b0f0;
+}
+
+.white {
+    color: #ffffff;
+}
+
+img.logo {
+    height: auto;
+    width: auto;
+    max-height: 450px;
+    max-width: 450px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+img.logo1 {
+    display: block;
+    float: right;
+}
+
+img.profile_avatar {
+    display: block;
+    height: auto;
+    width: auto;
+    max-height: 200px;
+    max-width: 200px;
+    float: left;
+}
+
+img.logo2 {
+    height: auto;
+    width: auto;
+    max-height: 250px;
+    max-width: 250px;
+    display: block;
+    float: right;
+}
+
+img.logo3 {
+    height: auto;
+    width: auto;
+    max-height: 250px;
+    max-width: 250px;
+    display: block;
+    float: left;
+}
+
+.center-block {
+    margin: 0 auto;
+    float: none;
+}
+
+.name {
+    padding: 0 30px;
+}
+
+.social-icon {
+    display: inline-block;
+    margin: 0 10px 0 0;
+}
+
+#subscribe {
+    border: 1px solid gainsboro;
+    border-radius: 3px;
+    display: inline-block;
+    padding: 10px;
+}
+
+.summary {
+    font-weight: bold;
+    color: #a9a9a9;
+    display: inline;
+    text-align: justify;
+}
+#id_email {
+    /*border: none;
+    box-shadow: none;
+    min-width: 250px;
+    width: 70%;
+    */
+}
+
+#id_subscriptioninput {
+    border: none;
+    box-shadow: none;
+    min-width: 90px;
+    width: 20%;
+}
+
+#id_subscriptioninput:hover {
+    border-bottom: 3px solid forestgreen;
+    border-radius: 0;
+}
+
+.hover-facebook:hover {
+    transition: color 0.3s linear;
+    color: #3B5998;
+}
+
+.hover-twitter:hover {
+    transition: color 0.3s linear;
+    color: #35b0ed;
+}
+
+.hover-pinterest:hover {
+    transition: color 0.3s linear;
+    color: #C92228;
+}
+
+.hover-youtube:hover {
+    transition: color 0.3s linear;
+    color: #e52d27;
+}
+
+.popover, .popover-title, .popover-content {
+    background: #F2DEDE !important;
+    background-color: #F2DEDE !important;
+    color: #A94442;
+}
+
+.arrow:after {
+    border-bottom-color: #F2DEDE !important;
+}
+
+.dropdown-content:hover{
+    display: block;
+}
+
+.dropdown-content {
+    display: none;
+    color: #2BA2D9;
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    margin-right: 5px;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 5px 10px;
+    list-style-type: none;
+}
+
+.dropdown-content a {
+    color: #2BA2D9;
+    padding: 5px 10px;
+    text-decoration: none;
+    display: block;
+}
+
+/*header for menubar-dropdown*/
+.modal-header {
+    background-color: #2BA2D9;
+}
+
+#logo-horizontal {
+    left: 0;
+    position: absolute;
+    max-width: 600px;
+    margin: 0 auto;
+    right: 0;
+    top: 0;
+}
+
+#alert-wrapper{
+    text-align: center;
+    font-size: medium;
+    font-weight: 700;
+}
+
+.relevate-alert{
+    border: 1px solid red;
+}
+
+#confirm-text {
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#confirm-text *:before, #confirm-text *:after {
+    content: "\00a0";
+}
+
+#messages {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    text-align: center;
+}
+
+.success {
+    background-color: #449D44;
+}
+
+.info {
+    background-color: #31B0D5;
+}
+
+.warning {
+    background-color: #EC971F;
+}
+
+.error {
+    background-color: #C9302C;
+}
+
+/* Cloud CSS Copied from http://thecodeplayer.com/walkthrough/pure-css3-animated-clouds-background*/
+/*Lets start with the cloud formation rather*/
+
+/*The container will also serve as the SKY*/
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    /*To hide the horizontal scroller appearing during the animation*/
+
+}
+
+#clouds {
+    padding: 100px 0;
+    position: fixed;
+    /*
+    background: #c9dbe9;
+    background: -webkit-linear-gradient(top, #c9dbe9 0%, #fff 100%);
+    background: linear-gradient(top, #c9dbe9 0%, #fff 100%);
+    background: -moz-linear-gradient(top, #c9dbe9 0%, #fff 100%);
+    */
+}
+
+/*Time to finalise the cloud shape*/
+.cloud {
+    width: 200px;
+    height: 60px;
+    background: #fff;
+
+    border-radius: 200px;
+    -moz-border-radius: 200px;
+    -webkit-border-radius: 200px;
+
+    position: absolute;
+}
+
+.cloud:before, .cloud:after {
+    content: '';
+    position: absolute;
+    background: #fff;
+    width: 100px;
+    height: 80px;
+    position: absolute;
+    top: -15px;
+    left: 10px;
+
+    border-radius: 100px;
+    -moz-border-radius: 100px;
+    -webkit-border-radius: 100px;
+
+    -webkit-transform: rotate(30deg);
+    transform: rotate(30deg);
+    -moz-transform: rotate(30deg);
+}
+
+.cloud:after {
+    width: 120px;
+    height: 120px;
+    top: -55px;
+    left: auto;
+    right: 15px;
+}
+
+/*Time to animate*/
+.x1 {
+    -webkit-animation: moveclouds 15s linear infinite;
+    -moz-animation: moveclouds 15s linear infinite;
+    -o-animation: moveclouds 15s linear infinite;
+}
+
+/*variable speed, opacity, and position of clouds for realistic effect*/
+.x2 {
+    left: 200px;
+
+    -webkit-transform: scale(0.6);
+    -moz-transform: scale(0.6);
+    transform: scale(0.6);
+    opacity: 0.6; /*opacity proportional to the size*/
+
+    /*Speed will also be proportional to the size and opacity*/
+    /*More the speed. Less the time in 's' = seconds*/
+    -webkit-animation: moveclouds 25s linear infinite;
+    -moz-animation: moveclouds 25s linear infinite;
+    -o-animation: moveclouds 25s linear infinite;
+}
+
+.x3 {
+    left: -250px;
+    top: -200px;
+
+    -webkit-transform: scale(0.8);
+    -moz-transform: scale(0.8);
+    transform: scale(0.8);
+    opacity: 0.8; /*opacity proportional to the size*/
+
+    -webkit-animation: moveclouds 20s linear infinite;
+    -moz-animation: moveclouds 20s linear infinite;
+    -o-animation: moveclouds 20s linear infinite;
+}
+
+.x4 {
+    left: 470px;
+    top: -250px;
+
+    -webkit-transform: scale(0.75);
+    -moz-transform: scale(0.75);
+    transform: scale(0.75);
+    opacity: 0.75; /*opacity proportional to the size*/
+
+    -webkit-animation: moveclouds 18s linear infinite;
+    -moz-animation: moveclouds 18s linear infinite;
+    -o-animation: moveclouds 18s linear infinite;
+}
+
+.x5 {
+    left: -150px;
+    top: -150px;
+
+    -webkit-transform: scale(0.8);
+    -moz-transform: scale(0.8);
+    transform: scale(0.8);
+    opacity: 0.8; /*opacity proportional to the size*/
+
+    -webkit-animation: moveclouds 20s linear infinite;
+    -moz-animation: moveclouds 20s linear infinite;
+    -o-animation: moveclouds 20s linear infinite;
+}
+
+@-webkit-keyframes moveclouds {
+    0% {
+        margin-left: 1000px;
+    }
+    100% {
+        margin-left: -1000px;
+    }
+}
+
+@-moz-keyframes moveclouds {
+    0% {
+        margin-left: 1000px;
+    }
+    100% {
+        margin-left: -1000px;
+    }
+}
+
+@-o-keyframes moveclouds {
+    0% {
+        margin-left: 1000px;
+    }
+    100% {
+        margin-left: -1000px;
+    }
+}
+
+/* END CLOUD CSS */
+
+#submenu {
+}
+
+.uk-nav.uk-nav-offcanvas > li > a {
+    color: #fff
+}
+
+#index-slider {
+    display: block !important;
+}
+
+
+   .outer {
+      float: left;
+      width: 400px;
+      overflow: auto;
+      white-space: nowrap;
+   }
+

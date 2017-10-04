@@ -1,0 +1,19 @@
+{% if p.is_link %}
+	{% with l=p.link %}
+	{% include 'partials/link_partial.html' %}
+	<hr>
+	<br>
+	{% endwith %}
+{% elif p.is_article %}
+	{% with a=p.article %}
+		{% include 'partials/article_partial.html' %}
+		<hr>
+		<br>
+	{% endwith %}
+{% elif p.is_infographic %}
+	{% with i=p.infographic %}
+		{% include 'partials/infographic_partial.html' %}
+		<hr>
+		<br>
+	{% endwith %}
+{% endif %}

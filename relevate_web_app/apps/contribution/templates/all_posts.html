@@ -1,0 +1,98 @@
+{% extends "base-titlebar.html" %}
+{% load staticfiles %}
+
+{% block head %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/all-posts.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class='uk-container uk-margin-top'>
+	<ul class="uk-tab" data-uk-tab="{connect:'#content-panels'}">
+		<li class='uk-active'><a>All Posts</a></li>
+		<li><a>Published Posts</a></li>
+		{% if has_adviser %}
+			<li><a>Pending Posts</a></li>
+		{% endif %}
+		<li><a>Saved Posts</a></li>
+	</ul>
+
+	<ul id="content-panels" class="uk-switcher uk-margin">
+		<!-- All Posts --> 
+		<li>
+			<h1 class='orange'>All Posts To Date</h1>
+			<p>These are all the posts you have made.</p>
+			<hr>
+			{% if not posts %}
+				<h3>You don't have any posts.</h3>
+			{% else %}
+				{% for p in posts %}
+					{% include 'partials/post_if_partial.html' %}
+				{% endfor %}
+			{% endif %}
+		</li>	
+		<!-- End All Posts --> 
+		<!-- Published Posts --> 
+		<li>
+			<h1 class='orange'>Published Posts</h1>
+			<p>These are all the posts that you have published.</p>
+			<hr>
+			{% if not published_posts %}
+				<h3>You don't have any published posts.</h3>
+			{% else %}
+				{% for p in published_posts %}
+					{% include 'partials/post_if_partial.html' %}
+				{% endfor %}
+			{% endif %}
+		</li>
+		<!-- Published Posts --> 
+		{% if has_adviser %}
+			<!-- Pending Posts --> 
+			<li>
+				<h1 class='orange'>Pending Posts</h1>
+				<p>These are all the posts pending your advisers approval.</p>
+				<hr>
+				{% if not pending_posts %}
+					<h3>You don't have any pending posts.</h3>
+				{% else %}
+					{% for p in pending_posts %}
+						{% include 'partials/post_if_partial.html' %}
+					{% endfor %}
+				{% endif %}
+			</li>
+			<!-- End Pending Posts --> 
+		{% endif %}
+		<!-- Saved Posts --> 
+		<li>
+			<h1 class='orange'>Saved Posts</h1>
+			<p>These are all the posts you have saved but have not been
+				{% if has_adviser %}
+					submitted for adviser approval.
+				{% else %}
+					published.
+				{% endif %}
+				</p>
+			<hr>
+			{% if not saved_posts %}
+				<h3>You don't have any saved posts.</h3>
+			{% else %}
+				{% for p in saved_posts %}
+					{% include 'partials/post_if_partial.html' %}
+				{% endfor %}
+			{% endif %}
+		</li>
+		<!-- Deleted Posts -->
+		<li>
+			<h1 class='orange'>Deleted Posts</h1>
+			<hr>
+			{% if not deleted_posts %}
+				<h3>You don't have any deleted posts.</h3>
+			{% else %}
+				{% for p in deleted_posts %}
+					{% include 'partials/post_if_partial.html' %}
+				{% endfor %}
+			{% endif %}
+		</li>
+	</ul>
+</div>
+
+{% endblock %}

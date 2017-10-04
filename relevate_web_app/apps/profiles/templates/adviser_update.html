@@ -1,0 +1,51 @@
+{% extends "base-titlebar.html" %}
+{% load staticfiles %}
+
+{% block head %}
+	{{ block.super }}
+	<script src="{% static 'ckeditor/ckeditor.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/adviser-verification.js' %}"></script>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="uk-container uk-margin-top">
+	<h1>Adviser Update</h1>
+	<form class="uk-form uk-form-stacked" method="post" action="{% url 'profile:adviser_update' %}">
+		{% csrf_token %}
+		<div class="uk-form-row">
+			<h3 class="uk-form-label uk-text-bold">{{ form.number_of_advisees.label }}</h3>
+			<p>How many mentees will you be willing to take on?</p>
+			<div class="uk-form-controls">
+				{{ form.number_of_advisees }}
+			</div>
+		</div>
+		<br>
+		<div class="uk-form-row">
+			<h3 class="uk-form-label uk-text-bold">{{ form.reason.label }}</h3>
+			<p>Briefly explain why you want to be a mentor.</p>
+			<div class="uk-form-controls">
+				{{ form.reason }}
+			</div>
+		</div>
+		
+		<p style='display: none;'>{{ form.accept_terms }}</p>
+		
+		<br>
+		<button id='submit_btn' class="uk-button uk-button-primary" type="button">Update</button>
+	</form>
+</div>
+<br>
+
+{% endblock %}
+
+
+{% block footer %}
+	{{ block.super }}
+	<script>
+		// Replace the <textarea id="editor1"> with a CKEditor
+		// instance, using default configuration.
+		CKEDITOR.replace('id_reason');
+	</script>
+{% endblock %}

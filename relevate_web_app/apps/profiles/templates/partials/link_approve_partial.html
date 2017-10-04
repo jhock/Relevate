@@ -1,0 +1,28 @@
+<div class='uk-card uk-card-default uk-box-shadow-large'>
+	<div class='uk-card-body'>
+		<div class='uk-clearfix'>
+			<div class='uk-float-right'>
+				<button name= '{{ p.id }}' id='approve-{{ p.id }}' class='uk-button-large uk-button-success post-approve-btn'>Approve</button>
+				<button class="uk-button uk-button-large uk-button-danger post-modal-btn" uk-toggle='target: #postDeny{{ p.id }}'>
+					Deny
+				</button>
+			</div>
+			<a href="{{ l.url }}" class='uk-card-title'>{{ l.title }}</a>
+		</div>
+		<a href="{{ l.url }}">
+			<img src="{{ l.image.url }}">
+		</a>
+		<p>{{ l.description }}<a class='uk-text-primary' href="{{ l.url }}"> Read more...</a></p>
+		<hr>
+		<div class="uk-grid">
+		<div class="uk-width-1-1">
+			<small>Topics: </small>
+		</div>
+			{% for topic in l.topics.all %}
+				<div class="uk-width-1-6">
+					<button class="uk-button-link"><small>{{ topic.name }}</small></button>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>

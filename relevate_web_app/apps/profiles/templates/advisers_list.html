@@ -1,0 +1,48 @@
+{% extends "base-titlebar.html" %}
+{% load staticfiles %}
+
+{% block content %}
+	<div class="uk-container uk-margin-top">
+		<h1>Advisers</h1>
+		<span>
+			Identifying and communicating the main points of research articles in a way that is accurate and focused
+			takes an understanding of research methods and academic scholarship. In order to promote these skills,
+			undergraduate and masters students who apply to be MyRelevate contributors are required to have an advisor.
+			MyRelevate advisors are contributors with graduate degrees who value mentoring others (i.e., undergraduate
+			and masters students) in becoming educated consumers and communicators of relationship research.
+			Check out our impressive advisors below!
+		</span>
+		<br>
+		<br>
+		{% if not advisers %}
+			<div class='uk-card uk-card-default uk-box-shadow-large'>
+				<div class='uk-card-body'>
+					<h2 class="uk-text-center">No Advisers at this time.</h2>
+				</div>
+			</div>
+		{% else %}
+			{% for adviser in advisers %}
+				<div class='uk-card uk-card-default uk-box-shadow-large'>
+					<div class='uk-card-body'>
+						<div id="adviser_profile_{{ adviser.id }}">
+							<a  uk-toggle="target: #adviserProfile{{ adviser.id }};">
+								<h3 class="blue">{{ adviser.contributor_profile.user_profile.user.first_name }} 
+									{{adviser.contributor_profile.user_profile.user.last_name }}</h3>
+							</a>
+						</div>
+						<div id="adviserProfile{{ adviser.id }}" class='uk-modal-container' uk-modal>
+							<div class='uk-modal-dialog'>
+								<div class='uk-modal-body'>
+									{% with contrib_prof=adviser.contributor_profile %}
+										{% include 'partials/contributor_info_display.html' %}
+									{% endwith %}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+
+		{% endif %}
+	</div>
+{% endblock %}

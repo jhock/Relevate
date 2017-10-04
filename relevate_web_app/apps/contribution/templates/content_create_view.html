@@ -1,0 +1,36 @@
+{% extends "base-titlebar.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class='uk-container uk-margin-top'>
+		<div hidden id="error-message" class="uk-alert uk-alert-danger">
+			<p>Sorry Something went wrong try again, or reload page</p>
+		</div>
+		 <div hidden id="publish-message" class="uk-alert uk-alert-success">
+			<p>Post has been published!</p>
+		</div>
+		 <div hidden id="unpublish-message" class="uk-alert uk-alert-success">
+			<p>Post has been unpublished!</p>
+		</div>
+		<a style='color: white;' class='uk-button uk-button-primary' href="{% url 'contribution:content_creation' %}">
+			Back To All Posts
+		</a>
+        <h1 class="uk-text-center uk-text-uppercase">{{ post.title }}</h1>
+
+        <div class="uk-text-center">
+            {% if post.contributor.avatar == ""  %}
+                <img style="max-width: 50px;" class="profile_avatar uk-border-circle" src="{% static "images/profile-placeholder.png" %}"{{ person.photo_url|default_if_none:'#' }} alt="logo"/>
+            {% elif post.contributor.avatar != "" %}
+                <img style="max-width: 50px;" class="profile_avatar uk-border-circle" src="{{ post.contributor.avatar.url }}">
+            {% endif %}
+            {{ post.contributor.user_profile.user.first_name }} {{ post.contributor.user_profile.user.last_name }}
+            <span style="display:inline-block; width: 50px;"></span>
+            {{ post.publishedDate }}
+        </div>
+        <br>
+
+		{% with p=post %}
+			{% include 'partials/content_create_partial.html' %}
+		{% endwith %}
+</div>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "base-titlebar.html" %}
+{% load staticfiles %}
+
+{% block head %}
+	{{ block.super }}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/contributor-create.css' %}">
+	<script type="text/javascript" src="{% static 'js/contributor.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/topic-button.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/degree.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/contributor-create-verification.js' %}"></script>
+{% endblock head %}
+
+{% block content %}
+<div class='uk-container uk-width-1-1 uk-margin-top'>
+	<div class='uk-flex uk-flex-center uk-text-center'>
+		<div style="width: 40%; border: 5px solid #2FA6F5; border-radius: 6px; padding: 15px; background:#FFFFFF">
+			<form action="{% url 'profile:registration' %}" method="post" class="uk-form-horizontal">
+				{% csrf_token %}
+				<div>
+					<label class="uk-form-label uk-text-bold">{{ form.first_name.label }}</label>
+					<div class="uk-form-controls">
+						{{ form.first_name }}
+					</div>
+				</div>
+				<div>
+					<label class="uk-form-label uk-text-bold">{{ form.last_name.label }}</label>
+					<div class="uk-form-controls">
+						{{ form.last_name }}
+					</div>
+				</div>
+				<div>
+					<label class="uk-form-label uk-text-bold">{{ form.email.label }}</label>
+					<div class="uk-form-controls">
+						{{ form.email }}
+					</div>
+				</div>
+				<div>
+					<label class="uk-form-label uk-text-bold">{{ form.password1.label }}</label>
+					<div class="uk-form-controls">
+						{{ form.password1 }}
+					</div>
+				</div>
+				<div>
+					<label class="uk-form-label uk-text-bold">{{ form.password2.label }}</label>
+					<div class="uk-form-controls">
+						{{ form.password2 }}
+				</div>
+				<ul uk-accordion>
+				<li>
+				<h3 class='uk-accordion-title'>
+					Topics of Interest (optional)
+				</h3>
+
+
+				<div class='uk-accordion-content'>
+						<div  class="uk-form-row">
+					<div class="uk-form-controls">
+						{{ form.topics_preferences }}
+					</div>
+
+					</div>
+
+					</div>
+					</li>
+					</ul>
+				</div>
+
+				<br>
+				<button type="submit" class='uk-button uk-button-primary'>Sign Up</button>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

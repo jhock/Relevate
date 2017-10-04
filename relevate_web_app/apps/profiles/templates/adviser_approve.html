@@ -1,0 +1,169 @@
+{% extends "base-titlebar.html" %}
+{% load staticfiles %}
+
+{% block content %}
+	<div class="uk-container uk-margin-top">
+		<div>
+			<h2 class="orange">Approve Advisers</h2>
+			<p>
+				<span>
+					These are the advisers that are still waiting to be approved. Click "Approve" to 
+					grant them adviser status, or click "Deny" to deny their application.
+				</span>
+			</p>
+			{% if not advisers %}
+				<div class='uk-card uk-card-default uk-box-shadow-large'>
+					<div class='uk-card-body'>
+						<h4>No Pending Applications</h4>
+					</div>
+				</div>
+			{% else %}
+				{% for adviser in advisers %}
+					<div class='uk-card uk-card-default uk-box-shadow-large'>
+						<div class='uk-card-body'>
+							<div class="uk-float-right">
+								<button name="{{ adviser.id }}" id='approve-{{adviser.id}}' class="uk-button-success uk-button-large adviser_approve_btn">Approve</button>
+								<a id='modal-{{adviser.id}}' uk-toggle="target: #adviserDeny{{adviser.id}}" class="uk-button uk-button-large uk-button-danger" style='color: white;' name="{{ adviser.id }}">Deny</a>
+							</div>
+							<div class='uk-card-title'>
+								<a uk-toggle="target: #adviserProfile{{ adviser.id }};">
+									<h3 class="blue">{{ adviser.contributor_profile.user_profile.user.first_name }} 
+										{{adviser.contributor_profile.user_profile.user.last_name }}</h3>
+								</a>
+							</div>
+							<p><b>Max Number of Advisees:</b> {{ adviser.max_num_advisees }}</p>
+							<div class='uk-panel-scrollable'>
+								{{ adviser.description | safe }}
+							</div>
+						</div>
+					</div>
+
+					<div id="adviserProfile{{ adviser.id }}" class='uk-modal-container' uk-modal>
+						<div class='uk-modal-dialog'>
+							<div class='uk-modal-body'>
+								{% with contrib_prof=adviser.contributor_profile %}
+									{% include 'partials/contributor_info_display.html' %}
+								{% endwith %}
+							</div>
+						</div>
+					</div>
+					<div id="adviserDeny{{adviser.id}}" class="uk-modal-container" uk-modal>
+						<div class="uk-modal-dialog">
+							<div class="uk-modal-body">
+								<h3>Reason for Denial:</h3>
+								<p><i>This will be emailed to the adviser</i></p>
+								<p id="warning-tag-{{ adviser.id }}" style="display: none; color: red;">
+									A reason is required</p>
+								<textarea id="text-area-{{ adviser.id }}" cols="120" rows="10"
+								style="font-size: 18px;"> </textarea>
+								<br>
+								<br>
+								<button name="{{ adviser.id }}" id='deny-{{ adviser.id }}' class="uk-button-danger uk-button-large adviser_deny_btn">Deny</button>
+								<br>
+								<br>
+								<p style="dislay:none;"></p>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			{% endif %}
+		</div>
+	</div>
+	<script>
+
+		$('.adviser_approve_btn').click( function()
+		{
+			var id = $(this).attr("name");
+			if($(this).text() !== "Adviser Approved")
+			{
+				console.log("Approved Adviser: ", + id);
+				approveAdviser(id);
+			}
+		});
+
+		function approveAdviser(id)
+		{
+			$.ajaxSetup({
+				data: {csrfmiddlewaretoken: '{{ csrf_token }}'}
+			});
+			$.ajax({
+				url: '{% url 'profile:approve_adviser' %}',
+				type: "POST",
+				data: { id: id },
+				success: function()
+				{
+					$("#approve-" + id).text("Adviser Approved!");
+					$("#deny-" + id).hide(100);
+					$('#modal-' + id).hide(100);
+					console.log("Successfully approved adviser");
+				},
+				error: function(xhr)
+				{
+					// $("#error-message").text(xhr.responseText).show();
+					console.log("ERROR: " + xhr.responseText);
+				}
+			})
+		}
+
+		String.prototype.trim = function() 
+		{
+			return this.replace(/^\s+|\s+$/g,"");
+		}
+
+		$('.adviser_deny_btn').click( function()
+		{
+			var id = $(this).attr("name");
+			var input = $('#text-area-'+id);
+			if (input.val().trim() == '')
+			{
+				$('#warning-tag-' + id).css('display', "");
+			}
+			else
+			{
+				if($(this).text() !== "Adviser Denied!")
+				{
+					console.log("Denied Adviser: ", + id);
+					var reason = input.val();
+					denyAdviser(id, reason);
+				}
+			}
+		});
+
+		function denyAdviser(id, reason)
+		{
+			$.ajaxSetup({
+				data: {csrfmiddlewaretoken: '{{ csrf_token }}'}
+			});
+			$.ajax({
+				url: "{% url 'profile:deny_adviser' %}",
+				type: "POST",
+				data: { id: id, reason: reason },
+				success: function()
+				{
+					$("#deny-" + id).text("Adviser Denied!");
+					$("#approve-" + id).hide(100);
+					$("#modal-" + id).text("Adviser Denied!");
+					console.log("Successfully denied contributor");
+				},
+				error: function(xhr)
+				{
+					// $("#error-message").text(xhr.responseText).show();
+					console.log("ERROR: " + xhr.responseText);
+				}
+			})
+		}
+
+
+	</script>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+

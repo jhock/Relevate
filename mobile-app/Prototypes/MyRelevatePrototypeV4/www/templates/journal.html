@@ -1,0 +1,31 @@
+<ion-view view-title="MyJournal">
+  <ion-content class = "page">
+  <div style="height:auto;
+  text-align:center;">
+    <div class = "card">
+    <label class="item item-input">
+       <input type="text" id ="journalTitle" placeholder="Enter a title..." class="journal-Title" name="Title" ng-model = "title" minlength="1" maxlength="100" cols="15" ></input>
+    </label>
+    <label class="item item-input">
+       <textarea id="journalEntry" class="journal" placeholder="What did you do today?" name="Text1" minlength="1" maxlength="5000" cols="15" rows="20" ng-model = "newEntry"></textarea>
+    </label>
+    <div class="button-bar">
+    <a class="button button-positive journal-button" ng-click="submitJournal(newEntry,title)">
+     Save
+    </a>
+    <a class="button button-positive journal-button" ng-click="Clear()">
+     Clear
+    </a>
+  </div>
+    <label class="item item-divider"></label>
+    <div class="card generalScheme" ng-repeat="entry in journals" style="margin-top:3%;margin-bottom:3%;">
+      <div class="item item-text-wrap" style="width:95%;margin-left:2%;margin-top:3%;margin-bottom:3%;padding-bottom:5%;">
+        <h2>{{entry.title}}</h2>
+        <h3>{{entry.date | date : 'M-dd-yy'}}</h3>
+        <pre style="text-align:left">{{entry.text}}</pre>
+      </div>
+    </div>
+  </div>
+</div>
+  </ion-content>
+</ion-view>

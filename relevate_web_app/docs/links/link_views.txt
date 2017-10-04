@@ -1,0 +1,12 @@
+Link Views Documentation
+========================
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+.. module :: apps.contribution.views.link_views
+.. autoclass :: LinkCreateView
+	:members:
+.. autoclass :: LinkUpdateView
+	:members:

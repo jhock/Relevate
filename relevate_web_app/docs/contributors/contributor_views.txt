@@ -1,0 +1,28 @@
+Contributor Views Documentation
+===============================
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+.. module :: apps.profiles.views.contributor_views
+.. autoclass :: ContributorCreateView
+	:members:
+.. autoclass :: ContributorUpdateView
+	:members:
+.. autoclass :: ContributorProfileView
+	:members:
+.. autoclass :: PublicContributorProfileView
+	:members:
+.. autoclass :: ContributorListView
+	:members:
+.. autoclass :: DeniedContributorListView
+	:members:
+.. autoclass :: ContributorApproveView
+	:members:
+.. autoclass :: ApproveButtonView
+	:members:
+.. autoclass :: DenyButtonView
+	:members:
+.. autoclass :: QueryUniversities
+	:members:

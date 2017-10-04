@@ -1,0 +1,9 @@
+Infographic Utilities Documentation
+===================================
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+.. module :: apps.contribution.modules.infographic_util
+.. autofunction :: get_infographic_crop

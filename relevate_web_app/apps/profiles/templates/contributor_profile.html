@@ -1,0 +1,27 @@
+{% extends "base-titlebar.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="uk-container uk-margin-top uk-clearfix">
+	<div class="uk-float-right">
+		<button id="update-btn" class="uk-button uk-button-primary">Update Profile</button>
+	</div>
+	{% include 'partials/contributor_info_display.html' %}
+</div>
+
+<script>
+
+	$("#update-btn").click(function()
+	{
+		location.href = "{% url 'profile:contributor_update' %}"
+	})
+
+</script>
+
+{% endblock %}
+
+
+
+
+

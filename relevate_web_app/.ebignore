@@ -1,0 +1,16 @@
+media/user_profiles/avatar/*
+!media/user_profiles/avatar/.keep
+media/user_profiles/cv/*
+!media/user_profiles/cv/.keep
+media/links/images/*
+!media/links/images/.keep
+media/articles/images/*
+!media/articles/images/.keep
+media/article_infographic/*
+!media/article_infographic/.keep
+.git/*
+docs/
+# scripts/
+code_reviews/
+base-data.json
+

@@ -1,0 +1,47 @@
+{% extends "base-titlebar.html" %}
+{% load staticfiles %}
+
+{% block content %}
+	<div class="uk-container uk-margin-top">
+		<div>
+			<h2 class="orange">Meet Our Contributors</h2>
+			<p>
+				<span>
+					Our contributors at Relevate are scholars and practitioners with expert knowledge to share about interpersonal
+					relationships. Our contributors range from University professors, graduate students, certified therapists
+					and relationship educators, and undergraduate students studying relationships under mentorship. Each contributor
+					has been vetted by the Relevate team to ensure that all content is trustworthy and grounded in interpersonal
+					relationship theory and research in order to ensure that everyone has access to the cutting edge knowledge
+					and skills they need to elevate their current and future relationships.
+				</span>
+			</p>
+			{% for contrib_prof in contributors %}
+				<div class='uk-card uk-card-default uk-box-shadow-large'>
+					<div class='uk-card-body'>
+						<a href="{% url 'profile:public_contributor_profile' contrib_prof.id %}">
+							<h3 class="blue">{{ contrib_prof.first_name }}
+								{{ contrib_prof.last_name }}
+                            </h3>
+						</a>
+                        <h4 class="blue">Degree(s)</h4>
+                        {% for aca_prof in contrib_prof.credentials.academic_profile %}
+                            {{ aca_prof.degree.abbreviation }}
+                            {{ aca_prof.program }}
+                            {{ aca_prof.institution }}
+                            <br>
+                        {% endfor %}
+                        <hr>
+                        {% if contrib_prof.credentials.certifications %}
+                            <h4 class="blue">Certifications</h4>
+                            {% for cert_cred in contrib_prof.credentials.certifications %}
+                                {{ cert_cred.name_of_certification }}<br>
+                            {% endfor %}
+                        {% endif %}
+					</div>
+				</div>
+				<br>
+			{% endfor %}
+		</div>
+	</div>
+
+{% endblock %}

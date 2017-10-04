@@ -1,0 +1,25 @@
+<ion-view view-title="Life Events">
+  <ion-content class="page">
+        <div class="formTemplate card-view" style="padding-top:3%">
+        	<div class = "list" ng-if="personData.numChild > 0">
+        		<div class="item item-divider generalScheme">
+            		Children's Survey
+        		</div>
+        	</div>
+        	<div class = "list" ng-if="personData.currentRelationship != 'Single'">
+        		Yes
+        	</div>
+        	<div class = "list" ng-if="personData.currentRelationship == 'Single'">
+        		<label class = "item item-input">
+        			<label class="toggle">
+        			<input type="checkbox">
+        			<div class="track">
+        				<div class="handle"></div>
+        			</div>
+        			Would you like to take on the next steps?
+        		</label>
+        		</label>
+        	</div>
+        </div>
+  <ion-content>
+<ion-view>

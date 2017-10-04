@@ -1,0 +1,9 @@
+Infographic Model Documentation
+===============================
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+.. module :: apps.contribution.models.infographic_model
+.. autoclass :: Infographic

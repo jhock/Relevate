@@ -1,0 +1,48 @@
+<ion-view view-title="Search">
+  <ion-content class = "page">
+   <div style="height:auto;text-align:center;">
+   	<label class="item item-input">
+       <input type="text" id ="query" placeholder="Search contributors and articles by tag, seperated by commas (Ex: Marriage, Children, Infidelity)." class="query" name="query" ng-model="query" minlength="1" maxlength="100" cols="15" ></input>
+   </label>
+   <a class="button button-positive" ng-click="Search(query)">Search</a>
+   <div id="results"class="searchResults" ng-if="Request(requestAccepted)">
+    	  <div class="list card" ng-repeat="newsArticle in news">
+      <div class="item item-avatar newsArticle">
+        <img src="{{contributors[newsArticle.author - 1].profilePic}}">
+        <h2>{{newsArticle.title}}</h2>
+        <h3><a href='#/app/contributors/{{contributors[newsArticle.author - 1].id}}'> by {{contributors[newsArticle.author - 1].name}}</a></h3>
+        <p>{{newsArticle.date | date : 'dd-M-yy'}}</p>
+      </div>
+
+      <div class="item item-body" ng-click="goToArticle(newsArticle.id)">
+        <img class="image" src="{{newsArticle.image}}">
+        <p>
+          {{newsArticle.descshort}}
+        </p>
+       </div>
+
+      <div class="item tabs tabs-secondary tabs-icon-left newsArticle">
+        <div class="tab-item" style="width:100%; padding-right:25%;" ng-click="AddFavorite(newsArticle.id)">
+            <button id="article_{{newsArticle.id}}" class="button button-positive" style="width:25%; position:absolute;">
+              <i class="icon ion-heart"></i>
+               Favorite
+               </button>
+        </div>
+      </div>
+
+    </div>
+   <div class="list">
+   	<a class="item item-thumbnail-left generalScheme" ng-repeat="contr in contributors" href="#/app/contributors/{{contr.id}}">
+   		<img src="{{contr.profilePic}}">
+   		<h2 style="color:black;">{{contr.name}}</h2>
+   		<p style="color:black;">{{contr.employmentInfo}}</p>
+   	</a>
+    </div>
+    <div id="message" class="searchResults" ng-if="!Request(requestAccepted)">
+    	<span ng-render-html="contentForm">
+    </div>
+</div>
+  </ion-content>
+</ion-view>
+
+

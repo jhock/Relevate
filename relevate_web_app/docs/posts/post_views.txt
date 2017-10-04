@@ -1,0 +1,12 @@
+Link Views Documentation
+========================
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+.. module :: apps.contribution.views.post_views
+.. autoclass :: PostListView
+	:members:
+.. autoclass :: PostRemoveView
+	:members:

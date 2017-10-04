@@ -1,0 +1,10 @@
+Adviser Models Documentation
+====================================
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+.. module :: apps.contribution.models.about_person_model
+.. autoclass :: AboutPerson
+	:members: __str__

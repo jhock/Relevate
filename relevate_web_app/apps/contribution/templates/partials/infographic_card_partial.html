@@ -1,0 +1,36 @@
+{% load staticfiles %}
+
+<div class='uk-card uk-card-default uk-box-shadow-large item'>
+	<div class='uk-card-body'>
+		<div class='uk-clearfix'>
+			<p class='uk-card-title'>
+				<a href="{% url 'contribution:infographic_view' p.slug %}">{{ i.title }}</a>
+			</p>
+		</div>
+		<a href="{% url 'contribution:infographic_view' p.slug %}">
+			<div class=".uk-container-center">
+				<img src="{{ i.thumbnail }}">
+			</div>
+		</a>
+		<p>
+			{{ i.blurb | safe }} <a href="{% url 'contribution:infographic_view' p.slug %}">Read more...</a>
+		</p>
+			<div>
+				{% if p.contributor.avatar == ""  %}
+                    <img style="max-width: 70px;" class="profile_avatar uk-border-circle" src="{% static "images/profile-placeholder.png" %}"{{ person.photo_url|default_if_none:'#' }} alt="logo"/>
+                {% elif p.contributor.avatar != "" %}
+                    <img style="max-width: 70px;" class="profile_avatar uk-border-circle" src="{{ p.contributor.avatar.url }}">
+                {% endif %}
+				{{ p.contributor }}
+            </div>
+		<hr>
+		<small>Topics: </small>
+		<div class="topics-scroll-menu">
+			<li>
+			{% for topic in i.topics.all %}
+					<a href="{% url 'contribution:topic_sort' topic.name %}"><small>{{ topic.name }}</small></a>
+			{% endfor %}
+			</li>
+		</div>
+	</div>
+</div>

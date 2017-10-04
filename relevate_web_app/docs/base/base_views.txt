@@ -1,0 +1,11 @@
+Basic View Documentation
+============================
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+.. module :: apps.contribution.views.base_views
+
+.. autoclass :: HomeView
+	:members: get

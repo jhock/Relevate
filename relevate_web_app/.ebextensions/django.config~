@@ -1,0 +1,25 @@
+packages:
+  yum:
+    libjpeg-turbo-devel: []
+    libpng-devel: []
+    freetype-devel: []
+
+container_commands:
+  01_reinstall_pil:
+    command: "source /opt/python/run/venv/bin/activate && yes | pip install Pillow --no-cache-dir"
+
+#  02_migrate:
+#    command: "django-admin.py migrate"
+    
+
+ # 03_createsu:
+ #   command: "python3 manage.py createsu"
+ #   leader_only: true
+
+option_settings:
+  aws:elasticbeanstalk:application:environment:
+    DJANGO_SETTINGS_MODULE: settings.beta
+
+option_settings:
+  aws:elasticbeanstalk:container:python:
+    WSGIPath: relevate_web_app/wsgi.py

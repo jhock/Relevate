@@ -1,0 +1,36 @@
+{% extends "base-titlebar.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class='uk-container uk-margin-top'>
+	<h1>Create A New Post</h1>
+
+	<a href="{% url 'contribution:article_create' %}" data-uk-grid-match="{target:'.uk-panel'}" uk-grid>
+		<div class="uk-width-3-3">
+			<div class="uk-card uk-card-primary uk-card-body">
+				<h3 class="uk-card-title">New Article</h3>
+				<p>Articles are text-based posts which consist of a Title, Main Content, Short Description, References, optional Picture, and Topics.</p>
+				<p>Choose this Post type if your post is heavily text-based.</p>
+			</div>
+		</div>
+    </a>
+    <a href="{% url 'contribution:link_create' %}" data-uk-grid-match="{target:'.uk-panel'}" uk-grid>
+		<div class="uk-width-3-3">
+			<div class="uk-card uk-card-primary uk-card-body">
+				<h3 class="uk-card-title">New Link</h3>
+				<p>Link Posts are a way to easily link to existing works by yourself on a professional website. Links consist of a Title, Link, Image, Description, and Topics.</p>
+				<p>Choose this Post type if you have pre-existing content that you would like to add.</p>
+			</div>
+		</div>
+    </a>
+    <a href="{% url 'contribution:infographic_create_view' %}"data-uk-grid-match="{target:'.uk-panel'}" uk-grid>
+		<div class="uk-width-3-3">
+			<div class="uk-card uk-card-primary uk-card-body">
+				<h3 class="uk-card-title">New Infographic</h3>
+				<p>Infographic Posts are similar to Articles, but rely heavily on images, with little to no text information. Infographics consist of a Title, Description, Image, and Topics.</p>
+				<p>Choose this if your Post is an infographic and does not need much text.</p>
+			</div>
+		</div>
+    </a>
+</div>
+{% endblock %}

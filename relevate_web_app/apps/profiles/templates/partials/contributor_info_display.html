@@ -1,0 +1,116 @@
+{% load staticfiles %}
+
+<div class='uk-children-1-3' uk-grid>
+	<div>
+		{% if contrib_prof.avatar == ""  %}
+			<img style="max-width: 150px;" class="profile_avatar" src="{% static "images/profile-placeholder.png" %}" alt="logo"/>
+		{% elif contrib_prof.avatar != "" %}
+			<img style="max-width: 150px;" class="profile_avatar" src="{{ contrib_prof.avatar.url }}">
+		{% endif %}
+	</div>
+	<div>
+		{% if highest_ranking_degree %}
+			<h1 class="uk-text-center orange">{{ contrib_prof.user_profile.user.first_name }} 
+				{{ contrib_prof.user_profile.user.last_name }}, {{ highest_ranking_degree.degree.abbreviation }}
+			</h1>
+		{% else %}
+			<h1 class="uk-text-center orange">{{ contrib_prof.user_profile.user.first_name }} 
+				{{ contrib_prof.user_profile.user.last_name }}
+			</h1>
+		{% endif %}
+		
+		{% if contrib_prof.user_profile.is_contributor %}
+			<h3 class="uk-text-center blue">Approved Relevate Contributor</h3>
+		{% endif %}
+		<h4 class="orange">Professional Address</h4>
+		{{ contrib_prof.address.street_address }}<br>
+		{{ contrib_prof.address.city }}, {{ contrib_prof.address.state }} {{ contrib_prof.address.zipcode }}
+		<br>
+		{{ contrib_prof.address.country }}
+		<br>
+		<a href="{{ user.contributor_profile.website_url }}">{{ contrib_prof.website_url }}</a>
+	</div>
+</div>
+<div class="uk-grid">
+	<div class="uk-width-1-2">
+		<h4 class="orange">Degrees</h4>
+		<div class="uk-list">
+			{% for each_qual in academic_prof %}
+				<li>
+					{{ each_qual.program }},
+					{{ each_qual.institution }},
+					{{ each_qual.degree.name }}
+				</li>
+			{% endfor %}
+		</div>
+	</div>
+	<div class="uk-width-1-2">
+		<h4 class="orange">Certifications</h4>
+		{% if certifications %}
+		<div class="uk-list">
+			{% for each_qual in certifications %}
+				<li>
+					{{ each_qual.name_of_certification }}
+				</li>
+			{% endfor %}
+		</div>
+		{% else %}
+			<p> No certification listed.</p>
+		{% endif %}
+	</div>
+	<div class="uk-width-1-2">
+		<h4 class="orange">Organizational Affiliations</h4>
+		{% if organizational_affiliations%}
+		<div class="uk-list">
+			{% for each_affil in organizational_affiliations %}
+				<li>
+					{{ each_affil.name_of_affiliation }}
+				</li>
+			{% endfor %}
+		</div>
+		{% else %}
+			<p> No affiliations listed.</p>
+		{% endif %}
+		</div>
+	</div>
+
+<h3 class="blue">Expertise Topics</h3>
+<div uk-grid>
+	{% for topic in contrib_prof.expertise_topics.all %}
+		<div class="{% cycle 'uk-width-1-3' 'uk-width-1-3' 'uk-width-1-3' %}">
+			<ul uk-accordion>
+				<li>
+					<div class='uk-accordion-title uk-text-center uk-text-small' style='background-color: #1e87f0; color: white;'>
+						{{ topic.name }}
+					</div>
+					<div class='uk-accordion-content'>
+						{{ topic.description }}
+					</div>
+				</li>
+			</ul>
+		</div>
+	{% endfor %}
+</div>
+<h3 class="blue">Professional Interests, Experience, and Expertise</h3>
+<div class="uk-panel-scrollable uk-height-small uk-height-max-small">
+	{{ contrib_prof.biography_text | safe }}
+</div>
+{% if contrib_prof.website_url %}
+	<h3 class="blue">Contributor Website</h3>
+	<a target='_blank' href="{{ contrib_prof.website_url }}">{{ contrib_prof.website_url }}</a>
+{% endif %}
+<!-- 
+<h3 class="blue">Research and Clinical Interests</h3>
+<div class="uk-scrollable-box">
+	{{ contrib_prof.interests|safe }}
+</div> 
+-->
+
+<h3 class="blue">CV/Resume</h3>
+{% if contrib_prof.cv == "" %}
+	<object data="{% static "empty-cv/empty-cv.pdf" %}" type="application/pdf"
+			width="1100" height="1000"></object>
+{% elif contrib_prof.cv != "" %}
+	<object data="{{ contrib_prof.cv.url }}" type="application/pdf"
+			width="1100" height="1000"></object>
+{% endif %}

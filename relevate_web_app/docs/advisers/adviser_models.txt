@@ -1,0 +1,13 @@
+Adviser Models Documentation
+============================
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+.. module :: apps.profiles.models.adviser_model
+.. autoclass :: Adviser
+	:members: __str__
+.. autoclass :: PendingAdvisers
+.. autoclass :: DeniedAdvisers
+	:members: __str__

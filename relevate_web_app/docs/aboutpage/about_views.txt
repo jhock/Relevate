@@ -1,0 +1,18 @@
+About Views Documentation
+===========================
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+.. module :: apps.contribution.views.about_views
+.. autoclass :: AboutView
+	:members: get
+.. autoclass :: AboutCreateView
+	:members: get, post
+.. autoclass :: AboutUpdateView
+	:members: get, post
+.. autoclass :: PermissionMixin
+	:members: get_object
+.. autoclass :: AboutRemoveView
+

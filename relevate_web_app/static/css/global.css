@@ -1,0 +1,124 @@
+.up-btn-container
+{
+	border-radius: 50%;
+	background: #D7E3F0;
+	position: fixed;
+	bottom: 15px;
+	right: 15px;
+}
+
+body {
+	background-image: url(/static/images/backgroundCloud.png);
+	background-size: contain;
+}
+
+.uk-container
+{
+	background-color: white !important;
+	width: 80%;
+}
+
+.about-image
+{
+    width: 210px;
+}
+
+div.topics-scroll-menu {
+    overflow: auto;
+    white-space: nowrap;
+}
+
+div.topics-scroll-menu a {
+    display: inline-block;
+    background-color: #1e87f0;
+    color: white;
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+}
+
+div.topics-scroll-menu a:hover {
+    background-color: #777;
+}
+
+.masonry { /* Masonry container */
+    column-count: 4;
+    column-gap: 1em;
+}
+
+.item { /* Masonry bricks or child elements */
+    background-color: #eee;
+    display: inline-block;
+    margin: 0 0 1em;
+    width: 100%;
+}
+
+body {
+    font: 1em/1.67 'Open Sans', Arial, Sans-serif;
+    margin: 0;
+}
+
+.wrapper {
+    width: 95%;
+    margin: 3em auto;
+}
+
+.masonry {
+    margin: 1.5em 0;
+    padding: 0;
+    -moz-column-gap: 1.5em;
+    -webkit-column-gap: 1.5em;
+    column-gap: 1.5em;
+    font-size: .85em;
+}
+
+.item {
+    display: inline-block;
+    background: #fff;
+    padding: 1em;
+    margin: 0 0 1.5em;
+    width: 100%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-shadow: 2px 2px 4px 0 #ccc;
+}
+
+
+@media only screen and (min-width: 400px) {
+    .masonry {
+        -moz-column-count: 1;
+        -webkit-column-count: 1;
+        column-count: 1;
+    }
+}
+
+@media only screen and (min-width: 700px) {
+    .masonry {
+        -moz-column-count: 1;
+        -webkit-column-count: 1;
+        column-count: 1;
+    }
+}
+
+@media only screen and (min-width: 900px) {
+    .masonry {
+        -moz-column-count: 2;
+        -webkit-column-count: 2;
+        column-count: 2;
+    }
+}
+
+@media only screen and (min-width: 1100px) {
+    .masonry {
+        -moz-column-count: 2;
+        -webkit-column-count: 2;
+        column-count: 2;
+    }
+}
+
+@media only screen and (min-width: 1280px) {
+    .wrapper {
+        width: 1260px;
+    }
+}

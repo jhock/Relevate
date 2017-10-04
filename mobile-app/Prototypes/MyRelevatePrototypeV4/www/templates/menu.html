@@ -1,0 +1,131 @@
+<ion-side-menus ng-controller = "MenuCtrl" enable-menu-with-back-views="false">
+  <ion-side-menu-content edge-drag-threshold="true" drag-content="true">
+    <ion-nav-bar class="bar-stable">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+      </ion-nav-buttons>
+      <!--
+      In case nav-bar buttons are needed...
+      <ion-nav-buttons side="right">
+              <button class="button button-icon button-clear ion-ios-paper-outline" ng-click="ToNewsFeed()">{{newsString}}</button>
+              <button class="button button-icon button-clear ion-ios-body" ng-click="ToCommunity()">{{comString}}</button>
+              <button class="button button-icon button-clear ion-ios-undo-outline" ng-click="LogOut()">{{logString}}</button>
+    </ion-nav-buttons>
+    !-->
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent">
+  </ion-nav-view>
+  </ion-side-menu-content>
+
+  <ion-side-menu side="left">
+    <ion-header-bar class="bar-stable" style="background-color:#e7ffff">
+      <h1 class="title">MyRelevate</h1>
+    </ion-header-bar>
+    <ion-content class="generalScheme">
+      <ion-list>
+        <ion-item menu-close href="#/app/newsfeed">
+          <div class="row">
+            <div class="col col-50">
+              <i class="icon ion-ios-paper-outline menu-icon"></i>
+            </div>
+          <div class="col col-50 menu-text">Newsfeed</div>
+          </div>
+        </ion-item>
+       <!--<ion-item menu-close href="#/app/community">
+          <div class="row">
+            <div class="col col-50">
+              <i class="icon ion-ios-body-outline menu-icon"></i>
+            </div>
+          <div class="col col-50 menu-text">Community</div>
+          </div>
+        </ion-item>!-->
+        <ion-item menu-close href="#/app/search">
+          <div class="row">
+            <div class="col col-50">
+              <i class="icon ion-ios-search menu-icon"></i>
+            </div>
+          <div class="col col-50 menu-text">Search</div>
+          </div>
+        </ion-item>
+        <ion-item menu-close href="#/app/quizzes">
+          <div class="row">
+            <div class="col col-50">
+              <i class="icon ion-ios-paper-outline menu-icon"></i>
+            </div>
+          <div class="col col-50 menu-text">Quizzes</div>
+          </div>
+        </ion-item>
+        <ion-item menu-close href="#/app/favorites">
+          <div class="row">
+            <div class="col col-50">
+              <i class="icon ion-ios-heart-outline menu-icon"></i>
+            </div>
+          <div class="col col-50 menu-text">Favorites</div>
+          </div>
+        </ion-item>
+        <ion-item menu-close href="#/app/journal">
+          <div class="row">
+            <div class="col col-50">
+              <i class="icon ion-ios-bookmarks-outline menu-icon"></i>
+            </div>
+          <div class="col col-50 menu-text">Journal</div>
+          </div>
+        </ion-item>
+        <ion-item menu-close href="#/app/mydata/mydataInit">
+          <div class="row">
+            <div class="col col-50">
+              <i class="icon ion-ios-settings menu-icon"></i>
+            </div>
+          <div class="col col-50 menu-text">MyData</div>
+          </div>
+        </ion-item>
+        <ion-item menu-close href="#/app/contributors">
+          <div class="row">
+            <div class="col col-50">
+              <i class="icon ion-ios-person-outline menu-icon"></i>
+            </div>
+          <div class="col col-50 menu-text">Contributors</div>
+          </div>
+        </ion-item>
+        <ion-item menu-close href="#/app/about">
+          <div class="row">
+            <div class="col col-50">
+              <i class="icon ion-ios-information-outline menu-icon"></i>
+            </div>
+          <div class="col col-50 menu-text">About</div>
+          </div>
+        </ion-item>
+        <ion-item menu-close ng-click="LogOut()">
+          <div class="row">
+            <div class="col col-50">
+              <i class="icon ion-log-out menu-icon menu-content-ng"></i>
+            </div>
+          <div class="col col-50 menu-text menu-content-ng">LogOut</div>
+          </div>
+        </ion-item>
+        <ion-item menu-close ng-click="Exit()">
+          <div class="row">
+            <div class="col col-50">
+              <i class="icon ion-ios-undo-outline menu-icon menu-content-ng"></i>
+            </div>
+          <div class="col col-50 menu-text menu-content-ng">Exit</div>
+          </div>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>
+
+<script id="mydataInit.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar>
+      <h1 class="title">My Modal title</h1>
+    </ion-header-bar>
+    <ion-content>
+    </ion-content>
+  </ion-modal-view>
+</script>

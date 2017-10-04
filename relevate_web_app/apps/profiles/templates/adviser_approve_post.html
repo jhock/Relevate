@@ -1,0 +1,124 @@
+{% extends "base-titlebar.html" %}
+{% load staticfiles %}
+
+{% block head %}
+	{{ block.super }}
+{% endblock %}
+
+{% block content %}
+	<div class="uk-container uk-margin-top">
+		<div>
+			<h2 class="orange">Approve Advisee Posts</h2>
+			{% if not posts %}
+				<h3>There aren't any posts here.</h3>
+			{% else %}
+				{% for p in posts %}
+					{% if p.is_link %}
+						{% with l=p.link %}
+						{% include 'partials/link_approve_partial.html' %}
+						<br>
+						{% endwith %}
+					{% elif p.is_article %}
+						{% with a=p.article %}
+							{% include 'partials/article_approve_partial.html' %}
+							<br>
+						{% endwith %}
+					{% elif p.is_infographic %}
+						{% with i=p.infographic %}
+							{% include 'partials/infographic_approve_partial.html' %}
+							<br>
+						{% endwith %}
+					{% endif %}
+					{% include 'partials/denial_modal_partial.html' %}
+				{% endfor %}
+			{% endif %}
+		</div>
+	</div>
+	<script>
+
+		$('.post-approve-btn').click( function()
+		{
+			var id = $(this).attr("name");
+			console.log("Approved Post: ", + id);
+			if($(this).text() !== "Post Approved!")
+			{
+				approvePost(id);
+			}
+		});
+
+		function approvePost(id)
+		{
+			$.ajaxSetup({
+				data: {csrfmiddlewaretoken: '{{ csrf_token }}'}
+			});
+			$.ajax({
+				url: "{% url 'profile:approve_post_ajax' %}",
+				type: "POST",
+				data: { id: id },
+				success: function()
+				{
+					$("#approve-" + id).text("Post Approved!");
+					$("#deny-" + id).hide(100);
+					$("#modal-" + id).hide(100);
+					console.log("Successfully approved post");
+				},
+				error: function(xhr)
+				{
+					// $("#error-message").text(xhr.responseText).show();
+					console.log("ERROR: " + xhr.responseText);
+				}
+			})
+		}
+
+		String.prototype.trim = function() 
+		{
+			return this.replace(/^\s+|\s+$/g,"");
+		}
+
+		$('.post-deny-btn').click( function()
+		{
+			var id = $(this).attr("name");
+			var input = $('#text-area-'+id);
+			if (input.val().trim() == '')
+			{
+				$('#warning-tag-' + id).css('display', "");
+			}
+			else
+			{
+				if($(this).text() !== "Post Denied!")
+				{
+					console.log("Denied Post: ", + id);
+					var reason = input.val();
+					denyPost(id, reason);
+				}
+			}
+		});
+
+		function denyPost(id, reason)
+		{
+			$.ajaxSetup({
+				data: {csrfmiddlewaretoken: '{{ csrf_token }}'}
+			});
+			$.ajax({
+				url: "{% url 'profile:deny_post_ajax' %}",
+				type: "POST",
+				data: { id: id, reason: reason },
+				success: function()
+				{
+					$("#deny-" + id).text("Post Denied!");
+					$("#approve-" + id).hide(100);
+					$("#modal-" + id).text("Post Denied!");
+					console.log("Successfully denied post");
+				},
+				error: function(xhr)
+				{
+					// $("#error-message").text(xhr.responseText).show();
+					console.log("ERROR: " + xhr.responseText);
+				}
+			})
+		}
+
+
+	</script>
+
+{% endblock %}

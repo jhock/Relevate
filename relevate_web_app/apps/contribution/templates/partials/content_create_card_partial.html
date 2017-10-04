@@ -1,0 +1,52 @@
+{% load staticfiles %}
+
+<div class="uk-card uk-card-default uk-box-shadow-large item">
+	<div class='uk-card-body'>
+		<div class='uk-clearfix uk-card-title uk-text-center'>
+            <a href="{% url 'contribution:content_creation_view' p.slug %}">{{ p.title }}</a>
+            <span class="uk-badge">{{  p.level }}</span>
+		</div>
+        <div class="uk-grid">
+            <div class="uk-width-1-2">
+                <p class='uk-text-center' style="font-size: 125%;">
+                    {% if p.contributor.avatar == ""  %}
+                        <img style="max-width: 50px;" class="profile_avatar uk-border-circle" src="{% static "images/profile-placeholder.png" %}"{{ person.photo_url|default_if_none:'#' }} alt="logo"/>
+                    {% elif p.contributor.avatar != "" %}
+                        <img style="max-width: 50px;" class="profile_avatar uk-border-circle" src="{{ p.contributor.avatar.url }}">
+                    {% endif %}
+                    {{ p.contributor }}
+                </p>
+                <div class='grey-bg'>
+                    <img class='post-img uk-align-center' src="{{ p.image.url }}">
+                </div>
+            </div>
+            <div class="uk-width-1-2">
+                <p style="display:inline">{{ p.blurb | safe }}<a href="{% url 'contribution:content_creation_view' p.slug %}">Read more...</a>
+                </p>
+            </div>
+        </div>
+		{% if p.contributor == contrib_prof or superuser_override %}
+		<div class='uk-float-right'>
+			{% csrf_token %}
+			<a style='color: white;' class='uk-button uk-button-primary' href="{% url 'contribution:content_creation_update' p.slug %}">
+				Edit
+			</a>
+			<button class="uk-button uk-button-default uk-margin-small-right" type="button" uk-toggle="target: #modal-example">Delete</button>
+				<div id="modal-example" uk-modal>
+					<div class="uk-modal-dialog uk-modal-body">
+						<h2 class="uk-modal-title">Warning!</h2>
+						<p>This post will be permanently deleted. If you would like to unpublish the post, click the "Edit" button, then unpublish.</p>
+						<p class="uk-text-right">
+							<button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+							<form class='uk-float-right' action="{% url 'contribution:content_creation_remove' p.pk %}" method="post">
+								{% csrf_token %}
+								<input style='color: white; background-color: red;' class='uk-button uk-button-primary' type="submit" value="Delete" />
+							</form>
+						</p>
+					</div>
+				</div>
+		</div>
+		{% endif %}
+	</div>
+</div>
+

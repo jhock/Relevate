@@ -1,0 +1,11 @@
+Search Utilities Documentation
+===================================
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+.. module :: apps.contribution.modules.search_util
+.. autofunction :: get_query
+.. autofunction :: normalize_query
+.. autofunction :: find_universities

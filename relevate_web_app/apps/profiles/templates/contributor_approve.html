@@ -1,0 +1,156 @@
+{% extends "base-titlebar.html" %}
+{% load staticfiles %}
+
+{% block content %}
+	<div class="uk-container uk-margin-top">
+		<h2 class="orange">Approve Contributors</h2>
+		<p>
+			<span>
+				These are the contributors that are still waiting to be approved. Click "Approve" to 
+				grant them contributor status, or click "Deny" to deny their application. Click on their
+				name to view their contributor application.
+			</span>
+		</p>
+		{% if not contributors %}
+			<div class='uk-card uk-card-default uk-box-shadow-large'>
+				<div class='uk-card-body'>
+					<h4>No Pending Applications</h4>
+				</div>
+			</div>
+		{% else %}
+			{% for contrib_prof in contributors %}
+				<div class='uk-card uk-card-default uk-box-shadow-large'>
+					<div class='uk-card-body'>
+						<div class="uk-float-right">
+							<button name="{{ contrib_prof.id }}" id='approve-{{ contrib_prof.id }}' class="uk-button-success uk-button-large contrib_approve_btn">Approve</button>
+							<a uk-toggle="target: #contributorDeny{{contrib_prof.id}}" class="uk-button uk-button-large uk-button-danger" style='color: white;' name="{{ contrib_prof.id }}">Deny</a>
+						</div>
+						<a uk-toggle="target: #contributorProfile{{ contrib_prof.id }};">
+							<h3 class="blue uk-card-title">{{ contrib_prof.user_profile.user.first_name }} 
+								{{ contrib_prof.user_profile.user.last_name }}</h3>
+						</a>
+					</div>
+				</div>
+				<div id="contributorDeny{{contrib_prof.id}}" class="uk-modal-container" uk-modal>
+					<div class="uk-modal-dialog">
+						<div class='uk-modal-body'>
+							<h3>Reason for Denial:</h3>
+							<p><i>This will be emailed to the contributor</i></p>
+							<p id="warning-tag-{{ contrib_prof.id }}" style="display: none; color: red;">
+								A reason is required</p>
+							<textarea id="text-area-{{ contrib_prof.id }}" cols="120" rows="10"
+							style="font-size: 18px;"> </textarea>
+							<button name="{{ contrib_prof.id }}" id='deny-{{contrib_prof.id}}' class="uk-button-danger uk-button-large contrib_deny_btn">Deny</button>
+							<p style="dislay:none;"></p>
+						</div>
+					</div>
+				</div>
+				<div id="contributorProfile{{ contrib_prof.id }}" class='uk-modal-container' uk-modal>
+					<div class='uk-modal-dialog'>
+						<div class='uk-modal-body'>
+{% with academic_prof=contrib_prof.credentials.academic_profile certifications=contrib_prof.credentials.certifications %}
+							{% include 'partials/contributor_info_display.html' %}
+							{% endwith %}
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		{% endif %}
+	</div>
+	<script>
+		$('.contrib_approve_btn').click( function()
+		{
+			var id = $(this).attr("name");
+			console.log("Approved Contributor: ", + id);
+			if($(this).text() !== "Contributor Approved!")
+			{
+				approveContributor(id);
+			}
+		});
+
+		function approveContributor(id)
+		{
+			$.ajaxSetup({
+				data: {csrfmiddlewaretoken: '{{ csrf_token }}'}
+			});
+			$.ajax({
+				url: '{% url 'profile:approve_contributor' %}',
+				type: "POST",
+				data: { id: id },
+				success: function()
+				{
+					$("#approve-" + id).text("Contributor Approved!");
+					$("#modal-" + id).hide(100);
+					console.log("Successfully approved contributor");
+				},
+				error: function(xhr)
+				{
+					// $("#error-message").text(xhr.responseText).show();
+					console.log("ERROR: " + xhr.responseText);
+				}
+			})
+		}
+
+		String.prototype.trim = function() 
+		{
+			return this.replace(/^\s+|\s+$/g,"");
+		}
+
+		$('.contrib_deny_btn').click( function()
+		{
+			var id = $(this).attr("name");
+			var input = $('#text-area-'+id);
+			if (input.val().trim() == '')
+			{
+				$('#warning-tag-' + id).css('display', "");
+			}
+			else
+			{
+				if($(this).text() !== "Contributor Denied!")
+				{
+					console.log("Denied Contributor: ", + id);
+					var reason = input.val();
+					denyContributor(id, reason);
+				}
+			}
+		});
+
+		function denyContributor(id, reason)
+		{
+			$.ajaxSetup({
+				data: {csrfmiddlewaretoken: '{{ csrf_token }}'}
+			});
+			$.ajax({
+				url: '{% url 'profile:deny_contributor' %}',
+				type: "POST",
+				data: { id: id, reason: reason},
+				success: function()
+				{
+					$("#deny-" + id).text("Contributor Denied!");
+					var modal = $("#modal-" + id);
+					modal.text("Contributor Denied!");
+					$("#approve-" + id).hide(100);
+					console.log("Successfully denied contributor");
+				},
+				error: function(xhr)
+				{
+					// $("#error-message").text(xhr.responseText).show();
+					console.log("ERROR: " + xhr.responseText);
+				}
+			})
+		}
+
+
+	</script>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+

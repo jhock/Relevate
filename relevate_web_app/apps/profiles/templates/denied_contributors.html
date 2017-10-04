@@ -1,0 +1,35 @@
+{% extends "base-titlebar.html" %}
+{% load staticfiles %}
+
+{% block content %}
+	<div class="uk-container uk-margin-top">
+		<h2 class="orange">Denied Contributors</h2>
+		<p>
+			This is a list of all contributors that have been denied, their reason for denial, and when they 
+			were denied.
+		</p>
+		{% if not contributors %}
+			<div class='uk-card uk-card-default uk-box-shadow-large'>
+				<div class='uk-card-body'>
+					<h3>No Denied Contributors</h3>
+				</div>
+			</div>
+		{% else %}
+			{% for denial in contributors %}
+				<div class='uk-card uk-card-default uk-box-shadow-large'>
+					<div class='uk-card-body'>
+						<h3 class="blue">{{ denial.contributor.user_profile.user.first_name }} 
+							{{ denial.contributor.user_profile.user.last_name }}</h3>
+						<p><b>Denied at:</b></p>
+						<p>{{ denial.date_denied }} <i>(UTC Time)</i></p>
+						<p><b>Reason:</b></p>
+						<div class="uk-panel-scrollable">
+							{{ denial.reason|safe }}
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		{% endif %}
+	</div>
+
+{% endblock %}

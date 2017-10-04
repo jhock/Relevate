@@ -1,0 +1,16 @@
+<ion-view view-title="Quizzes">
+  <ion-content class="page">
+   <div class="list" style="text-align:center;">
+    <div ng-if="allQuizzesFinished()">
+      <a class="item"  href="#" style="text-align:center;">
+      <h1 style="color:black;">All Quizzes Finished!</h1>
+    </a>
+    </div>
+   	<a class="item item-thumbnail-left" ng-repeat="quiz in quizzes" href="#/app/quizzes/{{quiz.id}}" style="text-align:center;">
+   		<img src="img/ionic.png">
+   		<h2 style="color:black;">{{quiz.title}}</h2>
+   		<p style="color:black;">{{quiz.description}}</p>
+   		<p style="color:black;">Estimated Time: {{quiz.length}}</p>
+   	</a>
+  </ion-content>
+</ion-view>

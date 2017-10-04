@@ -1,0 +1,99 @@
+{% extends "base-titlebar.html" %}
+{% load staticfiles %}
+
+{% block head %}
+	{{ block.super }}
+	<script type="text/javascript" src="{% static 'js/topic-button.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/infographic-verification.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class='uk-container uk-margin-top'>
+	<form class="uk-form-stacked" action="{% url 'contribution:infographic_create_view' %}" enctype='multipart/form-data',
+		  method="post">{% csrf_token %}
+		<h1 class="orange">Upload An Infographic</h1>
+		<span class="uk-text-danger">{{ form.title.error }}</span>
+		<div class='uk-margin'>
+			<div class='uk-form-label uk-text-bold uk-text-lead'>
+				{{ form.title.label }} <span id="title_count"></span>
+			</div>
+			<div class='uk-form-controls'>
+				{{ form.title }}
+			</div>
+		</div>
+		<div>
+			<label class='uk-form-label uk-text-bold uk-text-lead'>
+				{{ form.blurb.label }} <span id="blurb_count"></span>
+			</label>
+			<div class='uk-form-controls'>
+				{{ form.blurb }}
+			</div>
+		</div>
+		<div class='uk-margin'>
+			<div class='uk-form-label uk-text-bold uk-text-lead'>
+				{{ form.contents.label }}
+			</div>
+			<p>
+				Must be either a '.png', '.jpeg', or '.jpg'
+			</p>
+			<div class='uk-form-controls'>
+				{{ form.contents }}
+			</div>
+		</div>
+		<div hidden>
+			{{ form.topic_choices }}
+		</div>
+		<span class="uk-text-danger">{{ form.title.error }}</span>
+		<label class='uk-form-label uk-text-bold uk-text-lead'>Infographic Topics</label>
+		<p>You must select at least 1 topic for this infographic. Hover over a button to read it's description.</p>
+		<div class="uk-card uk-card-default uk-box-shadow-large">
+			<div class='uk-card-body'>
+				<label class='uk-form-label uk-text-bold'>Selected Topics for Infographics</label>
+				<div id="chosen-item-list" uk-grid>
+
+				</div>
+			</div>
+		</div>
+		<br>
+		<div class="uk-card uk-card-default uk-box-shadow-large">
+			<div class='uk-card-body'>
+				<label class='uk-form-label uk-text-bold'>All Topics</label>
+				<div uk-grid>
+					{% for topic in tag_names %}
+						{% include 'global-partials/available-topics-partial.html' %}
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+		<br>
+		<input id='hidden-publish-checkbox' name='hidden-publish-checkbox' type='checkbox' hidden />
+		<div uk-grid>
+			<div>
+				<button id='submit-btn' type="button" name='save_and_publish'class="submit-button uk-button uk-button-orange">
+					Save And Publish
+				</button>
+				<button id='submit-btn' type="button" class="submit-button uk-button uk-button-primary">Save</button>
+                <button id='preview-btn' type="button" class="uk-button uk-button-secondary"
+                         uk-toggle="target: #preview-modal-info">
+                     Preview
+                 </button>
+			</div>
+		</div>
+		<br>
+        <div id="preview-modal-info" uk-modal>
+            <div class="uk-modal-dialog uk-modal-body">
+                {% include 'previews/infographic_preview.html' %}
+            </div>
+        </div>
+	</form>
+</div>
+{% endblock %}
+
+{% block footer %}
+	{{ block.super }}
+	<script>
+		// Replace the <textarea id="editor1"> with a CKEditor
+		// instance, using default configuration.
+		CKEDITOR.replace('id_blurb');
+	</script>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base-titlebar.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class='uk-container uk-margin-top'>
+	<div data-uk-grid>
+		{% for p in published_article_posts %}
+			<div class="uk-width-1-2">
+				{% with a=p.article %}
+					{% include 'partials/article_card_partial.html' %}
+				{% endwith %}
+			</div>
+		{% endfor %}
+        {% for p in published_infographic_posts %}
+			<div class="uk-width-1-2">
+				{% with i=p.infographic %}
+					{% include 'partials/infographic_card_partial.html' %}
+				{% endwith %}
+			</div>
+		{% endfor %}
+        {% for p in published_link_posts %}
+			<div class="uk-width-1-2">
+				{% with l=p.link %}
+					{% include 'partials/link_card_partial.html' %}
+				{% endwith %}
+			</div>
+		{% endfor %}
+		{% if count == 0 %}
+			<P>No posts found for this topic.</P>
+		{% endif %}
+	</div>
+</div>
+{% endblock %}

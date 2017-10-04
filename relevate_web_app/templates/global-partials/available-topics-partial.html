@@ -1,0 +1,11 @@
+{% if topic in already_sel %}
+	<div id='{{ topic.id }}' class="uk-width-1-3 selected-topics uk-margin-small">
+		<button class="not-selected uk-button"  type="button" onclick="addSession('{{ topic.id }}')" title="{{ topic.description }}" value="{{ topic.id }}">
+			<span class="">{{ topic.name }}</span></button>
+	</div>
+{% else %}
+	 <div id='{{ topic.id }}' class="uk-width-1-3 uk-margin-small">
+		<button class="not-selected uk-button"  type="button" onclick="addSession('{{ topic.id }}')" title="{{ topic.description }}" value="{{ topic.id }}">
+			<span class="">{{ topic.name }}</span></button>
+	 </div>
+{% endif %}

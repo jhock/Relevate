@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block body %}
+
+<div id='nav-sticky'>
+	<nav id='top-level-nav' class="uk-navbar-container uk-box-shadow-medium" uk-navbar="mode: click">
+		<div class="uk-navbar-center">
+			<div class='uk-navbar-item uk-logo'>
+					<img style="max-height: 60px" src="{% static 'images/Relevate Logo.png' %}">
+			</div>
+		</div>
+	</nav>
+</div>
+
+	{% block content %}
+		{{ block.super }}
+	{% endblock %}
+
+{% endblock %}

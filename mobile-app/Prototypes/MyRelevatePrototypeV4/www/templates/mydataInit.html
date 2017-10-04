@@ -1,0 +1,96 @@
+<ion-view view-title="My Data">
+  <ion-content class="page">
+        <div class="formTemplate card-view" style="padding-top:3%">
+            <div class="list">
+            <div class="item item-divider" style="text-align:center;">
+                Current Relationship
+            </div>
+            <label class="item item-radio">
+                <input type="radio" name="group" value="Single" ng-model="personData.currentRelationship">
+                <div class="item-content">
+                    Single
+                </div>
+                <i class="radio-icon ion-checkmark"></i>
+            </label>
+            <label class="item item-radio">
+                <input type="radio" name="group" value="Talking" ng-model="personData.currentRelationship">
+                <div class="item-content">
+                    Just talking
+                </div>
+                <i class="radio-icon ion-checkmark"></i>
+            </label>
+            <label class="item item-radio">
+                <input type="radio" name="group" value="CDating" ng-model="personData.currentRelationship">
+                <div class="item-content">
+                    Casually dating
+                </div>
+                <i class="radio-icon ion-checkmark"></i>
+            </label>
+            <label class="item item-radio">
+                <input type="radio" name="group" value="SDating" ng-model="personData.currentRelationship">
+                <div class="item-content">
+                    Seriously dating
+                </div>
+                <i class="radio-icon ion-checkmark"></i>
+            </label>
+            <label class="item item-radio">
+                <input type="radio" name="group" value="Committed" ng-model="personData.currentRelationship">
+                <div class="item-content">
+                    Committed
+                </div>
+                <i class="radio-icon ion-checkmark"></i>
+            </label>
+            <label class="item item-radio">
+                <input type="radio" name="group" value="Engaged" ng-model="personData.currentRelationship">
+                <div class="item-content">
+                    Engaged
+                </div>
+                <i class="radio-icon ion-checkmark"></i>
+            </label>
+            <label class="item item-radio">
+                <input type="radio" name="group" value="Married" ng-model="peronsData.currentRelationship">
+                <div class="item-content">
+                    Married
+                </div>
+                <i class="radio-icon ion-checkmark"></i>
+            </label>
+    </div>
+    <div class="list">
+        <div class="item item-divider" style="text-align:center;">
+            Months in current relationship
+        </div>
+        <label class="item item-input">
+            <div class = "form-input">
+            <input type="number" class="mydata-text-entry
+            " placeholder="Length in months..."name="length" min="0" max="99" ng-model="personData.currentRelationshipLength">
+        </div>
+        </label>
+    </div>
+
+    <div class="list">
+        <div class="item item-divider" style="text-align:center;">
+            Number of past relationships
+        </div>
+        <label class="item item-input">
+            <div class="form-input">
+            <input type="number" class="mydata-text-entry" placeholder="Number of past relationships..." name="numRelate"min="0" max="99" ng-model="personData.relationshipCount">
+        </div>
+        </label>
+    </div>
+
+    <div class="list">
+        <div class="item item-divider" style="text-align:center;">
+            Number of children
+        </div>
+        <label class="item item-input">
+            <div class="form-input">
+            <input type="number" placeholder ="Total number of children..." class="mydata-text-entry"name="numRelate" min="0" max="50" ng-model="personData.numChild">
+        </div>
+        </label>
+    </div>
+</div>
+    <button class="button button-full button-positive" ng-click="Submit()">
+      Done
+    </button>
+  </ion-content>
+</ion-view>

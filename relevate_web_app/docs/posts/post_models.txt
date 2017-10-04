@@ -1,0 +1,11 @@
+Post Model Documentation
+============================
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+.. module :: apps.contribution.models.post_model
+.. autoclass :: Post
+	:members: save, getTitle, PendingPost
+.. autoclass :: PendingPost

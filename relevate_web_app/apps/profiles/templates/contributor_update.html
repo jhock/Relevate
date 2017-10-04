@@ -1,0 +1,511 @@
+{% extends "base-titlebar.html" %}
+{% load staticfiles %}
+
+{% block head %}
+	{{ block.super }}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/contributor-create.css' %}">
+	<script type="text/javascript" src="{% static 'js/contributor.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/topic-button.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/degree.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/contributor-create-verification.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+	<div id="contributorApplication">
+		<div class="uk-container uk-margin-top">
+			<form id="contrib-update-form" action="{% url 'profile:contributor_update' %}" method="post" enctype='multipart/form-data'
+				  class="uk-form uk-form-stacked" novalidate>
+				{% csrf_token %}
+				<div class="text-center">
+					<h1>Update Profile</h1>
+				</div>
+
+				<div class='uk-grid'>
+					<div class='uk-width-1-3'>
+						<div class="uk-form-row">
+							<label class="uk-form-label uk-text-bold">
+								{{ user_form.first_name.label }}<span class="orange">*</span>
+							</label>
+							<div class="uk-form-controls">
+								{{ user_form.first_name }}
+							</div>
+						</div>
+					</div>
+					<div class='uk-width-1-3'>
+						<div class="uk-form-row">
+							<label class="uk-form-label uk-text-bold">
+								{{ user_form.last_name.label }}<span class="orange">*</span>
+							</label>
+							<div class="uk-form-controls">
+								{{ user_form.last_name }}
+							</div>
+						</div>
+					</div>
+					<div class='uk-width-1-3'>
+						<div class="uk-form-row">
+							<label class="uk-form-label uk-text-bold">
+								{{ user_form.email.label }}<span class="orange">*</span>
+							</label>
+							<div class="uk-form-controls">
+								{{ user_form.email }}
+							</div>
+						</div>
+					</div>
+				</div>
+				<ul uk-accordion>
+					<li>
+						<h3 class='uk-accordion-title'>
+							Degree, Certification, and Affiliation
+							<span class='incomplete-span' id='degree-incomplete' style='display: none;'>
+								<small><span><i>Incomplete</i></span></small>
+							</span>
+							<span class='done-span' id='degree-done'>
+								<small><span><i>Done!</i></span></small><span uk-icon="icon: check;"></span>
+							</span>
+						</h3>
+						<div class='uk-accordion-content'>
+							<div class='uk-card uk-card-default uk-box-shadow-large'>
+								<div class='uk-card-body'>
+									<div uk-grid>
+										<div id='adviser-div' class='uk-width-1-2 uk-hidden'>
+											<h3><label class="blue" for="id_adviser">Mentor<span class="orange">*</span><br></label></h3>
+											<span>
+												If your level of study is Student-Undergraduate or Student-Masters, you will need to select a mentor.
+											</span>
+											<br>
+											<button class='uk-button uk-button-primary'type='button' uk-toggle='target: #adviserListModal'>
+												List of Mentors
+											</button>
+											<br>
+											<div class="uk-form-row">
+												<label class="uk-form-label">{{ form.adviser.label }}</label>
+												<div class="uk-form-controls">
+													{{ form.adviser }}
+												</div>
+											</div>
+											<div id='adviserListModal' class='uk-modal-container' uk-modal>
+												<div class="uk-modal-dialog uk-modal-dialog-blank uk-modal-body uk-height-viewport">
+													<a href class="uk-modal-close uk-close"></a>
+													<div class="uk-container">
+														<div class='uk-margin-top'>
+															<h1>Mentors</h1>
+															<span>
+																Identifying and communicating the main points of research articles in a way that is accurate and focused
+																takes an understanding of research methods and academic scholarship. In order to promote these skills,
+																undergraduate and masters students who apply to be MyRelevate contributors are required to have a mentor.
+																MyRelevate mentors are contributors with graduate degrees who value mentoring others (i.e., undergraduate
+																and masters students) in becoming educated consumers and communicators of relationship research.
+																Check out our impressive mentors below!
+															</span>
+															<br>
+															<br>
+															{% if not advisers %}
+																<h2 class="uk-text-center">No Mentors at this time.</h2>
+															{% else %}
+																{% for adviser in advisers %}
+																	<div id="adviser_profile_{{ adviser.id }}">
+																		<a href="#adviserProfile{{ adviser.id }}" data-uk-modal="{ target:'#adviserProfile{{ adviser.id }}', modal:false}">
+																			<h3 class="blue">{{ adviser.contributor_profile.user_profile.user.first_name }} 
+																				{{adviser.contributor_profile.user_profile.user.last_name }}</h3>
+																		</a>
+																	</div>
+																	<div id="adviserProfile{{ adviser.id }}" class="uk-modal">
+																	{% with contrib_prof=adviser.contributor_profile %}	
+																		{% include 'partials/contributor_modal.html' %}
+																	{% endwith %}
+																	</div>
+																{% endfor %}
+
+															{% endif %}
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<p>
+										Enter your degree and click 'Add'. If you have multiple degrees, you may enter 
+										as many as you possess. 
+									</p>
+									<input id="hiddenAcaTable" hidden name="academicList">
+									<div class='uk-child-width-1-4' uk-grid>
+										<div>
+											{{ form.program.label }}<span class="orange">*</span>
+											<div class="uk-form-controls">
+												{{ form.program }}
+											</div>
+										</div>
+										<div>
+											{{ form.degree.label }}<span class="orange">*</span>
+											<div class="uk-form-controls">
+												{{ form.degree }}
+											</div>
+										</div>
+										<div>
+											{{ form.institution.label }}<span class="orange">*</span>
+											<div id="uni_div">
+												<div class="uk-form-row">
+													<div class="uk-form-controls">
+														{{ form.institution }}
+													</div>
+												</div>
+												<!-- @US_TODO: Fix this so it works with new framework -->
+												<div id="list_of_uni" style="width: 500px;" class="uk-dropdown uk-dropdown-search uk-panel-scrollable">
+													<ul class="uk-nav uk-nav-search" id="items_to_search">
+
+													</ul>
+												</div>
+											</div>
+										</div>
+										<div>
+											<br>
+											<button id='degree-add-btn' type="button" class="uk-button uk-button-primary" onclick="addAcademicProfile()">Add</button>
+										</div>
+									</div>
+									<table id="acaProf" data-name="acaProfTable" class="uk-table">
+										<tbody>
+											{% for each_academic in academic_profiles %}
+												<tr class='acaRow' id="acaProf{{ each_academic.id }}">
+													<td>
+														<div  class='uk-form-controls'>
+															<span class='program'>{{ each_academic.program }}</span>
+														</div>
+													</td>
+													<td>
+														<div  class='uk-form-controls'>
+															<span class='degree'>{{ each_academic.degree.name }}</span>
+														</div>
+													</td>
+													<td>
+														<div class='uk-form-controls'>
+															<span class='institute'>{{ each_academic.institution }}</span>
+														</div>
+													</td>
+													<td>
+														<button type='button' class='uk-button uk-button-orange' onclick='deleteAcademicProfile({{ each_academic.id }})'>delete</button>
+													</td>
+												</tr>
+											{% endfor %}
+										</tbody>
+									</table>
+									<p>
+										Enter a certification (if any) and click 'Add'. If you have multiple
+										certifications, you may enter as many as you possess.
+									</p>
+									<input id="hiddenCertTable" hidden name="certificateList">
+									<div uk-grid>
+										<div class="uk-width-3-4">
+											<div class="uk-form-controls">
+												{{ form.certification }}
+											</div>
+										</div>
+										<div class='uk-width-1-4'>
+											<button type="button" class="uk-button uk-button-primary" onclick="addCertificate()">Add</button>
+										</div>
+									</div>
+									<table id="addCert" data-name="certTable" class="uk-table">
+										<tbody>
+											{% for each_cert in certifications %}
+												<tr class='certRow' id=addCert{{ each_cert.id }}>
+													<td>
+														<div  class='uk-form-controls'>
+															<span class='certName'>{{ each_cert.name_of_certification }}</span>
+														</div>
+													</td>
+													<td>
+														<button type='button' class='uk-button uk-button-orange' onclick='deleteCertificate({{ each_cert.id }})'>delete</button>
+													</td>
+												</tr>
+											{% endfor %}
+										</tbody>
+									</table>
+
+									<p>
+										Enter a organizational affiliation (if any) and click 'Add'. If you have multiple
+										affiliations, you may enter as many as you possess.
+									</p>
+									<p>
+										Double-click on input box for a list of pre-determined organizations, or enter a custom organization.
+									</p>
+									<input id="hiddenAffilTable" hidden name="affiliationList">
+									<div uk-grid>
+										<div class="uk-width-3-4">
+											<div class="uk-form-controls">
+												{{ form.organizational_affiliation }}
+											</div>
+										</div>
+										<div class='uk-width-1-4'>
+											<button type="button" class="uk-button uk-button-primary" onclick="addAffiliation()">Add</button>
+										</div>
+									</div>
+									<table id="addAffiliation" data-name="affiliationTable" class="uk-table">
+										<tbody>
+											{% for each_org in organizational_affiliations %}
+												<tr class='affiliationRow' id=addAffiliation{{ each_org.id }}>
+													<td>
+														<div  class='uk-form-controls'>
+															<span class='affiliationName'>{{ each_org.name_of_affiliation }}</span>
+														</div>
+													</td>
+													<td>
+														<button type='button' class='uk-button uk-button-orange' onclick='deleteAffiliation({{ each_org.id }})'>delete</button>
+													</td>
+												</tr>
+											{% endfor %}
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<h3 class='uk-accordion-title'>
+							Expertise Topics
+							<span class='incomplete-span' id='topics-incomplete' style='display: none;'>
+								<small><span><i>Incomplete</i></span></small>
+							</span>
+							<span class='done-span' id='topics-done'>
+								<small><span><i>Done!</i></span></small><span uk-icon="icon: check;"></span>
+							</span>
+						</h3>
+						<div class='uk-accordion-content'>
+							<div  class="uk-form-row">
+								<div class='uk-hidden'>
+									<div class="uk-form-controls">
+										{{ form.area_of_expertise }}
+									</div>
+								</div>
+								<div class="row">
+									<div class="uk-card uk-card-default uk-box-shadow-large">
+										<div class='uk-card-body'>
+											<h3>Selected Topics for Expertise</h3>
+											<div id="chosen-item-list" uk-grid>
+												{% for each_sel in already_sel %}
+													{% include 'global-partials/already-selected-topic-partial.html' %}
+												{% endfor %}
+											</div>
+										</div>
+									</div>
+								</div>
+								<hr>
+								<div class="row">
+									<div class="uk-card uk-card-default uk-box-shadow-large">
+										<div class='uk-card-body'>
+											<h3>List of Available Topics</h3>
+											<div uk-grid>
+												{% for topic in tag_names %}
+													{% include 'global-partials/available-topics-partial.html' %}
+												{% endfor %}
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<h3 class='uk-accordion-title'>
+							Professional Information
+							<span class='incomplete-span' id='professional-info-incomplete'  style='display: none;'>
+								<small><span><i>Incomplete</i></span></small>
+							</span>
+							<span class='done-span' id='professional-info-done'>
+								<small><span><i>Done!</i></span></small><span uk-icon="icon: check;"></span>
+							</span>
+						</h3>
+						<div class='uk-accordion-content'>
+							<div class='uk-card uk-card-default uk-box-shadow-large'>
+								<div class='uk-card-body'>
+									<div class='uk-grid'>
+										<div class='uk-width-1-2'>
+											<div class="uk-form-row">
+												<label class="uk-form-label uk-text-bold">
+													{{ form.address.label }}<span class="orange">*</span>
+												</label>
+												<div class="uk-form-controls">
+													{{ form.address }}
+												</div>
+											</div>
+											<br>
+										</div>
+										<div class='uk-width-1-2'>
+											<div class="uk-form-row">
+												<label class="uk-form-label uk-text-bold">
+													{{ form.city.label }}<span class="orange">*</span>
+												</label>
+												<div class="uk-form-controls">
+													{{ form.city }}
+												</div>
+											</div>
+											<br>
+										</div>
+										<div class='uk-width-1-2'>
+											<div class="uk-form-row">
+												<label class="uk-form-label uk-text-bold">
+													{{ form.state.label }}<span class="orange">*</span>
+												</label>
+												<div class="uk-form-controls">
+													{{ form.state }}
+												</div>
+											</div>
+											<br>
+										</div>
+										<div class='uk-width-1-2'>
+											<div class="uk-form-row">
+												<label class="uk-form-label uk-text-bold">
+													{{ form.country.label }}<span class="orange">*</span>
+												</label>
+												<div class="uk-form-controls">
+													{{ form.country }}
+												</div>
+											</div>
+											<br>
+										</div>
+										<div class='uk-width-1-2'>
+											<div class="uk-form-row">
+												<label class="uk-form-label uk-text-bold">
+													{{ form.zipcode.label }}<span class="orange">*</span>
+												</label>
+												<div class="uk-form-controls">
+													{{ form.zipcode }}
+												</div>
+											</div>
+											<br>
+										</div>
+									</div>
+									<div class="uk-form-row">
+										<label class="uk-form-label uk-text-bold">
+											{{ form.website_url.label }}
+										</label>
+										<div class="uk-form-controls">
+											{{ form.website_url }}
+										</div>
+									</div>
+									<br>
+									<div class='uk-grid'>
+										<div class='uk-width-1-2'>
+											<h3 class="blue" >Upload your cv/resume </h3>
+											<div class="uk-form-row">
+												<label class="uk-form-label">{{ form.cv.label }}</label>
+												{% if cv_name != "" %}
+												<p>Current CV: {{cv_name}}</p>
+												{% endif %}
+												<div class="uk-form-controls">
+													{{ form.cv }}
+												</div>
+											</div>
+										</div>
+										<div class='uk-width-1-2'>
+											<h3 class="blue">Profile Picture</h3>
+											<div class="uk-form-row">
+												<label class="uk-form-label">{{ form.avatar.label }}</label>
+												{% if avatar_name != "" %}
+												<p>Current Profile Picture:</p>
+												<img style="max-width: 150px;" src="{{ avatar_name }}">
+												{% endif %}
+												<div class="uk-form-controls">
+													{{ form.avatar }}
+
+
+		<div class="uk-hidden">
+			{{ form.x }}
+			{{ form.y }}
+			{{ form.height }}
+			{{ form.width }}
+		</div>
+
+		  <!-- MODAL TO CROP THE IMAGE -->
+		  <div class="modal fade" id="modalCrop">
+			<div class="modal-dialog">
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				  </button>
+				  <h4 class="modal-title">Crop the photo</h4>
+				</div>
+				<div class="modal-body">
+				  <img src="" id="image" style="max-width: 100%;">
+				</div>
+				<div class="modal-footer">
+				  <div class="btn-group pull-left" role="group">
+					<button type="button" class="btn btn-default js-zoom-in">
+					  <span class="glyphicon glyphicon-zoom-in"></span>
+					</button>
+					<button type="button" class="btn btn-default js-zoom-out">
+					  <span class="glyphicon glyphicon-zoom-out"></span>
+					</button>
+				  </div>
+				  <button type="button" class="btn btn-default" data-dismiss="modal">Nevermind</button>
+				  <button type="button" class="btn btn-primary js-crop-and-upload">Crop and upload</button>
+				</div>
+			  </div>
+			</div>
+		  </div>
+
+		  <!-- CONTAINER TO DISPLAY THE CROPPED IMAGES -->
+		  <div class="row uk-hidden" style="margin-top: 20px">
+			  <div class="col-sm-4 col-md-3" id="cropped_thumbnail">
+				<img src="{{ form.avatar.url }}" class="thumbnail">
+			  </div>
+		  </div>
+
+												</div>
+											</div>
+										</div>
+									</div>
+									<h3 class="blue" >Professional Interests, Experience, and Expertise<span class="orange">*</span></h3>
+
+									<div>
+										In this section, tell us about yourself. What are your special interests (research topics
+										and/or clinical populations)? Also, tell why you want to contribute to Relevate. Include
+										anything else you think should be known about you. If approved, this biography will go on
+										your contributor profile page, so write it as though you are speaking directly to the users of
+										Relevate who are exploring your profile (i.e., avoid jargon and acronyms, use third grade language).
+									</div>
+									<br>
+									<div class="uk-form-row">
+										<div class="uk-form-controls">
+											{{ form.biography }}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+				<p style="display: none;">I agree to terms and conditions: {{ form.accept_terms }}</p>
+
+				<br><br>
+				<button id="submit-btn" type='button' class='uk-button uk-button-primary'>Update Profile</button>
+				<br>
+				<br>
+			</form>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block footer %}
+	{{ block.super }}
+
+	<script type="text/javascript">
+
+		var verificationFlags;
+		var mentorNeeded = false;
+		$(document).ready(function () {
+            universitySearchUrl = "{% url 'profile:query_universities' %}";
+			academicId = parseInt("{{ max_academic_id }}") + 2;
+			certId = parseInt('{{ max_certification_id }}') + 2;
+			affiliationId = parseInt('{{ max_affiliation_id }}') + 2;
+			academicTable = [];
+			certificationTable = [];
+			affiliationTable = [];
+			updateTablesUpdateInfo(true);
+			updateTablesUpdateInfo(false);
+		});
+
+	</script>
+
+{% endblock %}

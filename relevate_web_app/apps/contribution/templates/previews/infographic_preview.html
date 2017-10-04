@@ -1,0 +1,88 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+      <title>Mobile Preview</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+      <link rel='stylesheet' type='text/css'  href="{% static 'preview-ui/css/style.css' %}"/>
+      <link rel='stylesheet' type='text/css'  href="{% static 'preview-ui/css/normalize.css' %}"/>
+      <link href="https://fonts.googleapis.com/css?family=Offside" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Courgette" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Roboto:400i" rel="stylesheet">
+  </head>
+
+  <body>
+    <label class='uk-form-label uk-text-bold'>
+        This is a mobile preview display.
+        Some of the data you entered might have been cut short for sampling purposes.
+        If not displayed in this preview, scroll down to view the topics section on the mobile device.
+    </label>
+    <!--The Main Thing-->
+<div id="wrapper">
+    <div class="phone view_2" id="phone_1">
+      <div class='uk-margin-top'>
+          <div class="uk-margin">
+              <div class='uk-text-break uk-text-medium uk-text-center'>
+                  <span class="preview-title" id="preview_title">Fake Title</span>
+              </div>
+          </div>
+          <div class="uk-card preview-class uk-card-default">
+            <div class="uk-margin uk-card-body">
+                <p id="preview_content" class="uk-text-small infographic-preview">
+
+                </p>
+                <p class="uk-container"><i>Posted On: <span id="preview_date"></span></i></p>
+            </div>
+          </div>
+          <img id="preview_image" class="infographic-image" src="#"/>
+
+          <div class='up-btn-container' style="background: transparent;">
+         		<div class='uk-padding-small'>
+                    <i class="material-icons orange">favorite</i> 0
+                    <i class="material-icons blue">visibility</i> 0
+         		</div>
+          </div>
+          <p class="footer-font">
+              Contributor: <span id="contrib_info">{{ first_name }} {{ last_name }}
+          </span></p>
+          <br><br>
+          <div class="uk-card" style="background: transparent;">
+            <div class="uk-margin uk-card-body">
+                      <p>Topics:
+                          <span id="topics_info">
+
+                          </span>
+                      </p>
+                </div>
+            </div>
+          </div>
+    </div>
+</div>
+    <p class="uk-text-right">
+                <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+    </p>
+<!--Controls etc.-->
+<div id="controls">
+    <!--Idea by /u/aerosole-->
+
+</div>
+<!------- If we used an Iframe --->
+<div hidden id="phone-controls">
+
+  <div hidden id="views">
+      <label for="iframePerspective">Add perspective:</label>
+      <input type="checkbox" id="iframePerspective"  checked="true" />
+  </div>
+
+  <div id="phones">
+
+  </div>
+
+</div>
+
+    <script type="text/javascript" src="{% static 'preview-ui/js/index.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/mobile-preview.js' %}"></script>
+  </body>
+</html>

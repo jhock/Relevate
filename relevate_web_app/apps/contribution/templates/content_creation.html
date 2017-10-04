@@ -1,0 +1,340 @@
+{% extends "base-titlebar.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+	<div class="uk-container uk-margin-top">
+		<h1>Content Creation
+		{% if can_edit %}
+		<a style='color: white;' class='uk-button uk-button-primary' href="{% url 'contribution:content_creation_create' %}">
+				Add New Content Creation Guide </a>
+		{% endif %}
+		</h1>
+
+
+		<ul class="uk-tab" data-uk-tab="{connect:'#content-panels'}">
+			<li class='uk-active'><a>Infographics</a></li>
+			<li><a>Books</a></li>
+            <li><a>Videos</a></li>
+			<li><a>Articles & Books</a></li>
+            <li><a>Social Media</a></li>
+            <li><a>Podcasts</a></li>
+            <li><a>Interviews & Press Releases</a></li>
+            <li><a>Community Talks & Events</a></li>
+		</ul>
+
+		<ul id="content-panels" class="uk-switcher uk-margin">
+			<li>
+
+					<h2>Infographics</h2>
+                        <ul class="uk-tab uk-flex-center" data-uk-tab="{connect:'#content-levels-panels'}">
+                                <li class='uk-active'><a>Beginner</a></li>
+                                <li><a>Intermediate</a></li>
+                                <li><a>Expert</a></li>
+                        </ul>
+                        <ul id="level-select" class="uk-switcher uk-margin uk-width-medium-1-2">
+                            <li>
+                            	<div class="masonry">
+                                    {% for p in posts %}
+                                        {% if p.type == 'Infographics' and p.level == 'Beginner'%}
+                                            {% include 'partials/content_create_card_partial.html' %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="masonry">
+                                    {% for p in posts %}
+                                        {% if p.type == 'Infographics' and p.level == 'Intermediate'%}
+                                            {% include 'partials/content_create_card_partial.html' %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="masonry">
+                                    {% for p in posts %}
+                                        {% if p.type == 'Infographics' and p.level == 'Expert'%}
+                                            {% include 'partials/content_create_card_partial.html' %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </li>
+                        </ul>
+			</li>
+			<li>
+				<div class='uk-container'>
+					<h2>Blogs</h2>
+                        <ul class="uk-tab" data-uk-tab="{connect:'#content-levels-panels'}">
+                                <li class='uk-active'><a>Beginner</a></li>
+                                <li><a>Intermediate</a></li>
+                                <li><a>Expert</a></li>
+                            </ul>
+                        <ul id="content-panels" class="uk-switcher uk-margin">
+                            <li>
+                                <div class="masonry">
+                                    {% for p in posts %}
+                                        {% if p.type == 'Blogs' and p.level == 'Beginner'%}
+                                            {% include 'partials/content_create_card_partial.html' %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="masonry">
+                                    {% for p in posts %}
+                                        {% if p.type == 'Blogs' and p.level == 'Intermediate'%}
+                                            {% include 'partials/content_create_card_partial.html' %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="masonry">
+                                    {% for p in posts %}
+                                        {% if p.type == 'Blogs' and p.level == 'Expert'%}
+                                            {% include 'partials/content_create_card_partial.html' %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </li>
+                        </ul>
+				</div>
+			</li>
+			<li>
+				<div class='uk-container'>	
+                <h2>Videos</h2>
+                        <ul class="uk-tab" data-uk-tab="{connect:'#content-levels-panels'}">
+                                <li class='uk-active'><a>Beginner</a></li>
+                                <li><a>Intermediate</a></li>
+                                <li><a>Expert</a></li>
+                            </ul>
+                        <ul id="content-panels" class="uk-switcher uk-margin">
+                            <li>
+                                <div class="masonry">
+                                    {% for p in posts %}
+                                        {% if p.type == 'Videos' and p.level == 'Beginner'%}
+                                            {% include 'partials/content_create_card_partial.html' %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="masonry">
+                                    {% for p in posts %}
+                                        {% if p.type == 'Videos' and p.level == 'Intermediate'%}
+                                            {% include 'partials/content_create_card_partial.html' %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="masonry">
+                                    {% for p in posts %}
+                                        {% if p.type == 'Videos' and p.level == 'Expert'%}
+                                            {% include 'partials/content_create_card_partial.html' %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </li>
+                        </ul>
+				</div>
+			</li>
+            <li>
+				<div class='uk-container'>
+					<h2>Articles & Books</h2>
+                        <ul class="uk-tab" data-uk-tab="{connect:'#content-levels-panels'}">
+                                <li class='uk-active'><a>Beginner</a></li>
+                                <li><a>Intermediate</a></li>
+                                <li><a>Expert</a></li>
+                            </ul>
+                        <ul id="content-panels" class="uk-switcher uk-margin">
+                            <li>
+                                <div class="masonry">
+                                    {% for p in posts %}
+                                        {% if p.type == 'Articles and Books' and p.level == 'Beginner'%}
+                                            {% include 'partials/content_create_card_partial.html' %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="masonry">
+                                    {% for p in posts %}
+                                        {% if p.type == 'Articles and Books' and p.level == 'Intermediate'%}
+                                            {% include 'partials/content_create_card_partial.html' %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="masonry">
+                                    {% for p in posts %}
+                                        {% if p.type == 'Articles and Books' and p.level == 'Expert'%}
+                                            {% include 'partials/content_create_card_partial.html' %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </li>
+                        </ul>
+				</div>
+			</li>
+            <li>
+				<div class='uk-container'>
+					<h2>Social Media</h2>
+                        <ul class="uk-tab" data-uk-tab="{connect:'#content-levels-panels'}">
+                                <li class='uk-active'><a>Beginner</a></li>
+                                <li><a>Intermediate</a></li>
+                                <li><a>Expert</a></li>
+                            </ul>
+                        <ul id="content-panels" class="uk-switcher uk-margin">
+                            <li>
+                                <div class="masonry">
+                                    {% for p in posts %}
+                                        {% if p.type == 'Social Media' and p.level == 'Beginner'%}
+                                            {% include 'partials/content_create_card_partial.html' %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="masonry">
+                                    {% for p in posts %}
+                                        {% if p.type == 'Social Media' and p.level == 'Intermediate'%}
+                                            {% include 'partials/content_create_card_partial.html' %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="masonry">
+                                    {% for p in posts %}
+                                        {% if p.type == 'Social Media' and p.level == 'Expert'%}
+                                            {% include 'partials/content_create_card_partial.html' %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </li>
+                        </ul>
+				</div>
+			</li>
+            <li>
+				<div class='uk-container'>
+					<h2>Podcasts</h2>
+                        <ul class="uk-tab" data-uk-tab="{connect:'#content-levels-panels'}">
+                                <li class='uk-active'><a>Beginner</a></li>
+                                <li><a>Intermediate</a></li>
+                                <li><a>Expert</a></li>
+                            </ul>
+                        <ul id="content-panels" class="uk-switcher uk-margin">
+                            <li>
+                                <div class="masonry">
+                                    {% for p in posts %}
+                                        {% if p.type == 'Podcasts' and p.level == 'Beginner'%}
+                                            {% include 'partials/content_create_card_partial.html' %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="masonry">
+                                    {% for p in posts %}
+                                        {% if p.type == 'Podcasts' and p.level == 'Intermediate'%}
+                                            {% include 'partials/content_create_card_partial.html' %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="masonry">
+                                    {% for p in posts %}
+                                        {% if p.type == 'Podcasts' and p.level == 'Expert'%}
+                                            {% include 'partials/content_create_card_partial.html' %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </li>
+                        </ul>
+				</div>
+			</li>
+            <li>
+				<div class='uk-container'>
+					<h2>Interviews & Press Releases</h2>
+                        <ul class="uk-tab" data-uk-tab="{connect:'#content-levels-panels'}">
+                                <li class='uk-active'><a>Beginner</a></li>
+                                <li><a>Intermediate</a></li>
+                                <li><a>Expert</a></li>
+                            </ul>
+                        <ul id="content-panels" class="uk-switcher uk-margin">
+                            <li>
+                                <div class="masonry">
+                                    {% for p in posts %}
+                                        {% if p.type == 'Interviews & Press Releases' and p.level == 'Beginner'%}
+                                            {% include 'partials/content_create_card_partial.html' %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="masonry">
+                                    {% for p in posts %}
+                                        {% if p.type == 'Interviews & Press Releases' and p.level == 'Intermediate'%}
+                                            {% include 'partials/content_create_card_partial.html' %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="masonry">
+                                    {% for p in posts %}
+                                        {% if p.type == 'Interviews & Press Releases' and p.level == 'Expert'%}
+                                            {% include 'partials/content_create_card_partial.html' %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </li>
+                        </ul>
+				</div>
+			</li>
+            <li>
+				<div class='uk-container'>
+					<h2>Community Talks & Events</h2>
+                        <ul class="uk-tab" data-uk-tab="{connect:'#content-levels-panels'}">
+                                <li class='uk-active'><a>Beginner</a></li>
+                                <li><a>Intermediate</a></li>
+                                <li><a>Expert</a></li>
+                            </ul>
+                        <ul id="content-panels" class="uk-switcher uk-margin">
+                            <li>
+                                <div class="masonry">
+                                    {% for p in posts %}
+                                        {% if p.type == 'Community Talks & Events' and p.level == 'Beginner'%}
+                                            {% include 'partials/content_create_card_partial.html' %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="masonry">
+                                    {% for p in posts %}
+                                        {% if p.type == 'Community Talks & Events' and p.level == 'Intermediate'%}
+                                            {% include 'partials/content_create_card_partial.html' %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="masonry">
+                                    {% for p in posts %}
+                                        {% if p.type == 'Community Talks & Events' and p.level == 'Expert'%}
+                                            {% include 'partials/content_create_card_partial.html' %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </li>
+                        </ul>
+				</div>
+			</li>
+		</ul>
+	</div>
+{% endblock %}

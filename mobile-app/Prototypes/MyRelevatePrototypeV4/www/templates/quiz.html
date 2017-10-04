@@ -1,0 +1,21 @@
+<ion-view view-title="{{quiz.title}}">
+  <ion-content class="page">
+  <div style="  height:auto; text-align:center;">
+    <div class ="card" ng-repeat="question in quiz.questions">
+      <div class="list">
+        <div class="item item-divider">
+                <h1>{{question.id}}. {{question.text}}</h1>
+            </div>
+      <label class="item item-radio" ng-repeat="selections in question.options">
+        <input type="radio" name="group">
+        <div class="item-content">{{selections.letter}}.  {{selections.option}}</div>
+        <i class="radio-icon ion-checkmark"></i>
+      </label>
+    </div>
+  </div>
+    <button class="button button-positive button-full" ng-click="quizFinished(quiz)">
+  Done!
+</button>
+</div>
+  </ion-content>
+</ion-view>

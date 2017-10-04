@@ -1,0 +1,53 @@
+#Relevate Web App API
+
+General structure of API:
+
+home -> create Account
+    | -> login (recieve Token)
+
+Home -> Edit Info -> Relation Prof
+                |-> Password, etc (not email)
+
+Home -> View Posts(user tailored feed, not tailored feed)
+                |-> View Individual Posts (like, view)
+
+#Updating newest post feed:
+
+|------|
+|------| cached posts
+|------|
+|------|
+--------  update
+|------|
+|------| grab newests posts up to 30
+|------|
+|------|
+|------|
+
+if much greater than 30 and cached results older than a few days
+|------|
+|------|chached posts
+|------|
+|------|
+|------|-->|
+--------   |
+--------   | more than 30 mosts
+--------   |
+--------   |
+--------   |
+|       |<-|
+|       |
+|       | newest 30 posts
+|       |
+|       |
+
+
+
+-------------------------------------------------------------------
+TO DO LATER
+------------------------------------------------------------------
+#Cant view contributor unless user clicks on post
+
+Home -> View Posts(user tailored feed, not tailored feed)
+                |-> View Individual Posts (like, view)
+                                        |-> View Contributor of Article

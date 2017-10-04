@@ -1,0 +1,38 @@
+{% extends "base-titlebar.html" %}
+{% load staticfiles %}
+
+{% block content %}
+	<div class="uk-container uk-margin-top">
+		<div>
+			<h2 class="orange">Denied Advisers</h2>
+			<p>
+				This is a list of all advisers that have been denied, their reason for denial, and when they 
+				were denied.
+			</p>
+			{% if not advisers %}
+				<div class='uk-card uk-card-default uk-box-shadow-large'>
+					<div class='uk-card-body'>
+						<h3>No Denied Advisers</h3>
+					</div>
+				</div>
+			{% else %}
+				{% for denial in advisers %}
+					<div class='uk-card uk-card-default uk-box-shadow-large'>
+						<div class='uk-card-body'>
+							<h3 class="blue">{{ denial.adviser.contributor_profile.user_profile.user.first_name }} 
+								{{ denial.adviser.contributor_profile.user_profile.user.last_name }}</h3>
+							<p><b>Denied at:</b></p>
+							<p>{{ denial.date_denied }} <i>(UTC Time)</i></p>
+							<p><b>Reason:</b></p>
+							<div class="uk-panel-scrollable">
+								{{ denial.reason|safe }}
+							</div>
+						</div>
+					</div>
+					<br>
+				{% endfor %}
+			{% endif %}
+		</div>
+	</div>
+
+{% endblock %}

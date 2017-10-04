@@ -1,0 +1,16 @@
+Infographic Views Documentation
+===============================
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+.. module :: apps.contribution.views.infographics_view
+.. autoclass :: InfographicCreateView
+	:members: get, post
+.. autoclass :: InfographicUpdateView
+	:members: get, post
+.. autoclass :: InfographicsListView
+	:members: get
+.. autoclass :: InfographicView
+	:members: get, post

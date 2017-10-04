@@ -1,0 +1,30 @@
+Adviser Views Documentation
+===========================
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+.. module :: apps.profiles.views.adviser_views
+.. autoclass :: AdviserListView
+	:members: get
+.. autoclass :: DeniedAdviserListView
+	:members: get
+.. autoclass :: AdviserApproveView
+	:members: get
+.. autoclass :: ApproveButtonView
+	:members: post
+.. autoclass :: DenyButtonView
+	:members: post
+.. autoclass :: AdviserCreateView
+	:members: get, post
+.. autoclass :: AdviserUpdateView
+	:members: get, post
+.. autoclass :: AdviserProfileView
+	:members: get
+.. autoclass :: AdviserApprovePostView
+	:members: get
+.. autoclass :: ApprovePostAjaxView
+	:members: post
+.. autoclass :: DenyPostAjaxView
+	:members: post

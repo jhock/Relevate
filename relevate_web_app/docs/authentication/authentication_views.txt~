@@ -1,0 +1,18 @@
+Authentication Views Documentation
+===============================
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+.. module :: apps.profiles.views.authentication_views
+.. autoclass :: RegisterUserView
+	:members: get
+.. autoclass :: DeactivatedAccountView
+	:members: get
+.. autoclass :: ResetPasswordRequestView
+	:members: get
+.. autoclass :: ChangeAccountInfoView
+	:members: get
+.. autoclass :: ConfirmationView
+	:members: get

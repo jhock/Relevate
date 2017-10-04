@@ -1,0 +1,156 @@
+{% extends "base-titlebar.html" %}
+{% load staticfiles %}
+
+{% block head %}
+	{{ block.super }}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/link-create.css' %}"/>
+	<script type="text/javascript" src="{% static 'js/contributor.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/link-create.js' %}"></script>
+
+	<script type="text/javascript" src="{% static 'js/topic-button.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/link-validation.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+<div class='uk-container uk-margin-top'>
+	<h1 class='orange'>Add A Link</h1>
+	<form id='link-form' class="uk-form uk-form-stacked" action="{% url 'contribution:link_create' %}" method="post" enctype='multipart/form-data'>
+		{% csrf_token %}
+		<div uk-grid>
+			<div class='uk-width-1-2'>
+				<label class="uk-form-label uk-text-bold uk-text-lead">{{ form.title.label }}</label>
+				<div class="uk-form-controls">
+					{{ form.title }}
+				</div>
+			</div>
+			<div class='uk-width-1-2'>
+				<label class="uk-form-label uk-text-bold uk-text-lead">{{ form.link.label }}</label>
+				<div class="uk-form-controls">
+					{{ form.link }} 
+				</div>
+			</div>
+		</div>
+		<br>
+		<div uk-grid class='uk-child-width-1-2'> 
+			<div>
+				<label class='uk-form-label uk-text-bold uk-text-lead'>{{ form.image.label }}</label>
+				<p>Must be .png, .jpg, or .jpeg </p>
+				<div class="uk-form-controls">
+					{{ form.image }}
+				</div>
+			</div>
+			<div class="uk-hidden">
+				{{ form.x }}
+				{{ form.y }}
+				{{ form.height }}
+				{{ form.width }}
+			</div>
+		</div>
+
+		  <!-- MODAL TO CROP THE IMAGE -->
+		  <div class="modal fade" id="modalCrop">
+			<div class="modal-dialog">
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				  </button>
+				  <h4 class="modal-title">Crop the photo</h4>
+				</div>
+				<div class="modal-body">
+				  <img src="" id="image" style="max-width: 100%;">
+				</div>
+				<div class="modal-footer">
+				  <div class="btn-group pull-left" role="group">
+					<button type="button" class="btn btn-default js-zoom-in">
+					  <span class="glyphicon glyphicon-zoom-in"></span>
+					</button>
+					<button type="button" class="btn btn-default js-zoom-out">
+					  <span class="glyphicon glyphicon-zoom-out"></span>
+					</button>
+				  </div>
+				  <button type="button" class="btn btn-default" data-dismiss="modal">Nevermind</button>
+				  <button type="button" class="btn btn-primary js-crop-and-upload">Crop and upload</button>
+				</div>
+			  </div>
+			</div>
+		  </div>
+
+		<br>
+		<div class="uk-form-row">
+			<label class="uk-form-label uk-text-bold uk-text-lead">{{ form.blurb.label }}</label>
+			<div class="uk-form-controls"><i id="blurb_count"></i>
+				{{ form.blurb }}
+			</div>
+		</div>
+		<div hidden class="uk-form-row">
+			<label class="uk-form-label uk-text-bold uk-text-lead">{{ form.topic_choices.label }}</label>
+			<div class="uk-form-controls">
+				{{ form.topic_choices }}
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<label class='uk-form-label uk-text-lead uk-text-bold'>Link Topics</label>
+			<p>You must select at least 1 topic for this link. Hover over a button to read it's description.</p>
+			<div class="uk-card uk-card-default uk-box-shadow-large">
+				<div class='uk-card-body'>
+                    <p><label class="uk-form-label uk-text-bold">Selected Topics for this Link</label></p>
+					<div id="chosen-item-list" uk-grid>
+						{% for each_sel in already_sel %}
+							{% include 'global-partials/already-selected-topic-partial.html' %}
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+		<br>
+
+		<div class="row">
+			<div class="uk-card uk-card-default uk-box-shadow-large">
+				<div class='uk-card-body'>
+                    <p><label class="uk-form-label uk-text-bold">List of Avaliable Topics</label></p>
+					<div uk-grid>
+						{% for topic in tag_names %}
+							{% include 'global-partials/available-topics-partial.html' %}
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+		<br>
+		<input id='hidden-checkbox' name='hidden-checkbox' type='checkbox' hidden />
+		<div class='uk-grid'>
+			<div>
+				<button type="button" name='save_and_publish'class="submit-button uk-button uk-button-orange">
+					Save And Publish
+				</button>
+				<button type="button" class="submit-button uk-button uk-button-primary">Save</button>
+                <button id='preview-btn' type="button" class="uk-button uk-button-secondary"
+                                             uk-toggle="target: #preview-modal-link">
+                    Preview
+                </button>
+			</div>
+			<div>
+				<div id='load-icon' class='loader invisible'></div>
+			</div>
+		</div>
+	</form>
+    <div id="preview-modal-link" uk-modal>
+        <div class="uk-modal-dialog uk-modal-body">
+            {% include 'previews/link_preview.html' %}
+        </div>
+    </div>
+	<br>
+	<br>
+	<br>
+</div>
+<script>
+    CKEDITOR.replace('id_blurb');
+</script>
+
+{% endblock %}
+
+
+

@@ -1,0 +1,39 @@
+{% load staticfiles %}
+ <!--<script>-->
+ <!--var colors = ['red', 'green', 'blue', 'orange', 'yellow'];-->
+ <!--$('.item').css('background-color', colors[Math.floor(Math.random() * colors.length)]);</script>-->
+<div class="uk-card uk-card-default uk-box-shadow-large item">
+	<div class='uk-card-body'>
+		<div class='uk-clearfix'>
+			<p class='uk-card-title'>
+				<a target="_blank" href="{{ l.url }}">{{ l.title }}</a>
+			</p>
+		</div>
+        <div>
+            <a href="{{ l.url }}">
+                <img src="{{ l.image.url }}">
+            </a>
+        </div>
+		<p>{{ l.description | safe }}<a class='uk-text-primary' target="_blank" href="{{ l.url }}"> Read more...</a></p>
+			<div>
+				{% if p.contributor.avatar == ""  %}
+                    <img style="max-width: 70px;" class="profile_avatar uk-border-circle" src="{% static "images/profile-placeholder.png" %}"{{ person.photo_url|default_if_none:'#' }} alt="logo"/>
+                {% elif p.contributor.avatar != "" %}
+                    <img style="max-width: 70px;" class="profile_avatar uk-border-circle" src="{{ p.contributor.avatar.url }}">
+                {% endif %}
+				{{ p.contributor }}
+            </div>
+		<hr>
+		<small>Topics: </small>
+		<div class="topics-scroll-menu">
+            <li>
+			{% for topic in l.topics.all %}
+					<a href="{% url 'contribution:topic_sort' topic.name %}"><small>{{ topic.name }}</small></a>
+					<div class="uk-dropdown uk-dropdown-small">
+						<span>{{ topic.description }}</span>
+					</div>
+			{% endfor %}
+            </li>
+		</div>
+	</div>
+</div>

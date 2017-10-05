@@ -159,6 +159,11 @@ $(document).ready(function()
       }).on("hidden.bs.modal", function () {
         cropBoxData = $image.cropper("getCropBoxData");
         canvasData = $image.cropper("getCanvasData");
+        var cropData = $image.cropper("getData");
+        $("#id_x").val(cropData["x"]);
+        $("#id_y").val(cropData["y"]);
+        $("#id_height").val(cropData["height"]);
+        $("#id_width").val(cropData["width"]);
         $image.cropper("destroy");
       });
 

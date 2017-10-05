@@ -5,7 +5,9 @@ class AboutFunderForm(forms.Form):
     CHOICES = [('funder', 'funder'),
                ('adviser', 'adviser'),
                ('architect', 'architect'),
-               ('engineer', 'engineer')]
+               ('engineer', 'engineer'),
+               ('previous architect', 'previous architect'),
+               ('previous engineer', 'previous engineer')]
 
     name = forms.CharField(label='Funder Name', max_length=200, required=True, widget=forms.TextInput(attrs={'placeholder': 'Funder or Adviser Name'}))
     content = forms.CharField(max_length=1500, widget=forms.Textarea(attrs={'placeholder': 'Enter Funder or Adviser Description.',

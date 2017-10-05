@@ -33,7 +33,7 @@ class ContentCreateForm(forms.Form):
 	level = forms.CharField(label='Level of Reader Experience', required=True, widget=forms.Select(choices=LEVEL_OF_EXPERIENCE))
 
 	#fields for cropping images
-	x = forms.FloatField(required=False)
-	y = forms.FloatField(required=False)
-	width = forms.FloatField(required=False)
-	height = forms.FloatField(required=False)
+	x = forms.FloatField(required=True, error_messages={'required': 'Please crop the image before uploading.'})
+	y = forms.FloatField(required=True, error_messages={'required': 'Please crop the image before uploading.'})
+	width = forms.FloatField(required=True, error_messages={'required': 'Please crop the image before uploading.'})
+	height = forms.FloatField(required=True, error_messages={'required': 'Please crop the image before uploading.'})

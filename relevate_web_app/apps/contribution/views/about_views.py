@@ -37,6 +37,8 @@ class AboutView(View):
         advisers = about_persons.filter(funder_or_adviser='adviser').order_by('position')
         architects = about_persons.filter(funder_or_adviser='architect').order_by('position')
         engineers = about_persons.filter(funder_or_adviser='engineer').order_by('position')
+        previous_architects = about_persons.filter(funder_or_adviser='previous architect').order_by('position')
+        previous_engineers = about_persons.filter(funder_or_adviser='previous engineer').order_by('position')
         can_edit = False
         if request.user.is_authenticated:
             user_prof = UserProfile.objects.get(user=request.user)
@@ -44,11 +46,16 @@ class AboutView(View):
                 can_edit = True
             if (user_prof.is_contributor):
                 contrib_prof = ContributorProfile.objects.get(user_profile=user_prof)
-                return render(request, "about.html", {'user_prof': user_prof, 'contrib_prof': contrib_prof, 'funders': funders, 'advisers': advisers, 'architects': architects, 'engineers': engineers, 'can_edit': can_edit})
+                return render(request, "about.html", {'user_prof': user_prof, 'contrib_prof': contrib_prof, 'funders': funders,
+                  'advisers': advisers, 'architects': architects, 'engineers': engineers,
+                  'previous_architects': previous_architects, 'previous_engineers': previous_engineers,'can_edit': can_edit})
             else:
-                return render(request, "about.html", {'user_prof': user_prof, 'funders': funders, 'advisers': advisers, 'architects': architects, 'engineers': engineers, 'can_edit': can_edit})
+                return render(request, "about.html", {'user_prof': user_prof, 'funders': funders, 'advisers': advisers,
+                'architects': architects, 'engineers': engineers, 'previous_architects': previous_architects,
+                'previous_engineers': previous_engineers,'can_edit': can_edit})
         else:
-            return render(request, "about.html", {'funders': funders, 'advisers': advisers, 'architects': architects, 'engineers': engineers, 'can_edit': can_edit})
+            return render(request, "about.html", {'funders': funders, 'advisers': advisers, 'architects': architects,
+            'engineers': engineers, 'previous_architects': previous_architects, 'previous_engineers': previous_engineers, 'can_edit': can_edit})
 
 
 class AboutCreateView(LoginRequiredMixin, FormView):

@@ -2,23 +2,6 @@ from datetime import datetime
 from django.db import models
 from django.template.defaultfilters import slugify
 
-# List of types of content creation for sorting in the template
-TYPE_OF_CONTENT = (
-    ('Infographics', 'Infographics'),
-    ('Blogs', 'Blogs'),
-    ('Videos', 'Videos'),
-    ('Articles and Books', 'Articles and Books'),
-    ('Social Media', 'Social Media'),
-    ('Podcasts', 'Podcasts'),
-    ('Interviews & Press Releases', 'Interviews & Press Releases'),
-    ('Community Talks & Events', 'Community Talks & Events')
-)
-# list of identifiers used to separate content creation posts by experience.
-LEVEL_OF_EXPERIENCE = (
-    ('Beginner', 'Beginner'),
-    ('Intermediate', 'Intermediate'),
-    ('Expert', 'Expert')
-)
 
 class ContentCreation(models.Model):
     """
@@ -60,8 +43,8 @@ class ContentCreation(models.Model):
     slug = models.SlugField(default=None, max_length=100)
     isPublished = models.BooleanField(default=False)
 
-    type = models.CharField(max_length=30, choices=TYPE_OF_CONTENT)
-    level = models.CharField(max_length=30, choices=LEVEL_OF_EXPERIENCE)
+    type = models.CharField(max_length=30)
+    level = models.CharField(max_length=30)
 
     createdDate = models.DateTimeField(default=datetime.utcnow)
     publishedDate = models.DateTimeField(null=True, blank=True)

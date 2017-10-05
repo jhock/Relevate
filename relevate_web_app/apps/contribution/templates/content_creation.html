@@ -14,7 +14,7 @@
 
 		<ul class="uk-tab" data-uk-tab="{connect:'#content-panels'}">
 			<li class='uk-active'><a>Infographics</a></li>
-			<li><a>Books</a></li>
+			<li><a>Blogs</a></li>
             <li><a>Videos</a></li>
 			<li><a>Articles & Books</a></li>
             <li><a>Social Media</a></li>
@@ -28,15 +28,16 @@
 
 					<h2>Infographics</h2>
                         <ul class="uk-tab uk-flex-center" data-uk-tab="{connect:'#content-levels-panels'}">
-                                <li class='uk-active'><a>Beginner</a></li>
-                                <li><a>Intermediate</a></li>
-                                <li><a>Expert</a></li>
+                                <li class='uk-active'><a>Getting Started</a></li>
+                                <li><a>Expanding Your Reach</a></li>
+                                <li><a>Troubleshooting</a></li>
+                                <li><a>Advanced Techniques</a></li>
                         </ul>
                         <ul id="level-select" class="uk-switcher uk-margin uk-width-medium-1-2">
                             <li>
                             	<div class="masonry">
                                     {% for p in posts %}
-                                        {% if p.type == 'Infographics' and p.level == 'Beginner'%}
+                                        {% if p.type == 'Infographics' and p.level == 'Getting Started'%}
                                             {% include 'partials/content_create_card_partial.html' %}
                                         {% endif %}
                                     {% endfor %}
@@ -45,7 +46,7 @@
                             <li>
                                 <div class="masonry">
                                     {% for p in posts %}
-                                        {% if p.type == 'Infographics' and p.level == 'Intermediate'%}
+                                        {% if p.type == 'Infographics' and p.level == 'Expanding Your Reach'%}
                                             {% include 'partials/content_create_card_partial.html' %}
                                         {% endif %}
                                     {% endfor %}
@@ -54,7 +55,16 @@
                             <li>
                                 <div class="masonry">
                                     {% for p in posts %}
-                                        {% if p.type == 'Infographics' and p.level == 'Expert'%}
+                                        {% if p.type == 'Infographics' and p.level == 'Troubleshooting'%}
+                                            {% include 'partials/content_create_card_partial.html' %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="masonry">
+                                    {% for p in posts %}
+                                        {% if p.type == 'Infographics' and p.level == 'Advanced Techniques'%}
                                             {% include 'partials/content_create_card_partial.html' %}
                                         {% endif %}
                                     {% endfor %}
@@ -66,15 +76,16 @@
 				<div class='uk-container'>
 					<h2>Blogs</h2>
                         <ul class="uk-tab" data-uk-tab="{connect:'#content-levels-panels'}">
-                                <li class='uk-active'><a>Beginner</a></li>
-                                <li><a>Intermediate</a></li>
-                                <li><a>Expert</a></li>
+                                <li class='uk-active'><a>Getting Started</a></li>
+                                <li><a>Expanding Your Reach</a></li>
+                                <li><a>Troubleshooting</a></li>
+                                <li><a>Advanced Techniques</a></li>
                             </ul>
                         <ul id="content-panels" class="uk-switcher uk-margin">
                             <li>
                                 <div class="masonry">
                                     {% for p in posts %}
-                                        {% if p.type == 'Blogs' and p.level == 'Beginner'%}
+                                        {% if p.type == 'Blogs' and p.level == 'Getting Started'%}
                                             {% include 'partials/content_create_card_partial.html' %}
                                         {% endif %}
                                     {% endfor %}
@@ -83,7 +94,7 @@
                             <li>
                                 <div class="masonry">
                                     {% for p in posts %}
-                                        {% if p.type == 'Blogs' and p.level == 'Intermediate'%}
+                                        {% if p.type == 'Blogs' and p.level == 'Expanding Your Reach'%}
                                             {% include 'partials/content_create_card_partial.html' %}
                                         {% endif %}
                                     {% endfor %}
@@ -92,7 +103,16 @@
                             <li>
                                 <div class="masonry">
                                     {% for p in posts %}
-                                        {% if p.type == 'Blogs' and p.level == 'Expert'%}
+                                        {% if p.type == 'Blogs' and p.level == 'Troubleshooting'%}
+                                            {% include 'partials/content_create_card_partial.html' %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="masonry">
+                                    {% for p in posts %}
+                                        {% if p.type == 'Blogs' and p.level == 'Advanced Techniques'%}
                                             {% include 'partials/content_create_card_partial.html' %}
                                         {% endif %}
                                     {% endfor %}
@@ -102,18 +122,19 @@
 				</div>
 			</li>
 			<li>
-				<div class='uk-container'>	
+				<div class='uk-container'>
                 <h2>Videos</h2>
                         <ul class="uk-tab" data-uk-tab="{connect:'#content-levels-panels'}">
-                                <li class='uk-active'><a>Beginner</a></li>
-                                <li><a>Intermediate</a></li>
-                                <li><a>Expert</a></li>
+                                <li class='uk-active'><a>Getting Started</a></li>
+                                <li><a>Expanding Your Reach</a></li>
+                                <li><a>Troubleshooting</a></li>
+                                <li><a>Advanced Techniques</a></li>
                             </ul>
                         <ul id="content-panels" class="uk-switcher uk-margin">
                             <li>
                                 <div class="masonry">
                                     {% for p in posts %}
-                                        {% if p.type == 'Videos' and p.level == 'Beginner'%}
+                                        {% if p.type == 'Videos' and p.level == 'Getting Started'%}
                                             {% include 'partials/content_create_card_partial.html' %}
                                         {% endif %}
                                     {% endfor %}
@@ -122,7 +143,7 @@
                             <li>
                                 <div class="masonry">
                                     {% for p in posts %}
-                                        {% if p.type == 'Videos' and p.level == 'Intermediate'%}
+                                        {% if p.type == 'Videos' and p.level == 'Expanding Your Reach'%}
                                             {% include 'partials/content_create_card_partial.html' %}
                                         {% endif %}
                                     {% endfor %}
@@ -131,7 +152,16 @@
                             <li>
                                 <div class="masonry">
                                     {% for p in posts %}
-                                        {% if p.type == 'Videos' and p.level == 'Expert'%}
+                                        {% if p.type == 'Videos' and p.level == 'Troubleshooting'%}
+                                            {% include 'partials/content_create_card_partial.html' %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="masonry">
+                                    {% for p in posts %}
+                                        {% if p.type == 'Videos' and p.level == 'Advanced Techniques'%}
                                             {% include 'partials/content_create_card_partial.html' %}
                                         {% endif %}
                                     {% endfor %}
@@ -144,15 +174,16 @@
 				<div class='uk-container'>
 					<h2>Articles & Books</h2>
                         <ul class="uk-tab" data-uk-tab="{connect:'#content-levels-panels'}">
-                                <li class='uk-active'><a>Beginner</a></li>
-                                <li><a>Intermediate</a></li>
-                                <li><a>Expert</a></li>
+                                <li class='uk-active'><a>Getting Started</a></li>
+                                <li><a>Expanding Your Reach</a></li>
+                                <li><a>Troubleshooting</a></li>
+                                <li><a>Advanced Techniques</a></li>
                             </ul>
                         <ul id="content-panels" class="uk-switcher uk-margin">
                             <li>
                                 <div class="masonry">
                                     {% for p in posts %}
-                                        {% if p.type == 'Articles and Books' and p.level == 'Beginner'%}
+                                        {% if p.type == 'Articles and Books' and p.level == 'Getting Started'%}
                                             {% include 'partials/content_create_card_partial.html' %}
                                         {% endif %}
                                     {% endfor %}
@@ -161,7 +192,7 @@
                             <li>
                                 <div class="masonry">
                                     {% for p in posts %}
-                                        {% if p.type == 'Articles and Books' and p.level == 'Intermediate'%}
+                                        {% if p.type == 'Articles and Books' and p.level == 'Expanding Your Reach'%}
                                             {% include 'partials/content_create_card_partial.html' %}
                                         {% endif %}
                                     {% endfor %}
@@ -170,7 +201,16 @@
                             <li>
                                 <div class="masonry">
                                     {% for p in posts %}
-                                        {% if p.type == 'Articles and Books' and p.level == 'Expert'%}
+                                        {% if p.type == 'Articles and Books' and p.level == 'Troubleshooting'%}
+                                            {% include 'partials/content_create_card_partial.html' %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="masonry">
+                                    {% for p in posts %}
+                                        {% if p.type == 'Articles and Books' and p.level == 'Advanced Techniques'%}
                                             {% include 'partials/content_create_card_partial.html' %}
                                         {% endif %}
                                     {% endfor %}
@@ -183,15 +223,16 @@
 				<div class='uk-container'>
 					<h2>Social Media</h2>
                         <ul class="uk-tab" data-uk-tab="{connect:'#content-levels-panels'}">
-                                <li class='uk-active'><a>Beginner</a></li>
-                                <li><a>Intermediate</a></li>
-                                <li><a>Expert</a></li>
+                                <li class='uk-active'><a>Getting Started</a></li>
+                                <li><a>Expanding Your Reach</a></li>
+                                <li><a>Troubleshooting</a></li>
+                                <li><a>Advanced Techniques</a></li>
                             </ul>
                         <ul id="content-panels" class="uk-switcher uk-margin">
                             <li>
                                 <div class="masonry">
                                     {% for p in posts %}
-                                        {% if p.type == 'Social Media' and p.level == 'Beginner'%}
+                                        {% if p.type == 'Social Media' and p.level == 'Getting Started'%}
                                             {% include 'partials/content_create_card_partial.html' %}
                                         {% endif %}
                                     {% endfor %}
@@ -200,7 +241,7 @@
                             <li>
                                 <div class="masonry">
                                     {% for p in posts %}
-                                        {% if p.type == 'Social Media' and p.level == 'Intermediate'%}
+                                        {% if p.type == 'Social Media' and p.level == 'Expanding Your Reach'%}
                                             {% include 'partials/content_create_card_partial.html' %}
                                         {% endif %}
                                     {% endfor %}
@@ -209,7 +250,16 @@
                             <li>
                                 <div class="masonry">
                                     {% for p in posts %}
-                                        {% if p.type == 'Social Media' and p.level == 'Expert'%}
+                                        {% if p.type == 'Social Media' and p.level == 'Troubleshooting'%}
+                                            {% include 'partials/content_create_card_partial.html' %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="masonry">
+                                    {% for p in posts %}
+                                        {% if p.type == 'Social Media' and p.level == 'Advanced Techniques'%}
                                             {% include 'partials/content_create_card_partial.html' %}
                                         {% endif %}
                                     {% endfor %}
@@ -222,15 +272,16 @@
 				<div class='uk-container'>
 					<h2>Podcasts</h2>
                         <ul class="uk-tab" data-uk-tab="{connect:'#content-levels-panels'}">
-                                <li class='uk-active'><a>Beginner</a></li>
-                                <li><a>Intermediate</a></li>
-                                <li><a>Expert</a></li>
+                                <li class='uk-active'><a>Getting Started</a></li>
+                                <li><a>Expanding Your Reach</a></li>
+                                <li><a>Troubleshooting</a></li>
+                                <li><a>Advanced Techniques</a></li>
                             </ul>
                         <ul id="content-panels" class="uk-switcher uk-margin">
                             <li>
                                 <div class="masonry">
                                     {% for p in posts %}
-                                        {% if p.type == 'Podcasts' and p.level == 'Beginner'%}
+                                        {% if p.type == 'Podcasts' and p.level == 'Getting Started'%}
                                             {% include 'partials/content_create_card_partial.html' %}
                                         {% endif %}
                                     {% endfor %}
@@ -239,7 +290,7 @@
                             <li>
                                 <div class="masonry">
                                     {% for p in posts %}
-                                        {% if p.type == 'Podcasts' and p.level == 'Intermediate'%}
+                                        {% if p.type == 'Podcasts' and p.level == 'Expanding Your Reach'%}
                                             {% include 'partials/content_create_card_partial.html' %}
                                         {% endif %}
                                     {% endfor %}
@@ -248,7 +299,16 @@
                             <li>
                                 <div class="masonry">
                                     {% for p in posts %}
-                                        {% if p.type == 'Podcasts' and p.level == 'Expert'%}
+                                        {% if p.type == 'Podcasts' and p.level == 'Troubleshooting'%}
+                                            {% include 'partials/content_create_card_partial.html' %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="masonry">
+                                    {% for p in posts %}
+                                        {% if p.type == 'Podcasts' and p.level == 'Advanced Techniques'%}
                                             {% include 'partials/content_create_card_partial.html' %}
                                         {% endif %}
                                     {% endfor %}
@@ -261,15 +321,16 @@
 				<div class='uk-container'>
 					<h2>Interviews & Press Releases</h2>
                         <ul class="uk-tab" data-uk-tab="{connect:'#content-levels-panels'}">
-                                <li class='uk-active'><a>Beginner</a></li>
-                                <li><a>Intermediate</a></li>
-                                <li><a>Expert</a></li>
+                                <li class='uk-active'><a>Getting Started</a></li>
+                                <li><a>Expanding Your Reach</a></li>
+                                <li><a>Troubleshooting</a></li>
+                                <li><a>Advanced Techniques</a></li>
                             </ul>
                         <ul id="content-panels" class="uk-switcher uk-margin">
                             <li>
                                 <div class="masonry">
                                     {% for p in posts %}
-                                        {% if p.type == 'Interviews & Press Releases' and p.level == 'Beginner'%}
+                                        {% if p.type == 'Interviews & Press Releases' and p.level == 'Getting Started'%}
                                             {% include 'partials/content_create_card_partial.html' %}
                                         {% endif %}
                                     {% endfor %}
@@ -278,7 +339,7 @@
                             <li>
                                 <div class="masonry">
                                     {% for p in posts %}
-                                        {% if p.type == 'Interviews & Press Releases' and p.level == 'Intermediate'%}
+                                        {% if p.type == 'Interviews & Press Releases' and p.level == 'Expanding Your Reach'%}
                                             {% include 'partials/content_create_card_partial.html' %}
                                         {% endif %}
                                     {% endfor %}
@@ -287,7 +348,16 @@
                             <li>
                                 <div class="masonry">
                                     {% for p in posts %}
-                                        {% if p.type == 'Interviews & Press Releases' and p.level == 'Expert'%}
+                                        {% if p.type == 'Interviews & Press Releases' and p.level == 'Troubleshooting'%}
+                                            {% include 'partials/content_create_card_partial.html' %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="masonry">
+                                    {% for p in posts %}
+                                        {% if p.type == 'Interviews & Press Releases' and p.level == 'Advanced Techniques'%}
                                             {% include 'partials/content_create_card_partial.html' %}
                                         {% endif %}
                                     {% endfor %}
@@ -300,15 +370,16 @@
 				<div class='uk-container'>
 					<h2>Community Talks & Events</h2>
                         <ul class="uk-tab" data-uk-tab="{connect:'#content-levels-panels'}">
-                                <li class='uk-active'><a>Beginner</a></li>
-                                <li><a>Intermediate</a></li>
-                                <li><a>Expert</a></li>
+                                <li class='uk-active'><a>Getting Started</a></li>
+                                <li><a>Expanding Your Reach</a></li>
+                                <li><a>Troubleshooting</a></li>
+                                <li><a>Advanced Techniques</a></li>
                             </ul>
                         <ul id="content-panels" class="uk-switcher uk-margin">
                             <li>
                                 <div class="masonry">
                                     {% for p in posts %}
-                                        {% if p.type == 'Community Talks & Events' and p.level == 'Beginner'%}
+                                        {% if p.type == 'Community Talks & Events' and p.level == 'Getting Started'%}
                                             {% include 'partials/content_create_card_partial.html' %}
                                         {% endif %}
                                     {% endfor %}
@@ -317,7 +388,7 @@
                             <li>
                                 <div class="masonry">
                                     {% for p in posts %}
-                                        {% if p.type == 'Community Talks & Events' and p.level == 'Intermediate'%}
+                                        {% if p.type == 'Community Talks & Events' and p.level == 'Expanding Your Reach'%}
                                             {% include 'partials/content_create_card_partial.html' %}
                                         {% endif %}
                                     {% endfor %}
@@ -326,7 +397,16 @@
                             <li>
                                 <div class="masonry">
                                     {% for p in posts %}
-                                        {% if p.type == 'Community Talks & Events' and p.level == 'Expert'%}
+                                        {% if p.type == 'Community Talks & Events' and p.level == 'Troubleshooting'%}
+                                            {% include 'partials/content_create_card_partial.html' %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="masonry">
+                                    {% for p in posts %}
+                                        {% if p.type == 'Community Talks & Events' and p.level == 'Advanced Techniques'%}
                                             {% include 'partials/content_create_card_partial.html' %}
                                         {% endif %}
                                     {% endfor %}

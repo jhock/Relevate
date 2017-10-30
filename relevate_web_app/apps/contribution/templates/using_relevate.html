@@ -8,27 +8,91 @@
 
 		<ul class="uk-tab" data-uk-tab="{connect:'#content-panels'}">
 			<li class='uk-active'><a>Getting Started</a></li>
-			<li><a>Troubleshooting</a></li>
-			<li><a>Tracking Metrics</a></li>
+			<li><a>Troubleshooting and F.A.Q.</a></li>
 		</ul>
 
 		<ul id="content-panels" class="uk-switcher uk-margin">
 			<li>
 				<div class='uk-container'>
 					<h2>Getting Started</h2>
-					<p>This resource is under development.</p>
+					<p>The following guide will instruct you on how to navigate the website, create a user account, create
+					 an application to be a contributor to the site, as well as creation and editing of posts.</p>
+					<hr class="uk-divider-icon">
+					<h4>Set up user account</h4>
+					<p>You must set up a basic user account before creating a contributor account. To do so, click on "CREATE ACCOUNT"
+						in the navigation bar, or the link <a href="{% url 'profile:registration' %}">here</a>. Fill out the e-mail and password
+					forms, and the optional topic preferences. These preferences will be used to select relevant posts to
+					display on the home page. If you do not select any topic, your home page posts will be filled out
+					at random.</p>
+					<h4>Confirm Your Account</h4>
+					<p>Confirm your account by opening the inbox of the e-mail address used to create your account.
+					Open the confirmation email sent from Relevate, and click the link included. Your user account will them be
+					confirmed.</p>
+					<h4>Apply to be a contributor</h4>
+					<p>Once you have set up a user account, you have access to the contributor application. To access it,
+					click on "CONTRIBUTOR APPLICATION" on the navigation bar, or the link <a href="{% url 'profile:contributor_create' %}">here</a>
+					. Before you begin, it is important to note that the information entered into the form will not be saved
+						 if the browser or window is closed, and it it best to complete the form in one sitting.
+						There are four sections to be completed before the application will be accepted. All required entries
+						will be marked with an orange asterisk. For the first section, enter in your degree and click the "ADD" button.
+						If you wish to remove an entry, simply click the "DELETE" button and re-enter the information.
+					Once you have completed a section, click on the next section to expand it. Click on a topic in the
+						"List of Available Topics" to add it to your application, and click on a topic in the "Selected Topics for Expertise"
+					 to remove it. Hover over a topic for a short description. Next fill out the "Professional Information" section,
+					 and read over then agree to the terms and conditions. Finally, click the blue "Submit" button once you
+					are satisfied to submit the application.</p>
+					<h4>Create a new Relevate post.</h4>
+					<p>To create a new post, click the "POSTS" button in the navigation bar, followed by the "Create A New Post"
+						link that appears underneath. This link will bring you to a page with three options of "Article", "Link", and "Infographic".
+					 Each option will have entries that are suitable for it's own content. Click on the appropriate blue box, and fill out
+					 the form. Note that all entries on the form are required in order to create the post; none are optional.
+						An image is always required in order to maintain consistency between posts, and to make them
+					more appealing to readers. Finally, to submit and publish the post at the same time, click the orange "SAVE AND PUBLISH" button.
+					Your post will automatically appear on the home page. If you are not yet ready to publish the post, click
+					the blue "SAVE" button and your post will be saved for editing and publishing at a later time.</p>
+					<p>IMPORTANT NOTE: If you navigate to another page or close the browser, your post will not be saved. You must click the "SAVE" or "SAVE AND PUBLISH" buttons to preserve it.</p>
+					<h4>Edit, manage, and delete posts</h4>
+					<p>Your posts will be found by clicking the "POSTS" button in the navigation bar, then the "Posts To Date" link that appears
+					 underneath. This page allows you to view all the posts you have ever created including both published and saved posts,
+					only your published posts, and only your saved posts. Saved posts are posts that you have created, but have not yet
+					published. Finish and publish a saved post by clicking on the blue "EDIT" button of the post under
+						 "SAVED POSTS", finishing the post, and clicking the orange "SAVE AND PUBLISH" button. Delete a post by clicking the red "DELETE" button
+					next to the post you wish to delete.</p>
+					<h4>Join the Public Scholarship and Content Creation group.</h4>
+					<p>Joining the Public Scholarship and Content Creation group is by invitation or request only. Contact Amber Vennum
+					or another member of the Relevate group to request to join. You will be notified when you are granted privileges to create
+					 content for both the Public Scholarship and Content Creation sections.</p>
 				</div>
 			</li>
 			<li>
 				<div class='uk-container'>
-					<h2>Troubleshooting</h2>
-					<p>This resource is under development.</p>
-				</div>
-			</li>
-			<li>
-				<div class='uk-container'>	
-					<h2>Tracking Metrics</h2>
-                    <p>This resource is under development.</p>
+					<h2>Troubleshooting and F.A.Q.</h2>
+					<hr class="uk-divider-icon">
+					<h4>How can I stay updated on Relevate events?</h4>
+                    <p>Keep up to date with relevate events on our Facebook page. <a href="https://www.facebook.com/MyRelevate/">(link)</a></p>
+					<h4>I cannot access the site from my iPad, tablet, phone, etc.</h4>
+					<p>	The relevate site is not developed for mobile users or contributors. Contributors must use a
+						full-sized laptop or desktop to create, update, or manage their content, while users may
+						download the mobile app for browsing articles. (app is under development)
+					</p>
+					<h4>I lost my user account confirmation e-mail.</h4>
+					<p>If you have lost your confirmation e-mail, request a new one to be sent by clicking the "Confirm Account"
+					 button on the navigation bar, or the following link <a href="{% url 'profile:confirmation' %}">here</a>.</p>
+					<h4>I have forgotten my password. How can I log in?</h4>
+					<p>To reset your password, click the "Forgot password? Reset it!" link located on the bottom of the login
+					page, or the following link <a href="{% url 'profile:password_reset_form' %}">here</a>. A reset link
+					will be sent to the e-mail address associated with your account, which will allow you to create a new password.
+					 You will not be able to recover your old password.</p>
+					<h4>Is my personal information secure on this site?</h4>
+					<p>Yes, your information is stored only on our secure server, and is not shared with any other entities.
+					Your information is only used to better provide posts, articles, and other content that is suited to you.</p>
+					<h4>Where can I add a suggestion for the site or report a problem?</h4>
+					<p>Send an e-mail to <a href="mailto:myrelevate@outlook.com?Subject=Relevate%20feedback" target="_top">myrelevate@outlook.com</a> with your suggestion or problem. Relevate is a community
+					driven site, and benefits from the feedback of users and contributors.</p>
+					<h4>How can I find a specific post or find a post on a specific topic?</h4>
+					<p>To search for a post, enter in a section of the post's title or the topic you are searching for and
+					 click enter on your keyboard. Any posts matching your search will be displayed. Note that currently Relevate Resources Posts are
+					 not searchable.</p>
 				</div>
 			</li>
 		</ul>

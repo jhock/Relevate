@@ -28,6 +28,11 @@ class ContentCreation(models.Model):
     +--------------------------+-------------------------------------------------------------------------+
     | level                    | Level field using LEVEL_OF_EXPERIENCE list                              |
     +--------------------------+-------------------------------------------------------------------------+
+    | layout                   | Determines the layout on the individual viewing page                    |
+    +--------------------------+-------------------------------------------------------------------------+
+    |  public_scholarship_or_content_creation  | Boolean, True is public_scholarship, False is content_c |
+    +--------------------------+-------------------------------------------------------------------------+
+
     model for the Content Creation page.
     """
     class Meta:
@@ -45,6 +50,8 @@ class ContentCreation(models.Model):
 
     type = models.CharField(max_length=30)
     level = models.CharField(max_length=30)
+    layout = models.CharField(max_length=30)
+    public_scholarship_or_content_creation = models.BooleanField(default=False)
 
     createdDate = models.DateTimeField(default=datetime.utcnow)
     publishedDate = models.DateTimeField(null=True, blank=True)

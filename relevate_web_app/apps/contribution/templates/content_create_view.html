@@ -1,6 +1,12 @@
 {% extends "base-titlebar.html" %}
 {% load staticfiles %}
 
+
+{% block head %}
+	{{ block.super }}
+	<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=59d698fcf466510012f7fead&product=sticky-share-buttons"></script>
+{% endblock %}
+
 {% block content %}
 <div class='uk-container uk-margin-top'>
 		<div hidden id="error-message" class="uk-alert uk-alert-danger">
@@ -12,9 +18,15 @@
 		 <div hidden id="unpublish-message" class="uk-alert uk-alert-success">
 			<p>Post has been unpublished!</p>
 		</div>
-		<a style='color: white;' class='uk-button uk-button-primary' href="{% url 'contribution:content_creation' %}">
-			Back To All Posts
-		</a>
+		{% if post.public_scholarship_or_content_creation == True %}
+			<a style='color: white;' class='uk-button uk-button-primary' href="{% url 'contribution:public_scholarship' %}">
+				Back To All Posts
+			</a>
+		{% elif post.public_scholarship_or_content_creation == False %}
+			<a style='color: white;' class='uk-button uk-button-primary' href="{% url 'contribution:content_creation' %}">
+				Back To All Posts
+			</a>
+		{% endif %}
         <h1 class="uk-text-center uk-text-uppercase">{{ post.title }}</h1>
 
         <div class="uk-text-center">

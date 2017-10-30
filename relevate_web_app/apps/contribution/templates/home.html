@@ -7,16 +7,20 @@
 <link rel="stylesheet" href="{% static 'uikit-old/css/components/slider.min.css' %}" />
 <link rel="stylesheet" href="{% static 'uikit-old/css/components/slidenav.min.css' %}" />
 <link rel="stylesheet" href="{% static 'uikit-old/css/components/dotnav.min.css' %}" />
+<link rel="stylesheet" href="{% static 'css/global.css' %}" />
 
 <body onload="return ran_col()">
 <div class='uk-container uk-margin-top'>
 	{% if user.is_authenticated %}
-		<h1>{{ user.first_name }} {{ user.last_name }}</h1>
-		{% if user_prof.confirmed %}
-		<p>Confirmation status: All set!</p>
-		{% else %}
-		<p>Confirmation status: Not quite.</p>
-		{% endif %}
+		<div class="sign-in-header">
+			<h1> Signed in as: {{ user.first_name }} {{ user.last_name }}</h1>
+			{% if user_prof.confirmed %}
+			<p class="uk-badge uk-badge-notification uk-badge-success">Confirmation status: All set!</p>
+			{% else %}
+			<p class="uk-badge uk-badge-notification uk-badge-danger">Confirmation status: Not quite.</p>
+			{% endif %}
+		</div>
+	<br>
 	{% else %}
 		<h1>User is not logged in</h1>
 	{% endif %}
@@ -52,11 +56,13 @@
 	</div>
 	<div class='uk-grid-match' uk-grid>
 		{% if user.is_authenticated and not user.is_contributor %}
-		<div class='uk-card uk-card-default uk-card-body uk-width-1-1 uk-text-large'>
-			<p>
-				We are currently working on making this website great and need contributions from relationship content experts. If that's you, sign up to be a contributor
-				<a href="{% url 'profile:contributor_create' %}">here</a>.
+		<div class="uk-width-1-1">
+			<div class='uk-card uk-card-default uk-card-body uk-text-large'>
+				<p>
+					We are currently working on making this website great and need contributions from relationship content experts. If that's you, sign up to be a contributor
+					<a href="{% url 'profile:contributor_create' %}">here</a>.
 				</p>
+			</div>
 		</div>
 		{% endif %}
 	</div>

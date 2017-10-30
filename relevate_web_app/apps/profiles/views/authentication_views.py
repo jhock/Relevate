@@ -152,8 +152,7 @@ class ResetPasswordRequestView(FormView):
 					email = loader.render_to_string(email_template_name, c)
 					send_mail(subject, email, 'relevate@outlook.com', [user.email], fail_silently=False)
 				result = self.form_valid(form)
-				messages.success(request,
-								 'An email has been sent to ' + data + ". Please check its inbox to continue reseting password.")
+				messages.success(request,								 'An email has been sent to ' + data + ". Please check its inbox to continue reseting password.")
 				return self.form_valid(form)
 			messages.error(request, 'No user is associated with this email address')
 			return render(request, 'password_reset.html', {'form': PasswordResetRequestForm()})

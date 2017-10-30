@@ -50,6 +50,8 @@ class ContentCreateForm(forms.Form):
 					widget=forms.Textarea(), required=False)
 	type = forms.CharField(label='Post Category', required=True, widget=forms.Select(choices=TYPE_OF_CONTENT))
 	level = forms.CharField(label='Level of Reader Experience', required=True, widget=forms.Select(choices=LEVEL_OF_EXPERIENCE))
+	#True is public_scholarship, False is content_creation
+	public_scholarship_or_content_creation = forms.BooleanField(required=False)
 
 	#fields for cropping images
 	x = forms.FloatField(required=True, error_messages={'required': 'Please crop the image before uploading.'})

@@ -1,6 +1,11 @@
 {% extends "base-titlebar.html" %}
 {% load staticfiles %}
 
+{% block head %}
+	{{ block.super }}
+	<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=59d698fcf466510012f7fead&product=sticky-share-buttons"></script>
+{% endblock %}
+
 {% block content %}
 <div class='uk-container uk-margin-top'>
 		<div hidden id="error-message" class="uk-alert uk-alert-danger">

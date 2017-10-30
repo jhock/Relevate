@@ -7,6 +7,35 @@
 	right: 15px;
 }
 
+.sign-in-header h1, .sign-in-header p{
+    display: inline;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+/* Color modifier
+ ========================================================================== */
+/*
+ * Modifier: `uk-badge-success`
+ */
+.uk-badge-success {
+    background-color: #8cc14c;
+}
+
+/*
+ * Modifier: `uk-badge-warning`
+ */
+.uk-badge-warning {
+    background-color: #faa732;
+}
+
+/*
+ * Modifier: `uk-badge-danger`
+ */
+.uk-badge-danger {
+    background-color: #da314b;
+}
+
 body {
 	background-image: url(/static/images/backgroundCloud.png);
 	background-size: contain;

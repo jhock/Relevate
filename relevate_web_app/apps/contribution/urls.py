@@ -28,6 +28,7 @@ urlpatterns = [
 
 	#Content Creation
 	url(r'^content_creation/$', content_creation_views.ContentCreationView.as_view(), name="content_creation"),
+	url(r'^content_creation_create/(?P<slug>[-\w\d\ ]+)/$', content_creation_views.ContentCreationCreateView.as_view(), name="content_creation_create"),
 	url(r'^content_creation_create/$', content_creation_views.ContentCreationCreateView.as_view(), name="content_creation_create"),
 	url(r'^content_creation/(?P<slug>[-\w\d\ ]+)/$', content_creation_views.ContentCreationIndividualView.as_view(), name="content_creation_view"),
 	url(r'^content_creation_remove/(?P<pk>\d+)/$', content_creation_views.ContentCreationRemoveView.as_view(), name="content_creation_remove"),

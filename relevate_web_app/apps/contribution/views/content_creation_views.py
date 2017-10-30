@@ -49,6 +49,7 @@ class ContentCreationView(View):
                 posts = ContentCreation.objects.all()
                 # checks the group "Content Creation Contributor" for the user. If this group has not yet been created, create
                 # and assign users in the admin page.
+                public_scholarship_or_content_creation = "content_creation"
                 if user.groups.filter(name='Content Creation Contributor').exists():
                     can_edit = True
                 return render(request, "content_creation.html",
@@ -64,17 +65,28 @@ class ContentCreationCreateView(View):
     View for creating a new Content Creation Post, only relevate@outlook.com or user in permissions group will return
     content_creation_create.html
     '''
-    def get(self, request):
+    def get(self, request, slug):
         if request.user.is_authenticated:
             user = request.user
             user_prof = UserProfile.objects.get(user=user)
-            form = ContentCreateForm()
+            form = ContentCreateForm
             contrib_prof = ContributorProfile.objects.get(user_profile=user_prof)
-            #checks the group "Content Creation Contributor" for the user. If this group has not yet been created, create
-            # and assign users in the admin page.
+            #if the user has clicked on the "new post" button from the content creation page
+            if slug == 'content_creation':
+                # variable used in template to show level and type for content creation
+                public_scholarship_or_content_creation = False
+                form = ContentCreateForm(initial={'public_scholarship_or_content_creation': False})
+            #if the user has clicked on the "new post" button from the public scholarship page
+            else:
+                #variable used in template to hide level and type for public scholarship
+                public_scholarship_or_content_creation = True
+                data = {'type': 'Infographics', 'level': 'Expanding Your Reach', 'public_scholarship_or_content_creation': True}
+                form = ContentCreateForm(initial=data)
+                #checks the group "Content Creation Contributor" for the user. If this group has not yet been created, create
+                # and assign users in the admin page.
             if user.groups.filter(name='Content Creation Contributor').exists():
                 return render(request, "content_creation_create.html",
-                              {'user_prof': user_prof, 'contrib_prof': contrib_prof, 'form': form})
+                              {'user_prof': user_prof, 'contrib_prof': contrib_prof, 'form': form, 'public_scholarship_or_content_creation': public_scholarship_or_content_creation})
             else:
                 return render(request, "home.html", {'user_prof': user_prof})
         else:
@@ -99,6 +111,7 @@ class ContentCreationCreateView(View):
             references = form.cleaned_data.get('references')
             type = form.cleaned_data.get('type')
             level = form.cleaned_data.get('level')
+            public_scholarship_or_content_creation = form.cleaned_data.get('public_scholarship_or_content_creation')
             contributor_profile = ContributorProfile.objects.get(user_profile=user_prof)
             if user.groups.filter(name='Content Creation Contributor').exists():
                 contributor_profile = user_can_contribute(request.user)
@@ -110,7 +123,8 @@ class ContentCreationCreateView(View):
                     references=references,
                     type=type,
                     level=level,
-                    publishedDate=datetime.utcnow()
+                    publishedDate=datetime.utcnow(),
+                    public_scholarship_or_content_creation=public_scholarship_or_content_creation
                 )
                 new_content_creation.save()
                 if content:
@@ -133,7 +147,10 @@ class ContentCreationCreateView(View):
                 messages.success(request, "Content Creation Post Was Successfully Created!")
 
                 print ("Article went through")
-                return HttpResponseRedirect(reverse_lazy('contribution:content_creation'))
+                if public_scholarship_or_content_creation == True:
+                    return HttpResponseRedirect(reverse_lazy('contribution:public_scholarship'))
+                else:
+                    return HttpResponseRedirect(reverse_lazy('contribution:content_creation'))
             else:
                 return HttpResponseRedirect(reverse_lazy("contribution:home"))
         else:

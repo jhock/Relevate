@@ -4,7 +4,9 @@
 	<div class='uk-card-body'>
 		<div class='uk-clearfix uk-card-title uk-text-center'>
             <a href="{% url 'contribution:content_creation_view' p.slug %}">{{ p.title }}</a>
+			{% if p.public_scholarship_or_content_creation == False %}
             <span class="uk-badge">{{  p.level }}</span>
+			{% endif %}
 		</div>
         <div class="uk-grid">
             <div class="uk-width-1-2">

@@ -36,6 +36,7 @@ INSTALLED_APPS = [
 	'apps.profiles',
 	'apps.contribution',
 	'apps.api',
+	'compressor',
 	'django.contrib.admin',
 	'django.contrib.auth',
 	'django.contrib.contenttypes',
@@ -133,14 +134,24 @@ USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
-
 STATIC_URL = '/static/'
 STATIC_DIRS = (os.path.join(BASE_DIR, 'static'))
+COMPRESS_ROOT = (os.path.join(BASE_DIR, 'static/__cache__'))
 
 STATICFILES_DIRS = [
 	os.path.join(BASE_DIR, "static"),
 	'/var/www/static/',
 ]
+
+STATICFILES_FINDERS = (
+  'django.contrib.staticfiles.finders.FileSystemFinder',
+  'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+  'compressor.finders.CompressorFinder',
+)
+
+COMPRESS_PRECOMPILERS = (
+	('text/x-scss', 'django_libsass.SassCompiler'),
+)
 
 LOGIN_URL = "profile:login"
 LOGGED_OUT_URL = "profile:logged_out"

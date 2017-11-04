@@ -1,6 +1,5 @@
 {% extends "base-titlebar.html" %}
 {% load staticfiles %}
-{% load compress %}
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'uikit-old/css/components/accordion.min.css' %}" />
@@ -9,15 +8,12 @@
 <link rel="stylesheet" href="{% static 'uikit-old/css/components/slidenav.min.css' %}" />
 <link rel="stylesheet" href="{% static 'uikit-old/css/components/dotnav.min.css' %}" />
 <link rel="stylesheet" href="{% static 'css/global.css' %}" />
-{% compress css %}
-	<link rel="stylesheet" type="text/x-scss" href="{% static "scss/main.scss" %}" />
-{% endcompress %}
 
 <body onload="return ran_col()">
 <div class='uk-container uk-margin-top test'>
 	{% if user.is_authenticated %}
 		<div class="sign-in-header">
-			<div><h1> Welcome {{ user.first_name }}</h1></div>
+			<div><h3> Welcome {{ user.first_name }}</h3></div>
 			{% if not user_prof.confirmed %}
 			<!--TODO: we should provide some useful feedback here. How do they go about confirming the account? -->
 			<p class="uk-badge uk-badge-notification uk-badge-danger">Looks like you still need to confirm your account</p>

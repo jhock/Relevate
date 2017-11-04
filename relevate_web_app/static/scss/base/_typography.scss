@@ -1,13 +1,80 @@
 @import "./lato/lato";
 @import "variables";
 
-html {
-  font-family: "Lato", "Helvetica Neue", Arial, sans-serif;
+body,
+p,
+.rv-text {
+  font-family: $rv-font-family;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: $rv-font-weight-regular;
   line-height: 1.5;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   background: $rv-color-white;
-  color: $rv-color-primary;
+  color: $rv-font-color;
+
+  &.inverse {
+    color: $rv-color-white;
+  }
+}
+
+p {
+  margin: 0;
+}
+
+h1,
+.rv-h1,
+h2,
+.rv-h2,
+h3,
+.rv-h3,
+h4,
+.rv-h4,
+h5,
+.rv-h5,
+h6,
+.rv-h6 {
+  margin: 0 0 0.5rem 0;
+  font-family: $rv-font-family;
+  font-weight: $rv-font-weight-heavy;
+  color: $rv-font-color;
+  text-transform: none;
+
+  &.inverse {
+    color: $rv-color-white;
+  }
+}
+
+/*
+ * Sizes
+ */
+h1,
+.rv-h1 {
+  font-size: 2.625rem;
+  line-height: 1.2;
+}
+h2,
+.rv-h2 {
+  font-size: 2rem;
+  line-height: 1.3;
+}
+h3,
+.rv-h3 {
+  font-size: 1.5rem;
+  line-height: 1.4;
+}
+h4,
+.rv-h4 {
+  font-size: 1.25rem;
+  line-height: 1.4;
+}
+h5,
+.rv-h5 {
+  font-size: 1rem;
+  line-height: 1.4;
+}
+h6,
+.rv-h6 {
+  font-size: 0.875rem;
+  line-height: 1.4;
 }

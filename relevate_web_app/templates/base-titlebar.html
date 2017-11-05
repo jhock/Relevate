@@ -8,7 +8,9 @@
 		<div class="uk-navbar-left">
 			<div class='uk-navbar-item uk-logo'>
 				<a href="{% url 'contribution:home' %}">
-					<img style="max-height: 60px" src="{% static 'images/Relevate Logo.png' %}">
+					<span class="rv-navbar_logo">
+						{% include 'global-partials/relevate-logo-svg-partial.html' %}
+					</span>
 				</a>
 			</div>
 			<ul class="uk-navbar-nav">

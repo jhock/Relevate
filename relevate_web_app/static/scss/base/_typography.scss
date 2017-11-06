@@ -1,20 +1,27 @@
 @import "./lato/lato";
 @import "variables";
 
+html {
+  font-size: 16px;
+}
+
 body,
 p,
 .rv-text {
   font-family: $rv-font-family;
-  font-size: 16px;
+  font-size: 0.875rem;
   font-weight: $rv-font-weight-regular;
   line-height: 1.5;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
-  background: $rv-color-white;
   color: $rv-font-color;
 
   &.inverse {
     color: $rv-color-white;
+  }
+
+  &.primary {
+    color: $rv-color-primary;
   }
 }
 
@@ -38,6 +45,10 @@ h6,
 
   &.inverse {
     color: $rv-color-white;
+  }
+
+  &.primary {
+    color: $rv-color-primary;
   }
 }
 

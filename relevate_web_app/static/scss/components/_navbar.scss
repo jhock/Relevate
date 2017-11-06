@@ -1,9 +1,22 @@
 @import "../base/variables";
 
+.rv-navbar {
+  position: fixed;
+  width: 100%;
+  background: rgba($rv-color-white, 0.8);
+  z-index: 999;
+}
+
 .rv-navbar_logo {
   svg {
+    width: 1.5rem;
     g {
       fill: $rv-color-primary; 
+      stroke: $rv-color-white;
     }
   }
+}
+
+.rv-navbar_shadow {
+  box-shadow: $rv-box-shadow;
 }

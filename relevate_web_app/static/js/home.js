@@ -15,4 +15,8 @@ $(function(){
   //   var randomColorIndex = getRandomInt(0,colors.length-1);
   //   $(el).css('background-color',colors[randomColorIndex]);
   // });
+
+  $('.cloud').each(function(index, el) {
+    el.classList.add('cloud-animate')
+  });
 });

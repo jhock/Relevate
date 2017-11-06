@@ -1,18 +1,18 @@
 /**
--------------
+----------------
   Colors
--------------
+----------------
 **/
-
 $rv-color-primary: #246FF2;
 $rv-color-white: #ffffff;
 $rv-color-dark: #3A3A3A;
 $rv-color-black: #000000;
 
 /**
+----------------
   Typography
+----------------
 **/
-
 $rv-font-family: "Lato", "Helvetica Neue", Arial, sans-serif;
 $rv-font-color: $rv-color-dark;
 $rv-font-weight-black: 900;
@@ -23,4 +23,9 @@ $rv-font-weight-medium: 500;
 $rv-font-weight-regular: 400;
 $rv-font-weight-light: 300;
 
-
+/**
+----------------
+  Shadows
+----------------
+**/
+$rv-box-shadow: 0 0.3rem 0.3rem rgba(0, 0, 0, 0.03);

@@ -4,7 +4,7 @@
 {% block body %}
 
 <div id='nav-sticky'>
-	<nav id='top-level-nav' class="uk-navbar-container uk-box-shadow-medium" uk-navbar="mode: click">
+	<nav id='top-level-nav' class="rv-navbar" uk-navbar="mode: click">
 		<div class="uk-navbar-left">
 			<div class='uk-navbar-item uk-logo'>
 				<a href="{% url 'contribution:home' %}">
@@ -154,11 +154,4 @@
 	{% block content %}
 		{{ block.super }}
 	{% endblock %}
-	
-	<div class='up-btn-container' uk-scroll>
-		<div class='uk-padding-small'>
-			<img src="{% static 'images/up-arrow.png' %}">
-		</div>
-	</div>	
-
 {% endblock %}

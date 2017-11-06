@@ -10,23 +10,21 @@
 <link rel="stylesheet" href="{% static 'css/global.css' %}" />
 
 <body onload="return ran_col()">
-<div class='uk-container uk-margin-top test'>
-	{% if user.is_authenticated %}
-		<div class="sign-in-header">
-			<div><h3> Welcome {{ user.first_name }}</h3></div>
-			{% if not user_prof.confirmed %}
-			<!--TODO: we should provide some useful feedback here. How do they go about confirming the account? -->
-			<p class="uk-badge uk-badge-notification uk-badge-danger">Looks like you still need to confirm your account</p>
-			{% endif %}
-		</div>
-	<br>
-	{% else %}
-		<div>
-			<h3>Welcome to Relevate!</h3>
-			<p>We are a multidisciplinary team of researchers and practitioners who are on a mission to make research-based information about interpersonal relationships accessible to all. As part of this mission, we are creating a website and smart phone app that can be tailored to meet the needs of each user. We believe healthy relationships are worth working for. Do you?</p>
-		</div>
-	{% endif %}
+	
+{% if user.is_authenticated %}
+	<div class="sign-in-header">
+		<div><h3> Welcome {{ user.first_name }}</h3></div>
+		{% if not user_prof.confirmed %}
+		<!--TODO: we should provide some useful feedback here. How do they go about confirming the account? -->
+		<p class="uk-badge uk-badge-notification uk-badge-danger">Looks like you still need to confirm your account</p>
+		{% endif %}
+	</div>
+<br>
+{% else %}
+	{% include 'partials/home_header_partial.html' %}
+{% endif %}
 
+<div class='uk-container uk-margin-top test'>
 	<div class='uk-grid-match' uk-grid>
 		{% if user.is_authenticated and not user.is_contributor %}
 		<div class="uk-width-1-1">

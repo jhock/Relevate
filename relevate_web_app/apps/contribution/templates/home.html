@@ -24,41 +24,41 @@
 	{% include 'partials/home_header_partial.html' %}
 {% endif %}
 
-<div class='uk-container uk-margin-top test'>
-	<div class='uk-grid-match' uk-grid>
-		{% if user.is_authenticated and not user.is_contributor %}
-		<div class="uk-width-1-1">
-			<div class='uk-card uk-card-default uk-card-body uk-text-large'>
-				<p>
-					We are currently working on making this website great and need contributions from relationship content experts. If that's you, sign up to be a contributor
-					<a href="{% url 'profile:contributor_create' %}">here</a>.
-				</p>
-			</div>
+<div class='uk-grid-match' uk-grid>
+	{% if user.is_authenticated and not user.is_contributor %}
+	<div class="uk-width-1-1">
+		<div class='uk-card uk-card-default uk-card-body uk-text-large'>
+			<p>
+				We are currently working on making this website great and need contributions from relationship content experts. If that's you, sign up to be a contributor
+				<a href="{% url 'profile:contributor_create' %}">here</a>.
+			</p>
 		</div>
-		{% endif %}
 	</div>
-	<!--<div uk-grid>-->
-		<!--<div class='uk-card uk-card-default uk-card-body uk-width-1-1'>-->
-			<!--<p>-->
-				<!--To provide research-informed, personalized, and up-to-date information on establishing and-->
-				<!--maintaining healthy relationships to young adults through accessible mobile technology.-->
-			<!--</p>-->
-		<!--</div>-->
+	{% endif %}
+</div>
+<!--<div uk-grid>-->
+	<!--<div class='uk-card uk-card-default uk-card-body uk-width-1-1'>-->
+		<!--<p>-->
+			<!--To provide research-informed, personalized, and up-to-date information on establishing and-->
+			<!--maintaining healthy relationships to young adults through accessible mobile technology.-->
+		<!--</p>-->
 	<!--</div>-->
+<!--</div>-->
 
-	{% if user.is_authenticated %}
-	<div class="uk-card uk-card-default uk-box-shadow-large">
-		<div class='uk-card-body'>
-			<h3>Posts Selected Based on Chosen Topics:</h3>
-			<div id="chosen-item-list" uk-grid>
-				{% for each_sel in already_sel %}
-					{% include 'global-partials/already-selected-topic-partial.html' %}
-				{% endfor %}
-			</div>
+{% if user.is_authenticated %}
+<div class="uk-card uk-card-default uk-box-shadow-large">
+	<div class='uk-card-body'>
+		<h3>Posts Selected Based on Chosen Topics:</h3>
+		<div id="chosen-item-list" uk-grid>
+			{% for each_sel in already_sel %}
+				{% include 'global-partials/already-selected-topic-partial.html' %}
+			{% endfor %}
 		</div>
 	</div>
+</div>
 
-	<div class="masonry">
+<div class="rv-masonry_container">
+	<div class="rv-masonry">
 		{% for p in preference_posts %}
 			{% if p.is_link %}
 				{% with l=p.link %}
@@ -75,12 +75,14 @@
 			{% endif %}
 		{% endfor %}
 	</div>
+</div>
 
-	<h3>All Other Posts:</h3>
-	{% endif %}
+<h3>All Other Posts:</h3>
+{% endif %}
 
-	{% if published_posts %}
-	<div class="masonry">
+{% if published_posts %}
+<div class="rv-masonry_container">
+	<div class="rv-masonry">
 		{% for p in published_posts %}
 			{% if p.is_link %}
 				{% with l=p.link %}
@@ -97,9 +99,8 @@
 			{% endif %}
 		{% endfor %}
 	</div>
-	{% endif %}
-
 </div>
+{% endif %}
 
 	<!--<div class="uk-margin" data-uk-slideset="{default: 4}">-->
 		<!--<div class="uk-slidenav-position uk-margin">-->

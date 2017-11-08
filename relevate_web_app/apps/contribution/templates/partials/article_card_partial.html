@@ -1,18 +1,38 @@
 {% load staticfiles %}
 
-<div class="rv-article-card">
-  <img class="rv-article-card_img" src="{{ a.image.url }}" alt="Image for article">
-  <div class="rv-article-card_content">
-    <a href="{% url 'contribution:article_view' p.slug %}"><h4>{{ a.title }}</h4></a>
-		<div>
-      {% if p.contributor.avatar == ""  %}
-          <img style="max-width: 70px;" class="profile_avatar uk-border-circle" src="{% static "images/profile-placeholder.png" %}"{{ person.photo_url|default_if_none:'#' }} alt="logo"/>
-      {% elif p.contributor.avatar != "" %}
-          <img style="max-width: 70px;" class="profile_avatar uk-border-circle" src="{{ p.contributor.avatar.url }}">
-      {% endif %}
-			{{ p.contributor }}
+<div class="rv-content-card">
+  <a href="{% url 'contribution:article_view' p.slug %}">
+    <img class="rv-content-card_img" src="{{ a.image.url }}" alt="Image for article">
+  </a>
+  <div class="rv-content-card_content">
+    <a href="{% url 'contribution:article_view' p.slug %}" class="rv-content-card_heading-link">
+      <h4 class="rv-content-card_heading">{{ a.title }}</h4>
+    </a>
+    <a href="{% url 'contribution:article_view' p.slug %}">
+      <span class="rv-content-card_link"></span>
+    </a>
+    <div class="rv-content-card_contributor-info">
+  		<div class="rv-content-card_avatar">
+        {% if p.contributor.avatar == ""  %}
+          <div class="rv-avatar">
+            <img src="{% static "images/profile-placeholder.png" %}"{{ person.photo_url|default_if_none:'#' }} alt="logo"/>
+          </div>
+        {% elif p.contributor.avatar != "" %}
+          <div class="rv-avatar">
+            <img src="{{ p.contributor.avatar.url }}">
+          </div>
+        {% endif %}
+      </div>
+      <div class="rv-content-card_contributor-name">
+		    {{ p.contributor }}
+      </div>
+      <hr class="rv-content-card_contributor-rule" />
     </div>
-    <p>{{ a.blurb | safe }}<a href="{% url 'contribution:infographic_view' p.slug %}">Read more...</a> </p>
+    <div class="rv-content-card_preview">
+      <p>{{ a.blurb | safe }}</p>
+    </div>
+  </div>
+  <div class="rv-content-card_topics">
   	<small>Topics: </small>
   	<li>
   	{% for topic in a.article_topics.all %}

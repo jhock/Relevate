@@ -15,6 +15,9 @@ p,
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   color: $rv-font-color;
+  font-smooth: always;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
   &.inverse {
     color: $rv-color-white;

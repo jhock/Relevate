@@ -2,29 +2,51 @@
  <!--<script>-->
  <!--var colors = ['red', 'green', 'blue', 'orange', 'yellow'];-->
  <!--$('.item').css('background-color', colors[Math.floor(Math.random() * colors.length)]);</script>-->
-<div class="rv-article-card">
+<div class="rv-content-card">
 	<a href="{{ l.url }}">
-    <img class="rv-article-card_img" src="{{ l.image.url }}">
+    <img class="rv-content-card_img" src="{{ l.image.url }}">
   </a>
-  <p class='uk-card-title'>
-		<a target="_blank" href="{{ l.url }}">{{ l.title }}</a>
-	</p>
-	{% if p.contributor.avatar == ""  %}
-              <img style="max-width: 70px;" class="profile_avatar uk-border-circle" src="{% static "images/profile-placeholder.png" %}"{{ person.photo_url|default_if_none:'#' }} alt="logo"/>
-          {% elif p.contributor.avatar != "" %}
-              <img style="max-width: 70px;" class="profile_avatar uk-border-circle" src="{{ p.contributor.avatar.url }}">
-          {% endif %}
-	{{ p.contributor }}
-  <p>{{ l.description | safe }}<a class='uk-text-primary' target="_blank" href="{{ l.url }}"> Read more...</a></p>
-		<small>Topics: </small>
-		<div>
-            <li>
-			{% for topic in l.topics.all %}
-					<a href="{% url 'contribution:topic_sort' topic.name %}"><small>{{ topic.name }}</small></a>
-					<div class="uk-dropdown uk-dropdown-small">
-						<span>{{ topic.description }}</span>
-					</div>
-			{% endfor %}
-            </li>
-	</div>
+  <div class="rv-content-card_content">
+    <a target="_blank" href="{{ l.url }}" class="rv-content-card_heading-link">
+      <h4 class="rv-content-card_heading">
+    		{{ l.title }}
+    	</h4>
+    </a>
+    <a class='uk-text-primary' target="_blank" href="{{ l.url }}">
+      <span class="rv-content-card_link"></span>
+    </a>
+    <div class="rv-content-card_contributor-info">
+      <div class="rv-content-card_avatar">
+      	{% if p.contributor.avatar == ""  %}
+          <div class="rv-avatar">
+            <img src="{% static "images/profile-placeholder.png" %}"{{ person.photo_url|default_if_none:'#' }} alt="logo"/>
+          </div>
+        {% elif p.contributor.avatar != "" %}
+          <div class="rv-avatar">
+            <img src="{{ p.contributor.avatar.url }}">
+          </div>
+        {% endif %}
+      </div>
+      <div class="rv-content-card_contributor-name">
+  	   {{ p.contributor }}
+      </div>
+      <hr class="rv-content-card_contributor-rule" />
+    </div>
+    <div class="rv-content-card_preview">
+      <p>{{ l.description | safe }}</p>
+    </div>
+  </div>
+  <div class="rv-content-card_topics">
+	<small>Topics: </small>
+  	<div>
+      <li>
+  			{% for topic in l.topics.all %}
+  				<a href="{% url 'contribution:topic_sort' topic.name %}"><small>{{ topic.name }}</small></a>
+  				<div class="uk-dropdown uk-dropdown-small">
+  					<span>{{ topic.description }}</span>
+  				</div>
+  			{% endfor %}
+      </li>
+    </div>
+  </div>
 </div>

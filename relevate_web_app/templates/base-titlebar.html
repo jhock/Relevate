@@ -14,8 +14,15 @@
 					</span>
 				</a>
 			</div>
+		</div>
+		<div class="uk-navbar-right">
 			<ul class="uk-navbar-nav">
-				<li class=""><a href="{% url 'contribution:home' %}">Home</a></li>
+				<li>
+					<form action="{% url 'contribution:search_results' %}" method="get">
+						{% csrf_token %}
+						<input class="searchfield" id="searchbox" name="searchbox" type="text" placeholder="Search">
+					</form>
+				</li>
 				{% if user.is_staff %}
 				<li>
 					<a href="#">Staff</a>
@@ -108,17 +115,7 @@
 					{% endif %}
 				{% endif %}
 			</ul>
-		</div>
-		<div class="uk-navbar-right">
 			<ul class="uk-navbar-nav">
-				<li>
-					<!-- uikit.css line 3638 (edit-->
-					<form action="{% url 'contribution:search_results' %}" method="get">
-						{% csrf_token %}
-						<input class="searchfield" id="searchbox" name="searchbox" type="text" placeholder="Search">
-					</form>
-
-				</li>
 				<li><a href="{% url 'contribution:about' %}">About</a></li>
 				{% if not user.is_authenticated %}
 				<li>

@@ -20,6 +20,7 @@ urlpatterns = [
 	url(r'password_reset_form/$', django_auth_views.password_reset,{'post_reset_redirect': 'password_reset_done/'},
 		name='password_reset_form'),
 	url(r'password_reset/password_reset_done/$', django_auth_views.password_reset_done	, name="password_reset_done"),
+	url(r'user_update/$', authentication_views.UserUpdateView.as_view(), name="user_update"),
 	#url(r'password_reset_confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$', authentication_views.PasswordResetConfirmView.as_view(),
 	# {'post_reset_redirect': 'password_done/'}, name='password_reset_confirm'),
 	#url(r'password_done/$', authentication_views.password_reset_complete, name='password_reset_complete'),

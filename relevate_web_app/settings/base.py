@@ -43,7 +43,9 @@ INSTALLED_APPS = [
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
 	'storages',
-	'rest_framework'
+	'rest_framework',
+	'ckeditor',
+	'ckeditor_uploader'
 	#formset-dependencies
 ]
 
@@ -136,12 +138,74 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 STATIC_DIRS = (os.path.join(BASE_DIR, 'static'))
+STATIC_ROOT = os.path.join(BASE_DIR,'static_assets')
 
 STATICFILES_DIRS = [
 	os.path.join(BASE_DIR, "static"),
-	'/var/www/static/',
 ]
 
 LOGIN_URL = "profile:login"
 LOGGED_OUT_URL = "profile:logged_out"
+
+# The following lines are settings for django-ckeditor. See their documentation page for more info.
+CKEDITOR_RESTRICT_BY_USER = True
+CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'
+
+# Configuration for django-ckeditor. Here is where you control everything for django-ckeditor, including the toolbar,
+# style, size, options, file upload url, and extra plugins. Plugins must be added to /static/ckeditor/plugins, and to
+# 'extraPlugins' to appear on the editor.
+CKEDITOR_CONFIGS = {
+	#To change the default toolbar, go to /static/js/ckeditor_basic_config.js. Yes, it only works that way.
+	#Toolbars set here can only be used for ckeditor form fields, default django form fields must be replaced in the
+	#template or assocated js file.
+    'default': {
+        'toolbar': 'Basic',
+    },
+	#The advanced toolbar, mainly used for content with image upload
+	'advanced_toolbar': {
+		'skin': 'moono',
+		# 'skin': 'office2013',
+		'toolbar': 'Custom',
+		'toolbar_Custom': [
+			{'name': 'clipboard', 'items': ['Undo', 'Redo', 'PasteFromWord']},
+			{'name': 'styles', 'items': ['Styles', 'Format']},
+			{'name': 'basicstyles',
+			 'items': ['Bold', 'Italic', 'Underline', 'RemoveFormat']},
+			{'name': 'paragraph',
+			 'items': ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-',
+					   'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'Blockquote']},
+			{'name': 'document', 'items': ['Preview', '-', 'Templates']},
+			{'name': 'links', 'items': ['Link', 'Unlink']},
+			{'name': 'insert',
+			 'items': ['Image']},
+			{'name': 'tools', 'items': ['Maximize', 'ShowBlocks']},
+			{'name': 'about', 'items': ['About']},
+			{'name': 'editing', 'items': ['Scayt']},
+		],
+		# 'toolbarGroups': [{ 'name': 'document', 'groups': [ 'mode', 'document', 'doctools' ] }],
+		# 'height': 291,
+		# 'width': '100%',
+		# 'filebrowserWindowHeight': 725,
+		# 'filebrowserWindowWidth': 940,
+		# 'toolbarCanCollapse': True,
+		'tabSpaces': 4,
+		'extraPlugins': ','.join([
+			'uploadimage',  # the upload image feature,
+			'uploadwidget',
+			'image2',
+ 'about', 'clipboard',  'colordialog',  'dialog', 'div',
+ 'filetools', 'find', 'flash', 'format', 'forms', 'iframe', 'image', 'justify', 'language',
+'lineutils', 'link', 'magicline', 'menubutton', 'notification', 'notificationaggregator',
+'pagebreak', 'pastefromword', 'preview', 'scayt', 'showblocks', 'smiley',
+ 'specialchar', 'stylescombo', 'table', 'templates', 'undo',
+ 'widget', 'maximize', 'removeformat', 'blockquote'
+		]),
+		"removePlugins": "stylesheetparser",
+		'imageUploadUrl' : '/ckeditor/',
+		'filebrowserUploadUrl' : '/ckeditor/upload/',
+	}
+}
+
+
+
 

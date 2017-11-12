@@ -1,11 +1,13 @@
 from django.shortcuts import render
 from ..forms.authentication_forms import RegistrationForm, LoginForm, ConfirmationForm
-from ..forms.authentication_forms import PasswordChangeForm, PasswordResetRequestForm, SetPasswordForm
+from ..forms.authentication_forms import PasswordChangeForm, PasswordResetRequestForm, SetPasswordForm, UpdateUserForm
 from ...profiles.models.user_models import User, UserProfile
 from django.template.loader import get_template
 from django.contrib.auth import authenticate, login, logout
 from django.core.mail import EmailMessage
 from ...profiles.models.confirmation_model import Confirmation
+from braces.views import LoginRequiredMixin
+from django.core.exceptions import ObjectDoesNotExist
 
 from django.db.models.query_utils import Q
 from django.utils.encoding import force_bytes
@@ -18,6 +20,8 @@ from django.views.generic import *
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.template import *
+from ...contribution.models.topic_model import Topics
+from ...contribution.modules.post_util import display_error
 
 from django.contrib.auth.tokens import default_token_generator
 from django.http import HttpResponseRedirect, QueryDict
@@ -62,7 +66,7 @@ class RegisterUserView(View):
 			user.save()
 			user_profile = UserProfile(user=user)
 			user_profile.save()
-			for each_topic in form.cleaned_data.get('topics_preferences'):
+			for each_topic in form.cleaned_data.get('area_of_expertise'):
 				user_profile.topics_preferences.add(each_topic)
 			#If autoconfirm set for testing, a confirmation email will not be sent, user redirected to home.
 			if auto_confirm:
@@ -188,15 +192,86 @@ class ResetPasswordRequestView(FormView):
 			return render(request, 'password_reset.html', {'form': PasswordResetRequestForm()})
 
 
-class ChangeAccountInfoView(View):
+class UserUpdateView(LoginRequiredMixin, View):
 	"""
 	View for changing account information in progress.
 	"""
+
 	def get(self, request):
-		return render(request, 'change_account_info.html')
+		'''
+        Gets the form for updating a user profile. User can update first name, last name, password, and topics
+        '''
+		user = request.user
+		user_prof = UserProfile.objects.get(user=user)
+		topics = user_prof.topics_preferences.all()
+		already_sel = []
+		for t in topics:
+			already_sel.append(t)
+		tag_names = Topics.objects.all()
+		user_form = UpdateUserForm({
+			'first_name': user.first_name,
+			'last_name': user.last_name,
+			'password1': user.password,
+			'password2': user.password,
+			'area_of_expertise': already_sel,
+		})
+		obj = {
+			'form': user_form,
+			'user_prof': user_prof,
+			'already_sel': already_sel,
+			'tag_names': tag_names,
+		}
+		return render(request, 'user_update.html', obj)
+
+	def post(self, request):
+		'''
+        Performs the update of the user profile after checking the
+        validity of the form.
+        '''
+		user_form = UpdateUserForm(request.POST)
+		user_prof = UserProfile.objects.get(user=request.user)
+		if user_form.is_valid():
+			# Update User name, password
+			user_prof.user.first_name = user_form.cleaned_data.get('first_name')
+			user_prof.user.last_name = user_form.cleaned_data.get('last_name')
+			if user_form.cleaned_data.get('password1'):
+				user_prof.user.set_password(user_form.cleaned_data.get('password1'))
+			user_prof.user.save()
+
+			curr_topics = user_prof.topics_preferences.all()
+			for each_topic in curr_topics:
+				try:
+					user_prof.topics_preferences.remove(each_topic)
+				except ObjectDoesNotExist:
+					pass
+			for each_topic in user_form.cleaned_data.get('area_of_expertise'):
+				user_prof.topics_preferences.add(each_topic)
+			user_prof.save()
+			messages.success(request, 'Your profile has been updated!')
+			return HttpResponseRedirect(reverse('profile:user_update'))
+		else:
+			display_error(user_form, request)
+			topics = user_prof.expertise_topics.all()
+			already_sel = []
+			for t in topics:
+				already_sel.append(t)
+			tag_names = Topics.objects.all()
+			user_form = UpdateUserForm({
+				'first_name': user_prof.user.first_name,
+				'last_name': user_prof.user.last_name,
+				'password': user_prof.user.password,
+				'area_of_expertise': already_sel,
+			})
+			return render(request, 'user_update.html',
+						  {
+							'form': user_form,
+							'user_prof': user_prof,
+							'already_sel': already_sel,
+							'tag_names': tag_names,
+						  })
 
 
-class ConfirmationView(View):
+class ConfirmationView(LoginRequiredMixin, View):
 	"""
 	View for confirming an account after creation.
 	"""

@@ -36,4 +36,9 @@ MEDIAFILES_LOCATION = 'media'
 MEDIA_URL = "https://%s/" % (AWS_S3_CUSTOM_DOMAIN,)
 DEFAULT_FILE_STORAGE = "custom_storages.MediaStorage"
 
+#ckeditor settings
+AWS_QUERYSTRING_AUTH = False
+CKEDITOR_UPLOAD_PATH = "uploads/"
+
+
 

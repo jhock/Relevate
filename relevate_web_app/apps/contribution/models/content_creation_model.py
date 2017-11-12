@@ -1,6 +1,7 @@
 from datetime import datetime
 from django.db import models
 from django.template.defaultfilters import slugify
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class ContentCreation(models.Model):
@@ -40,13 +41,15 @@ class ContentCreation(models.Model):
 
     image = models.ImageField(upload_to='content_creation/images', null=True, blank=True)
     title = models.TextField(max_length=1000)
-    content = models.TextField(max_length=5000)
+    content = RichTextUploadingField(null=True, blank=True)
     blurb = models.CharField(max_length=500, default="")
     content_file = models.FileField(upload_to='content_creation/files', null=True, blank=True)
     references = models.TextField(max_length=3000, null=True, blank=True)
     contributor = models.ForeignKey('profiles.ContributorProfile', on_delete=models.CASCADE, blank=True, null=True)
     slug = models.SlugField(default=None, max_length=100)
     isPublished = models.BooleanField(default=False)
+    is_deleted = models.BooleanField(default=False)
+
 
     type = models.CharField(max_length=30)
     level = models.CharField(max_length=30)

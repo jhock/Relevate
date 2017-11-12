@@ -20,6 +20,8 @@ urlpatterns = [
 	url(r'^articles_update/(?P<slug>[-\w\d\ ]+)/$', article_views.ArticleUpdateView.as_view(), name="article_update"),
 	url(r'^article/(?P<slug>[-\w\d\ ]+)/$', article_views.ArticleIndividualView.as_view(), name="article_view"),
 
+url(r'^ck$', content_creation_views.ckeditor_form_view, name='ck'),
+
 	#About
 	url(r'^about/$', about_views.AboutView.as_view(), name='about'),
 	url(r'^about_create/$', about_views.AboutCreateView.as_view(), name="about_create"),

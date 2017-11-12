@@ -106,6 +106,9 @@
 	<script>
 		// Replace the <textarea id="editor1"> with a CKEditor
 		// instance, using default configuration.
-		CKEDITOR.replace('id_content');
+		CKEDITOR.replace( 'id_content',
+		{
+			customConfig: '{% static 'js/ckeditor_basic_config.js' %}'
+		});
 	</script>
 {% endblock %}

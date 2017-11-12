@@ -131,7 +131,7 @@ class InfographicUpdateView(LoginRequiredMixin, View):
 		form = ArticleInfographicUpdateForm(initial={'title':infographic_post.title,
 													 'image':infographic_post.image,
 													 'topic_choices':already_sel,
-													 'is_published':post.isPublished,
+													 'isPublished':post.isPublished,
 													 'blurb': infographic_post.blurb,
 													 })
 		user_prof = UserProfile.objects.get(user=request.user)
@@ -172,11 +172,11 @@ class InfographicUpdateView(LoginRequiredMixin, View):
 				t = get_infographic_crop(content, thumb_name)
 				infographic_post.thumbnail.name = settings.MEDIA_URL + 'media/article_infographic/thumbnails/' + thumb_name
 				infographic_post.save()
-			is_published = form.cleaned_data.get('is_published')
+			isPublished = form.cleaned_data.get('isPublished')
 			infographic_post.title = title
 			contributor_profile = user_can_contribute(request.user)
 			post_.save()
-			if is_published:
+			if isPublished:
 				if contributor_profile.has_adviser:
 					pending_post = PendingPost(post=post_, adviser=contributor_profile.advisers_profile)
 					pending_post.save()
@@ -185,7 +185,7 @@ class InfographicUpdateView(LoginRequiredMixin, View):
 				else:
 					post_.isPublished = True
 					messages.success(request, "Infographic Article Was Successfully Published!")
-			post_.isPublished = is_published
+			post_.isPublished = isPublished
 			for each_topic in infographic_post.topics.all():
 				try:
 					infographic_post.topics.remove(each_topic)

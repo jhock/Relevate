@@ -4,12 +4,14 @@
 {% block head %}
 	{{ block.super }}
 	<script type="text/javascript" src="{% static 'js/content-creation-verification.js' %}"></script>
+    <script>window.CKEDITOR_BASEPATH = '/static/ckeditor/ckeditor/';</script>
 {% endblock %}
 
 {% block content %}
 
 <div class='uk-container uk-margin-top'>
 	<form class="uk-form uk-form-stacked" id="formUpload" action="{% url 'contribution:content_creation_create' %}" method="post" enctype='multipart/form-data'>{% csrf_token %}
+		{{ form.media }}
 		{% if public_scholarship_or_content_creation == False %}
 		<h1 class='orange'>Create A Content Creation Guide</h1>
 		{% else %}
@@ -171,8 +173,13 @@
 	<script>
 		// Replace the <textarea id="editor1"> with a CKEditor
 		// instance, using default configuration.
-		CKEDITOR.replace('id_content');
-		CKEDITOR.replace('id_references');
-		CKEDITOR.replace('id_blurb');
+		CKEDITOR.replace( 'id_references',
+                        {
+                        	customConfig: '{% static 'js/ckeditor_basic_config.js' %}'
+                        });
+		CKEDITOR.replace('id_blurb',
+                        {
+                        	customConfig: '{% static 'js/ckeditor_basic_config.js' %}'
+                        });
 	</script>
 {% endblock %}

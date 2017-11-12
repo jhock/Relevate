@@ -126,7 +126,7 @@ class ArticleTestCase(TestCase):
 												'content':"I was suppose to do this",
 												'image':the_image,
 												'topic_choices': test_topics_ids(query_topic),
-												'is_published':False
+												'isPublished':False
 												}, follow=True)
 
 		red_path, red_code = response.redirect_chain[0]
@@ -157,7 +157,7 @@ class ArticleTestCase(TestCase):
 												'content':ARTICLE_MASSIVE_WORDS_TEXTS,
 												'image':the_image,
 												'topic_choices': test_topics_ids(query_topic),
-												'is_published':False
+												'isPublished':False
 												}, follow=True)
 
 		self.assertEqual(response.status_code, 200)

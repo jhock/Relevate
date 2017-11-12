@@ -32,7 +32,7 @@ class ArticleInfographicUpdateForm(forms.Form):
 								widget=forms.FileInput(attrs={'accept': '.png,.jpg,.jpeg'}))
 	blurb = forms.CharField(label="Short Description of Infographic", max_length=150, required=True,
 								widget=forms.Textarea())
-	is_published = forms.BooleanField(label="Publish Article", required=False,
+	isPublished = forms.BooleanField(label="Publish Article", required=False,
 								widget=forms.CheckboxInput(attrs={'class': 'uk-checkbox'}))
 	#fields for cropping images
 	x = forms.FloatField(required=False)

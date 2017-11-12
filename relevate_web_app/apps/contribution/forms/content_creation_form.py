@@ -2,6 +2,8 @@ from django import forms
 from ..models.topic_model import Topics
 from ..modules.post_util import validate_file, validate_content_creation_file
 from PIL import Image
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
+from ckeditor.fields import RichTextFormField
 
 class ContentCreateForm(forms.Form):
 	"""
@@ -38,9 +40,7 @@ class ContentCreateForm(forms.Form):
 																	}
 																)
 						)
-	content = forms.CharField(max_length=10000, label='Post Content',
-					widget=forms.Textarea(attrs={'placeholder': 'Insert Article Here',
-											'class': 'form-control'}),  required=False)
+	content = RichTextFormField(config_name='advanced_toolbar', max_length=10000, label='Post Content', required=False)
 	blurb = forms.CharField(max_length=400, label='Short Description of Post',
 						widget=forms.Textarea(attrs={'placeholder': 'Insert description Here',
 													 'class': 'uk-textarea', 'rows':'5'}),  required=True)
@@ -58,3 +58,6 @@ class ContentCreateForm(forms.Form):
 	y = forms.FloatField(required=True, error_messages={'required': 'Please crop the image before uploading.'})
 	width = forms.FloatField(required=True, error_messages={'required': 'Please crop the image before uploading.'})
 	height = forms.FloatField(required=True, error_messages={'required': 'Please crop the image before uploading.'})
+
+class CkEditorForm(forms.Form):
+    content = RichTextFormField()

@@ -72,7 +72,7 @@ class ArticleUpdateForm(forms.Form):
 													'class': 'uk-textarea', 'rows':'5'}),  required=True)
 	references = forms.CharField(max_length=3000, label='Article References (if any)',
 					widget=forms.Textarea(), required=False)
-	is_published = forms.BooleanField(label="Publish Article", required=False)
+	isPublished = forms.BooleanField(label="Publish Article", required=False)
 	#fields for cropping images
 	x = forms.FloatField(required=False)
 	y = forms.FloatField(required=False)

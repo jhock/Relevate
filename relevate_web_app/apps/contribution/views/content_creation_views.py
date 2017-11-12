@@ -7,7 +7,7 @@ from ...profiles.models.contributor_model import ContributorProfile
 from ..models.content_creation_model import ContentCreation
 from django.urls import reverse_lazy
 from itertools import chain
-from ..forms.content_creation_form import ContentCreateForm
+from ..forms.content_creation_form import ContentCreateForm, CkEditorForm
 from django.contrib import messages
 from datetime import datetime
 from PIL import Image
@@ -31,6 +31,8 @@ try:
 except ImportError:
     # Fall back to Python 2's urllib2
     from urllib2 import urlopen
+
+from django.views import generic
 
 
 class ContentCreationView(View):
@@ -60,7 +62,7 @@ class ContentCreationView(View):
             return render(request, "home.html")
 
 
-class ContentCreationCreateView(View):
+class ContentCreationCreateView(LoginRequiredMixin, View):
     '''
     View for creating a new Content Creation Post, only relevate@outlook.com or user in permissions group will return
     content_creation_create.html
@@ -76,12 +78,17 @@ class ContentCreationCreateView(View):
                 # variable used in template to show level and type for content creation
                 public_scholarship_or_content_creation = False
                 form = ContentCreateForm(initial={'public_scholarship_or_content_creation': False})
+
+
+
             #if the user has clicked on the "new post" button from the public scholarship page
             else:
                 #variable used in template to hide level and type for public scholarship
                 public_scholarship_or_content_creation = True
                 data = {'type': 'Infographics', 'level': 'Expanding Your Reach', 'public_scholarship_or_content_creation': True}
                 form = ContentCreateForm(initial=data)
+
+
                 #checks the group "Content Creation Contributor" for the user. If this group has not yet been created, create
                 # and assign users in the admin page.
             if user.groups.filter(name='Content Creation Contributor').exists():
@@ -101,6 +108,7 @@ class ContentCreationCreateView(View):
         if form.is_valid():
             title = form.cleaned_data['title']
             content = form.cleaned_data.get('content')
+            alternate_content = form.cleaned_data.get('alternate_content')
             x = form.cleaned_data.get('x')
             y = form.cleaned_data.get('y')
             w = form.cleaned_data.get('width')
@@ -217,7 +225,7 @@ class ContentCreationUpdateView(LoginRequiredMixin, View):
                 initial={
                     'title': post.title,
                     'content': post.content,
-                    'is_published': post.isPublished,
+                    'isPublished': post.isPublished,
                     'image': post.image,
                     'blurb': post.blurb,
                     'references': post.references,
@@ -323,3 +331,25 @@ class ContentCreationRemoveView(PermissionMixin, DeleteView):
 
     model = ContentCreation
     success_url = reverse_lazy('contribution:content_creation')
+
+
+
+
+
+
+
+
+
+
+
+
+
+class CkEditorFormView(generic.FormView):
+    form_class = ContentCreateForm
+    template_name = 'form.html'
+
+    def get_success_url(self):
+        return reverse('ckeditor-form')
+
+
+ckeditor_form_view = CkEditorFormView.as_view()

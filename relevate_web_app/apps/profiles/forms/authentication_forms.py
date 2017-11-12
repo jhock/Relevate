@@ -12,6 +12,12 @@ class UpdateUserForm(forms.Form):
 	first_name = forms.CharField(label='First Name', max_length=100, required=True, widget=forms.TextInput(attrs={'placeholder': 'First Name', 'class': 'uk-input'}))
 	last_name = forms.CharField(label='Last Name', max_length=100, required=True, widget=forms.TextInput(attrs={'placeholder': 'Last Name', 'class': 'uk-input'}))
 	email = forms.EmailField(label='Email', max_length=100, required=False, widget=forms.TextInput(attrs={'placeholder': 'Email', 'class': 'uk-input'}))
+	password1 = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class':'uk-input'}),
+							   required=False)
+	password2 = forms.CharField(label='Verify Password', widget=forms.PasswordInput(attrs={'class':'uk-input'}), required=False)
+	area_of_expertise = forms.ModelMultipleChoiceField(label="Area of Expertise Relevant to Romantic Relationships",
+								queryset=Topics.objects.all(),
+								widget=forms.CheckboxSelectMultiple(attrs={'class': 'expertise-checkbox'}), required=False)
 
 	#TODO: make a clean_mail to check for any other email besides their own.
 
@@ -21,6 +27,9 @@ class UpdateUserForm(forms.Form):
 		NOTE: Errors here will appear in ``non_field_errors()`` because it applies to more than one field.
 		"""
 		cleaned_data = super(UpdateUserForm, self).clean()
+		if 'password1' in self.cleaned_data and 'password2' in self.cleaned_data:
+			if self.cleaned_data['password1'] != self.cleaned_data['password2']:
+				raise forms.ValidationError("Passwords don't match. Please enter both fields again.")
 		self.cleaned_data['first_name'] = self.cleaned_data['first_name'].capitalize()
 		self.cleaned_data['last_name'] = self.cleaned_data['last_name'].capitalize()
 		return self.cleaned_data
@@ -36,7 +45,7 @@ class RegistrationForm(forms.Form):
 	password1 = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class':'uk-input'}),
 							   required=True)
 	password2 = forms.CharField(label='Verify Password', widget=forms.PasswordInput(attrs={'class':'uk-input'}), required=True)
-	topics_preferences = forms.ModelMultipleChoiceField(label="Area of Expertise Relevant to Romantic Relationships",
+	area_of_expertise = forms.ModelMultipleChoiceField(label="Area of Expertise Relevant to Romantic Relationships",
 								queryset=Topics.objects.all(),
 								widget=forms.CheckboxSelectMultiple(attrs={'class': 'expertise-checkbox'}), required=False)
 

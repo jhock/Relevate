@@ -215,7 +215,7 @@ class ArticleUpdateView(LoginRequiredMixin, View):
 					'title':article.title,
 					'content':article.content,
 					'topic_choices':list_of_topics,
-					'is_published':post.isPublished,
+					'isPublished':post.isPublished,
 					'image': article.image,
 					'blurb': article.blurb,
 					'references': article.references

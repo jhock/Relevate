@@ -116,14 +116,6 @@
 				{% endif %}
 			</ul>
 			<ul class="uk-navbar-nav">
-				<li>
-					<!-- uikit.css line 3638 (edit-->
-					<form action="{% url 'contribution:search_results' %}" method="get">
-						{% csrf_token %}
-						<input class="searchfield" id="searchbox" name="searchbox" type="text" placeholder="Search">
-					</form>
-
-				</li>
 				{% if user.is_authenticated %}
 				<li><a href="{% url 'profile:user_update' %}">Update Profile</a></li>
 				{% endif %}

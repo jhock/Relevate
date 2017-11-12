@@ -60,6 +60,9 @@ coverage.xml
 # Django stuff:
 *.log
 
+# Compiled static assets
+static/__cache__/
+
 # Sphinx documentation
 docs/_build/
 

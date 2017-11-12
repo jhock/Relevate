@@ -1,0 +1,28 @@
+@import "../base/variables";
+
+.rv-navbar {
+  position: fixed;
+  padding-left: 0.5rem;
+  top: 0;
+  width: 100%;
+  background: rgba($rv-color-white, 0.98);
+  z-index: 999;
+}
+
+.rv-navbar-placeholder {
+  height: $rv-navbar-height;
+}
+
+.rv-navbar_logo {
+  svg {
+    width: 1.5rem;
+    g {
+      fill: $rv-color-primary; 
+      stroke: $rv-color-white;
+    }
+  }
+}
+
+.rv-navbar_shadow {
+  box-shadow: $rv-box-shadow;
+}

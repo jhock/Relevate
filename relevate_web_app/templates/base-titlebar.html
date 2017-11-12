@@ -4,15 +4,25 @@
 {% block body %}
 
 <div id='nav-sticky'>
-	<nav id='top-level-nav' class="uk-navbar-container uk-box-shadow-medium" uk-navbar="mode: click">
+	<div class="rv-navbar-placeholder"></div>
+	<nav id='top-level-nav' class="rv-navbar" uk-navbar="mode: click">
 		<div class="uk-navbar-left">
 			<div class='uk-navbar-item uk-logo'>
 				<a href="{% url 'contribution:home' %}">
-					<img style="max-height: 60px" src="{% static 'images/Relevate Logo.png' %}">
+					<span class="rv-navbar_logo">
+						{% include 'global-partials/relevate-logo-svg-partial.html' %}
+					</span>
 				</a>
 			</div>
+		</div>
+		<div class="uk-navbar-right">
 			<ul class="uk-navbar-nav">
-				<li class=""><a href="{% url 'contribution:home' %}">Home</a></li>
+				<li>
+					<form action="{% url 'contribution:search_results' %}" method="get">
+						{% csrf_token %}
+						<input class="searchfield" id="searchbox" name="searchbox" type="text" placeholder="Search">
+					</form>
+				</li>
 				{% if user.is_staff %}
 				<li>
 					<a href="#">Staff</a>
@@ -105,8 +115,6 @@
 					{% endif %}
 				{% endif %}
 			</ul>
-		</div>
-		<div class="uk-navbar-right">
 			<ul class="uk-navbar-nav">
 				<li>
 					<!-- uikit.css line 3638 (edit-->
@@ -155,11 +163,4 @@
 	{% block content %}
 		{{ block.super }}
 	{% endblock %}
-	
-	<div class='up-btn-container' uk-scroll>
-		<div class='uk-padding-small'>
-			<img src="{% static 'images/up-arrow.png' %}">
-		</div>
-	</div>	
-
 {% endblock %}

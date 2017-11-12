@@ -1,36 +1,47 @@
 {% load staticfiles %}
 
-<div class='uk-card uk-card-default uk-box-shadow-large item'>
-	<div class='uk-card-body'>
-		<div class='uk-clearfix'>
-			<p class='uk-card-title'>
-				<a href="{% url 'contribution:infographic_view' p.slug %}">{{ i.title }}</a>
+<div class='rv-content-card'>
+		<a href="{% url 'contribution:infographic_view' p.slug %}">
+			<img class="rv-content-card_img" src="{{ i.thumbnail }}">
+		</a>
+		<div class="rv-content-card_content">
+			<a href="{% url 'contribution:infographic_view' p.slug %}" class="rv-content-card_heading-link">
+				<h4 class="rv-content-card_heading">{{ i.title }}</h4>
+			</a>
+			<a href="{% url 'contribution:infographic_view' p.slug %}">
+	      <span class="rv-content-card_link"></span>
+	    </a>
+	    <div class="rv-content-card_contributor-info">
+  			<div class="rv-content-card_avatar">
+					{% if p.contributor.avatar == ""  %}
+						<div class="rv-avatar">
+	          	<img src="{% static "images/profile-placeholder.png" %}"{{ person.photo_url|default_if_none:'#' }} alt="logo"/>
+	          </div>
+	        {% elif p.contributor.avatar != "" %}
+	        	<div class="rv-avatar">
+	          	<img src="{{ p.contributor.avatar.url }}">
+	          </div>
+	        {% endif %}
+	      </div>
+	      <div class="rv-content-card_contributor-name">
+					{{ p.contributor }}
+				</div>
+				<hr class="rv-content-card_contributor-rule" />
+			</div>
+		<div class="rv-content-card_preview">
+			<p>
+				{{ i.blurb | safe }}
 			</p>
 		</div>
-		<a href="{% url 'contribution:infographic_view' p.slug %}">
-			<div class=".uk-container-center">
-				<img src="{{ i.thumbnail }}">
+		<div class="rv-content-card_topics">
+			<small>Topics: </small>
+			<div class="topics-scroll-menu">
+				<li>
+				{% for topic in i.topics.all %}
+						<a href="{% url 'contribution:topic_sort' topic.name %}"><small>{{ topic.name }}</small></a>
+				{% endfor %}
+				</li>
 			</div>
-		</a>
-		<p>
-			{{ i.blurb | safe }} <a href="{% url 'contribution:infographic_view' p.slug %}">Read more...</a>
-		</p>
-			<div>
-				{% if p.contributor.avatar == ""  %}
-                    <img style="max-width: 70px;" class="profile_avatar uk-border-circle" src="{% static "images/profile-placeholder.png" %}"{{ person.photo_url|default_if_none:'#' }} alt="logo"/>
-                {% elif p.contributor.avatar != "" %}
-                    <img style="max-width: 70px;" class="profile_avatar uk-border-circle" src="{{ p.contributor.avatar.url }}">
-                {% endif %}
-				{{ p.contributor }}
-            </div>
-		<hr>
-		<small>Topics: </small>
-		<div class="topics-scroll-menu">
-			<li>
-			{% for topic in i.topics.all %}
-					<a href="{% url 'contribution:topic_sort' topic.name %}"><small>{{ topic.name }}</small></a>
-			{% endfor %}
-			</li>
 		</div>
 	</div>
 </div>

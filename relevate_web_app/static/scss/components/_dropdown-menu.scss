@@ -1,0 +1,57 @@
+@import "../base/variables";
+
+$menu-width: 14rem;
+
+.rv-dropdown-menu_container {
+  position: relative;
+}
+
+.rv-dropdown-menu {
+  position: absolute;
+  width: $menu-width;
+  background: $rv-color-white;
+  box-shadow: $rv-box-shadow;
+  transform: translateX(-50%);
+  left: 50%;
+  top: 2rem;
+  display: none;
+  padding: 1rem;
+  border-radius: 0.25rem;
+  border: 1px solid $rv-color-light-gray;
+}
+
+.rv-dropdown-menu_trigger {
+  cursor: pointer;
+}
+
+.rv-dropdown-menu_item {
+  display: block;
+  padding: 0.5rem;
+  color: $rv-color-dark;
+  text-decoration: none;
+  box-sizing: border-box;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  font-size: 0.875rem;
+  border-radius: 999rem;
+
+  &:focus {
+    outline: none;
+    color: $rv-color-white;
+    background: $rv-color-primary;
+    font-weight: $rv-font-weight-bold;
+  }
+
+  &:hover {
+    font-weight: $rv-font-weight-bold;
+  }
+}
+
+.rv-dropdown-menu_header {
+  font-weight: $rv-font-weight-bold;
+}
+
+.rv-dropdown-menu_separator {
+  margin: 1rem 0;
+  border-bottom: 1px solid $rv-color-dark;
+}

@@ -35,6 +35,7 @@ LOGIN_REDIRECT_URL = 'contribution:home'
 INSTALLED_APPS = [
 	'apps.profiles',
 	'apps.contribution',
+	'apps.components',
 	'apps.api',
 	'compressor',
 	'django.contrib.admin',
@@ -84,6 +85,9 @@ TEMPLATES = [
 				'django.contrib.auth.context_processors.auth',
 				'django.contrib.messages.context_processors.messages',
 			],
+			'libraries':{
+        'component_tags': 'apps.components.templatetags.component_tags',
+			}
 		},
 	},
 ]
@@ -217,6 +221,11 @@ CKEDITOR_CONFIGS = {
 	}
 }
 
+# I wasn't sure where to put this, so I'm open/hopeful we can move it to a 
+# location that makes more sense
 
-
+# this allows Django template tags to span multiple lines.
+import re
+from django.template import base
+base.tag_re = re.compile(base.tag_re.pattern, re.DOTALL)
 

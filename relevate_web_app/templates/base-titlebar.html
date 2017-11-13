@@ -1,137 +1,199 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% load component_tags %}
 
 {% block body %}
 
 <div id='nav-sticky'>
-	<div class="rv-navbar-placeholder"></div>
-	<nav id='top-level-nav' class="rv-navbar" uk-navbar="mode: click">
-		<div class="uk-navbar-left">
-			<div class='uk-navbar-item uk-logo'>
-				<a href="{% url 'contribution:home' %}">
-					<span class="rv-navbar_logo">
-						{% include 'global-partials/relevate-logo-svg-partial.html' %}
-					</span>
-				</a>
-			</div>
+	<div class="rv-navbar_placeholder"></div>
+	<nav id='top-level-nav' class="rv-navbar">
+		<div class="rv-navbar_logo-container">
+			<a href="{% url 'contribution:home' %}" class="rv-navbar_logo-link">
+				<span class="rv-navbar_logo">
+					{% include 'global-partials/relevate-logo-svg-partial.html' %}
+				</span>
+			</a>
 		</div>
-		<div class="uk-navbar-right">
-			<ul class="uk-navbar-nav">
-				<li>
-					<form action="{% url 'contribution:search_results' %}" method="get">
-						{% csrf_token %}
-						<input class="searchfield" id="searchbox" name="searchbox" type="text" placeholder="Search">
-					</form>
+		<ul class="rv-navbar_options-container">
+			<li class="rv-navbar_option-text-input">
+				<form action="{% url 'contribution:search_results' %}" method="get">
+					{% csrf_token %}
+					<input class="rv-text-input" id="searchbox" name="searchbox" type="text" placeholder="Search">
+				</form>
+			</li>
+			{% if user.is_staff %}
+			<li>
+				{% dropdown_menu 
+					'{
+						"trigger": {
+							"label": "Staff",
+							"className": "rv-navbar_option",
+							"id": "main_navbar_ddmenu_0"
+						},
+						"items": [{
+							"header": "Approve/Deny"
+						}, {
+							"label": "Approve Advisors",
+							"href": "profile:adviser_approve"
+						}, {
+							"label": "Approve Contributors",
+							"href": "profile:contributor_approve"
+						}, {
+							"separator": "true"
+						}, {
+							"header": "List Denied"
+						}, {
+							"label": "List Denied Advisers",
+							"href": "profile:denied_adviser_list"
+						}, {
+							"label": "List Denied Contributors",
+							"href": "profile:denied_contributor_list"
+						}]
+					}'
+				%}
+			</li>
+			{% endif %}
+			{% if user_prof.is_contributor %}
+				{% if user_prof.is_adviser %}
+					<li>
+					{% dropdown_menu 
+						'{
+							"trigger": {
+								"label": "Mentors",
+								"className": "rv-navbar_option",
+								"id": "main_navbar_ddmenu_1"
+							},
+							"items": [{
+								"label": "My Mentor Profile", 
+								"href": "profile:adviser_profile"
+							}, {
+								"label": "Approve Mentee Posts",
+								"href": "profile:adviser_approve_posts"
+							}, {
+								"label": "Mentor Application",
+								"href": "profile:adviser_create"
+							}]
+						}'
+					%}
 				</li>
-				{% if user.is_staff %}
-				<li>
-					<a href="#">Staff</a>
-					<div class="uk-navbar-dropdown uk-width-medium">
-						<ul class="uk-nav uk-navbar-dropdown-nav">
-							<li class='uk-nav-header'>Approve/Deny</li>
-							<li>
-								<a href=" {% url 'profile:adviser_approve' %}">
-									Approve Adviser Applications
-								</a>
-							</li>
-							<li>
-								<a href="{% url 'profile:contributor_approve' %}">
-									Approve Contributor Applications
-								</a>
-							</li>
-							<li class='uk-nav-divider'></li>
-							<li class='uk-nav-header'>List Denied</li>
-							<li>
-								<a href="{% url 'profile:denied_adviser_list' %}">
-									List Denied Advisers
-								</a>
-							</li>
-							<li>
-								<a href="{% url 'profile:denied_contributor_list' %}">
-									List Denied Contributors
-								</a>
-							</li>
-						</ul>
-					</div>
-				</li>
-				{% endif %}
-				{% if user_prof.is_contributor %}
-					<li>
-						<a href="#">Mentors</a>
-						<div class="uk-navbar-dropdown uk-width-medium">
-							<ul class="uk-nav uk-navbar-dropdown-nav">
-								{% if user_prof.is_adviser %}
-								<li><a href="{% url 'profile:adviser_profile' %}">My Mentor Profile</a></li>
-								<li><a href="{% url 'profile:adviser_approve_posts' %}">Approve Mentee Posts</a></li>
-								{% else %}
-								<li><a href="{% url 'profile:adviser_create' %}">Mentor Application</a></li>
-								{% endif %}
-							</ul>
-						</div>
-					</li>
-					<li>
-						<a href="#">Contributors</a>
-						<div class='uk-navbar-dropdown uk-width-medium'>
-							<ul class='uk-nav uk-navbar-dropdown-nav'>
-								<li><a href="{% url 'profile:contributors' %}">All Contributors</a></li>
-								<li><a href="{% url 'profile:contributor_profile' %}">My Contributor Profile</a></li>
-							</ul>
-						</div>
-					</li>
-					<li>
-						<a href="#">Posts</a>
-						<div class='uk-navbar-dropdown uk-width-medium'>
-							<ul class='uk-nav uk-navbar-dropdown-nav'>
-								<li><a href="{% url 'contribution:new_post' %}">Create A New Post</a></li>
-								<li><a href="{% url 'contribution:all_posts' %}">Posts To Date</a></li>
-							</ul>
-						</div>
-					</li>
-					<li>
-						<a href="#">Resources</a>
-						<div class='uk-navbar-dropdown uk-width-medium'>
-							<ul class='uk-nav uk-navbar-dropdown-nav'>
-								<li><a href="{% url 'contribution:using_relevate' %}">Using Relevate</a></li>
-								<li><a href="{% url 'contribution:public_scholarship' %}">Public Scholarship</a></li>
-								<li><a href="{% url 'contribution:content_creation' %}">Content Creation</a></li>
-							</ul>
-						</div>
-					</li>
 				{% else %}
 					<li>
-						<a href="#">Contributors</a>
-						<div class='uk-navbar-dropdown uk-width-medium'>
-							<ul class='uk-nav uk-navbar-dropdown-nav'>
-								<li><a href="{% url 'profile:contributors' %}">All Contributors</a></li>
-							</ul>
-						</div>
+					{% dropdown_menu 
+						'{
+							"trigger": {
+								"label": "Mentors",
+								"className": "rv-navbar_option",
+								"id": "main_navbar_ddmenu_2"
+							},
+							"items": [{
+								"label": "Mentor Application",
+								"href": "profile:adviser_create"
+							}]
+						}'
+					%}
 					</li>
-					{% if user.is_authenticated %}
-						<li><a href="{% url 'profile:contributor_create' %}">Contributor Application</a></li>
-						{% if not user_prof.confirmed %}
-							<li><a href="{% url 'profile:confirmation' %}">Confirm Account</a></li>
-						{% endif %}
-						<!-- <li><a href="{%url 'profile:password_reset_form' %}">Reset Password</a></li> -->
-					{% endif %}
 				{% endif %}
-			</ul>
-			<ul class="uk-navbar-nav">
+				<li>
+				{% dropdown_menu 
+					'{
+						"trigger": {
+							"label": "Contributors",
+							"className": "rv-navbar_option",
+							"id": "main_navbar_ddmenu_3"
+						},
+						"items": [{
+							"label": "All Contributors", 
+							"href": "profile:contributors"
+						}, {
+							"label": "My Contributor Profile",
+							"href": "profile:contributor_profile"
+						}]
+					}'
+				%}
+				</li>
+
+				<li>
+				{% dropdown_menu 
+					'{
+						"trigger": {
+							"label": "Posts",
+							"className": "rv-navbar_option",
+							"id": "main_navbar_ddmenu_4"
+						},
+						"items": [{
+							"label": "Create A New Post", 
+							"href": "contribution:new_post"
+						}, {
+							"label": "Posts To Date",
+							"href": "contribution:all_posts"
+						}]
+					}'
+				%}
+				</li>
+
+				<li>
+				{% dropdown_menu 
+					'{
+						"trigger": {
+							"label": "Resources",
+							"className": "rv-navbar_option",
+							"id": "main_navbar_ddmenu_5"
+						},
+						"items": [{
+							"label": "Using Relevate", 
+							"href": "contribution:using_relevate"
+						}, {
+							"label": "Public Scholarship",
+							"href": "contribution:public_scholarship"
+						}, {
+							"label": "Content Creation",
+							"href": "contribution:content_creation"
+						}]
+					}'
+				%}
+				</li>
+			{% else %}
+				<li>
+				{% dropdown_menu 
+					'{
+						"trigger": {
+							"label": "Contributors",
+							"className": "rv-navbar_option",
+							"id": "main_navbar_ddmenu_6"
+						},
+						"items": [{
+							"label": "All Contributors", 
+							"href": "profile:contributors"
+						}]
+					}'
+				%}
+				</li>
+
 				{% if user.is_authenticated %}
-				<li><a href="{% url 'profile:user_update' %}">Update Profile</a></li>
+					<li><a class="rv-navbar_option" href="{% url 'profile:contributor_create' %}">Contributor Application</a></li>
+					{% if not user_prof.confirmed %}
+						<li><a class="rv-navbar_option" href="{% url 'profile:confirmation' %}">Confirm Account</a></li>
+					{% endif %}
+					<!-- <li><a href="{%url 'profile:password_reset_form' %}">Reset Password</a></li> -->
 				{% endif %}
-				<li><a href="{% url 'contribution:about' %}">About</a></li>
-				{% if not user.is_authenticated %}
-				<li>
-					<a href="{% url 'profile:registration' %}">Create Account</a>
-				</li>
-				<li>
-					<a href="{% url 'profile:login' %}">Sign In</a>
-				</li>
-				{% else %}
-				<li><a href="{% url 'profile:logged_out' %}">Logout</a></li>
-				{% endif %}
-			</ul>
-		</div>
+			{% endif %}
+			<li>
+				<a class="rv-navbar_option" href="{% url 'profile:user_update' %}">Update Profile</a>
+			</li>
+			<li>
+				<a class="rv-navbar_option" href="{% url 'contribution:about' %}">About</a>
+			</li>
+			{% if not user.is_authenticated %}
+			<li>
+				<a class="rv-navbar_option" href="{% url 'profile:login' %}">Sign In</a>
+			</li>
+			<li>
+				<a class="rv-button" href="{% url 'profile:registration' %}">Create Account</a>
+			</li>
+			{% else %}
+			<li><a class="rv-navbar_option" href="{% url 'profile:logged_out' %}">Logout</a></li>
+			{% endif %}
+		</ul>
 	</nav>
 </div>
 	<div id="messages">
@@ -150,7 +212,6 @@
 			}, 6000); // <-- time in milliseconds, 1000 =  1 sec
 		});
 	</script>
-
 
 	{% block content %}
 		{{ block.super }}

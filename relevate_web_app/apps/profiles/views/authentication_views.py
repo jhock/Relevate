@@ -74,7 +74,7 @@ class RegisterUserView(View):
 				user_profile.save()
 				messages.success(request, 'Your account has been created!')
 				login(request, user)
-				return HttpResponseRedirect(reverse('contribution:home'))
+				return HttpResponseRedirect(reverse('profile:user_contributor_question'))
 			else:
 				#save user profile, and create a confirmation code.
 				user_profile.save()
@@ -298,3 +298,9 @@ class ConfirmationView(LoginRequiredMixin, View):
 		#Error for incorrect code, user enters again.
 		messages.error(request, 'Code is not correct, please try again.')
 		return render(request, 'contribution.html', {'form': ConfirmationForm()})
+
+class UserContributorQuestionView(LoginRequiredMixin, View):
+
+	def get(self, request):
+		return render(request, 'user_contributor_question.html')
+

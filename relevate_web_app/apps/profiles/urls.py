@@ -14,6 +14,7 @@ urlpatterns = [
 	url(r'^logged_out/$', django_auth_views.logout, name='logged_out'),
 	url(r'inactive-user/', authentication_views.DeactivatedAccountView.as_view(), name='deactivated_account'),
 	url(r'confirmation/', authentication_views.ConfirmationView.as_view(), name='confirmation'),
+	url(r'user_contributor_question/$', authentication_views.UserContributorQuestionView.as_view(), name='user_contributor_question'),
 
 	# User Password Reset/Change Information
 	url(r'reset_done/$', django_auth_views.password_reset_complete, name='password_reset_complete'),

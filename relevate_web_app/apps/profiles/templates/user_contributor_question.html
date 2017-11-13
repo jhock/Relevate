@@ -1,0 +1,25 @@
+{% extends "base-titlebar.html" %}
+{% load staticfiles %}
+
+{% block head %}
+	{{ block.super }}
+{% endblock head %}
+
+{% block content %}
+<div class='uk-container uk-width-1-1 uk-margin-top'>
+	<div class='uk-flex uk-flex-center uk-text-center'>
+		<div style="width: 600px; border: 5px solid #2FA6F5; border-radius: 6px; padding: 15px; background:#FFFFFF">
+			<h1>Welcome to Relevate!</h1>
+            Are you here to become a contributor to this site?
+            <div style="white-space: nowrap; padding: 15px;" class="inline">
+            <a style='color: white;' class='uk-button uk-button-primary' href="{% url 'profile:contributor_create' %}">
+				Yes, continue to application
+			</a>
+            <a style='color: white;' class='uk-button uk-button-primary' href="{% url 'contribution:home' %}">
+				No, continue to home page
+			</a>
+            </div>
+		</div>
+	</div>
+</div>
+{% endblock %}

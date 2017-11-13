@@ -1,16 +1,29 @@
 @import "../base/variables";
+@import "../mixins/focus";
 
 .rv-navbar {
   position: fixed;
-  padding-left: 0.5rem;
   top: 0;
   width: 100%;
   background: rgba($rv-color-white, 0.98);
   z-index: 999;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.rv-navbar-placeholder {
+.rv-navbar_placeholder {
   height: $rv-navbar-height;
+}
+
+.rv-navbar_logo-container {
+  margin: 0.5rem 1rem;
+}
+
+.rv-navbar_logo-link {
+  display: block;
+  height: 2.4rem;
+  @include buttonFocus(0.3rem, 0.3rem, 0.3rem, 0.3rem);
 }
 
 .rv-navbar_logo {
@@ -25,4 +38,51 @@
 
 .rv-navbar_shadow {
   box-shadow: $rv-box-shadow;
+}
+
+.rv-navbar_options-container {
+  display: flex;
+  margin: 0 1rem;
+}
+
+.rv-navbar_option {
+  color: $rv-color-primary;
+  margin: 0 1rem;
+  text-decoration: none;
+  border: none;
+  background: $rv-color-white;
+  font-size: 1rem;
+
+  &:active {
+    color: darken($rv-color-primary, 10%)
+  }
+
+  &:focus,
+  &:hover {
+    text-decoration: underline;
+  }
+
+  @include buttonFocus(0.5rem, 0.5rem, 0.5rem, 0.5rem);
+}
+
+.rv-dropdown-menu_label {
+  display: flex;
+  align-items: center;
+}
+
+.rv-dropdown-menu_icon {
+  width: 0.4rem;
+  margin-left: 0.5rem;
+
+  svg {
+    transform: rotate(0deg);
+    transition: transform 100ms ease-in;
+    g {
+      fill: $rv-color-primary;
+    }
+  }
+}
+
+.rv-navbar_option-text-input {
+  margin: 0 1rem;
 }

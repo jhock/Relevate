@@ -1,0 +1,22 @@
+@import "../base/variables";
+
+.rv-text-input {
+  border: none;
+  border-bottom: 1px solid $rv-color-primary;
+  font-size: 1rem;
+  color: $rv-color-primary;
+  position: relative;
+  overflow: visible;
+
+  &::placeholder {
+    color: $rv-color-primary;
+  }
+
+  &:focus {
+    outline: none;
+
+    &::placeholder {
+      color: $rv-color-neutral;
+    }
+  }
+}

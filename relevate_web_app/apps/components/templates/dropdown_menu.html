@@ -1,0 +1,139 @@
+<span class="rv-dropdown-menu_container">
+  <button 
+    class="rv-dropdown-menu_trigger {{props.trigger.className}}"
+    id="{{props.trigger.id}}"
+    aria-haspopup="true"
+    aria-expanded="false"
+    onclick="handleMenuTriggerClick(this)"
+  >
+    <span class="rv-dropdown-menu_label">
+      <span>
+        {{props.trigger.label}}
+      </span>
+      <span 
+        class="rv-dropdown-menu_icon"
+        aria-hidden="true"
+      >
+        {% include 'global-partials/arrow-svg-partial.html' %}
+      </span>
+    <span>
+  </button>
+  <ul 
+    class="rv-dropdown-menu"
+    role="menu"
+    aria-hidden="true"
+    aria-labelledby="{{props.trigger.id}}"
+  >
+    {% for item in props.items %}
+      {% if item.header %}
+        <li class="rv-dropdown-menu_header">{{item.header}}</li>
+      {% elif item.separator %}
+        <li class="rv-dropdown-menu_separator" role="separator"></li>
+      {% else %}
+        <li>
+          <a 
+            class="rv-dropdown-menu_item" 
+            href="{% url item.href %}"
+            role="menuitem"
+            onkeydown="handleMenuItemKeyDown(event, this)"
+            onblur="handleMenuItemBlur(event, this)" 
+            tabindex="-1"
+          >
+            {{item.label}}
+          </a>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</span>
+
+<script>
+  function handleMenuTriggerClick (trigger) {
+    var menu = trigger.parentElement.getElementsByClassName('rv-dropdown-menu')[0]
+    var arrow = menu.parentElement.getElementsByTagName('svg')[0]
+
+    menu.style.display = 'initial'
+    menu.setAttribute('aria-hidden', 'false')
+    trigger.setAttribute('aria-expanded', 'true')
+    arrow.style.transform = 'rotate(90deg)'
+
+    var items = menu.getElementsByClassName('rv-dropdown-menu_item')
+    if (items[0]) {
+      items[0].focus()
+    }
+  }
+
+  function handleMenuItemKeyDown (event, item) {
+    var menu = item.parentElement.parentElement
+    var items = menu.getElementsByClassName('rv-dropdown-menu_item')
+    var trigger = menu.parentElement.getElementsByClassName('rv-dropdown-menu_trigger')[0]
+    var arrow = menu.parentElement.getElementsByTagName('svg')[0]
+
+    if (event.key === 'Escape') {
+      menu.style.display = 'none'
+      menu.setAttribute('aria-hidden', 'true')
+      trigger.setAttribute('aria-expanded', 'false')
+      arrow.style.transform = 'rotate(0deg)'
+      trigger.focus()
+      return
+    }
+
+    var arrow = false
+    var step
+
+    if (event.key === 'ArrowDown') {
+      arrow = true
+      step = 1
+    }
+
+    if (event.key === 'ArrowUp') {
+      arrow = true
+      step = -1
+    }
+
+    if (arrow) {
+      event.preventDefault()
+      event.stopPropagation
+
+      var index
+      for (var i = 0; i < items.length; i++) {
+        if (items[i] === item) {
+          index = i
+          break
+        }
+      }
+
+      var newIndex = index + step
+
+      if (newIndex < 0) {
+        items[items.length - 1].focus()
+      } else if (newIndex > (items.length - 1)) {
+        items[0].focus()
+      } else {
+        items[newIndex].focus()
+      }
+    }
+  }
+
+  function handleMenuItemBlur (event, item) {
+    var menu = item.parentElement.parentElement
+    var items = menu.getElementsByClassName('rv-dropdown-menu_item')
+    var trigger = menu.parentElement.getElementsByClassName('rv-dropdown-menu_trigger')[0]
+    var arrow = menu.parentElement.getElementsByTagName('svg')[0]
+
+    setTimeout(function () {
+      for (var i = 0; i < items.length; i++) {
+        var item = items[i]
+        if (item === document.activeElement) {
+          return
+        }
+      }
+
+      menu.style.display = 'none'
+      menu.setAttribute('aria-hidden', 'true')
+      trigger.setAttribute('aria-expanded', 'false')
+      arrow.style.transform = 'rotate(0deg)'
+
+    }, 50)
+  }
+</script>

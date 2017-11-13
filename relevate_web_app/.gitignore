@@ -87,3 +87,6 @@ settings/access_keys.py
 
 # Don't push any backup files
 *.py~
+
+# Don't push any ckeditor file uploads
+ck_media/

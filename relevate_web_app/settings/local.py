@@ -10,7 +10,7 @@ DATABASES = {
 }
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'ck_media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 #ckeditor settings
 CKEDITOR_UPLOAD_PATH = "uploads/"

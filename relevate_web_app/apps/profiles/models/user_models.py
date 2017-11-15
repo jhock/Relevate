@@ -9,6 +9,7 @@ class UserProfile(models.Model):
 	is_adviser = models.BooleanField(default=False)
 	is_contributor = models.BooleanField(default=False)
 	topics_preferences = models.ManyToManyField('contribution.Topics', blank=True)
+	# contributor_profile = models.ForeignKey('ContributorProfile', blank=True, null=True)
 	#user_avatar = models.ImageField(upload_to='user_profiles/user_avatar', null=True, blank=True)
 
 

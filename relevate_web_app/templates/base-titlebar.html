@@ -178,7 +178,7 @@
 				{% endif %}
 			{% endif %}
 			<li>
-				<a class="rv-navbar_option" href="{% url 'profile:user_update' %}">Update Profile</a>
+				<!--<a class="rv-navbar_option" href="{% url 'profile:user_update' %}">Update Profile</a>-->
 			</li>
 			<li>
 				<a class="rv-navbar_option" href="{% url 'contribution:about' %}">About</a>
@@ -191,9 +191,36 @@
 				<a class="rv-button" href="{% url 'profile:registration' %}">Create Account</a>
 			</li>
 			{% else %}
-			<li><a class="rv-navbar_option" href="{% url 'profile:logged_out' %}">Logout</a></li>
+			<!--<li><a class="rv-navbar_option" href="{% url 'profile:logged_out' %}">Logout</a></li>-->
 			{% endif %}
 		</ul>
+		<div class="container">
+		<div class="rv-navbar_avatar-container">
+			{% if user_prof.is_contributor and contrib_prof.avatar == "" %}
+				<a href="#">
+				<img style="max-width: 50px; max-height: 50px;" class="profile_avatar uk-border-circle" src="{{ contrib_prof.avatar.url }}">
+				</a>
+			{% else %}
+				<a href="#">
+				<img style="max-width: 50px;" class="profile_avatar uk-border-circle" src="{% static "images/profile-placeholder.png" %}"{{ person.photo_url|default_if_none:'#' }} alt="logo"/>
+				</a>
+			{% endif %}
+			<div uk-dropdown="mode: click">
+				<ul class="uk-nav uk-dropdown-nav">
+					<li>
+						<a class="rv-navbar_option" href="{% url 'profile:user_update' %}">Update Profile</a>
+					</li>
+					{% if user.is_authenticated %}
+					<li><a href="{% url 'profile:contributor_profile' %}">My Contributor Profile</a></li>
+					{% endif %}
+					{% if user.is_authenticated %}
+					<li><a href="{% url 'profile:contributor_create' %}">Contributor Application</a></li>
+					{% endif %}
+					<li><a href="{% url 'profile:logged_out' %}">Logout</a></li>
+				</ul>
+			</div>
+		</div>
+		</div>
 	</nav>
 </div>
 	<div id="messages">

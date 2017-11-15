@@ -108,7 +108,6 @@ class ContentCreationCreateView(LoginRequiredMixin, View):
         if form.is_valid():
             title = form.cleaned_data['title']
             content = form.cleaned_data.get('content')
-            alternate_content = form.cleaned_data.get('alternate_content')
             x = form.cleaned_data.get('x')
             y = form.cleaned_data.get('y')
             w = form.cleaned_data.get('width')
@@ -126,6 +125,7 @@ class ContentCreationCreateView(LoginRequiredMixin, View):
                 new_content_creation = ContentCreation(
                     contributor=contributor_profile,
                     title=title,
+                    content=content,
                     image=image,
                     blurb=blurb,
                     references=references,
@@ -135,8 +135,6 @@ class ContentCreationCreateView(LoginRequiredMixin, View):
                     public_scholarship_or_content_creation=public_scholarship_or_content_creation
                 )
                 new_content_creation.save()
-                if content:
-                    new_content_creation.content = content
                 if content_file:
                     new_content_creation.content_file = content_file
                 # If user inputs image file instead of url

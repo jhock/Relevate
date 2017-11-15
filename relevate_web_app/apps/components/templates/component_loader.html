@@ -1,0 +1,13 @@
+{% load staticfiles %}
+
+<script src="{% static 'js/utils/doc-ready.js' %}"></script>
+<script>
+  docReady(function() {
+    if (!document.getElementById('{{componentName}}_script')) {
+      var component_script = document.createElement("script")
+      component_script.setAttribute('id', '{{componentName}}_script')
+      component_script.setAttribute('src', "{% static script %}")
+      document.head.appendChild(component_script)
+    }
+  })
+</script>

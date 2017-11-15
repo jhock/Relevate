@@ -8,6 +8,8 @@ $rv-content-avatar-size: 3rem;
   margin: 0 2rem 2rem 2rem;
   box-shadow: $rv-card-box-shadow;
   break-inside: avoid;
+  display: inline-block;
+  border: 1px solid $rv-color-light-gray;
   
   &:hover {
     box-shadow: $rv-card-box-shadow-hover;

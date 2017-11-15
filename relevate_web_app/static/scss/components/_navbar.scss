@@ -42,6 +42,7 @@
 
 .rv-navbar_options-container {
   display: flex;
+  flex-shrink: 0;
   margin: 0 1rem;
 }
 

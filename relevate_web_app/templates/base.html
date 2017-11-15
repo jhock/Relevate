@@ -1,7 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="en">
 {% load staticfiles %}
-{% load compress %}
 
 <head>
     <!--[if lt IE 9]>
@@ -15,11 +14,7 @@
 	<link rel='stylesheet' type='text/css' href="{% static 'css/colors.css' %}">
 	<!-- <link rel="stylesheet" href="{% static 'uikit/css/uikit.min.css' %}"/> -->
 	<link rel="stylesheet" href="{% static 'uikit/css/uikit.css' %}"/>
-
-	{% compress css %}
-	<link rel="stylesheet" type="text/x-scss" href="{% static "scss/main.scss" %}" />
-	{% endcompress %}
-
+	<link rel="stylesheet" type='text/css' href="{% static 'scss/main.css' %}" />
 	<script src="{% static 'ckeditor/ckeditor.js' %}"></script>
 	<link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
 	<script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>

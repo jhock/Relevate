@@ -54,6 +54,7 @@
   border: none;
   background: $rv-color-white;
   font-size: 1rem;
+  padding: 0;
 
   &:active {
     color: darken($rv-color-primary, 10%)

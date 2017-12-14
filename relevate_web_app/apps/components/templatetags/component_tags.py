@@ -10,7 +10,7 @@ def component_loader(componentName, script):
     'script': script 
   }
 
-@register.inclusion_tag('dropdown_menu.html')
+@register.inclusion_tag('dropdown_menu/index.html')
 def dropdown_menu(jsonStr):
   menu_props = json.loads(jsonStr)
   return { 'props': menu_props }

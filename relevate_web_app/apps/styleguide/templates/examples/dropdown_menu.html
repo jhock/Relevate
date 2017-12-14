@@ -1,0 +1,39 @@
+{% extends "styleguide_layout.html" %}
+{% load example_tags %}
+{% load component_tags %}
+
+{% block content%}
+  {% example with 
+    heading="Default" 
+    caption="The basic menu with links" 
+  %}
+{% dropdown_menu 
+  '{
+    "trigger": {
+      "label": "Staff",
+      "className": "rv-navbar_option",
+      "id": "main_navbar_ddmenu_0"
+    },
+    "items": [{
+      "header": "Approve/Deny"
+    }, {
+      "label": "Approve Advisors",
+      "href": "profile:adviser_approve"
+    }, {
+      "label": "Approve Contributors",
+      "href": "profile:contributor_approve"
+    }, {
+      "separator": "true"
+    }, {
+      "header": "List Denied"
+    }, {
+      "label": "List Denied Advisers",
+      "href": "profile:denied_adviser_list"
+    }, {
+      "label": "List Denied Contributors",
+      "href": "profile:denied_contributor_list"
+    }]
+  }'
+%}
+  {% endexample %}
+{% endblock content %}

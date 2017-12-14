@@ -1,0 +1,11 @@
+{% extends "styleguide_layout.html" %}
+{% load example_tags %}
+
+{% block content%}
+  {% example with 
+    heading="Default" 
+    caption="The default link styling" 
+  %}
+<a class='rv-link' href='#'>Hello, this is a link<a>
+  {% endexample %}
+{% endblock content %}

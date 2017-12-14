@@ -1,0 +1,19 @@
+{% extends "styleguide_layout.html" %}
+{% load example_tags %}
+
+{% block content%}
+  {% example with 
+    heading="Default" 
+    caption="For main actions"  
+  %}
+<button class='rv-button'>Default button</button>
+  {% endexample %}
+
+  {% example with 
+    heading="Secondary" 
+    caption="Use the secondary button in conjunction with the default button when there are multiple actions, such as a confirmation" 
+  %}
+<button class='rv-button'>Confirm</button>
+<button class='rv-button-secondary'>Cancel</button>
+  {% endexample %}
+{% endblock content %}

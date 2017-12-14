@@ -36,6 +36,7 @@ INSTALLED_APPS = [
 	'apps.profiles',
 	'apps.contribution',
 	'apps.components',
+	'apps.styleguide',
 	'apps.api',
 	'compressor',
 	'django.contrib.admin',
@@ -87,6 +88,7 @@ TEMPLATES = [
 			],
 			'libraries':{
         'component_tags': 'apps.components.templatetags.component_tags',
+        'example_tags': 'apps.styleguide.templatetags.example_tags'
 			}
 		},
 	},

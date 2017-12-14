@@ -26,6 +26,7 @@ urlpatterns = [
 	url(r'^profile/', include('apps.profiles.urls', namespace='profile')),
 	url(r'^', include('django.contrib.auth.urls')),
 	url(r'^api/', include('apps.api.urls', namespace='api')),
+	url(r'^styleguide/', include('apps.styleguide.urls', namespace='styleguide')),
 	#required for ckeditor file upload
 	url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 

@@ -1,0 +1,20 @@
+<div class="rv-styleguide-nav">
+  <div class="rv-styleguide-nav_logo-container">
+    <a class="rv-styleguide-nav_logo" href="{% url 'styleguide:index' %}" tabindex="-1" aria-hidden="true">
+      {% include 'global-partials/relevate-logo-svg-partial.html' %}
+    </a>
+    <a class="rv-styleguide-nav_logo-caption" href="{% url 'styleguide:index' %}">
+      <h3 class="rv-styleguide-nav_logo-caption--header">Styleguide</h3>
+    </a>
+  </div>
+  <div class="rv-styleguide-nav_links-container">
+    {% for data in examplesData %}
+      <a 
+        class="rv-styleguide-nav_link {% ifequal data.displayName displayName %} selected {% endifequal %}" 
+        href="{% url 'styleguide:'|add:data.rawName %}"
+      >
+        {{data.displayName}}
+      </a>
+    {% endfor %}
+  </div>
+</div>

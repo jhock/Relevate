@@ -1,0 +1,34 @@
+<html lang="en">
+  {% load staticfiles %}
+  {% load compress %}
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% compress css %}
+      <link rel="stylesheet" type="text/x-scss" href="{% static "scss/main.scss" %}" />
+    {% endcompress %}
+  </head>
+  <body>
+    <div class="rv-styleguide-layout">
+      <div>
+        {% include 'partials/nav_partial.html' %}
+      </div>
+      <div class="rv-styleguide-layout_content">
+        {% block heading %}
+          <h2 class="rv-styleguide-layout_rule">{{displayName}}</h2>
+          {% if cssFilePath %}
+            <div>{{cssFilePath}}</div>
+          {% endif %}
+          {% if jsFilePath %}
+            <div>{{jsFilePath}}<div>
+          {% endif %}
+        {% endblock heading %}
+        {% block content %}
+          <div>
+            styleguide content
+          </div>
+        {% endblock content %}
+      </div>
+    </div>
+  </body>
+</html>

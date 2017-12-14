@@ -3,11 +3,13 @@
 @import "base/layout";
 
 @import "components/avatar";
-@import "components/button";
+@import "components/buttons";
+@import "components/links";
 @import "components/dropdown-menu";
 @import "components/text-input";
 @import "components/navbar";
 @import "components/home-header";
 @import "components/content-card";
 
-@import "pages/home"
+@import "pages/styleguide";
+@import "pages/home";

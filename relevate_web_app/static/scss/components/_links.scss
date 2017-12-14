@@ -1,0 +1,15 @@
+@import "../base/variables";
+
+.rv-link {
+  color: $rv-color-primary;
+  text-decoration: none;
+
+  &:focus,
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:active {
+    color: darken($rv-color-primary, 10%);
+  }
+}

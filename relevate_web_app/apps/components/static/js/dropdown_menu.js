@@ -5,7 +5,10 @@ function ddmenuHandleMenuTriggerClick (trigger) {
   menu.style.display = 'initial'
   menu.setAttribute('aria-hidden', 'false')
   trigger.setAttribute('aria-expanded', 'true')
-  arrow.style.transform = 'rotate(90deg)'
+  
+  if (arrow) {
+    arrow.style.transform = 'rotate(90deg)'
+  }
 
   var items = menu.getElementsByClassName('rv-dropdown-menu_item')
   if (items[0]) {
@@ -23,7 +26,11 @@ function ddmenuHandleMenuItemKeyDown (event, item) {
     menu.style.display = 'none'
     menu.setAttribute('aria-hidden', 'true')
     trigger.setAttribute('aria-expanded', 'false')
-    arrow.style.transform = 'rotate(0deg)'
+    
+    if (arrow) {
+      arrow.style.transform = 'rotate(0deg)'
+    }
+    
     trigger.focus()
     return
   }
@@ -82,7 +89,10 @@ function ddmenuHandleMenuItemBlur (event, item) {
     menu.style.display = 'none'
     menu.setAttribute('aria-hidden', 'true')
     trigger.setAttribute('aria-expanded', 'false')
-    arrow.style.transform = 'rotate(0deg)'
+    
+    if (arrow) {
+      arrow.style.transform = 'rotate(0deg)'
+    }
 
   }, 50)
 }

@@ -2,7 +2,6 @@ from os import listdir
 from os.path import dirname, join, splitext
 from collections import namedtuple
 import string
-import pdb
 
 ExampleData = namedtuple('ExampleData', ['rawName', 'displayName', 'cssFilePath', 'jsFilePath'])
 
@@ -24,23 +23,22 @@ for example in examples:
 
   appName = 'relevate_web_app'
 
-  componentCssDir = 'static/scss/components'
+  componentCssDir = 'apps/components/static/scss'
   componentCssDirAbs = join(dirname(dirname(dirname(__file__))), componentCssDir)
   componentCssFiles = listdir(componentCssDirAbs)
-  cssFileName = '_' + example.replace('_', '-') + '.scss'
+  cssFileName = example + '.scss'
   cssFilePath = appName + '/' + componentCssDir + '/' + cssFileName
 
   if cssFileName not in componentCssFiles:
     cssFilePath = None
 
-  componentJsDir = 'static/js/components'
+  componentJsDir = 'apps/components/static/js'
   componentJsDirAbs = join(dirname(dirname(dirname(__file__))), componentJsDir)
   componentJsFiles = listdir(componentJsDirAbs)
-  jsFileName = example.replace('_', '-') + '.js'
+  jsFileName = example + '.js'
   jsFilePath = appName + '/' + componentJsDir + '/' + jsFileName
 
   if jsFileName not in componentJsFiles:
     jsFilePath = None
 
   examplesData.append(ExampleData(example, displayName, cssFilePath, jsFilePath))
-  

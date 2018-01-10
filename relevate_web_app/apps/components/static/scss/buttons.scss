@@ -1,5 +1,5 @@
-@import "../base/variables";
-@import "../mixins/focus";
+@import "../../../../static/scss/base/variables";
+@import "../../../../static/scss/mixins/focus";
 
 @mixin baseButton($color, $background, $border) {
   position: relative;

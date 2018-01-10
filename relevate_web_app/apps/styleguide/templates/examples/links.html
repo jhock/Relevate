@@ -2,10 +2,19 @@
 {% load example_tags %}
 
 {% block content%}
+  {% example with
+    heading="Requirements"
+    caption="Include the following in your HTML head (This imports the styles)"
+    codeOnly="True"
+  %}
+{% load component_assets %}
+{% link_assets %}
+  {% end_example %}
+
   {% example with 
     heading="Default" 
     caption="The default link styling" 
   %}
 <a class='rv-link' href='#'>Hello, this is a link<a>
-  {% endexample %}
+  {% end_example %}
 {% endblock content %}

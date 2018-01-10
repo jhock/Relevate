@@ -128,13 +128,14 @@ $styleguide-nav-width: 12rem;
 }
 
 .rv-styleguide-example_section-caption {
-  font-style: italic;
+  // font-style: italic;
 }
 
 .rv-styleguide-example {
   padding: 2rem;
   border: 1px solid $rv-color-light-gray;
   margin-top: 1rem;
+  border-bottom: none;
 }
 
 .rv-styleguide-example_code {
@@ -143,7 +144,6 @@ $styleguide-nav-width: 12rem;
   padding-top: 1rem;
   font-size: 0.875rem;
   border: 1px solid $rv-color-light-gray;
-  border-top: none;
   font-family: 'monaco';
   font-weight: $rv-font-weight-bold;
   width: 100%;
@@ -152,4 +152,15 @@ $styleguide-nav-width: 12rem;
   &:focus {
     outline: none;
   }
+}
+
+.rv-styleguide-layout_path {
+  font-style: italic;
+}
+
+.rv-styleguide-layout_path-label {
+  display: inline-block;
+  width: 3.5rem;
+  margin-left: 1rem;
+  font-weight: $rv-font-weight-bold;
 }

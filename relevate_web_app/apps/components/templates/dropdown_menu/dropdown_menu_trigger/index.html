@@ -1,0 +1,21 @@
+<button 
+  class="rv-dropdown-menu_trigger {{className}}"
+  id="{{id}}"
+  aria-haspopup="true"
+  aria-expanded="false"
+  onclick="ddmenuHandleMenuTriggerClick(this)"
+>
+  <span class="rv-dropdown-menu_label">
+    <span>
+      {{label}}
+    </span>
+    {% if withArrow %}
+    <span 
+      class="rv-dropdown-menu_icon"
+      aria-hidden="true"
+    >
+      {% include 'global-partials/arrow-svg-partial.html' %}
+    </span>
+    {% endif %}
+  <span>
+</button>

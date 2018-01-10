@@ -1,39 +1,47 @@
 {% extends "styleguide_layout.html" %}
 {% load example_tags %}
-{% load component_tags %}
+{% load dropdown_menu_tags %}
 
 {% block content%}
-  {% example with 
-    heading="Default" 
-    caption="The basic menu with links" 
+  {% example with
+    heading="Requirements"
+    caption="Include the following in your HTML head (This imports the styles and javascript)"
+    codeOnly="True"
   %}
-{% dropdown_menu 
-  '{
-    "trigger": {
-      "label": "Staff",
-      "className": "rv-navbar_option",
-      "id": "main_navbar_ddmenu_0"
-    },
-    "items": [{
-      "header": "Approve/Deny"
-    }, {
-      "label": "Approve Advisors",
-      "href": "profile:adviser_approve"
-    }, {
-      "label": "Approve Contributors",
-      "href": "profile:contributor_approve"
-    }, {
-      "separator": "true"
-    }, {
-      "header": "List Denied"
-    }, {
-      "label": "List Denied Advisers",
-      "href": "profile:denied_adviser_list"
-    }, {
-      "label": "List Denied Contributors",
-      "href": "profile:denied_contributor_list"
-    }]
-  }'
-%}
-  {% endexample %}
+{% load component_assets %}
+{% dropdown_menu_assets %}
+  {% end_example %}
+
+  {% example with
+    heading=""
+    caption="Within your template file, load the custom dropdown menu tags"
+    codeOnly="True"
+  %}
+{% load dropdown_menu_tags %}
+  {% end_example %}
+
+  {% example with 
+    heading="Example Usage" 
+    caption="A Dropdown Menu is a composition of several components. The 'dropdown_menu' tag encapsulates the 'dm_trigger' and 'dm_content' tags. The trigger defines the clickable area that will toggle the menu to an open state and the content defines the items to be presented within the menu. 'dm_item' components consist of an href and a label as seen in the example usage below." 
+  %}
+{% dropdown_menu %}
+  {% dm_trigger with
+    id="dd_menu_styleguide"
+    className="rv-navbar_option"
+    withArrow="True"
+  %}
+    <span>hello trigger</span>
+  {% end_dm_trigger %}
+
+  {% dm_content %}
+    {% dm_label %}Approve/Deny{% end_dm_label %}
+    {% dm_item with href="profile:adviser_approve" %}Approve Advisors{% end_dm_item %}
+    {% dm_item with href="profile:contributor_approve" %}Approve Contributors{% end_dm_item %}
+    {% dm_separator %}
+    {% dm_label %}List Denied{% end_dm_label %}
+    {% dm_item with href="profile:denied_adviser_list" %}List Denied Advisors{% end_dm_item %}
+    {% dm_item with href="profile:denied_contributor_list" %}List Denied Contributors{% end_dm_item %}
+  {% end_dm_content %}
+{% end_dropdown_menu %}
+  {% end_example %}
 {% endblock content %}

@@ -2,6 +2,7 @@
 <html lang="en">
 {% load staticfiles %}
 {% load compress %}
+{% load component_assets %}
 
 <head>
     <!--[if lt IE 9]>
@@ -19,6 +20,10 @@
 	{% compress css %}
 	<link rel="stylesheet" type="text/x-scss" href="{% static "scss/main.scss" %}" />
 	{% endcompress %}
+
+	{% button_assets %}
+  {% dropdown_menu_assets %}
+  {% link_assets %}
 
 	<script src="{% static 'ckeditor/ckeditor.js' %}"></script>
 	<link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}">

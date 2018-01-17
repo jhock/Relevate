@@ -1,0 +1,37 @@
+{% extends "styleguide_layout.html" %}
+{% load example_tags %}
+{% load text_input_tags %}
+
+{% block content%}
+  {% example with
+    heading="Requirements"
+    caption="Include the following in your HTML head (This imports the styles)"
+    codeOnly="True"
+  %}
+{% load component_assets %}
+{% text_input_assets %}
+  {% end_example %}
+
+  {% example with
+    heading=""
+    caption="Within your template file, load the custom dropdown menu tags"
+    codeOnly="True"
+  %}
+{% load text_input_tags %}
+  {% end_example %}
+
+  {% example with 
+    heading="Default" 
+    caption="By default, the input is set to type text" 
+  %}
+{% text_input label="Favorite color" placeholder="Enter your favorite color here" %}
+{% text_input label="Age" placeholder="Enter your current age" %}
+  {% end_example %}
+
+  {% example with 
+    heading="Password" 
+    caption="An input of type password" 
+  %}
+{% text_input variant="password" label="Password" placeholder="Enter a strong password" %}
+  {% end_example %}
+{% endblock content %}

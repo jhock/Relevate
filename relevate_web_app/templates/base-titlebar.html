@@ -15,12 +15,17 @@
 			</a>
 		</div>
 		<ul class="rv-navbar_options-container">
+{# 			
+			TODO: With the text input updates the input no longer fits within the navbar.
+			We will bring this back, but we need to come up with an alternative that will fit
+
 			<li class="rv-navbar_option-text-input">
 				<form action="{% url 'contribution:search_results' %}" method="get">
 					{% csrf_token %}
 					<input class="rv-text-input" id="searchbox" name="searchbox" type="text" placeholder="Search">
 				</form>
 			</li>
+ #}
 			{% if user.is_staff %}
 			<li>
 				{% dropdown_menu %}

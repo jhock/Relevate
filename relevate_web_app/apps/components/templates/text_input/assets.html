@@ -1,0 +1,7 @@
+{% load staticfiles %}
+{% load compress %}
+
+<script src="{% static 'js/text_input.js' %}"></script>
+{% compress css %}
+  <link rel="stylesheet" type="text/x-scss" href="{% static "scss/text_input.scss" %}" />
+{% endcompress %}

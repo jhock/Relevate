@@ -5,7 +5,6 @@ from ..utils import parse_tag
 
 register = template.Library()
 
-
 @register.tag('dropdown_menu')
 def dropdown_menu(parser, token):
   nodelist, _ = parse_tag(parser, token, 'end_dropdown_menu')
@@ -62,6 +61,7 @@ class DropdownMenuTrigger(Node):
 
   def render(self, context):
     dropdown_menu_trigger_html = get_template("dropdown_menu/dropdown_menu_trigger/index.html")
+
     context.update({
       'label' : self.nodelist.render(context),
       'id': self.id,

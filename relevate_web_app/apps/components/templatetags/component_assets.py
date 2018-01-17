@@ -15,3 +15,7 @@ def button_assets():
 @register.inclusion_tag('links/assets.html')
 def link_assets():
   return {}
+
+@register.inclusion_tag('text_input/assets.html')
+def text_input_assets():
+  return {}

@@ -2,7 +2,17 @@ from django import template
 from django.template.loader import get_template
 from django.template.base import Node, Token, TemplateSyntaxError
 import uuid
-from ..utils import parse_tag, enforce_required_props, split_props, parse_prop, create_chained_function, fetch_prop
+from ..utils import (
+  parse_tag, 
+  enforce_required_props, 
+  split_props, 
+  parse_prop, 
+  create_chained_function, 
+  fetch_prop, 
+  resolve_variable,
+  resolve_prop_variables,
+  convert_props_to_html
+)
 
 register = template.Library()
 
@@ -35,8 +45,7 @@ def text_input(parser, token):
   else:
     id = str(uuid.uuid4())
 
-  input_props_str = ' '.join(str(p) for p in input_props)
-  return TextInput(variant, label, id, input_props_str)
+  return TextInput(variant, label, id, input_props)
 
 
 class TextInput(Node):
@@ -47,12 +56,13 @@ class TextInput(Node):
     self.input_props = input_props
 
   def render(self, context):
+    self.input_props = resolve_prop_variables(self.input_props, context)
+
     text_input_html = get_template("text_input/index.html")
     context.update({
-      'variant':self.variant,
-      'label' : self.label,
-      'id': self.id,
-      'input_props': self.input_props
+      'variant': resolve_variable(self.variant, context),
+      'label' : resolve_variable(self.label, context),
+      'id': resolve_variable(self.id, context)
     })
-    foo = text_input_html.render(context).replace('input_props', self.input_props)
+    foo = text_input_html.render(context).replace('input_props', convert_props_to_html(self.input_props))
     return foo

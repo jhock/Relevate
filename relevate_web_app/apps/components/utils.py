@@ -1,3 +1,4 @@
+from django import template
 from django.template.base import TemplateSyntaxError
 
 def parse_tag(parser, token, closetag):
@@ -73,3 +74,25 @@ def create_chained_function(query, function_to_chain, props):
   else:
     props.append(query + '=' + function_to_chain)
   return props
+
+def resolve_variable(prop_value, context):
+  variable = template.Variable(prop_value)
+  try:
+    resolved = variable.resolve(context)
+    return resolved
+  except template.VariableDoesNotExist:
+    return prop_value
+
+def resolve_prop_variables(props, context):
+  for i in range(0, len(props)):
+    parsed = parse_prop(props[i])
+    if len(parsed) > 1:
+      props[i] = parsed[0] + '=' + resolve_variable(parsed[1], context)
+  return props
+
+def convert_props_to_html(props):
+  for i in range(0, len(props)):
+    parsed = parse_prop(props[i])
+    if len(parsed) > 1:
+      props[i] = parsed[0] + '=' + '\"' + parsed[1] + '\"'
+  return ' '.join(props)

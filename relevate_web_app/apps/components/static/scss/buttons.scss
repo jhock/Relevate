@@ -10,7 +10,7 @@
   background: $background;
   font-size: 1rem;
   font-weight: $rv-font-weight-semibold;
-  padding: 0.25em 1em;
+  padding: 0.4em 1em;
   transition: background 200ms linear;
   text-decoration: none;
   cursor: pointer;
@@ -34,4 +34,8 @@
 
 .rv-button-secondary {
   @include baseButton($rv-color-white, $rv-color-neutral, $rv-color-neutral);
+}
+
+.fill-button {
+  width: 100%;
 }

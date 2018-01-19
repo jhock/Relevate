@@ -1,5 +1,7 @@
 from django import template
 from django.template.base import TemplateSyntaxError
+import re
+import pdb
 
 def parse_tag(parser, token, closetag):
   nodelist = parser.parse((closetag,))
@@ -76,6 +78,11 @@ def create_chained_function(query, function_to_chain, props):
   return props
 
 def resolve_variable(prop_value, context):
+  if type(prop_value) is list or type(prop_value) is tuple:
+    prop_value = prop_value[0]
+    if prop_value is None:
+      return None
+
   variable = template.Variable(prop_value)
   try:
     resolved = variable.resolve(context)
@@ -96,3 +103,23 @@ def convert_props_to_html(props):
     if len(parsed) > 1:
       props[i] = parsed[0] + '=' + '\"' + parsed[1] + '\"'
   return ' '.join(props)
+
+def amend_html_props_to_tag(html_props, markup, tag):
+  search_tag = '<' + tag
+  idx = markup.find(search_tag) + len(search_tag)
+  res = markup[:idx] + ' ' + html_props + ' ' + markup[idx:]
+  return res
+
+def get_prop_from_tag(query, markup, tag):
+  tag_re = re.search('<' + tag + '.*>', markup)
+  if tag_re is not None:
+    tag_markup = tag_re.group(0)
+    query_re = re.search(query + '=".*?"', tag_markup)
+    if query_re is not None:
+      prop = query_re.group(0)
+      return prop
+    else:
+      return None
+  else:
+    return None
+

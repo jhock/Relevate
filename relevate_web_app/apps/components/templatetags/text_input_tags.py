@@ -11,7 +11,9 @@ from ..utils import (
   fetch_prop, 
   resolve_variable,
   resolve_prop_variables,
-  convert_props_to_html
+  convert_props_to_html,
+  amend_html_props_to_tag,
+  get_prop_from_tag
 )
 
 register = template.Library()
@@ -27,32 +29,42 @@ def text_input(parser, token):
   props = create_chained_function('onfocus', 'handleTextInputFocus(event);', props)
   props = create_chained_function('onblur', 'handleTextInputBlur(event);', props)
 
-  picked_props, input_props = split_props(['variant', 'label', 'id'], props)
+  picked_props, input_props = split_props(['variant', 'label', 'id', 'input'], props)
 
   label = parse_prop(fetch_prop('label', picked_props))[1].replace('\"', '')
   
   variant_prop = fetch_prop('variant', picked_props)
   if variant_prop:
     variant = parse_prop(variant_prop)[1].replace('\"', '')
-    if variant != 'text' and variant != 'password':
+    if variant != 'text' and variant != 'password' and variant != 'email':
       variant = 'text'
   else:
     variant = 'text'
 
   id_prop = fetch_prop('id', picked_props)
   if id_prop:
-    id = parse_prop(id_prop)[1].replace('\"', '')
+    input_id = parse_prop(id_prop)[1].replace('\"', '')
   else:
-    id = str(uuid.uuid4())
+    input_id = str(uuid.uuid4())
 
-  return TextInput(variant, label, id, input_props)
+  input_prop = fetch_prop('input', picked_props)
+  if input_prop:
+    alt_input = parse_prop(fetch_prop('input', picked_props))[1]
+  else:
+    alt_input = None
+
+  if alt_input:
+    input_props.append('class="rv-text-input_input"')
+
+  return TextInput(variant, label, input_id, alt_input, input_props)
 
 
 class TextInput(Node):
-  def __init__(self, variant, label, id, input_props):
+  def __init__(self, variant, label, input_id, alt_input, input_props):
     self.variant = variant
     self.label = label
-    self.id = id
+    self.input_id = input_id,
+    self.alt_input = alt_input,
     self.input_props = input_props
 
   def render(self, context):
@@ -62,7 +74,19 @@ class TextInput(Node):
     context.update({
       'variant': resolve_variable(self.variant, context),
       'label' : resolve_variable(self.label, context),
-      'id': resolve_variable(self.id, context)
+      'id': resolve_variable(self.input_id, context),
+      'alt_input': resolve_variable(self.alt_input, context)
     })
-    foo = text_input_html.render(context).replace('input_props', convert_props_to_html(self.input_props))
-    return foo
+    html_props = convert_props_to_html(self.input_props)
+    markup = text_input_html.render(context)
+    markup = amend_html_props_to_tag(html_props, markup, 'input')
+
+    if self.alt_input:
+      # if the alt input is provided, we need to get the id if it exists
+      # and add it to the label as the for attribute
+      alt_input_id_prop = get_prop_from_tag('id', markup, 'input')
+      if alt_input_id_prop:
+        alt_input_id = parse_prop(alt_input_id_prop)[1].replace('\"', '')
+        markup = amend_html_props_to_tag('for="' + alt_input_id + '"', markup, 'label')
+
+    return markup

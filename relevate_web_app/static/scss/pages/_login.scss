@@ -1,23 +1,8 @@
 @import "../base/variables";
 
-.rv-login {
-  display: flex;
-  justify-content: center;
-  margin-top: 0rem;
-}
-
-.rv-login_box {
-  border: none;
-  box-shadow: none;
-  padding: 0rem 2rem;
-}
-
-.rv-login_form {
-  max-width: 24rem;
-}
-
 .rv-login_form-header {
   margin-bottom: 2rem;
+  width: 100%;
 }
 
 .rv-login_form-submit {
@@ -26,22 +11,5 @@
 }
 
 .rv-login_form-links {
-  margin-top: 1rem;
   text-align: center;
-}
-
-@media only screen and (min-width: $rv-breakpoint-phone) {
-  .rv-login {
-    margin-top: 4rem;
-  }
-
-  .rv-login_box {
-    border: 1px solid $rv-color-light-gray;
-    box-shadow: $rv-box-shadow;
-    padding: 2rem 2rem;
-  }
-
-  .rv-login_form-links {
-    text-align: left;
-  }
 }

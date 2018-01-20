@@ -1,15 +1,18 @@
 @import "../base/variables";
 
-.rv-login_form-header {
+.rv-box-form_header {
   margin-bottom: 2rem;
-  width: 100%;
 }
 
-.rv-login_form-submit {
+.rv-box-form_header-with-text {
+  margin-bottom: 1rem;
+}
+
+.rv-box-form_submit {
   margin-top: 1rem;
   text-align: right;
 }
 
-.rv-login_form-links {
+.rv-box-form_links {
   text-align: center;
 }

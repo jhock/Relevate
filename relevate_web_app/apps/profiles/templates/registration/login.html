@@ -6,7 +6,7 @@
 {% block content %}
 <div class="rv-box-layout">
 	<div class="rv-box-layout_box">
-		<h2 class="rv-login_form-header">Relevate Login</h2>
+		<h2 class="rv-box-form_header">Relevate Login</h2>
 		<form method="post" action=".">
 			{% csrf_token %}
 			{% text_input 
@@ -24,7 +24,7 @@
 				name=form.password.html_name 
 				maxlength="30" 
 			%}
-			<div class="rv-login_form-submit">
+			<div class="rv-box-form_submit">
 				<button class="rv-button fill-button" type="submit">{% trans "Log in" %}</button>
 				{# <input class='rv-button fill-button' type="submit" value="{% trans 'Log in' %}" /> #}
 				{# <input type="hidden" name="next" value="{{ next }}" /> #}
@@ -32,7 +32,7 @@
 		</form>
 	</div>
 </div>
-<div class="rv-login_form-links">
+<div class="rv-box-form_links">
 	<a class="rv-link" href="{% url 'profile:password_reset_form' %}">{% trans "Forgot your password?" %}</a>
 </div>
 {% endblock %}

@@ -1,9 +1,13 @@
 <span class="rv-text-input">
-  {% if alt_input %}
-    <label class="rv-text-input_label">{{label}}</label>
-    {{ alt_input }}
+  {% if alt_form %}
+    {{ alt_form }}
   {% else %}
-    <label for="{{id}}" class="rv-text-input_label">{{label}}</label>
-    <input id="{{id}}" class="rv-text-input_input" type="{{variant}}" />
+    {% if alt_input %}
+      <label class="rv-text-input_label">{{label}}</label>
+      {{ alt_input }}
+    {% else %}
+      <label for="{{id}}" class="rv-text-input_label">{{label}}</label>
+      <input id="{{id}}" class="rv-text-input_input" type="{{variant}}" />
+    {% endif %}
   {% endif %}
 </span>

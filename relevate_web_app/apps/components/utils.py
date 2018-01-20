@@ -1,7 +1,6 @@
 from django import template
 from django.template.base import TemplateSyntaxError
 import re
-import pdb
 
 def parse_tag(parser, token, closetag):
   nodelist = parser.parse((closetag,))
@@ -52,6 +51,13 @@ def fetch_prop(query, props):
     return props[query_index]
   else:
     return None
+
+def get_prop_value(query, props, default):
+  prop = fetch_prop(query, props)
+  if prop:
+    return parse_prop(prop)[1].replace('\"', '')
+  else:
+    return default
     
 
 # Function splitting the props. Will return an array of
@@ -78,6 +84,9 @@ def create_chained_function(query, function_to_chain, props):
   return props
 
 def resolve_variable(prop_value, context):
+  if not prop_value:
+    return None
+
   if type(prop_value) is list or type(prop_value) is tuple:
     prop_value = prop_value[0]
     if prop_value is None:

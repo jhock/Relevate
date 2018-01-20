@@ -8,7 +8,8 @@ from ..utils import (
   split_props, 
   parse_prop, 
   create_chained_function, 
-  fetch_prop, 
+  fetch_prop,
+  get_prop_value,
   resolve_variable,
   resolve_prop_variables,
   convert_props_to_html,
@@ -22,49 +23,35 @@ register = template.Library()
 def text_input(parser, token):
   props = token.split_contents()[1:]
   try:
-    enforce_required_props(['label'], props)
+    if not fetch_prop('form', props):
+      enforce_required_props(['label'], props)
   except TemplateSyntaxError as e:
     raise TemplateSyntaxError('Error [' + props[0] + ']: ' + str(e))
 
   props = create_chained_function('onfocus', 'handleTextInputFocus(event);', props)
   props = create_chained_function('onblur', 'handleTextInputBlur(event);', props)
 
-  picked_props, input_props = split_props(['variant', 'label', 'id', 'input'], props)
-
-  label = parse_prop(fetch_prop('label', picked_props))[1].replace('\"', '')
+  picked_props, input_props = split_props(['variant', 'label', 'id', 'input', 'form'], props)
   
-  variant_prop = fetch_prop('variant', picked_props)
-  if variant_prop:
-    variant = parse_prop(variant_prop)[1].replace('\"', '')
-    if variant != 'text' and variant != 'password' and variant != 'email':
-      variant = 'text'
-  else:
+  label = get_prop_value('label', picked_props, None)
+  input_id = get_prop_value('id', picked_props, str(uuid.uuid4()))
+  alt_input = get_prop_value('input', picked_props, None)
+  alt_form = get_prop_value('form', picked_props, None)
+  variant = get_prop_value('variant', picked_props, 'text')
+  
+  if variant != 'text' and variant != 'password' and variant != 'email':
     variant = 'text'
 
-  id_prop = fetch_prop('id', picked_props)
-  if id_prop:
-    input_id = parse_prop(id_prop)[1].replace('\"', '')
-  else:
-    input_id = str(uuid.uuid4())
-
-  input_prop = fetch_prop('input', picked_props)
-  if input_prop:
-    alt_input = parse_prop(fetch_prop('input', picked_props))[1]
-  else:
-    alt_input = None
-
-  if alt_input:
-    input_props.append('class="rv-text-input_input"')
-
-  return TextInput(variant, label, input_id, alt_input, input_props)
+  return TextInput(variant, label, input_id, alt_input, alt_form, input_props)
 
 
 class TextInput(Node):
-  def __init__(self, variant, label, input_id, alt_input, input_props):
+  def __init__(self, variant, label, input_id, alt_input, alt_form, input_props):
     self.variant = variant
     self.label = label
     self.input_id = input_id,
     self.alt_input = alt_input,
+    self.alt_form = alt_form,
     self.input_props = input_props
 
   def render(self, context):
@@ -75,10 +62,14 @@ class TextInput(Node):
       'variant': resolve_variable(self.variant, context),
       'label' : resolve_variable(self.label, context),
       'id': resolve_variable(self.input_id, context),
-      'alt_input': resolve_variable(self.alt_input, context)
+      'alt_input': resolve_variable(self.alt_input, context),
+      'alt_form': resolve_variable(self.alt_form, context)
     })
-    html_props = convert_props_to_html(self.input_props)
     markup = text_input_html.render(context)
+    return self.process_markup(markup)
+
+  def process_markup(self, markup):
+    html_props = convert_props_to_html(self.input_props)
     markup = amend_html_props_to_tag(html_props, markup, 'input')
 
     if self.alt_input:
@@ -88,5 +79,13 @@ class TextInput(Node):
       if alt_input_id_prop:
         alt_input_id = parse_prop(alt_input_id_prop)[1].replace('\"', '')
         markup = amend_html_props_to_tag('for="' + alt_input_id + '"', markup, 'label')
+        markup = amend_html_props_to_tag('class="rv-text-input_input"', markup, 'input')
+
+    if self.alt_form:
+      # if the alt form is provided we need to add our attributes to both
+      # the label and the input. We trust that the consuming app has set up
+      # accessibility attributes properly
+      markup = amend_html_props_to_tag('class="rv-text-input_label"', markup, 'label')
+      markup = amend_html_props_to_tag('class="rv-text-input_input"', markup, 'input')
 
     return markup

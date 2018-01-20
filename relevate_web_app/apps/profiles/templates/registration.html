@@ -14,7 +14,7 @@
 {% block content %}
 <div class="rv-box-layout">
 	<div class="rv-box-layout_box">
-		<h2 class="rv-login_form-header">Create account</h2>
+		<h2 class="rv-box-form_header">Create account</h2>
 		<form action="{% url 'profile:registration' %}" method="post" class="uk-form-horizontal">
 			{% csrf_token %}
 			<div>
@@ -51,7 +51,7 @@
 			TODO: Comenting this out until we get de facto
 			direction on what we want to do with area of
 			expertise throughout the site
-				
+
 			<ul uk-accordion>
 				<li>
 					<h3 class='uk-accordion-title'>
@@ -68,7 +68,7 @@
 			</ul>
 			<br> 
 #}
-			<div class="rv-login_form-submit">
+			<div class="rv-box-form_submit">
 				<button type="submit" class='rv-button fill-button'>Sign Up</button>
 			</div>
 		</form>

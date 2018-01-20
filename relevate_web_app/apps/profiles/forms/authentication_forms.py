@@ -39,12 +39,12 @@ class RegistrationForm(forms.Form):
 	"""
 	Registration form, allows users to create accounts.
 	"""
-	first_name = forms.CharField(label='First Name', max_length=100, required=True, widget=forms.TextInput(attrs={'placeholder': 'First Name','class':'uk-input'}))
-	last_name = forms.CharField(label='Last Name', max_length=100, required=True, widget=forms.TextInput(attrs={'placeholder': 'Last Name','class':'uk-input'}))
-	email = forms.EmailField(label='Email', max_length=100, required=False, widget=forms.TextInput(attrs={'placeholder': 'Email','class':'uk-input'}))
-	password1 = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class':'uk-input'}),
+	first_name = forms.CharField(label='First Name', max_length=100, required=True, widget=forms.TextInput(attrs={'placeholder': 'Enter your first Name'}))
+	last_name = forms.CharField(label='Last Name', max_length=100, required=True, widget=forms.TextInput(attrs={'placeholder': 'Enter your last Name'}))
+	email = forms.EmailField(label='Email', max_length=100, required=False, widget=forms.TextInput(attrs={'placeholder': 'Enter your email'}))
+	password1 = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'placeholder': 'Enter a strong password'}),
 							   required=True)
-	password2 = forms.CharField(label='Verify Password', widget=forms.PasswordInput(attrs={'class':'uk-input'}), required=True)
+	password2 = forms.CharField(label='Verify Password', widget=forms.PasswordInput(attrs={'placeholder': "Re-enter the password"}), required=True)
 	area_of_expertise = forms.ModelMultipleChoiceField(label="Area of Expertise Relevant to Romantic Relationships",
 								queryset=Topics.objects.all(),
 								widget=forms.CheckboxSelectMultiple(attrs={'class': 'expertise-checkbox'}), required=False)

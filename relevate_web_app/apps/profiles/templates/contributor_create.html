@@ -139,6 +139,28 @@
 							</div>
 							<table id="acaProf" data-name="acaProfTable" class="uk-table">
 								<tbody>
+									{% for each_academic in academic_profiles %}
+										<tr class='acaRow' id="acaProf{{ each_academic.id }}">
+											<td>
+												<div  class='uk-form-controls'>
+													<span class='program'>{{ each_academic.program }}</span>
+												</div>
+											</td>
+											<td>
+												<div  class='uk-form-controls'>
+													<span class='degree'>{{ each_academic.degree.name }}</span>
+												</div>
+											</td>
+											<td>
+												<div class='uk-form-controls'>
+													<span class='institute'>{{ each_academic.institution }}</span>
+												</div>
+											</td>
+											<td>
+												<button type='button' class='uk-button uk-button-orange' onclick='deleteAcademicProfile({{ each_academic.id }})'>delete</button>
+											</td>
+										</tr>
+									{% endfor %}
 								</tbody>
 							</table>
 							<!-- <div class="uk-grid-small" uk-grid> -->
@@ -160,6 +182,18 @@
 							</div>
 							<table id="addCert" data-name="certTable" class="uk-table">
 								<tbody>
+									{% for each_cert in certifications %}
+										<tr class='certRow' id=addCert{{ each_cert.id }}>
+											<td>
+												<div  class='uk-form-controls'>
+													<span class='certName'>{{ each_cert.name_of_certification }}</span>
+												</div>
+											</td>
+											<td>
+												<button type='button' class='uk-button uk-button-orange' onclick='deleteCertificate({{ each_cert.id }})'>delete</button>
+											</td>
+										</tr>
+									{% endfor %}
 								</tbody>
 							</table>
 															<!-- <div class="uk-grid-small" uk-grid> -->
@@ -184,6 +218,18 @@
 							</div>
 							<table id="addAffiliation" data-name="affiliationTable" class="uk-table">
 								<tbody>
+									{% for each_org in organizational_affiliations %}
+										<tr class='affiliationRow' id=addAffiliation{{ each_org.id }}>
+											<td>
+												<div  class='uk-form-controls'>
+													<span class='affiliationName'>{{ each_org.name_of_affiliation }}</span>
+												</div>
+											</td>
+											<td>
+												<button type='button' class='uk-button uk-button-orange' onclick='deleteAffiliation({{ each_org.id }})'>delete</button>
+											</td>
+										</tr>
+									{% endfor %}
 								</tbody>
 							</table>
 						</div>

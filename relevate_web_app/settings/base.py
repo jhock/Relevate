@@ -36,6 +36,7 @@ INSTALLED_APPS = [
 	'apps.profiles',
 	'apps.contribution',
 	'apps.components',
+	'apps.styleguide',
 	'apps.api',
 	'compressor',
 	'django.contrib.admin',
@@ -88,7 +89,10 @@ TEMPLATES = [
 				'django.contrib.messages.context_processors.messages',
 			],
 			'libraries':{
-        'component_tags': 'apps.components.templatetags.component_tags',
+        'dropdown_menu_tags': 'apps.components.templatetags.dropdown_menu_tags',
+        'text_input_tags': 'apps.components.templatetags.text_input_tags',
+        'component_assets': 'apps.components.templatetags.component_assets',
+        'example_tags': 'apps.styleguide.templatetags.example_tags'
 			}
 		},
 	},

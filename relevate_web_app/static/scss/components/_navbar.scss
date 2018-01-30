@@ -10,7 +10,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid $rv-color-light-gray;
 }
 
 .rv-navbar_placeholder {
@@ -59,6 +59,7 @@
   border: none;
   background: $rv-color-white;
   font-size: 1rem;
+  padding: 0;
 
   &:active {
     color: darken($rv-color-primary, 10%)

@@ -16,7 +16,7 @@ from ..forms.contributor_form import ContributorForm
 from ..models.adviser_model import Adviser
 from ..models.contributor_model import ContributorProfile, Address, PendingContributors, DeniedContributors, \
     AcademicProfile, ContributorCertification, OrganizationalAffiliation, ContributorProfileUnfinished, \
-AddressUnfinished, AcademicProfileUnfinished, ContributorCertificationUnfinished, DegreeUnfinished, \
+AddressUnfinished, AcademicProfileUnfinished, ContributorCertificationUnfinished, \
     OrganizationalAffiliationUnfinished
 from ..models.user_models import UserProfile
 from ..modules.contributor_util import validate_academic_and_cert, update_contributor_qualification, \
@@ -99,7 +99,7 @@ class ContributorCreateView(LoginRequiredMixin, View):
                     'area_of_expertise': already_sel,
                     'avatar': previous_form.avatar,
                     'biography': previous_form.biography_text,
-                    'accept_terms': previous_form.accept_terms,
+                    'accept_terms': previous_form.accept_terms
                 }, data_list=organization_list)
                 obj = {
                     'form': contribution_form,
@@ -249,13 +249,10 @@ class ContributorTempSaveView(LoginRequiredMixin, View):
                     previous_form.expertise_topics.remove(each_topic)
                 except ObjectDoesNotExist:
                     pass
-            ap = AcademicProfileUnfinished.objects.filter(contributor_profile=previous_form.id).first()
-            if ap:
-                DegreeUnfinished.objects.filter(id=ap.degree_id).delete()
-                ap.delete()
+            AcademicProfileUnfinished.objects.filter(contributor_profile=previous_form.id).delete()
             ContributorCertificationUnfinished.objects.filter(contributor_profile=previous_form.id).delete()
             OrganizationalAffiliationUnfinished.objects.filter(contributor_profile=previous_form.id).delete()
-            AddressUnfinished.objects.filter(id=previous_form.address_id)
+            AddressUnfinished.objects.filter(id=previous_form.address_id).delete()
             previous_form.delete()
         academics_req = request.POST.get('academicList')
         print ("academic_req ", academics_req)

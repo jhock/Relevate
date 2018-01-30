@@ -1,0 +1,46 @@
+<html lang="en">
+  {% load staticfiles %}
+  {% load compress %}
+  {% load component_assets %}
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% compress css %}
+      <link rel="stylesheet" type="text/x-scss" href="{% static "scss/main.scss" %}" />
+    {% endcompress %}
+
+    {% button_assets %}
+    {% dropdown_menu_assets %}
+    {% link_assets %}
+    {% text_input_assets %}
+  </head>
+  <body>
+    <div class="rv-styleguide-layout">
+      <div>
+        {% include 'partials/nav_partial.html' %}
+      </div>
+      <div class="rv-styleguide-layout_content">
+        {% block heading %}
+          <h2 class="rv-styleguide-layout_rule">{{displayName}}</h2>
+          {% if cssFilePath %}
+            <div>
+              <span class="rv-styleguide-layout_path-label">Styles:</span>
+              <span class="rv-styleguide-layout_path">{{cssFilePath}}</span>
+            </div>
+          {% endif %}
+          {% if jsFilePath %}
+            <div>
+              <span class="rv-styleguide-layout_path-label">JS:</span>
+              <span class="rv-styleguide-layout_path">{{jsFilePath}}</span>
+            <div>
+          {% endif %}
+        {% endblock heading %}
+        {% block content %}
+          <div>
+            styleguide content
+          </div>
+        {% endblock content %}
+      </div>
+    </div>
+  </body>
+</html>

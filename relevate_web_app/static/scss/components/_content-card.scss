@@ -4,12 +4,13 @@ $rv-content-card-padding: 1rem;
 $rv-content-avatar-size: 3rem;
 
 .rv-content-card {
-  width: 18rem;
-  margin: 0 2rem 2rem 2rem;
+  width: $rv-card-width;
+  margin: 0 $rv-card-margin*0.5 $rv-card-margin $rv-card-margin*0.5;
   box-shadow: $rv-card-box-shadow;
   break-inside: avoid;
   display: inline-block;
   border: 1px solid $rv-color-light-gray;
+  text-align: left;
   
   &:hover {
     box-shadow: $rv-card-box-shadow-hover;

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
-{% load component_tags %}
+{% load dropdown_menu_tags %}
 
 {% block body %}
 
@@ -15,160 +15,142 @@
 			</a>
 		</div>
 		<ul class="rv-navbar_options-container">
+{# 			
+			TODO: With the text input updates the input no longer fits within the navbar.
+			We will bring this back, but we need to come up with an alternative that will fit
+
 			<li class="rv-navbar_option-text-input">
 				<form action="{% url 'contribution:search_results' %}" method="get">
 					{% csrf_token %}
 					<input class="rv-text-input" id="searchbox" name="searchbox" type="text" placeholder="Search">
 				</form>
 			</li>
+ #}
 			{% if user.is_staff %}
 			<li>
-				{% dropdown_menu 
-					'{
-						"trigger": {
-							"label": "Staff",
-							"className": "rv-navbar_option",
-							"id": "main_navbar_ddmenu_0"
-						},
-						"items": [{
-							"header": "Approve/Deny"
-						}, {
-							"label": "Approve Advisors",
-							"href": "profile:adviser_approve"
-						}, {
-							"label": "Approve Contributors",
-							"href": "profile:contributor_approve"
-						}, {
-							"separator": "true"
-						}, {
-							"header": "List Denied"
-						}, {
-							"label": "List Denied Advisers",
-							"href": "profile:denied_adviser_list"
-						}, {
-							"label": "List Denied Contributors",
-							"href": "profile:denied_contributor_list"
-						}]
-					}'
-				%}
+				{% dropdown_menu %}
+				  {% dm_trigger with
+				    id="main_navbar_ddmenu_0"
+				    className="rv-navbar_option"
+				    withArrow="True"
+				  %}
+				    <span>Staff</span>
+				  {% end_dm_trigger %}
+
+				  {% dm_content %}
+				    {% dm_label %}Approve/Deny{% end_dm_label %}
+				    {% dm_item with href="profile:adviser_approve" %}Approve Advisors{% end_dm_item %}
+				    {% dm_item with href="profile:contributor_approve" %}Approve Contributors{% end_dm_item %}
+				    {% dm_separator %}
+				    {% dm_label %}List Denied{% end_dm_label %}
+				    {% dm_item with href="profile:denied_adviser_list" %}List Denied Advisors{% end_dm_item %}
+				    {% dm_item with href="profile:denied_contributor_list" %}List Denied Contributors{% end_dm_item %}
+				  {% end_dm_content %}
+				{% end_dropdown_menu %}
 			</li>
 			{% endif %}
 			{% if user_prof.is_contributor %}
 				{% if user_prof.is_adviser %}
 					<li>
-					{% dropdown_menu 
-						'{
-							"trigger": {
-								"label": "Mentors",
-								"className": "rv-navbar_option",
-								"id": "main_navbar_ddmenu_1"
-							},
-							"items": [{
-								"label": "My Mentor Profile", 
-								"href": "profile:adviser_profile"
-							}, {
-								"label": "Approve Mentee Posts",
-								"href": "profile:adviser_approve_posts"
-							}, {
-								"label": "Mentor Application",
-								"href": "profile:adviser_create"
-							}]
-						}'
-					%}
-				</li>
+						{% dropdown_menu %}
+						  {% dm_trigger with
+						    id="main_navbar_ddmenu_1"
+						    className="rv-navbar_option"
+						    withArrow="True"
+						  %}
+						    <span>Mentors</span>
+						  {% end_dm_trigger %}
+
+						  {% dm_content %}
+						    {% dm_item with href="profile:adviser_profile" %}My Mentor Profile{% end_dm_item %}
+						    {% dm_item with href="profile:adviser_approve_posts" %}Approve Mentee Posts{% end_dm_item %}
+						    {% dm_item with href="profile:adviser_create" %}Mentor Application{% end_dm_item %}
+						  {% end_dm_content %}
+						{% end_dropdown_menu %}
+					</li>
 				{% else %}
 					<li>
-					{% dropdown_menu 
-						'{
-							"trigger": {
-								"label": "Mentors",
-								"className": "rv-navbar_option",
-								"id": "main_navbar_ddmenu_2"
-							},
-							"items": [{
-								"label": "Mentor Application",
-								"href": "profile:adviser_create"
-							}]
-						}'
-					%}
+						{% dropdown_menu %}
+						  {% dm_trigger with
+						    id="main_navbar_ddmenu_2"
+						    className="rv-navbar_option"
+						    withArrow="True"
+						  %}
+						    <span>Mentors</span>
+						  {% end_dm_trigger %}
+
+						  {% dm_content %}
+						    {% dm_item with href="profile:adviser_create" %}Mentor Application{% end_dm_item %}
+						  {% end_dm_content %}
+						{% end_dropdown_menu %}
 					</li>
 				{% endif %}
 				<li>
-				{% dropdown_menu 
-					'{
-						"trigger": {
-							"label": "Contributors",
-							"className": "rv-navbar_option",
-							"id": "main_navbar_ddmenu_3"
-						},
-						"items": [{
-							"label": "All Contributors", 
-							"href": "profile:contributors"
-						},
-					{
-							"label": "My Contributor Profile",
-							"href": "profile:contributor_profile"
-						}
-					]
-					}'
-				%}
+					{% dropdown_menu %}
+					  {% dm_trigger with
+					    id="main_navbar_ddmenu_3"
+					    className="rv-navbar_option"
+					    withArrow="True"
+					  %}
+					    <span>Contributors</span>
+					  {% end_dm_trigger %}
+
+					  {% dm_content %}
+					    {% dm_item with href="profile:contributors" %}All Contributors{% end_dm_item %}
+					    {% dm_item with href="profile:contributor_profile" %}My Contributor Profile{% end_dm_item %}
+					  {% end_dm_content %}
+					{% end_dropdown_menu %}
 				</li>
 
 				<li>
-				{% dropdown_menu 
-					'{
-						"trigger": {
-							"label": "Posts",
-							"className": "rv-navbar_option",
-							"id": "main_navbar_ddmenu_4"
-						},
-						"items": [{
-							"label": "Create A New Post", 
-							"href": "contribution:new_post"
-						}, {
-							"label": "Posts To Date",
-							"href": "contribution:all_posts"
-						}]
-					}'
-				%}
+					{% dropdown_menu %}
+					  {% dm_trigger with
+					    id="main_navbar_ddmenu_4"
+					    className="rv-navbar_option"
+					    withArrow="True"
+					  %}
+					    <span>Posts</span>
+					  {% end_dm_trigger %}
+
+					  {% dm_content %}
+					    {% dm_item with href="contribution:new_post" %}Create A New Post{% end_dm_item %}
+					    {% dm_item with href="contribution:all_posts" %}Posts To Date{% end_dm_item %}
+					  {% end_dm_content %}
+					{% end_dropdown_menu %}
 				</li>
 
 				<li>
-				{% dropdown_menu 
-					'{
-						"trigger": {
-							"label": "Resources",
-							"className": "rv-navbar_option",
-							"id": "main_navbar_ddmenu_5"
-						},
-						"items": [{
-							"label": "Using Relevate", 
-							"href": "contribution:using_relevate"
-						}, {
-							"label": "Public Scholarship",
-							"href": "contribution:public_scholarship"
-						}, {
-							"label": "Content Creation",
-							"href": "contribution:content_creation"
-						}]
-					}'
-				%}
+					{% dropdown_menu %}
+					  {% dm_trigger with
+					    id="main_navbar_ddmenu_5"
+					    className="rv-navbar_option"
+					    withArrow="True"
+					  %}
+					    <span>Resources</span>
+					  {% end_dm_trigger %}
+
+					  {% dm_content %}
+					    {% dm_item with href="contribution:using_relevate" %}Using Relevate{% end_dm_item %}
+					    {% dm_item with href="contribution:public_scholarship" %}Public Scholarship{% end_dm_item %}
+					    {% dm_item with href="contribution:content_creation" %}Content Creation{% end_dm_item %}
+					  {% end_dm_content %}
+					{% end_dropdown_menu %}
 				</li>
 			{% else %}
 				<li>
-				{% dropdown_menu 
-					'{
-						"trigger": {
-							"label": "Contributors",
-							"className": "rv-navbar_option",
-							"id": "main_navbar_ddmenu_6"
-						},
-						"items": [{
-							"label": "All Contributors", 
-							"href": "profile:contributors"
-						}]
-					}'
-				%}
+					{% dropdown_menu %}
+					  {% dm_trigger with
+					    id="main_navbar_ddmenu_6"
+					    className="rv-navbar_option"
+					    withArrow="True"
+					  %}
+					    <span>Contributors</span>
+					  {% end_dm_trigger %}
+
+					  {% dm_content %}
+					    {% dm_item with href="profile:contributors" %}All Contributors{% end_dm_item %}
+					  {% end_dm_content %}
+					{% end_dropdown_menu %}
 				</li>
 
 				{% if user.is_authenticated %}

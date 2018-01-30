@@ -176,15 +176,6 @@ class ContributorCertificationUnfinished(models.Model):
 		return self.contributor_profile.user_profile.user.first_name + \
 			   " " + self.contributor_profile.user_profile.user.last_name
 
-class DegreeUnfinished(models.Model):
-	class Meta:
-		db_table = 'degreeunfinished'
-	abbreviation = models.CharField(max_length=10, null=True, blank=True)
-	name = models.CharField(max_length=50, null=True, blank=True)
-
-	def __str__(self):
-		return self.name
-
 
 class OrganizationalAffiliationUnfinished(models.Model):
 	class Meta:

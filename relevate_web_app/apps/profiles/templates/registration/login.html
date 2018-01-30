@@ -1,32 +1,38 @@
 {% extends "base-titlebar.html" %}
 {% load staticfiles %}
 {% load i18n %}
+{% load text_input_tags %}
 
 {% block content %}
-<div class='uk-container uk-width-1-1 uk-margin-top'>
-	<div class='uk-flex uk-flex-center uk-text-center'>
-		<div style="width: 40%; border: 5px solid #2FA6F5; border-radius: 6px; padding: 15px; background:#FFFFFF">
-			<form method="post" action="." class='uk-form-horizontal'>
-				{% csrf_token %}
-				<!-- {{ form.as_p }} -->
-				<div>
-					<label class='uk-form-label uk-text-bold'>Email:</label>
-					<div class='uk-form-controls'>
-						<input class="uk-input" id="{{ form.username.id_for_label }}" maxlength="30" name="{{ form.username.html_name }}" type="text" />
-					</div>
-				</div>
-				<div>
-					<label class='uk-form-label uk-text-bold'>Password:</label>
-					<div class='uk-form-controls'>
-						<input class="uk-input" id="{{ form.password.id_for_label }}" maxlength="30" name="{{ form.password.html_name }}" type="password" />
-					</div>
-				</div>
-				<br>
-				<input class='uk-button uk-button-primary' type="submit" value="{% trans 'Log in' %}" />
-				<input type="hidden" name="next" value="{{ next }}" />
-			</form>
-			<p>{% trans "Forgot password" %}? <a href="{% url 'profile:password_reset_form' %}">{% trans "Reset it" %}</a>!</p>
-		</div>
+<div class="rv-box-layout">
+	<div class="rv-box-layout_box">
+		<h2 class="rv-box-form_header">Relevate Login</h2>
+		<form method="post" action=".">
+			{% csrf_token %}
+			{% text_input 
+				label="Email"
+				placeholder="Enter your email address"
+				id=form.username.id_for_label 
+				name=form.username.html_name 
+				maxlength="30" 
+			%}
+			{% text_input 
+				variant="password"
+				placeholder="Enter your password"
+				label="Password" 
+				id=form.password.id_for_label 
+				name=form.password.html_name 
+				maxlength="30" 
+			%}
+			<div class="rv-box-form_submit">
+				<button class="rv-button fill-button" type="submit">{% trans "Log in" %}</button>
+				{# <input class='rv-button fill-button' type="submit" value="{% trans 'Log in' %}" /> #}
+				{# <input type="hidden" name="next" value="{{ next }}" /> #}
+			</div>
+		</form>
 	</div>
+</div>
+<div class="rv-box-form_links">
+	<a class="rv-link" href="{% url 'profile:password_reset_form' %}">{% trans "Forgot your password?" %}</a>
 </div>
 {% endblock %}

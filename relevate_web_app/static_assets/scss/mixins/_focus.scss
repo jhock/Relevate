@@ -1,0 +1,36 @@
+@import "../base/variables";
+
+@mixin baseFocus($marginTop, $marginEnd, $marginBottom, $marginStart) {
+  position: relative;
+
+  &:before {
+    content: "";
+    position: absolute;
+    opacity: 0;
+    top: $marginTop * -1;
+    right: $marginEnd * -1;
+    bottom: $marginBottom * -1;
+    left: $marginStart * -1;
+    border: 1px solid $rv-color-primary;
+    transform: scale(0.8, 0.8);
+    transition: transform 100ms ease-in;
+    z-index: -1;
+  }
+
+  &:focus {
+    outline: 0;
+    &:before {
+      opacity: 1;
+      transition: transform 100ms ease-in;
+      transform: scale(1, 1)
+    }
+  }
+}
+
+@mixin buttonFocus ($marginTop, $marginEnd, $marginBottom, $marginStart) {
+  @include baseFocus($marginTop, $marginEnd, $marginBottom, $marginStart);
+
+  &:before {
+    border-radius: 999rem;
+  }
+}

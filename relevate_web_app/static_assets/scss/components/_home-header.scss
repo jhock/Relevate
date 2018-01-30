@@ -1,0 +1,48 @@
+@import "../base/variables";
+
+.rv-home-header {
+  padding-bottom: 5rem;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  animation: fadein 1s;
+}
+
+.rv-home-header_logo {
+  text-align: center;
+  margin-bottom: 1em;
+  svg {
+    width: 4em;
+    g {
+      fill: $rv-color-primary;
+      stroke: $rv-color-white;
+    }
+  }
+}
+
+.rv-home-header_description {
+  text-align: center;
+  max-width: 32em;
+  background: $rv-color-white;
+}
+
+.rv-home-header_description-text {
+  font-weight: $rv-font-weight-bold;
+  color: $rv-color-primary;
+}
+
+.rv-home-header_button {
+  margin-top: 1.5em;
+  text-align: center;
+}
+
+@keyframes fadein {
+  from { 
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+  }
+  to { 
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}

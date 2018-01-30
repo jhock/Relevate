@@ -1,0 +1,25 @@
+@media only screen and (min-width: 1050px) {
+  .rv-masonry {
+    column-count: 3;
+    column-gap: 0;
+  }
+}
+
+@media only screen and (max-width: 1049px) {
+  .rv-masonry {
+    column-count: 2;
+    column-gap: 0;
+  }
+}
+
+@media only screen and (max-width: 670px) {
+  .rv-masonry {
+    column-count: 1;
+    column-gap: 0;
+  }
+}
+
+.rv-masonry_container {
+  display: flex;
+  justify-content: center;
+}

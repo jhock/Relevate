@@ -12,30 +12,32 @@
 <body onload="return ran_col()">
 	<div class="rv-home_body">
 		{% if user.is_authenticated %}
-			<div>
-				<div><h2 class="rv-home_welcome"> Welcome {{ user.first_name }}</h2></div>
+			<div class="rv-home_body_top">
+				<div style="text-align:center;">
+					  {% include 'global-partials/clouds-welcome-svg.html' %}
 				{% if not user_prof.confirmed %}
 				<!--TODO: we should provide some useful feedback here. How do they go about confirming the account? -->
 				<p class="uk-badge uk-badge-notification uk-badge-danger">Looks like you still need to confirm your account</p>
 				{% endif %}
+			</div>
 			</div>
 		<br>
 		{% else %}
 			{% include 'partials/home_header_partial.html' %}
 		{% endif %}
 
-		<div class='uk-grid-match' uk-grid>
 			{% if user.is_authenticated and not user_prof.is_contributor %}
-			<div class="uk-width-1-1">
-				<div class='uk-card uk-card-default uk-card-body uk-text-large'>
-					<p>
-						We are currently working on making this website great and need contributions from relationship content experts. If that's you, sign up to be a contributor
-						<a href="{% url 'profile:contributor_create' %}">here</a>.
-					</p>
-				</div>
-			</div>
+					<!--<div class='uk-grid-match' uk-grid>-->
+			<!--<div class="uk-width-1-1">-->
+				<!--<div class='uk-card uk-card-default uk-card-body uk-text-large' style="background-color:#1f87f0;">-->
+					<!--<p style="color:#f5f5f5;">-->
+						<!--We are currently working on making this website great and need contributions from relationship content experts. If that's you, sign up to be a contributor-->
+						<!--<a href="{% url 'profile:contributor_create' %}">here</a>.-->
+					<!--</p>-->
+				<!--</div>-->
+			<!--</div>-->
+								<!--</div>-->
 			{% endif %}
-		</div>
 		<!--<div uk-grid>-->
 			<!--<div class='uk-card uk-card-default uk-card-body uk-width-1-1'>-->
 				<!--<p>-->
@@ -45,7 +47,7 @@
 			<!--</div>-->
 		<!--</div>-->
 
-		{% if user.is_authenticated %}
+		{% if user.is_authenticated and preference_posts %}
 		<h4 class="rv-home_header">Suggested posts</h4>
 <!-- temporarily commenting this out until we figure out what to do here  -->
 <!-- 			<div id="chosen-item-list" class="rv-home_header-topics-tags">
@@ -100,25 +102,7 @@
 		{% endif %}
 	</div>
 
-	<!--<div class="uk-margin" data-uk-slideset="{default: 4}">-->
-		<!--<div class="uk-slidenav-position uk-margin">-->
-			<!--<ul class="uk-slideset uk-grid uk-flex-center uk-grid-width-1-4">-->
-				<!--<li class="uk-active" style=""><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDYwMCA0MDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzYwMHg0MDAvc2t5L2F1dG8vdGV4dDoxL3NpemU6MTAwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi41LjIuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcy8+PHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiMwRDhGREIiLz48Zz48dGV4dCB4PSIyNjIuOTI5Njg3NSIgeT0iMjQ0LjciIHN0eWxlPSJmaWxsOiNGRkZGRkY7Zm9udC13ZWlnaHQ6Ym9sZDtmb250LWZhbWlseTpBcmlhbCwgSGVsdmV0aWNhLCBPcGVuIFNhbnMsIHNhbnMtc2VyaWYsIG1vbm9zcGFjZTtmb250LXNpemU6MTAwcHQiPjE8L3RleHQ+PC9nPjwvc3ZnPg==" width="600" height="400" alt="1 [600x400]" data-src="holder.js/600x400/sky/auto/text:1/size:100" data-holder-rendered="true"></li>-->
-				<!--<li class="uk-active" style=""><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDYwMCA0MDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzYwMHg0MDAvc2t5L2F1dG8vdGV4dDoyL3NpemU6MTAwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi41LjIuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcy8+PHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiMwRDhGREIiLz48Zz48dGV4dCB4PSIyNjIuOTI5Njg3NSIgeT0iMjQ0LjciIHN0eWxlPSJmaWxsOiNGRkZGRkY7Zm9udC13ZWlnaHQ6Ym9sZDtmb250LWZhbWlseTpBcmlhbCwgSGVsdmV0aWNhLCBPcGVuIFNhbnMsIHNhbnMtc2VyaWYsIG1vbm9zcGFjZTtmb250LXNpemU6MTAwcHQiPjI8L3RleHQ+PC9nPjwvc3ZnPg==" width="600" height="400" alt="2 [600x400]" data-src="holder.js/600x400/sky/auto/text:2/size:100" data-holder-rendered="true"></li>-->
-				<!--<li class="uk-active" style=""><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDYwMCA0MDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzYwMHg0MDAvc2t5L2F1dG8vdGV4dDozL3NpemU6MTAwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi41LjIuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcy8+PHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiMwRDhGREIiLz48Zz48dGV4dCB4PSIyNjIuOTI5Njg3NSIgeT0iMjQ0LjciIHN0eWxlPSJmaWxsOiNGRkZGRkY7Zm9udC13ZWlnaHQ6Ym9sZDtmb250LWZhbWlseTpBcmlhbCwgSGVsdmV0aWNhLCBPcGVuIFNhbnMsIHNhbnMtc2VyaWYsIG1vbm9zcGFjZTtmb250LXNpemU6MTAwcHQiPjM8L3RleHQ+PC9nPjwvc3ZnPg==" width="600" height="400" alt="3 [600x400]" data-src="holder.js/600x400/sky/auto/text:3/size:100" data-holder-rendered="true"></li>-->
-				<!--<li class="uk-active" style=""><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDYwMCA0MDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzYwMHg0MDAvc2t5L2F1dG8vdGV4dDo0L3NpemU6MTAwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi41LjIuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcy8+PHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiMwRDhGREIiLz48Zz48dGV4dCB4PSIyNjIuOTI5Njg3NSIgeT0iMjQ0LjciIHN0eWxlPSJmaWxsOiNGRkZGRkY7Zm9udC13ZWlnaHQ6Ym9sZDtmb250LWZhbWlseTpBcmlhbCwgSGVsdmV0aWNhLCBPcGVuIFNhbnMsIHNhbnMtc2VyaWYsIG1vbm9zcGFjZTtmb250LXNpemU6MTAwcHQiPjQ8L3RleHQ+PC9nPjwvc3ZnPg==" width="600" height="400" alt="4 [600x400]" data-src="holder.js/600x400/sky/auto/text:4/size:100" data-holder-rendered="true"></li>-->
-				<!--<li style="display: none;"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDYwMCA0MDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzYwMHg0MDAvc2t5L2F1dG8vdGV4dDo1L3NpemU6MTAwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi41LjIuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcy8+PHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiMwRDhGREIiLz48Zz48dGV4dCB4PSIyNjIuOTI5Njg3NSIgeT0iMjQ0LjciIHN0eWxlPSJmaWxsOiNGRkZGRkY7Zm9udC13ZWlnaHQ6Ym9sZDtmb250LWZhbWlseTpBcmlhbCwgSGVsdmV0aWNhLCBPcGVuIFNhbnMsIHNhbnMtc2VyaWYsIG1vbm9zcGFjZTtmb250LXNpemU6MTAwcHQiPjU8L3RleHQ+PC9nPjwvc3ZnPg==" width="600" height="400" alt="5 [600x400]" data-src="holder.js/600x400/sky/auto/text:5/size:100" data-holder-rendered="true"></li>-->
-				<!--<li style="display: none;"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDYwMCA0MDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzYwMHg0MDAvc2t5L2F1dG8vdGV4dDo2L3NpemU6MTAwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi41LjIuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcy8+PHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiMwRDhGREIiLz48Zz48dGV4dCB4PSIyNjIuOTI5Njg3NSIgeT0iMjQ0LjciIHN0eWxlPSJmaWxsOiNGRkZGRkY7Zm9udC13ZWlnaHQ6Ym9sZDtmb250LWZhbWlseTpBcmlhbCwgSGVsdmV0aWNhLCBPcGVuIFNhbnMsIHNhbnMtc2VyaWYsIG1vbm9zcGFjZTtmb250LXNpemU6MTAwcHQiPjY8L3RleHQ+PC9nPjwvc3ZnPg==" width="600" height="400" alt="6 [600x400]" data-src="holder.js/600x400/sky/auto/text:6/size:100" data-holder-rendered="true"></li>-->
-				<!--<li style="display: none;"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDYwMCA0MDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzYwMHg0MDAvc2t5L2F1dG8vdGV4dDo3L3NpemU6MTAwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi41LjIuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcy8+PHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiMwRDhGREIiLz48Zz48dGV4dCB4PSIyNjIuOTI5Njg3NSIgeT0iMjQ0LjciIHN0eWxlPSJmaWxsOiNGRkZGRkY7Zm9udC13ZWlnaHQ6Ym9sZDtmb250LWZhbWlseTpBcmlhbCwgSGVsdmV0aWNhLCBPcGVuIFNhbnMsIHNhbnMtc2VyaWYsIG1vbm9zcGFjZTtmb250LXNpemU6MTAwcHQiPjc8L3RleHQ+PC9nPjwvc3ZnPg==" width="600" height="400" alt="7 [600x400]" data-src="holder.js/600x400/sky/auto/text:7/size:100" data-holder-rendered="true"></li>-->
-				<!--<li style="display: none;"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDYwMCA0MDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzYwMHg0MDAvc2t5L2F1dG8vdGV4dDo4L3NpemU6MTAwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi41LjIuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcy8+PHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiMwRDhGREIiLz48Zz48dGV4dCB4PSIyNjIuOTI5Njg3NSIgeT0iMjQ0LjciIHN0eWxlPSJmaWxsOiNGRkZGRkY7Zm9udC13ZWlnaHQ6Ym9sZDtmb250LWZhbWlseTpBcmlhbCwgSGVsdmV0aWNhLCBPcGVuIFNhbnMsIHNhbnMtc2VyaWYsIG1vbm9zcGFjZTtmb250LXNpemU6MTAwcHQiPjg8L3RleHQ+PC9nPjwvc3ZnPg==" width="600" height="400" alt="8 [600x400]" data-src="holder.js/600x400/sky/auto/text:8/size:100" data-holder-rendered="true"></li>-->
-				<!--<li style="display: none;"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDYwMCA0MDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzYwMHg0MDAvc2t5L2F1dG8vdGV4dDo5L3NpemU6MTAwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi41LjIuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcy8+PHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiMwRDhGREIiLz48Zz48dGV4dCB4PSIyNjIuOTI5Njg3NSIgeT0iMjQ0LjciIHN0eWxlPSJmaWxsOiNGRkZGRkY7Zm9udC13ZWlnaHQ6Ym9sZDtmb250LWZhbWlseTpBcmlhbCwgSGVsdmV0aWNhLCBPcGVuIFNhbnMsIHNhbnMtc2VyaWYsIG1vbm9zcGFjZTtmb250LXNpemU6MTAwcHQiPjk8L3RleHQ+PC9nPjwvc3ZnPg==" width="600" height="400" alt="9 [600x400]" data-src="holder.js/600x400/sky/auto/text:9/size:100" data-holder-rendered="true"></li>-->
-				<!--<li style="display: none;"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDYwMCA0MDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzYwMHg0MDAvc2t5L2F1dG8vdGV4dDoxMC9zaXplOjEwMApDcmVhdGVkIHdpdGggSG9sZGVyLmpzIDIuNS4yLgpMZWFybiBtb3JlIGF0IGh0dHA6Ly9ob2xkZXJqcy5jb20KKGMpIDIwMTItMjAxNSBJdmFuIE1hbG9waW5za3kgLSBodHRwOi8vaW1za3kuY28KLS0+PGRlZnMvPjxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjMEQ4RkRCIi8+PGc+PHRleHQgeD0iMjI1Ljg1MTU2MjUiIHk9IjI0NC43IiBzdHlsZT0iZmlsbDojRkZGRkZGO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwMHB0Ij4xMDwvdGV4dD48L2c+PC9zdmc+" width="600" height="400" alt="10 [600x400]" data-src="holder.js/600x400/sky/auto/text:10/size:100" data-holder-rendered="true"></li>-->
-			<!--</ul>-->
-			<!--<a href="#" class="uk-slidenav uk-slidenav-previous" data-uk-slideset-item="previous"></a>-->
-			<!--<a href="#" class="uk-slidenav uk-slidenav-next" data-uk-slideset-item="next"></a>-->
-		<!--</div>-->
-		<!--<ul class="uk-slideset-nav uk-dotnav uk-flex-center"><li data-uk-slideset-item="0" class="uk-active"><a></a></li><li data-uk-slideset-item="1"><a></a></li><li data-uk-slideset-item="2"><a></a></li></ul>-->
-	<!--</div>-->
+
         <script type="text/javascript">
             function ran_col() { //function name
                 var color = '#'; // hexadecimal starting symbol
@@ -129,10 +113,10 @@
         </script>
 		<script src="{% static 'js/card_partial.js' %}"></script>
  <script type="text/javascript" src="{% static 'js/home.js' %}"></script>
-<script src="{% static 'uikit-old/js/components/slideset.min.js' %}"></script></body>
-<script src="{% static 'uikit-old/js/components/accordion.min.js' %}"></script></body>
-<script src="{% static 'uikit-old/js/components/slideshow.min.js' %}"></script></body>
-<script src="{% static 'uikit-old/js/components/slideshow-fx.min.js' %}"></script></body>
+<script src="{% static 'uikit-old/js/components/slideset.min.js' %}"></script>
+<script src="{% static 'uikit-old/js/components/accordion.min.js' %}"></script>
+<script src="{% static 'uikit-old/js/components/slideshow.min.js' %}"></script>
+<script src="{% static 'uikit-old/js/components/slideshow-fx.min.js' %}"></script>
 <script src="{% static 'uikit-old/js/components/slider.min.js' %}"></script></body>
 
 

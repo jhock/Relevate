@@ -27,7 +27,7 @@ SENDGRID_USER = sendgrid_user
 DEBUG = True
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'www.relevate.com']
 LOGIN_REDIRECT_URL = 'contribution:home'
 
 # Application definition
@@ -47,7 +47,9 @@ INSTALLED_APPS = [
 	'storages',
 	'rest_framework',
 	'ckeditor',
-	'ckeditor_uploader'
+	'ckeditor_uploader',
+	'formtools'
+
 	#formset-dependencies
 ]
 

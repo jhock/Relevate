@@ -3,6 +3,7 @@ from datetime import datetime
 from .adviser_model import Adviser
 from ...contribution.models.topic_model import Topics
 from .user_models import UserProfile
+from django.templatetags.static import static
 
 
 class Degree(models.Model):
@@ -40,7 +41,7 @@ class ContributorProfile(models.Model):
 	interests = models.TextField(null=True, blank=True)
 	avatar = models.ImageField(upload_to='user_profiles/avatar', null=True, blank=True)
 	accept_terms = models.BooleanField(default=False)
-	expertise_topics = models.ManyToManyField('contribution.Topics')
+	expertise_topics = models.ManyToManyField('contribution.Topics', blank=True)
 	has_adviser = models.BooleanField(default=False)
 	advisers_profile = models.ForeignKey('Adviser', null=True, blank=True)
 	is_approved = models.BooleanField(default=False)
@@ -49,6 +50,13 @@ class ContributorProfile(models.Model):
 	def __str__(self):
 		return self.user_profile.user.first_name + " " + self.user_profile.user.last_name
 
+	@property
+	def avatar_image_url(self):
+		# Pseudocode:
+		if self.avatar:
+			return self.avatar.url
+		else:
+			return static("images/profile-placeholder.png")
 
 class DeniedContributors(models.Model):
 	class Meta:
@@ -100,6 +108,94 @@ class OrganizationalAffiliation(models.Model):
 	def __str__(self):
 			return self.contributor_profile.user_profile.user.first_name + \
 				   " " + self.contributor_profile.user_profile.user.last_name
+
+
+# The following models are for use with saving a temporary Contributor profile only.
+
+class AddressUnfinished(models.Model):
+	class Meta:
+		db_table = 'addressunfinished'
+
+	street_address = models.CharField(max_length=255, null=True, blank=True)
+	city = models.CharField(max_length=255, null=True, blank=True)
+	state = models.CharField(max_length=255, null=True, blank=True)
+	zipcode = models.CharField(max_length=5, null=True, blank=True)
+	country = models.CharField(max_length=255, null=True, blank=True)
+
+
+class ContributorProfileUnfinished(models.Model):
+	class Meta:
+		db_table = 'contributorprofileunfinished'
+
+	user_profile = models.ForeignKey('UserProfile')
+	website_url = models.URLField(null=True, blank=True)
+	cv = models.FileField(upload_to='user_profiles/cv', null=True, blank=True)
+	biography_text = models.TextField(max_length=3000, null=True, blank=True)
+	address = models.ForeignKey('AddressUnfinished', null=True, blank=True)
+	interests = models.TextField(null=True, blank=True)
+	avatar = models.ImageField(upload_to='user_profiles/avatar', null=True, blank=True)
+	accept_terms = models.BooleanField(default=False)
+	expertise_topics = models.ManyToManyField('contribution.Topics')
+	has_adviser = models.BooleanField(default=True)
+	advisers_profile = models.ForeignKey('Adviser', null=True, blank=True)
+
+	def __str__(self):
+		return self.user_profile.user.first_name + " " + self.user_profile.user.last_name
+
+	@property
+	def avatar_image_url(self):
+		# Pseudocode:
+		if self.avatar:
+			return self.avatar.url
+		else:
+			return static("images/profile-placeholder.png")
+
+
+class AcademicProfileUnfinished(models.Model):
+	class Meta:
+		db_table = 'academicprofileunfinished'
+
+	degree = models.ForeignKey('Degree', null=True, blank=True)
+	program = models.CharField(max_length=255, null=True, blank=True, verbose_name="i.e department name")
+	institution = models.CharField(max_length=255, null=True, blank=True)
+	contributor_profile = models.ForeignKey('ContributorProfileUnfinished', null=False, blank=False)
+
+	def __str__(self):
+		return self.contributor_profile.user_profile.user.first_name + \
+			   " " + self.contributor_profile.user_profile.user.last_name
+
+
+class ContributorCertificationUnfinished(models.Model):
+	class Meta:
+		db_table = 'certificationprofileunfinished'
+
+	name_of_certification = models.TextField(null=True, blank=True)
+	contributor_profile = models.ForeignKey('ContributorProfileUnfinished', null=False, blank=False)
+
+	def __str__(self):
+		return self.contributor_profile.user_profile.user.first_name + \
+			   " " + self.contributor_profile.user_profile.user.last_name
+
+class DegreeUnfinished(models.Model):
+	class Meta:
+		db_table = 'degreeunfinished'
+	abbreviation = models.CharField(max_length=10, null=True, blank=True)
+	name = models.CharField(max_length=50, null=True, blank=True)
+
+	def __str__(self):
+		return self.name
+
+
+class OrganizationalAffiliationUnfinished(models.Model):
+	class Meta:
+		db_table = 'organizational_affiliation_unfinished'
+
+	name_of_affiliation = models.TextField(null=True, blank=True)
+	contributor_profile = models.ForeignKey('ContributorProfileUnfinished', null=False, blank=False)
+
+	def __str__(self):
+		return self.contributor_profile.user_profile.user.first_name + \
+			   " " + self.contributor_profile.user_profile.user.last_name
 
 
 

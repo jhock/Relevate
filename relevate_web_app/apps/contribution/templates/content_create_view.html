@@ -30,11 +30,7 @@
         <h1 class="uk-text-center uk-text-uppercase">{{ post.title }}</h1>
 
         <div class="uk-text-center">
-            {% if post.contributor.avatar == ""  %}
-                <img style="max-width: 50px;" class="profile_avatar uk-border-circle" src="{% static "images/profile-placeholder.png" %}"{{ person.photo_url|default_if_none:'#' }} alt="logo"/>
-            {% elif post.contributor.avatar != "" %}
-                <img style="max-width: 50px;" class="profile_avatar uk-border-circle" src="{{ post.contributor.avatar.url }}">
-            {% endif %}
+                <img style="max-width: 50px;" class="profile_avatar uk-border-circle" src="{{ post.contributor.avatar_image_url }}">
             {{ post.contributor.user_profile.user.first_name }} {{ post.contributor.user_profile.user.last_name }}
             <span style="display:inline-block; width: 50px;"></span>
             {{ post.publishedDate }}

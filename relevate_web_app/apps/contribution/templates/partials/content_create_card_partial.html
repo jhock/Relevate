@@ -11,11 +11,7 @@
         <div class="uk-grid">
             <div class="uk-width-1-2">
                 <p class='uk-text-center' style="font-size: 125%;">
-                    {% if p.contributor.avatar == ""  %}
-                        <img style="max-width: 50px;" class="profile_avatar uk-border-circle" src="{% static "images/profile-placeholder.png" %}"{{ person.photo_url|default_if_none:'#' }} alt="logo"/>
-                    {% elif p.contributor.avatar != "" %}
-                        <img style="max-width: 50px;" class="profile_avatar uk-border-circle" src="{{ p.contributor.avatar.url }}">
-                    {% endif %}
+                        <img style="max-width: 50px;" class="profile_avatar uk-border-circle" src="{{ p.contributor.avatar_image_url }}">
                     {{ p.contributor }}
                 </p>
                 <div class='grey-bg'>

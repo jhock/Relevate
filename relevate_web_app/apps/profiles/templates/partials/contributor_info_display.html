@@ -2,33 +2,29 @@
 
 <div class='uk-children-1-3' uk-grid>
 	<div>
-		{% if contrib_prof.avatar == ""  %}
-			<img style="max-width: 150px;" class="profile_avatar" src="{% static "images/profile-placeholder.png" %}" alt="logo"/>
-		{% elif contrib_prof.avatar != "" %}
-			<img style="max-width: 150px;" class="profile_avatar" src="{{ contrib_prof.avatar.url }}">
-		{% endif %}
+			<img style="max-width: 150px;" class="profile_avatar" src="{{ contributor_prof.avatar_image_url }}">
 	</div>
 	<div>
 		{% if highest_ranking_degree %}
-			<h1 class="uk-text-center orange">{{ contrib_prof.user_profile.user.first_name }} 
-				{{ contrib_prof.user_profile.user.last_name }}, {{ highest_ranking_degree.degree.abbreviation }}
+			<h1 class="uk-text-center orange">{{ contributor_prof.user_profile.user.first_name }}
+				{{ contributor_prof.user_profile.user.last_name }}, {{ highest_ranking_degree.degree.abbreviation }}
 			</h1>
 		{% else %}
-			<h1 class="uk-text-center orange">{{ contrib_prof.user_profile.user.first_name }} 
-				{{ contrib_prof.user_profile.user.last_name }}
+			<h1 class="uk-text-center orange">{{ contributor_prof.user_profile.user.first_name }}
+				{{ contributor_prof.user_profile.user.last_name }}
 			</h1>
 		{% endif %}
 		
-		{% if contrib_prof.user_profile.is_contributor %}
+		{% if contributor_prof.user_profile.is_contributor %}
 			<h3 class="uk-text-center blue">Approved Relevate Contributor</h3>
 		{% endif %}
 		<h4 class="orange">Professional Address</h4>
-		{{ contrib_prof.address.street_address }}<br>
-		{{ contrib_prof.address.city }}, {{ contrib_prof.address.state }} {{ contrib_prof.address.zipcode }}
+		{{ contributor_prof.address.street_address }}<br>
+		{{ contributor_prof.address.city }}, {{ contributor_prof.address.state }} {{ contributor_prof.address.zipcode }}
 		<br>
-		{{ contrib_prof.address.country }}
+		{{ contributor_prof.address.country }}
 		<br>
-		<a href="{{ user.contributor_profile.website_url }}">{{ contrib_prof.website_url }}</a>
+		<a href="{{ user.contributor_profile.website_url }}">{{ contributor_prof.website_url }}</a>
 	</div>
 </div>
 <div class="uk-grid">
@@ -76,7 +72,7 @@
 
 <h3 class="blue">Expertise Topics</h3>
 <div uk-grid>
-	{% for topic in contrib_prof.expertise_topics.all %}
+	{% for topic in contributor_prof.expertise_topics.all %}
 		<div class="{% cycle 'uk-width-1-3' 'uk-width-1-3' 'uk-width-1-3' %}">
 			<ul uk-accordion>
 				<li>
@@ -93,24 +89,24 @@
 </div>
 <h3 class="blue">Professional Interests, Experience, and Expertise</h3>
 <div class="uk-panel-scrollable uk-height-small uk-height-max-small">
-	{{ contrib_prof.biography_text | safe }}
+	{{ contributor_prof.biography_text | safe }}
 </div>
-{% if contrib_prof.website_url %}
+{% if contributor_prof.website_url %}
 	<h3 class="blue">Contributor Website</h3>
-	<a target='_blank' href="{{ contrib_prof.website_url }}">{{ contrib_prof.website_url }}</a>
+	<a target='_blank' href="{{ contributor_prof.website_url }}">{{ contributor_prof.website_url }}</a>
 {% endif %}
 <!-- 
 <h3 class="blue">Research and Clinical Interests</h3>
 <div class="uk-scrollable-box">
-	{{ contrib_prof.interests|safe }}
+	{{ contributor_prof.interests|safe }}
 </div> 
 -->
 
 <h3 class="blue">CV/Resume</h3>
-{% if contrib_prof.cv == "" %}
+{% if contributor_prof.cv == "" %}
 	<object data="{% static "empty-cv/empty-cv.pdf" %}" type="application/pdf"
 			width="1100" height="1000"></object>
-{% elif contrib_prof.cv != "" %}
-	<object data="{{ contrib_prof.cv.url }}" type="application/pdf"
+{% elif contributor_prof.cv != "" %}
+	<object data="{{ contributor_prof.cv.url }}" type="application/pdf"
 			width="1100" height="1000"></object>
 {% endif %}

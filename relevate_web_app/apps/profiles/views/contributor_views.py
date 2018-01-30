@@ -15,14 +15,18 @@ from apps.profiles.modules.list_of_universities import WORLD_UNIVERSITIES_LISTS
 from ..forms.contributor_form import ContributorForm
 from ..models.adviser_model import Adviser
 from ..models.contributor_model import ContributorProfile, Address, PendingContributors, DeniedContributors, \
-    AcademicProfile, ContributorCertification, OrganizationalAffiliation
+    AcademicProfile, ContributorCertification, OrganizationalAffiliation, ContributorProfileUnfinished, \
+AddressUnfinished, AcademicProfileUnfinished, ContributorCertificationUnfinished, DegreeUnfinished, \
+    OrganizationalAffiliationUnfinished
 from ..models.user_models import UserProfile
 from ..modules.contributor_util import validate_academic_and_cert, update_contributor_qualification, \
-    get_max_academic_id, get_max_certificate_id, get_max_affiliation_id, get_list_of_contributor_credentials, get_contributor_highest_degree
+    get_max_academic_id, get_max_certificate_id, get_max_affiliation_id, get_list_of_contributor_credentials, get_contributor_highest_degree, \
+    unfinished_contributor_qualification
 from ...contribution.models.topic_model import Topics
 from ...contribution.modules.post_util import display_error
 from ...contribution.modules.search_util import find_universities
 from ..forms.authentication_forms import UpdateUserForm
+from django.core.files.storage import FileSystemStorage
 try:
     from urllib.parse import urlparse
 except ImportError:
@@ -52,19 +56,68 @@ class ContributorCreateView(LoginRequiredMixin, View):
         Creates an instance of ``ContributorForm`` and populates it with options
         for all currently advisers as well as all available topics.
         """
+        organization_list = ('National Council on Family Relations (NCFR)',
+                             'American Association for Marriage and Family Therapy (AAMFT)',
+                             'Society for the Study of Emerging Adulthood (SSEA)',
+                             'International Association for Relationship Research (IARR)',
+                             'American Family Therapy Academy (AFTA)',
+                             'American Psychological Association (APA)',
+                             'National Communication Association (NCA)',
+                             'Society for Prevention Research (SPR)')
         user_prof = UserProfile.objects.get(user=request.user)
+        #check for previous saved information to fill out form with
         if not (user_prof.is_contributor):
-            tag_names = Topics.objects.all().order_by('name')
             advisers = Adviser.objects.filter(is_active=True)
-
-            organization_list = ('National Council on Family Relations (NCFR)',
-                                 'American Association for Marriage and Family Therapy (AAMFT)',
-                                 'Society for the Study of Emerging Adulthood (SSEA)',
-                                 'International Association for Relationship Research (IARR)',
-                                 'American Family Therapy Academy (AFTA)',
-                                 'American Psychological Association (APA)',
-                                 'National Communication Association (NCA)',
-                                 'Society for Prevention Research (SPR)')
+            previous_form = ContributorProfileUnfinished.objects.filter(user_profile_id=user_prof.id).first()
+            if previous_form:
+                topics = previous_form.expertise_topics.all()
+                already_sel = []
+                for t in topics:
+                    already_sel.append(t)
+                tag_names = Topics.objects.all()
+                academic_profile = AcademicProfileUnfinished.objects.filter(contributor_profile=previous_form)
+                for a in academic_profile:
+                    print(a.program)
+                certifications = ContributorCertificationUnfinished.objects.filter(contributor_profile=previous_form)
+                for c in certifications:
+                    print(c.name_of_certification)
+                max_certification_id = get_max_certificate_id(certifications)
+                organizational_affiliations = OrganizationalAffiliationUnfinished.objects.filter(
+                    contributor_profile=previous_form)
+                for o in organizational_affiliations:
+                    print(o.name_of_affiliation)
+                max_academic_id = get_max_academic_id(academic_profile)
+                contribution_form = ContributorForm({
+                    'user_profile': user_prof,
+                    'address': previous_form.address.street_address,
+                    'city': previous_form.address.city,
+                    'state': previous_form.address.state,
+                    'country': previous_form.address.country,
+                    'zipcode': previous_form.address.zipcode,
+                    'website_url': previous_form.website_url,
+                    'interests': previous_form.interests,
+                    'area_of_expertise': already_sel,
+                    'avatar': previous_form.avatar,
+                    'biography': previous_form.biography_text,
+                    'accept_terms': previous_form.accept_terms,
+                }, data_list=organization_list)
+                obj = {
+                    'form': contribution_form,
+                    'user_prof': user_prof,
+                    'already_sel': already_sel,
+                    'tag_names': tag_names,
+                    'cv_name': os.path.basename(previous_form.cv.name),
+                    'academic_profiles': academic_profile,
+                    'certifications': certifications,
+                    'max_academic_id': max_academic_id,
+                    'max_certification_id': max_certification_id,
+                    'organizational_affiliations': organizational_affiliations,
+                    'advisers': advisers
+                }
+                if (previous_form.avatar):
+                    obj['avatar_name'] = previous_form.avatar.url
+                return render(request, 'contributor_create.html', obj)
+            tag_names = Topics.objects.all().order_by('name')
             contribution_form = ContributorForm(data_list=organization_list)
 
             return render(request, 'contributor_create.html',
@@ -164,6 +217,93 @@ class ContributorCreateView(LoginRequiredMixin, View):
                               'tag_names': Topics.objects.all().order_by('name'),
                               # 'institute': WORLD_UNIVERSITIES_LISTS[0:30], @TODO might need to use own database eventually
                           })
+
+class ContributorTempSaveView(LoginRequiredMixin, View):
+    """
+    Contains LoginRequiredMixin
+    """
+
+    def post(self, request):
+        """
+        If the form is valid, an ``Address`` object is created, then
+        a ``ContributorProfile`` object is created. If the contributor
+        is to have an ``Adviser``, that is created as well. All expertise
+        topics the contributor has selected are attached to his/her profile.
+
+        If the form is not valid, the errors are rendered as messages to the user,
+        and the form is re-rendered.
+
+        If the ``BETA`` variable is set to true, the contributor is automatically approved. Otherwise,
+        they are placed into the ``PendingContributors`` table for staff approval.
+        """
+        form = ContributorForm(request.POST, request.FILES)
+        user_prof = UserProfile.objects.get(user=request.user)
+        #look to see if the user has saved an unfinished contributor form already
+        previous_form = ContributorProfileUnfinished.objects.filter(user_profile_id=user_prof.id).first()
+        #TO_DO: change this so that instead of deleting old save info, it will be updated instead, updating is faster.
+        if previous_form:
+            print("yes, previous form")
+            curr_topics = previous_form.expertise_topics.all()
+            for each_topic in curr_topics:
+                try:
+                    previous_form.expertise_topics.remove(each_topic)
+                except ObjectDoesNotExist:
+                    pass
+            ap = AcademicProfileUnfinished.objects.filter(contributor_profile=previous_form.id).first()
+            if ap:
+                DegreeUnfinished.objects.filter(id=ap.degree_id).delete()
+                ap.delete()
+            ContributorCertificationUnfinished.objects.filter(contributor_profile=previous_form.id).delete()
+            OrganizationalAffiliationUnfinished.objects.filter(contributor_profile=previous_form.id).delete()
+            AddressUnfinished.objects.filter(id=previous_form.address_id)
+            previous_form.delete()
+        academics_req = request.POST.get('academicList')
+        print ("academic_req ", academics_req)
+        cert_req = request.POST.get('certificateList')
+        print ("cert req ", cert_req)
+        affiliation_req = request.POST.get('affiliationList')
+        print("affiliation_list", affiliation_req)
+        x = request.POST.get('x')
+        y = request.POST.get('y')
+        w = request.POST.get('width')
+        h = request.POST.get('height')
+        avatar = request.POST.get('avatar')
+        address = AddressUnfinished(
+            street_address=request.POST.get('address'),
+            city=request.POST.get('city'),
+            state=request.POST.get('state'),
+            zipcode=request.POST.get('zipcode'),
+            country=request.POST.get('country')
+        )
+        address.save()
+        contributor_profile = ContributorProfileUnfinished(
+            user_profile=user_prof,
+            website_url=request.POST.get('website_url'),
+            cv=request.POST.get('cv'),
+            biography_text=request.POST.get('biography'),
+            address=address,
+            interests=request.POST.get('interests'),
+            avatar=request.POST.get('avatar'),
+            accept_terms=False,
+        )
+        if (request.POST.get('avatar')):
+            # Gets the original image to be cropped
+            photo = Image.open(request.POST.get('avatar'))
+            # Crops the image using values x,y,w,and h from the form
+            cropped_image = photo.crop((x, y, w + x, h + y))
+            # Splits the file name and the extension
+            filename, file_extension = os.path.splitext(os.path.basename(urlparse(contributor_profile.avatar.url).path))
+            cropped_image.save(settings.BASE_DIR + "/media/user_profiles/avatar/" + filename + file_extension)
+            contributor_profile.avatar = "user_profiles/avatar/" + filename + file_extension
+        topics = request.POST.getlist('area_of_expertise')
+        contributor_profile.save()
+        if topics:
+            for t in topics:
+                contributor_profile.expertise_topics.add(t)
+        contributor_profile.save()
+        message = 'Application has been saved.'
+        unfinished_contributor_qualification(academics_req, cert_req, affiliation_req, contributor_profile)
+        return HttpResponse(json.dumps({'message': message}))
 
 
 class ContributorUpdateView(LoginRequiredMixin, View):
@@ -400,19 +540,33 @@ class PublicContributorProfileView(View):
             user_prof = None
 
         try:
-            contrib_prof = ContributorProfile.objects.get(id=contrib_id)
+            contributor_prof = ContributorProfile.objects.get(id=contrib_id)
         except ObjectDoesNotExist:
             return HttpResponseRedirect(reverse_lazy('contribution:home'))
 
-        expertise_topics = contrib_prof.expertise_topics.all().order_by('name')
-        academic_prof = AcademicProfile.objects.filter(contributor_profile=contrib_prof)
-        certifications = ContributorCertification.objects.filter(contributor_profile=contrib_prof)
-        organizational_affiliations = OrganizationalAffiliation.objects.filter(contributor_profile=contrib_prof)
+        expertise_topics = contributor_prof.expertise_topics.all().order_by('name')
+        academic_prof = AcademicProfile.objects.filter(contributor_profile=contributor_prof)
+        certifications = ContributorCertification.objects.filter(contributor_profile=contributor_prof)
+        organizational_affiliations = OrganizationalAffiliation.objects.filter(contributor_profile=contributor_prof)
         highest_ranking_degree = get_contributor_highest_degree(academic_prof)
+        if user_prof.is_contributor:
+            contrib_prof = ContributorProfile.objects.get(user_profile=user_prof)
+            return render(request, 'public_contributor_profile.html',
+                  {
+                      'user_prof': user_prof,
+                      'contributor_prof': contributor_prof,
+                      'contrib_prof': contrib_prof,
+                      'expertise_topics': expertise_topics,
+                      "academic_prof": academic_prof,
+                      "certifications": certifications,
+                      "highest_ranking_degree": highest_ranking_degree,
+                      'organizational_affiliations': organizational_affiliations
+                  })
+
         return render(request, 'public_contributor_profile.html',
                       {
                           'user_prof': user_prof,
-                          'contrib_prof': contrib_prof,
+                          'contributor_prof': contributor_prof,
                           'expertise_topics': expertise_topics,
                           "academic_prof": academic_prof,
                           "certifications": certifications,
@@ -434,11 +588,20 @@ class ContributorListView(View):
         contributor_profiles = ContributorProfile.objects.filter(is_approved=True)
         if (user.is_authenticated):
             user_prof = UserProfile.objects.get(user=request.user)
-            return render(request, 'contributors.html',
-                          {
-                              'user_prof': user_prof,
-                              'contributors': get_list_of_contributor_credentials(contributor_profiles),
-                          })
+            if (user_prof.is_contributor):
+                    contrib_prof = ContributorProfile.objects.get(user_profile=user_prof)
+                    return render(request, 'contributors.html',
+                                  {
+                                      'user_prof': user_prof,
+                                      'contrib_prof':contrib_prof,
+                                      'contributors': get_list_of_contributor_credentials(contributor_profiles),
+                                  })
+            else:
+                return render(request, 'contributors.html',
+                              {
+                                  'user_prof': user_prof,
+                                  'contributors': get_list_of_contributor_credentials(contributor_profiles),
+                              })
         else:
             return render(request, 'contributors.html',
                           {

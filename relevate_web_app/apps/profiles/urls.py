@@ -6,6 +6,7 @@ from .views import authentication_views
 from .views import adviser_views
 from .views import contributor_views
 # All of these will be prefixed by "profile"
+
 urlpatterns = [
 
 	# User Registration/Login
@@ -47,10 +48,12 @@ urlpatterns = [
 	url(r'approve_contributor/$', contributor_views.ApproveButtonView.as_view(), name="approve_contributor"),
 	url(r'deny_contributor/$', contributor_views.DenyButtonView.as_view(), name="deny_contributor"),
 	url(r'contributors_create/$', contributor_views.ContributorCreateView.as_view(), name="contributor_create"),
+	url(r'contributors_temp_save/$', contributor_views.ContributorTempSaveView.as_view(), name="contributor_temp_save"),
+
 	url(r'contributors_update/$', contributor_views.ContributorUpdateView.as_view(), name="contributor_update"),
 	url(r'contributor_profile/$', contributor_views.ContributorProfileView.as_view(), name="contributor_profile"),
 	url(r'denied_contributors/$', contributor_views.DeniedContributorListView.as_view(), name="denied_contributor_list"),
 	url(r'public_contributor/(?P<contrib_id>[\d]+)/$', contributor_views.PublicContributorProfileView.as_view(), name="public_contributor_profile"),
-	url(r'^get-university-query/$', contributor_views.QueryUniversities.as_view(), name='query_universities')
+	url(r'^get-university-query/$', contributor_views.QueryUniversities.as_view(), name='query_universities'),
 
 ]

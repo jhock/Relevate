@@ -13,15 +13,9 @@
     </a>
     <div class="rv-content-card_contributor-info">
   		<div class="rv-content-card_avatar">
-        {% if p.contributor.avatar == ""  %}
           <div class="rv-avatar">
-            <img src="{% static "images/profile-placeholder.png" %}"{{ person.photo_url|default_if_none:'#' }} alt="logo"/>
+            <img src="{{ p.contributor.avatar_image_url }}">
           </div>
-        {% elif p.contributor.avatar != "" %}
-          <div class="rv-avatar">
-            <img src="{{ p.contributor.avatar.url }}">
-          </div>
-        {% endif %}
       </div>
       <div class="rv-content-card_contributor-name">
 		    {{ p.contributor }}

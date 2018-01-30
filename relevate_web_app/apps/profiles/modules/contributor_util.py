@@ -3,6 +3,7 @@ from ..models.contributor_model import ContributorProfile, AcademicProfile, Cont
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from ..modules.important_variables import DELIMETER_FOR_TABLES, DELIMETER_FOR_TABLES_LIST, DEGREE_RANKING_DIC
+from ..models.contributor_model import AcademicProfileUnfinished, OrganizationalAffiliationUnfinished, ContributorCertificationUnfinished
 
 
 
@@ -125,13 +126,50 @@ def update_contributor_qualification(academics_req, cert_req, org_req, contribut
 		name_of_certification = item['program']
 		cert_qualification = ContributorCertification(name_of_certification=name_of_certification,
 											contributor_profile=contributor_profile)
-
 		cert_qualification.save()
 	for item in affiliation_dic:
 		name_of_affiliation = item['affiliation']
 		affiliation_qualification = OrganizationalAffiliation(name_of_affiliation=name_of_affiliation, contributor_profile=contributor_profile)
 
 		affiliation_qualification.save()
+
+def unfinished_contributor_qualification(academics_req, cert_req, org_req, contributor_profile):
+	"""
+	updates a contributor's academic and certification profile upon update and create
+
+	:param academics_req:  list of academic profile created by the user
+
+	:param cert_req:  list of certifcations created by the user
+
+	:param contributor_profile: user's contribution profile
+
+	:param update: this parameter is true if the update is editing current profile and is false if it is creating a new one
+
+	"""
+	if academics_req:
+		academics_dic = convert_academic_req_to_dic(academics_req)
+		for item in academics_dic:
+			print(academics_dic)
+			degree = Degree.objects.get(name=item['degree'])
+			program = item['program']
+			institution = item['institute']
+			new_qualification = AcademicProfileUnfinished(degree=degree, program=program,
+												institution=institution, contributor_profile=contributor_profile)
+			new_qualification.save()
+	if cert_req:
+		cert_dic = convert_certificate_req_to_dic(cert_req)
+		for item in cert_dic:
+			name_of_certification = item['program']
+			cert_qualification = ContributorCertificationUnfinished(name_of_certification=name_of_certification,
+												contributor_profile=contributor_profile)
+			cert_qualification.save()
+	if org_req:
+		affiliation_dic = convert_affiliation_req_to_dic(org_req)
+		for item in affiliation_dic:
+			name_of_affiliation = item['affiliation']
+			affiliation_qualification = OrganizationalAffiliationUnfinished(name_of_affiliation=name_of_affiliation, contributor_profile=contributor_profile)
+			affiliation_qualification.save()
+
 
 def convert_academic_req_to_dic(academics_request):
 	"""

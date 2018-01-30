@@ -4,7 +4,6 @@ from ..models.adviser_model import Adviser
 from ...contribution.models.topic_model import Topics
 from ..models.contributor_model import Degree
 
-
 class AdviserModelChoiceField(forms.ModelChoiceField):
 	def label_from_instance(self, obj):
 		return "%s (%s)" % (obj.__str__(), obj.contributor_profile.user_profile.user.username)
@@ -28,6 +27,7 @@ class ListTextWidget(forms.TextInput):
 
         return (text_html + data_list)
 
+
 class ContributorForm(forms.Form):
 	# Changed to false to prevent update page from throwing a fit
 	cv = forms.FileField(label='Upload CV (must be a .pdf)', required=False, 
@@ -49,8 +49,7 @@ class ContributorForm(forms.Form):
 	institution = forms.CharField(label="Institution",required=False,
 								  widget=forms.TextInput(attrs={'placeholder': 'Institution ex:Kansas State University',
 												'class': 'uk-search-field uk-input uk-form-width-large'}))
-	website_url = forms.URLField(label="Website", widget=forms.TextInput(attrs={'placeholder': 'Website URL', 
-
+	website_url = forms.URLField(label="Website", widget=forms.TextInput(attrs={'placeholder': 'Website URL',
 												'class': 'uk-input uk-form-width-large'}), required=False)
 	biography = forms.CharField(max_length=2999, widget=forms.Textarea(attrs={'placeholder': 'Write a brief biography about yourself.',
 											'style': 'font-size: 16px; width: 100%; overflow:scroll;resize:none;'}))
@@ -71,6 +70,7 @@ class ContributorForm(forms.Form):
 													'class': 'uk-search-field uk-input uk-form-width-large'}))
 
 	organizational_affiliation = forms.CharField(label="Organizational Affiliations", required=False)
+
 
 	# widget = forms.TextInput(attrs={'placeholder': 'Organizational Affiliation ex:NCFR',
 	# 								'class': 'uk-search-field uk-input uk-form-width-large'})

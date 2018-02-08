@@ -48,8 +48,7 @@ INSTALLED_APPS = [
 	'storages',
 	'rest_framework',
 	'ckeditor',
-	'ckeditor_uploader',
-	'formtools'
+	'ckeditor_uploader'
 
 	#formset-dependencies
 ]

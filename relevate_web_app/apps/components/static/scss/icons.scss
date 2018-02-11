@@ -1,0 +1,85 @@
+@import "../../../../static/scss/base/variables";
+
+@mixin iconSize($size) {
+  width: $size;
+  height: $size;
+}
+
+@mixin iconColor($color) {
+  svg {
+    g {
+      fill: $color;
+    }
+  }
+}
+
+@mixin iconRotate($rotate) {
+  svg {
+    transform: rotate($rotate);
+  }
+}
+
+.rv-icon {
+  display: inline-block;
+  
+  //------------
+  //  size
+  //------------
+  &.x-small {
+    @include iconSize(0.875rem);
+  }
+
+  &.small {
+    @include iconSize(1rem);
+  }
+
+  &.medium {
+    @include iconSize(1.25rem);
+  }
+
+  &.large {
+    @include iconSize(2rem);
+  }
+
+  &.fill {
+    @include iconSize(100%);
+  }
+
+  //------------
+  //  color
+  //------------
+  &.primary {
+    @include iconColor($rv-color-primary);
+  }
+
+  &.inverse {
+    @include iconColor($rv-color-white);
+  }
+
+  &.dark {
+    @include iconColor($rv-color-dark);
+  }
+
+  &.neutral{
+    @include iconColor($rv-color-neutral);
+  }
+
+  //------------
+  //  rotate
+  //------------
+  &.rotate-0 {
+    @include iconRotate(0deg);
+  }
+
+  &.rotate-90 {
+    @include iconRotate(90deg);
+  }
+
+  &.rotate-180 {
+    @include iconRotate(180deg);
+  }
+
+  &.rotate-270 {
+    @include iconRotate(270deg);
+  }
+}

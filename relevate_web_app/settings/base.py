@@ -89,6 +89,8 @@ TEMPLATES = [
 			],
 			'libraries':{
         'dropdown_menu_tags': 'apps.components.templatetags.dropdown_menu_tags',
+       	'icon_tags': 'apps.components.templatetags.icon_tags',
+        'select_tags': 'apps.components.templatetags.select_tags',
         'text_input_tags': 'apps.components.templatetags.text_input_tags',
         'component_assets': 'apps.components.templatetags.component_assets',
         'example_tags': 'apps.styleguide.templatetags.example_tags'

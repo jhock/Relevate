@@ -12,8 +12,16 @@ def dropdown_menu_assets():
 def button_assets():
   return {}
 
+@register.inclusion_tag('icons/assets.html')
+def icon_assets():
+  return {}
+
 @register.inclusion_tag('links/assets.html')
 def link_assets():
+  return {}
+
+@register.inclusion_tag('select/assets.html')
+def select_assets():
   return {}
 
 @register.inclusion_tag('text_input/assets.html')

@@ -1,0 +1,42 @@
+{% load icon_tags %}
+{% load text_input_tags %}
+
+<span class="rv-select">
+  {% text_input
+    label=label 
+    id=id 
+    placeholder=placeholder
+    icon="arrow-line"
+    onclick="handleSelectClick(event)"
+    onkeydown="handleSelectKeyDown(event)"
+    onkeyup="handleSelectKeyUp(event)"
+    onfocus="handleSelectInputFocus(event)"
+    onblur="handleSelectInputBlur(event)"
+    input=alt_input
+    role="combobox"
+    aria-owns=options_id
+    aria-controls=options_id
+    aria-expanded="false"
+    aria-haspopup="true"
+  %}
+  <ul 
+    class="rv-select_dropdown"
+    role="listbox"
+    tabindex="-1"
+    id="{{options_id}}"
+  >
+    {% for option in options %}
+      <li
+        class="rv-select_option"
+        role="option"
+        tabindex="-1"
+        onclick="handleSelectOptionClick(event)"
+        onmouseover="handleSelectOptionMouseOver(event)"
+        aria-selected="false"
+      >
+        {{option}}
+      </li>
+    {% endfor %}
+    <li class="rv-select_option--placeholder">No results</li>
+  </ul>
+</span>

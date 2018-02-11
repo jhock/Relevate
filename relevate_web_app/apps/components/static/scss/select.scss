@@ -1,0 +1,59 @@
+@import "../../../../static/scss/base/variables";
+
+$option-height: 2rem;
+$max-options: 6;
+
+.rv-select {
+  input {
+    &:read-only {
+      cursor: pointer;
+    }
+  }
+  position: relative;
+}
+
+.rv-select_dropdown {
+  display: none;
+  padding: 0.25rem 0;
+  position: absolute;
+  background: $rv-color-white;
+  border-radius: 0.25rem;
+  border: 1px solid $rv-color-light-gray;
+  box-shadow: $rv-box-shadow;
+  top: 2.25rem;
+  left: 0;
+  right: 0;
+  max-height: $option-height * $max-options;
+  overflow-y: scroll;
+  z-index: 1;
+}
+
+.rv-select_option {
+  list-style: none;
+  padding: 0.25rem 0.75rem;
+  cursor: pointer;
+  font-weight: $rv-font-weight-bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.rv-select_option--highlighted {
+  background: $rv-color-primary;
+  color: $rv-color-white;
+}
+
+.rv-select_option--hidden {
+  display: none;
+}
+
+.rv-select_option--placeholder {
+  display: none;
+  padding: 0.25rem 0.75rem;
+  font-weight: $rv-font-weight-bold;
+  font-style: italic;
+}

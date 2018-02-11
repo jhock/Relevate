@@ -22,21 +22,18 @@ $(document).ready(function() {
 			Add academic profile row
 		*/
 		var academicProgram = $("#id_program").val();
-		console.log(academicProgram, " acad");
-		var degreeVal = $("#id_degree option:selected").val();
-		console.log(degreeVal, " ");
+		var degree = $("#id_degree").val();
 		var institution = $("#id_institution").val();
-		console.log(institution, " ");
-		var degree = $("#id_degree option:selected").text();
+
 		var tableId = academicId;
-		if(academicProgram && degreeVal && institution){
+		if(academicProgram && degree && institution){
 			var academicGrid = "<tr class='acaRow' id=acaProf"+academicId+">" +
 					"<td>" +
 						"<div  class='uk-form-controls'><span class='program' value="+academicProgram+">" + academicProgram +
 						"</span></div>" +
 					"</td>" +
 					"<td>" +
-						"<div  class='uk-form-controls'><span class='degree' value="+degreeVal+">" + degree +
+						"<div  class='uk-form-controls'><span class='degree' value="+degree+">" + degree +
 						"</span></div>" +
 					"</td>" +
 					"<td>" +

@@ -16,40 +16,41 @@ from ..utils import (
   amend_html_props_to_tag,
   get_prop_from_tag
 )
+import pdb
 
 register = template.Library()
 
 @register.tag('text_input')
 def text_input(parser, token):
   props = token.split_contents()[1:]
-  try:
-    if not fetch_prop('form', props):
-      enforce_required_props(['label'], props)
-  except TemplateSyntaxError as e:
-    raise TemplateSyntaxError('Error [' + props[0] + ']: ' + str(e))
+
+  if not fetch_prop('form', props):
+    enforce_required_props(['label'], props)
 
   props = create_chained_function('onfocus', 'handleTextInputFocus(event);', props)
   props = create_chained_function('onblur', 'handleTextInputBlur(event);', props)
 
-  picked_props, input_props = split_props(['variant', 'label', 'id', 'input', 'form'], props)
+  picked_props, input_props = split_props(['variant', 'label', 'id', 'icon', 'input', 'form'], props)
   
   label = get_prop_value('label', picked_props, None)
   input_id = get_prop_value('id', picked_props, str(uuid.uuid4()))
+  icon = get_prop_value('icon', picked_props, None)
   alt_input = get_prop_value('input', picked_props, None)
   alt_form = get_prop_value('form', picked_props, None)
   variant = get_prop_value('variant', picked_props, 'text')
-  
+
   if variant != 'text' and variant != 'password' and variant != 'email':
     variant = 'text'
 
-  return TextInput(variant, label, input_id, alt_input, alt_form, input_props)
+  return TextInput(variant, label, input_id, icon, alt_input, alt_form, input_props)
 
 
 class TextInput(Node):
-  def __init__(self, variant, label, input_id, alt_input, alt_form, input_props):
+  def __init__(self, variant, label, input_id, icon, alt_input, alt_form, input_props):
     self.variant = variant
     self.label = label
     self.input_id = input_id,
+    self.icon = icon,
     self.alt_input = alt_input,
     self.alt_form = alt_form,
     self.input_props = input_props
@@ -62,6 +63,7 @@ class TextInput(Node):
       'variant': resolve_variable(self.variant, context),
       'label' : resolve_variable(self.label, context),
       'id': resolve_variable(self.input_id, context),
+      'icon': resolve_variable(self.icon, context),
       'alt_input': resolve_variable(self.alt_input, context),
       'alt_form': resolve_variable(self.alt_form, context)
     })

@@ -1,6 +1,7 @@
 from django import template
 from django.template.base import TemplateSyntaxError
 import re
+import pdb
 
 def parse_tag(parser, token, closetag):
   nodelist = parser.parse((closetag,))
@@ -76,9 +77,11 @@ def split_props(requested_props, props):
 def create_chained_function(query, function_to_chain, props):
   index = prop_index(query, props)
   if index > -1:
-    if props[index][:-1] != ';':
-      props[index] = props[index] + ';'
-    props[index] = props[index] + function_to_chain
+    close_str = props[index][-1:]
+    function_prop = props[index][:-1]
+    if function_prop[:-1] != ';':
+      function_prop = function_prop + ';'
+    props[index] = function_prop + function_to_chain + close_str
   else:
     props.append(query + '=' + function_to_chain)
   return props
@@ -102,14 +105,14 @@ def resolve_variable(prop_value, context):
 def resolve_prop_variables(props, context):
   for i in range(0, len(props)):
     parsed = parse_prop(props[i])
-    if len(parsed) > 1:
+    if parsed[1] is not None:
       props[i] = parsed[0] + '=' + resolve_variable(parsed[1], context)
   return props
 
 def convert_props_to_html(props):
   for i in range(0, len(props)):
     parsed = parse_prop(props[i])
-    if len(parsed) > 1:
+    if parsed[1] is not None:
       props[i] = parsed[0] + '=' + '\"' + parsed[1] + '\"'
   return ' '.join(props)
 

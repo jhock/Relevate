@@ -35,6 +35,7 @@
   overflow: visible;
   background: transparent;
   padding: 0.8rem 0;
+  padding-right: 1.25rem;
   transition: all 0.1s ease-in;
 
   &::placeholder {
@@ -45,4 +46,12 @@
     outline: none;
     border-color: $rv-color-primary;
   }
+}
+
+.rv-text-input_icon {
+  position: absolute;
+  display: block;
+  bottom: 0.6rem;
+  right: 0;
+  pointer-events: none;
 }

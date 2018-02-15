@@ -1,3 +1,5 @@
+{% load button_tags %}
+
 <div class="rv-home-header">
   <div class="rv-home-header_container">
     <div class="rv-home-header_logo">
@@ -10,7 +12,7 @@
       </p>
     </div>
     <div class="rv-home-header_button">
-      <a class="rv-button" href="{% url 'profile:registration' %}">Get Started</a>
+      {% button variant="primary" href="profile:registration"%}Get Started{% end_button %}
     </div>
   </div>
 </div>

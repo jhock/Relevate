@@ -1,7 +1,6 @@
 from django import template
 from django.template.base import TemplateSyntaxError
 import re
-import pdb
 
 def parse_tag(parser, token, closetag):
   nodelist = parser.parse((closetag,))

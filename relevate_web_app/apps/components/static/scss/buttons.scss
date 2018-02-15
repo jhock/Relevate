@@ -3,17 +3,34 @@
 
 @mixin baseButton($color, $background, $border) {
   position: relative;
-  border-radius: 2em;
+  border-radius: 2rem;
   box-sizing: border-box;
   border: 2px solid $border;
   color: $color;
   background: $background;
   font-size: 1rem;
   font-weight: $rv-font-weight-semibold;
-  padding: 0.4em 1em;
+  padding: 0.2rem 1rem;
   transition: background 200ms linear;
   text-decoration: none;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  user-select: none;
+  overflow: visible;
+  margin: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  vertical-align: middle;
+  text-decoration: none;
+  touch-action: manipulation;
+  height: 2.25rem;
+
+  &.fluid-width {
+    width: 100%;
+  }
 
   &:hover {
     background: darken($background, 10%);
@@ -25,17 +42,33 @@
     box-shadow: inset 0 0 0.15rem $rv-color-dark;
   }
 
+  &::-moz-focus-inner {
+    border: 0;
+  }
+
   @include buttonFocus(0.3rem, 0.33rem, 0.3rem, 0.32rem);
 }
 
-.rv-button {
-  @include baseButton($rv-color-white, $rv-color-primary, $rv-color-primary);
-}
-
-.rv-button-secondary {
+.rv-button-default {
   @include baseButton($rv-color-white, $rv-color-neutral, $rv-color-neutral);
 }
 
-.fill-button {
-  width: 100%;
+.rv-button-primary {
+  @include baseButton($rv-color-white, $rv-color-primary, $rv-color-primary);
+}
+
+.rv-button-ghost {
+  @include baseButton($rv-color-primary, $rv-color-white, $rv-color-primary)
+
+  &:hover {
+    background: lighten($rv-color-primary, 44%);
+  }
+
+  &:active {
+    background: lighten($rv-color-primary, 40%);
+  }
+}
+
+.rv-button-icon {
+  margin-right: 0.2rem;
 }

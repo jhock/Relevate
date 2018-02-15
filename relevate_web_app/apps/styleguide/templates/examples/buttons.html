@@ -1,5 +1,6 @@
 {% extends "styleguide_layout.html" %}
 {% load example_tags %}
+{% load button_tags %}
 
 {% block content%}
   {% example with
@@ -12,17 +13,68 @@
   {% end_example %}
 
   {% example with 
-    heading="Default" 
-    caption="For main actions"  
+    heading="Primary" 
+    caption="For secondary actions. There should only be one primary button per page."  
   %}
-<button class='rv-button'>Default button</button>
+{% button variant="primary" %}
+  Submit
+{% end_button %}
   {% end_example %}
 
   {% example with 
-    heading="Secondary" 
-    caption="Use the secondary button in conjunction with the default button when there are multiple actions, such as a confirmation" 
+    heading="Button groups" 
+    caption="Using a primary and default button together."  
   %}
-<button class='rv-button'>Confirm</button>
-<button class='rv-button-secondary'>Cancel</button>
+{% button %}
+  Submit
+{% end_button %}
+{% button variant="primary" %}
+  Cancel
+{% end_button %}
+  {% end_example %}
+
+  {% example with 
+    heading="Button with fluid width" 
+    caption="With the fluid_width prop set, the button expands to fill the width of its container."  
+  %}
+{% button 
+  variant="primary"
+  fluid_width="True"
+%}
+  Submit
+{% end_button %}
+  {% end_example %}
+
+  {% example with 
+    heading="Button with an icon" 
+    caption="Specify an icon to render inside the button."  
+  %}
+{% button 
+  variant="primary"
+  icon="add"
+%}
+  Submit
+{% end_button %}
+  {% end_example %}
+
+  {% example with 
+    heading="Ghost variant" 
+    caption=""  
+  %}
+{% button 
+  variant="ghost"
+  icon="edit" 
+%}
+  Create Account
+{% end_button %}
+  {% end_example %}
+
+  {% example with 
+    heading="Button with href set" 
+    caption="If a button is supplied with an href prop, it will render as a link with button styling"  
+  %}
+{% button href="profile:registration" %}
+  Create Account
+{% end_button %}
   {% end_example %}
 {% endblock content %}

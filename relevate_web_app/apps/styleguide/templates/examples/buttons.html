@@ -12,9 +12,17 @@
 {% button_assets %}
   {% end_example %}
 
+  {% example with
+    heading=""
+    caption="Within your template file, load the custom button tags"
+    codeOnly="True"
+  %}
+{% load button_tags %}
+  {% end_example %}
+
   {% example with 
     heading="Primary" 
-    caption="For secondary actions. There should only be one primary button per page."  
+    caption="For primary actions. There should only be one primary button per page."  
   %}
 {% button variant="primary" %}
   Submit
@@ -26,10 +34,10 @@
     caption="Using a primary and default button together."  
   %}
 {% button %}
-  Submit
+  Cancel
 {% end_button %}
 {% button variant="primary" %}
-  Cancel
+  Submit
 {% end_button %}
   {% end_example %}
 

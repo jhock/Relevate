@@ -24,7 +24,7 @@
     heading="Primary" 
     caption="For primary actions. There should only be one primary button per page."  
   %}
-{% button variant="primary" %}
+{% button %}
   Submit
 {% end_button %}
   {% end_example %}
@@ -33,10 +33,10 @@
     heading="Button groups" 
     caption="Using a primary and default button together."  
   %}
-{% button %}
+{% button color="dark" %}
   Cancel
 {% end_button %}
-{% button variant="primary" %}
+{% button %}
   Submit
 {% end_button %}
   {% end_example %}
@@ -46,7 +46,7 @@
     caption="With the fluid_width prop set, the button expands to fill the width of its container."  
   %}
 {% button 
-  variant="primary"
+  color="primary"
   fluid_width="True"
 %}
   Submit
@@ -58,7 +58,7 @@
     caption="Specify an icon to render inside the button."  
   %}
 {% button 
-  variant="primary"
+  color="primary"
   icon="add"
 %}
   Submit

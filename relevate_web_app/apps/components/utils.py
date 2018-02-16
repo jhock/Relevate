@@ -1,6 +1,7 @@
 from django import template
 from django.template.base import TemplateSyntaxError
 import re
+import pdb
 
 def parse_tag(parser, token, closetag):
   nodelist = parser.parse((closetag,))
@@ -134,3 +135,12 @@ def get_prop_from_tag(query, markup, tag):
   else:
     return None
 
+def replace_tag(markup, tag, replace):
+  open_tag = '<' + tag
+  open_idx = markup.find(open_tag) + len(open_tag)
+  markup = '<' + replace + markup[open_idx:]
+
+  close_tag = '</' + tag + '>'
+  close_idx = markup.find(close_tag) + len(close_tag)
+  markup = markup[:close_idx] + '</' + replace + '>'
+  return markup

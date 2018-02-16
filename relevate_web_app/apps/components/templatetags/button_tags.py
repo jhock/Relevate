@@ -9,6 +9,7 @@ from ..utils import (
   resolve_prop_variables,
   convert_props_to_html,
   amend_html_props_to_tag,
+  replace_tag
 )
 
 register = template.Library()
@@ -18,20 +19,22 @@ def button(parser, token):
   children, props = parse_tag(parser, token, 'end_button')
   props = token.split_contents()[1:]
 
-  picked_props, button_props = split_props(['variant', 'fluid_width', 'icon', 'href'], props)
+  picked_props, button_props = split_props(['variant', 'color', 'fluid_width', 'icon', 'href'], props)
 
-  variant = get_prop_value('variant', picked_props, 'default')
+  variant = get_prop_value('variant', picked_props, 'solid')
+  color = get_prop_value('color', picked_props, 'primary')
   fluid_width = get_prop_value('fluid_width', picked_props, 'False')
   icon = get_prop_value('icon', picked_props, None)
   href = get_prop_value('href', picked_props, None)
 
-  return Button(children, variant, fluid_width, icon, href, button_props)
+  return Button(children, variant, color, fluid_width, icon, href, button_props)
 
 
 class Button(Node):
-  def __init__(self, children, variant, fluid_width, icon, href, button_props):
+  def __init__(self, children, variant, color, fluid_width, icon, href, button_props):
     self.children = children
     self.variant = variant
+    self.color = color
     self.fluid_width = fluid_width if fluid_width == 'True' else None
     self.icon = icon
     self.href = href
@@ -44,15 +47,18 @@ class Button(Node):
     context.update({
       'children': self.children.render(context),
       'variant': resolve_variable(self.variant, context),
+      'color': resolve_variable(self.color, context),
       'fluid_width' : resolve_variable(self.fluid_width, context),
       'icon': resolve_variable(self.icon, context),
       'href': resolve_variable(self.href, context)
     })
     markup = button_html.render(context)
-    return self.process_markup(markup)
+    return self.process_markup(markup, self.href)
 
-  def process_markup(self, markup):
+  def process_markup(self, markup, href):
     html_props = convert_props_to_html(self.button_props)
     markup = amend_html_props_to_tag(html_props, markup, 'button')
+    if href:
+      markup = replace_tag(markup, 'button', 'a')
 
     return markup

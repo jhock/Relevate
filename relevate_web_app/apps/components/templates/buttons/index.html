@@ -1,23 +1,10 @@
 {% load icon_tags %}
 
-{% if not href %}
-  <button class="rv-button-{{variant}} {% if fluid_width %} fluid-width {% endif %}">
-    {% if icon %}
-      <div class="rv-button-icon">
-        {% icon variant=icon title=icon %}
-      </div>
-    {% endif %}
-    {{children}}
-  </button>
-{% endif %}
-
-{% if href %}
-  <a href="{% url href %}" class="rv-button-{{variant}} {% if fluid_width %} fluid-width {% endif %}">
-    {% if icon %}
-      <div class="rv-button-icon">
-        {% icon variant=icon title=icon %}
-      </div>
-    {% endif %}
-    {{children}}
-  </a>
-{% endif %}
+<button class="rv-button {{color}} {{variant}}{% if fluid_width %} fluid-width {% endif %}" {% if href %} href="{% url href %}" {% endif %}>
+  {% if icon %}
+    <div class="rv-button-icon">
+      {% icon variant=icon title=icon %}
+    </div>
+  {% endif %}
+  {{children}}
+</button>

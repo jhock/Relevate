@@ -1,7 +1,59 @@
 {% load staticfiles %}
 {% load compress %}
+{% load select_tags %}
+{% load templatetag_handlebars %}
 
 <script src="{% static 'js/select.js' %}"></script>
 {% compress css %}
   <link rel="stylesheet" type="text/x-scss" href="{% static "scss/select.scss" %}" />
 {% endcompress %}
+
+{% tplhandlebars "rv_select" %}
+  {% select label={{label}} placeholder={{placeholder}} editable="True" %}
+    <option>rv_select_placeholder</option>
+  {% end_select %}
+{% endtplhandlebars %}
+
+<script>
+  function RvSelect(props) {
+    var selectProps = {
+      label: props.label,
+      placeholder: props.placeholder,
+      editable: props.editable,
+      options: props.options
+    }
+
+    var select = Handlebars.compile(document.getElementById('rv_select').innerHTML)
+    var markup = select(selectProps)
+
+    // Append the options manually client side here since we
+    // can't do it server side
+    var temp = document.createElement('div')
+    temp.innerHTML = markup
+    var menu = temp.getElementsByTagName('UL')[0]
+    var input = temp.getElementsByTagName('INPUT')[0]
+
+    var items = menu.getElementsByTagName('LI')
+    var item
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].textContent.trim() === 'rv_select_placeholder') {
+        item = items[i].cloneNode()
+        menu.removeChild(items[i])
+      }
+    }
+
+    for (var i = 0; i < selectProps.options.length; i++) {
+      var optionText = selectProps.options[i]
+      var option = item.cloneNode()
+      option.textContent = optionText
+      menu.appendChild(option)
+    }
+
+    if (!selectProps.editable) {
+      input.readOnly = true
+    }
+    ammendPropsToElement(omitProps(props, selectProps), input)
+
+    return temp.innerHTML
+  }
+</script>

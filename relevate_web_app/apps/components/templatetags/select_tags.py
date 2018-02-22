@@ -53,6 +53,8 @@ class Select(Node):
 
     if self.children:
       child_options = self.parse_options(self.children.render(context))
+    else:
+      child_options = ''
 
     select_html = get_template("select/index.html")
     context.update({

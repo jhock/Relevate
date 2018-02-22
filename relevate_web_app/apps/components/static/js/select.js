@@ -219,7 +219,7 @@ function hideMenu (menu, input) {
 }
 
 function showMenu (menu, input) {
-  menu.style.display = 'initial'
+  menu.style.display = 'block'
   input.setAttribute('aria-expanded', 'true')
   highlightSelectInitialOption(menu, input)
 }

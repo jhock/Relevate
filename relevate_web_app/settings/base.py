@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 	'django.contrib.sessions',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
+	'templatetag_handlebars',
 	'storages',
 	'rest_framework',
 	'ckeditor',
@@ -150,7 +151,7 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 STATIC_URL = '/static/'
 STATIC_DIRS = (os.path.join(BASE_DIR, 'static'))
-STATIC_ROOT = os.path.join(BASE_DIR,'static_assets')
+STATIC_ROOT = (os.path.join(BASE_DIR,'static_assets'))
 COMPRESS_ROOT = (os.path.join(BASE_DIR, 'static/__cache__'))
 
 STATICFILES_DIRS = [

@@ -72,6 +72,14 @@
   &.dark {
     @include buttonVariants($rv-color-neutral)
   }
+
+  [data-icon] {
+    margin-right: 0.4rem;
+  }
+}
+
+.rv-button-label {
+  margin: 0 0.5rem;
 }
 
 .rv-button-icon {

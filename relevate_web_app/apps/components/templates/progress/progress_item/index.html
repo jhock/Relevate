@@ -1,0 +1,24 @@
+{% load icon_tags %}
+<div class="rv-progress-item {{status}}" data-progress-item>
+  <div class="rv-progress-item_box">
+    <div class="rv-progress-item_box--start"></div>
+    <div class="rv-progress-item_icon">
+      {% if status == "active" %}
+        <div class="rv-progress-item_icon--cloud">
+          {% icon_cloud title="cloud" color="primary" size="x-large" %}
+        </div>
+      {% elif status == "complete" %}
+        {% icon_circle_check title="circle" color="primary" size="medium" %}
+      {% elif status == "initial" %}
+        {% icon_circle title="circle" color="light-gray" size="medium" %}
+      {% endif %}
+    </div>
+    <div class="rv-progress-item_box--end"></div>
+  </div>
+  <div class="rv-progress-item_text">
+    {{children}}
+    <span class="rv-progress-item_position">
+      {{position}}
+    </span>
+  </div>
+</div>

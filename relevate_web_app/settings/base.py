@@ -92,6 +92,7 @@ TEMPLATES = [
 				'button_tags': 'apps.components.templatetags.button_tags',
         'dropdown_menu_tags': 'apps.components.templatetags.dropdown_menu_tags',
        	'icon_tags': 'apps.components.templatetags.icon_tags',
+       	'progress_tags': 'apps.components.templatetags.progress_tags',
         'select_tags': 'apps.components.templatetags.select_tags',
         'text_input_tags': 'apps.components.templatetags.text_input_tags',
         'component_assets': 'apps.components.templatetags.component_assets',

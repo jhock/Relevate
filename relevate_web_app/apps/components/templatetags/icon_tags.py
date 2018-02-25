@@ -35,6 +35,18 @@ def icon_add(parser, token):
 def icon_arrow(parser, token):
   return create_icon(parser, token, 'arrow')
 
+@register.tag('icon_cloud')
+def icon_cloud(parser, token):
+  return create_icon(parser, token, 'cloud')
+
+@register.tag('icon_circle')
+def icon_circle(parser, token):
+  return create_icon(parser, token, 'circle')
+
+@register.tag('icon_circle_check')
+def icon_circle_check(parser, token):
+  return create_icon(parser, token, 'circle_check')
+
 @register.tag('icon_edit')
 def icon_edit(parser, token):
   return create_icon(parser, token, 'edit')

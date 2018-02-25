@@ -16,6 +16,10 @@ def button_assets():
 def icon_assets():
   return {}
 
+@register.inclusion_tag('progress/assets.html')
+def progress_assets():
+  return {}
+
 @register.inclusion_tag('links/assets.html')
 def link_assets():
   return {}

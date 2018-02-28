@@ -4,7 +4,7 @@ python ../manage.py dumpdata --indent 4 --exclude=contenttypes --exclude=auth.Pe
 
 MYSQL=`which mysql`
 
-Q1="DROP DATABASE relevate_dev_db2;"
+Q1="DROP DATABASE relevate_dev_db;"
 SQL="${Q1}"
 $MYSQL -u root -p -e "$SQL"
 

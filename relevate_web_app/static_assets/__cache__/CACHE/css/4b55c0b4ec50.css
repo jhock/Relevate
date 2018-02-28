@@ -1,0 +1,81 @@
+/**
+----------------
+  Colors
+----------------
+**/
+/**
+----------------
+  Typography
+----------------
+**/
+/**
+----------------
+  Navbar
+----------------
+**/
+/**
+----------------
+  Shadows
+----------------
+**/
+/**
+----------------
+  Cards
+----------------
+**/
+/**
+----------------
+  Breakpoints
+----------------
+**/
+/* line 5, apps/components/static/scss/dropdown_menu.scss */
+.rv-dropdown-menu_container {
+  position: relative; }
+
+/* line 9, apps/components/static/scss/dropdown_menu.scss */
+.rv-dropdown-menu {
+  position: absolute;
+  width: 14rem;
+  background: #ffffff;
+  box-shadow: 0 0.3rem 0.3rem rgba(0, 0, 0, 0.3);
+  transform: translateX(-50%);
+  left: 50%;
+  top: 2rem;
+  display: none;
+  padding: 1rem;
+  border-radius: 0.25rem;
+  border: 1px solid #D6D6D6; }
+
+/* line 23, apps/components/static/scss/dropdown_menu.scss */
+.rv-dropdown-menu_trigger {
+  cursor: pointer; }
+
+/* line 27, apps/components/static/scss/dropdown_menu.scss */
+.rv-dropdown-menu_item {
+  display: block;
+  padding: 0.25rem;
+  color: #3A3A3A;
+  text-decoration: none;
+  box-sizing: border-box;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  font-size: 0.875rem;
+  border-radius: 999rem; }
+  /* line 38, apps/components/static/scss/dropdown_menu.scss */
+  .rv-dropdown-menu_item:focus {
+    outline: none;
+    color: #ffffff;
+    background: #246FF2;
+    font-weight: 700; }
+  /* line 45, apps/components/static/scss/dropdown_menu.scss */
+  .rv-dropdown-menu_item:hover {
+    font-weight: 700; }
+
+/* line 50, apps/components/static/scss/dropdown_menu.scss */
+.rv-dropdown-menu_header {
+  font-weight: 700; }
+
+/* line 54, apps/components/static/scss/dropdown_menu.scss */
+.rv-dropdown-menu_separator {
+  margin: 1rem 0;
+  border-bottom: 1px solid #3A3A3A; }

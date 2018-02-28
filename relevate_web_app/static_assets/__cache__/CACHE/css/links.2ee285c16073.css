@@ -1,0 +1,41 @@
+/**
+----------------
+  Colors
+----------------
+**/
+/**
+----------------
+  Typography
+----------------
+**/
+/**
+----------------
+  Navbar
+----------------
+**/
+/**
+----------------
+  Shadows
+----------------
+**/
+/**
+----------------
+  Cards
+----------------
+**/
+/**
+----------------
+  Breakpoints
+----------------
+**/
+/* line 3, apps/components/static/scss/links.scss */
+.rv-link {
+  color: #246FF2;
+  text-decoration: none; }
+  /* line 7, apps/components/static/scss/links.scss */
+  .rv-link:focus, .rv-link:hover {
+    text-decoration: underline;
+    outline: none; }
+  /* line 13, apps/components/static/scss/links.scss */
+  .rv-link:active {
+    color: #0d56d6; }

@@ -6,7 +6,9 @@
 
 $(document).ready(function()
 {
-    console.log("hello");
+    var currentTab = 0; // Current tab is set to be the first tab (0)
+    showTab(currentTab); // Display the current tab
+
 	verificationFlags = {
 		mentor: {
 			sectionDone: false,
@@ -254,69 +256,260 @@ $(document).ready(function()
         $("#modalCrop").modal("hide");
       });
 
+    function showTab(n) {
+      // This function will display the specified tab of the form ...
+      var x = document.getElementsByClassName("tab");
+      x[n].style.display = "block";
+      // ... and fix the Previous/Next buttons:
+      if (n == 0) {
+        document.getElementById("prevBtn").style.display = "none";
+      } else {
+        document.getElementById("prevBtn").style.display = "inline";
+      }
+      if (n == (x.length - 1)) {
+        document.getElementById("nextBtn").innerHTML = "Submit";
+      } else {
+        document.getElementById("nextBtn").innerHTML = "Next";
+      }
+      // ... and run a function that displays the correct step indicator:
+      fixStepIndicator(n)
+    }
 
-	$('#submit-btn').on('click', function()
+//    function nextPrev(n) {
+    $('#prevBtn').on('click', function()
 	{
-		verifySection(verificationFlags.professional_info);
-		var good = true;
-		var errorMsg = "<ul>";
-		if (mentorNeeded)
-		{
-			console.log("MENTOR");
-			if (!verificationFlags.mentor.sectionDone)
-			{
-				good = false;
-				errorMsg += "<li><p>" + verificationFlags.mentor.message + "</p></li>";
-			}
-		}
+        // This function will figure out which tab to display
+        var x = document.getElementsByClassName("tab");
+        // Exit the function if any field in the current tab is invalid:
+        if (-1 == 1 && !validateForm()) return false;
+        // Hide the current tab:
+        x[currentTab].style.display = "none";
+        // Increase or decrease the current tab by 1:
+        currentTab = currentTab + -1;
+        // if you have reached the end of the form... :
+        if (currentTab >= x.length) {
+        //...the form gets submitted:
+        $("form").submit();
+        return false;
+        }
+        // Otherwise, display the correct tab:
+        showTab(currentTab);
+    });
 
-		if ($("#acaProf tr.acaRow").length == 0)
-		{
-			good = false;
-			errorMsg += "<li><p>" + verificationFlags.degrees.message + "</p></li>";
-		}
+        $('#nextBtn').on('click', function()
+	{
+	    console.log("next");
+        // This function will figure out which tab to display
+        var x = document.getElementsByClassName("tab");
+        // Exit the function if any field in the current tab is invalid:
+        if (1 == 1 && !validateForm()) return false;
+        // Hide the current tab:
+        x[currentTab].style.display = "none";
+        // Increase or decrease the current tab by 1:
+        currentTab = currentTab + 1;
+        // if you have reached the end of the form... :
+        if (currentTab >= x.length) {
+        //...the form gets submitted:
+        $("form").submit();
+        return false;
+        }
+        // Otherwise, display the correct tab:
+        showTab(currentTab);
+    });
 
-		if (verificationFlags.topics.counter == 0)
-		{
-			good = false;
-			errorMsg += "<li><p>" + verificationFlags.topics.message + "</p></li>";
-		}
+    function validateForm() {
+        // This function deals with validation of the form fields
+        verifySection(verificationFlags.professional_info);
+        var valid = true;
+        var errorMsg = "<ul>";
 
-		if (!verificationFlags.professional_info.sectionDone)
-		{
-			console.log("PROF");
-			console.log(verificationFlags.professional_info.elems);
-			good = false;
-			if (!verificationFlags.professional_info.elems.address.done)
-			{
-				errorMsg += "<li><p>" + verificationFlags.professional_info.elems.address.message + "</p></li>";
-			}
-			if (!verificationFlags.professional_info.elems.city.done)
-			{
-				errorMsg += "<li><p>" + verificationFlags.professional_info.elems.city.message + "</p></li>";
-			}
-			if (!verificationFlags.professional_info.elems.zip.done)
-			{
-				errorMsg += "<li><p>" + verificationFlags.professional_info.elems.zip.message + "</p></li>";
-			}
-		}
+        console.log("validating");
+        //if we are on the first tab, check that fields are filled out
+        if (currentTab == 0)
+        {
+            if (mentorNeeded)
+            {
+                console.log("MENTOR");
+                if (!verificationFlags.mentor.sectionDone)
+                {
+                    valid = false;
+                    errorMsg += "<li><p>" + verificationFlags.mentor.message + "</p></li>";
+                }
+            }
+            if ($("#acaProf tr.acaRow").length == 0)
+            {
+                valid = false;
+                console.log("first");
+                errorMsg += "<li><p>" + verificationFlags.degrees.message + "</p></li>";
+            }
+        }
 
-		if (!verificationFlags.terms.sectionDone)
-		{
-			console.log("TERMS");
-			good = false;
-			errorMsg += "<li><p>" + verificationFlags.terms.elems.checkbox.message + "</p></li>";
-		}
+        //check second tab
+        if (currentTab == 1)
+        {
+            if (verificationFlags.topics.counter == 0)
+            {
+                valid = false;
+                errorMsg += "<li><p>" + verificationFlags.topics.message + "</p></li>";
+            }
+        }
 
-		if (good)
-		{
-			$("form").submit();
-		}
-		else
-		{
-			UIkit.modal.alert(errorMsg + "</ul>");
-		}
+        //check third tab
+        if (currentTab == 2)
+        {
+            if (!verificationFlags.professional_info.sectionDone)
+            {
+                console.log("PROF");
+                console.log(verificationFlags.professional_info.elems);
+                valid = false;
+                if (!verificationFlags.professional_info.elems.address.done)
+                {
+                    errorMsg += "<li><p>" + verificationFlags.professional_info.elems.address.message + "</p></li>";
+                }
+                if (!verificationFlags.professional_info.elems.city.done)
+                {
+                    errorMsg += "<li><p>" + verificationFlags.professional_info.elems.city.message + "</p></li>";
+                }
+                if (!verificationFlags.professional_info.elems.zip.done)
+                {
+                    errorMsg += "<li><p>" + verificationFlags.professional_info.elems.zip.message + "</p></li>";
+                }
+            }
+        }
+
+        //check fourth and final tab
+        if (currentTab == 3)
+        {
+            if (!verificationFlags.terms.sectionDone)
+            {
+                console.log("TERMS");
+                valid = false;
+                errorMsg += "<li><p>" + verificationFlags.terms.elems.checkbox.message + "</p></li>";
+            }
+        }
+        // If the valid status is true, mark the step as finished and valid:
+        if (valid) {
+          document.getElementsByClassName("step")[currentTab].className += " finish";
+        }
+        if (!valid) {
+            UIkit.modal.alert(errorMsg + "</ul>");
+        }
+        console.log(valid);
+        return valid; // return the valid status
+    }
+
+    function fixStepIndicator(n) {
+      // This function removes the "active" class of all steps...
+      var i, x = document.getElementsByClassName("step");
+      for (i = 0; i < x.length; i++) {
+        x[i].className = x[i].className.replace(" active", "");
+      }
+      //... and adds the "active" class to the current step:
+      x[n].className += " active";
+    }
+
+    	var frm = $("form");
+
+        $('#save').on('click', function()
+	{
+	    var contributor_temp_save_url = document.getElementById("contributor_temp_save").value;
+	    $('form').attr('action', contributor_temp_save_url);
+	    console.log("saved");
+	    $.ajaxSetup({
+            data: {csrfmiddlewaretoken: '{{ csrf_token }}'}
+        });
+        $.ajax({
+            type: "POST",
+            url: frm.attr('action'),
+            data: frm.serialize(),
+            success: function (data) {
+                $("#demo").html(data);
+            },
+            error: function(data) {
+                $("#demo").html("Something went wrong!");
+            }
+        });
+
 	});
+
+//	$('#submit-btn').on('click', function()
+//	{
+//		verifySection(verificationFlags.professional_info);
+//		var good = true;
+//		var errorMsg = "<ul>";
+//
+//		//if we are on the first tab, check that fields are filled out
+//		if (currentTab == 0)
+//        {
+//            if (mentorNeeded)
+//            {
+//                console.log("MENTOR");
+//                if (!verificationFlags.mentor.sectionDone)
+//                {
+//                    good = false;
+//                    errorMsg += "<li><p>" + verificationFlags.mentor.message + "</p></li>";
+//                }
+//            }
+//            if ($("#acaProf tr.acaRow").length == 0)
+//            {
+//                good = false;
+//                errorMsg += "<li><p>" + verificationFlags.degrees.message + "</p></li>";
+//            }
+//        }
+//
+//        //check second tab
+//        if (currentTab == 1)
+//        {
+//            if (verificationFlags.topics.counter == 0)
+//            {
+//                good = false;
+//                errorMsg += "<li><p>" + verificationFlags.topics.message + "</p></li>";
+//            }
+//        }
+//
+//        //check third tab
+//        if (currentTab == 1)
+//        {
+//            if (!verificationFlags.professional_info.sectionDone)
+//            {
+//                console.log("PROF");
+//                console.log(verificationFlags.professional_info.elems);
+//                good = false;
+//                if (!verificationFlags.professional_info.elems.address.done)
+//                {
+//                    errorMsg += "<li><p>" + verificationFlags.professional_info.elems.address.message + "</p></li>";
+//                }
+//                if (!verificationFlags.professional_info.elems.city.done)
+//                {
+//                    errorMsg += "<li><p>" + verificationFlags.professional_info.elems.city.message + "</p></li>";
+//                }
+//                if (!verificationFlags.professional_info.elems.zip.done)
+//                {
+//                    errorMsg += "<li><p>" + verificationFlags.professional_info.elems.zip.message + "</p></li>";
+//                }
+//            }
+//        }
+//
+//        //check fourth and final tab
+//        if (currentTab == 1)
+//        {
+//            if (!verificationFlags.terms.sectionDone)
+//            {
+//                console.log("TERMS");
+//                good = false;
+//                errorMsg += "<li><p>" + verificationFlags.terms.elems.checkbox.message + "</p></li>";
+//            }
+//        }
+//
+//		if (good)
+//		{
+//			$("form").submit();
+//		}
+//		else
+//		{
+//			UIkit.modal.alert(errorMsg + "</ul>");
+//		}
+//	});
 });
 
 

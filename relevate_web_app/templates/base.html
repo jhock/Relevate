@@ -17,13 +17,11 @@
 	<!-- <link rel="stylesheet" href="{% static 'uikit/css/uikit.min.css' %}"/> -->
 	<link rel="stylesheet" href="{% static 'uikit/css/uikit.css' %}"/>
 
+	<link rel="stylesheet" href="{% static "scss/main.css" %}" />
+
 	<!--{% compress css %}-->
 	<!--<link rel="stylesheet" type="text/x-scss" href="{% static "scss/main.scss" %}" />-->
 	<!--{% endcompress %}-->
-
-	{% compress css %}
-	<link rel="stylesheet" type="text/x-scss" href="{% static "scss/main.scss" %}" />
-	{% endcompress %}
 
 	{% button_assets %}
   {% dropdown_menu_assets %}

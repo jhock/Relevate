@@ -55,6 +55,7 @@ class RegistrationForm(forms.Form):
 		try:
 			email_value = User.objects.get(email=email)
 			msg = "Sorry, this email is already in use."
+			print("email already in use")
 			self.add_error('email', msg)
 		except User.DoesNotExist:
 			return email

@@ -100,8 +100,7 @@ class RegisterUserView(View):
 				login(request, user)
 				return HttpResponseRedirect(reverse('profile:confirmation'))
 			#Error for account creation. (To Do: specific errors)
-		messages.error(request, 'Your account could not be created, please try again.')
-		return render(request, 'registration.html', {'form': RegistrationForm()}, RequestContext(request, locals()))
+		return render(request, 'registration.html', {'form': form}, RequestContext(request, locals()))
 
 
 class DeactivatedAccountView(View):

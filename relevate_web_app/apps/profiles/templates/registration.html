@@ -47,7 +47,7 @@
 					input=form.password2
 				%}
 			</div>
-{# 		
+{#
 			TODO: Comenting this out until we get de facto
 			direction on what we want to do with area of
 			expertise throughout the site
@@ -66,12 +66,22 @@
 					</div>
 				</li>
 			</ul>
-			<br> 
+			<br>
 #}
 			<div class="rv-box-form_submit">
 				<button type="submit" class='rv-button fill-button'>Sign Up</button>
 			</div>
 		</form>
+							{% if form.errors %}
+			{% for field in form %}
+				{% for errors in field.errors %}
+					<p> {{ errors }} </p>
+				{% endfor %}
+			{% endfor %}
+			{% for error in form.non_field_errors %}
+				<p> {{ error }} </p>
+			{% endfor %}
+		{% endif %}
 	</div>
 </div>
 {% endblock %}

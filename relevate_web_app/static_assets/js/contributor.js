@@ -16,6 +16,7 @@ $(document).ready(function() {
 	var certificationTable;
 	var affiliationTable;
 	var universitySearchUrl;
+//	var saveInterval = setInterval(saveUnfinished, 15000);
 	function addAcademicProfile(){
 		/*
 			Add academic profile row
@@ -54,6 +55,9 @@ $(document).ready(function() {
 			$("#id_institution").val("");
 			$('#id_degree option[value="1"]').prop('selected', true);
 			$("#list_of_uni").hide()
+		}
+		else {
+		console.log(academicProgram, " acadsdf");
 		}
 		$("#list_of_uni").hide()
 	}
@@ -151,6 +155,12 @@ $(document).ready(function() {
 		updateTablesUpdateInfo(false);
 		$("#list_of_uni").hide()
 	}
+
+
+//    function saveUnfinished() {
+//        var d = new Date();
+//        document.getElementById("demo").innerHTML = d.toLocaleTimeString();
+//    }
 
 	function updateTablesUpdateInfo(is_academic_update){
 	/*

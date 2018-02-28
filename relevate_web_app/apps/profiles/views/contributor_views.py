@@ -194,6 +194,21 @@ class ContributorCreateView(LoginRequiredMixin, View):
             contributor_profile.save()
             for t in topics:
                 contributor_profile.expertise_topics.add(t)
+            #Remove an instance of saved contributor form information if it exists
+            previous_form = ContributorProfileUnfinished.objects.filter(user_profile_id=user_prof.id).first()
+            if previous_form:
+                print("yes, previous form")
+                curr_topics = previous_form.expertise_topics.all()
+                for each_topic in curr_topics:
+                    try:
+                        previous_form.expertise_topics.remove(each_topic)
+                    except ObjectDoesNotExist:
+                        pass
+                AcademicProfileUnfinished.objects.filter(contributor_profile=previous_form.id).delete()
+                ContributorCertificationUnfinished.objects.filter(contributor_profile=previous_form.id).delete()
+                OrganizationalAffiliationUnfinished.objects.filter(contributor_profile=previous_form.id).delete()
+                AddressUnfinished.objects.filter(id=previous_form.address_id).delete()
+                previous_form.delete()
             # @US_TODO: Remove this after Beta
             if (not BETA):
                 pending_contributors = PendingContributors(contributor=contributor_profile)

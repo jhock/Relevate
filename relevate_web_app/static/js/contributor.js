@@ -27,21 +27,48 @@ $(document).ready(function() {
 
 		var tableId = academicId;
 		if(academicProgram && degree && institution){
-			var academicGrid = "<tr class='acaRow' id=acaProf"+academicId+">" +
-					"<td>" +
-						"<div  class='uk-form-controls'><span class='program' value="+academicProgram+">" + academicProgram +
-						"</span></div>" +
+			var academicGrid = "<tr class='rv-contributor-form_box-row' id=acaProf"+academicId+">" +
+					"<td class='rv-contributor-form_table--item'>" +
+						"<div>" +
+							"<div class='rv-contributor-form_table--item-label'>Program</div>" +
+							"<div class='rv-contributor-form_table--item-content' value="+academicProgram+">" + academicProgram + "</span>" +
+						"</div>" +
 					"</td>" +
-					"<td>" +
-						"<div  class='uk-form-controls'><span class='degree' value="+degree+">" + degree +
-						"</span></div>" +
+					"<td class='rv-contributor-form_table--item'>" +
+						"<div>" +
+							"<div class='rv-contributor-form_table--item-label'>Level of Study</div>" +
+							"<div class='rv-contributor-form_table--item-content' value="+degree+">" + degree + "</div>" +
+						"</div>" +
 					"</td>" +
-					"<td>" +
-						"<div value="+institution+" class='uk-form-controls'><span class='institute' value="+institution+">" + institution +
-						"</span></div>" +
+					"<td class='rv-contributor-form_table--item'>" +
+						"<div>" + 
+							"<div class='rv-contributor-form_table--item-label'>Institution</div>" +
+							"<div class='rv-contributor-form_table--item-content' value="+institution+">" + institution + "</div>" +
+						"</div>" +
 					"</td>" +
-				   "<td>" +
-						"<button type='button' class='uk-button uk-button-orange degree-delete-btn' onclick='deleteAcademicProfile("+tableId+")'>delete</button> "+
+					"<td class='rv-contributor-form_button--container'>" +
+				   	"<div class='rv-contributor-form_button--group'>" +
+				   		"<div class='rv-contributor-form_button--group-button'>" +
+						   	RvButton({
+						   		variant: 'ghost',
+						   		color: 'dark',
+						   		label: 'Edit',
+						   		icon: 'edit',
+						   		fluid_width: true,
+						   		onclick: 'editAcademicProfile(' + tableId + ')'
+						   	}) +
+						  "</div>" +
+						  "<div class='rv-contributor-form_button--group-button'>" +
+						   	RvButton({
+						   		variant: 'ghost',
+						   		color: 'dark',
+						   		label: 'Delete',
+						   		icon: 'x',
+						   		fluid_width: true,
+						   		onclick: 'deleteAcademicProfile(' + tableId + ')'
+						   	}) +
+						  "</div>" +
+				   	"</div>" +
 					"</td>" +
 				"</tr>"
 			$("#acaProf").append(academicGrid);
@@ -65,14 +92,38 @@ $(document).ready(function() {
 	*/
 		var certificate = $("#id_certification").val();
 		var certTableId = certId;
+
 		if(certificate){
-			var certGrid = "<tr class='certRow' id=addCert"+certTableId+">" +
-				"<td>" +
-					"<div class='uk-form-controls'><span class='certName' value="+certificate+">" + certificate +
-					"</span></div>" +
+			var certGrid = "<tr class='rv-contributor-form_box-row' id=addCert"+certTableId+">" +
+				"<td class='rv-contributor-form_table--item'>" +
+					"<div>" +
+						"<div class='rv-contributor-form_table--item-label'>Certification</div>" +
+						"<div class='rv-contributor-form_table--item-content' value="+certificate+">" + certificate + "</div>" +
+					"</div>" +
 				"</td>" +
-			   "<td>" +
-					"<button type='button' class='uk-button uk-button-orange' onclick='deleteCertificate("+certTableId+")'>delete</button> "+
+			   "<td class='rv-contributor-form_button--container'>" +
+			   	"<div class='rv-contributor-form_button--group'>" +
+			   		"<div class='rv-contributor-form_button--group-button'>" +
+					   	RvButton({
+					   		variant: 'ghost',
+					   		color: 'dark',
+					   		label: 'Edit',
+					   		icon: 'edit',
+					   		fluid_width: true,
+					   		onclick: 'editCertificate(' + certTableId + ')'
+					   	}) +
+					  "</div>" +
+					  "<div class='rv-contributor-form_button--group-button'>" +
+					   	RvButton({
+					   		variant: 'ghost',
+					   		color: 'dark',
+					   		label: 'Delete',
+					   		icon: 'x',
+					   		fluid_width: true,
+					   		onclick: 'deleteCertificate(' + certTableId + ')'
+					   	}) +
+					  "</div>" +
+				  "</div>" +
 				"</td>" +
 			"</tr>"
 			$("#addCert").append(certGrid);
@@ -90,14 +141,38 @@ $(document).ready(function() {
 	*/
 		var affiliation = $("#id_organizational_affiliation").val();
 		var affiliationTableId = affiliationId;
+
 		if(affiliation){
-			var affiliationGrid = "<tr class='affiliationRow' id=addAffiliation"+affiliationTableId+">" +
-				"<td>" +
-					"<div class='uk-form-controls'><span class='affiliationName' value="+affiliation+">" + affiliation +
-					"</span></div>" +
+			var affiliationGrid = "<tr class='rv-contributor-form_box-row' id=addAffiliation"+affiliationTableId+">" +
+				"<td class='rv-contributor-form_table--item'>" +
+					"<div>" +
+						"<div class='rv-contributor-form_table--item-label'>Affiliation</div>" +
+						"<div class='rv-contributor-form_table--item-content' value="+affiliation+">" + affiliation + "</div>" +
+					"</div>" +
 				"</td>" +
-			   "<td>" +
-					"<button type='button' class='uk-button uk-button-orange' onclick='deleteAffiliation("+affiliationTableId+")'>delete</button> "+
+			   "<td class='rv-contributor-form_button--container'>" +
+			   	"<div class='rv-contributor-form_button--group'>" +
+			   		"<div class='rv-contributor-form_button--group-button'>" +
+					   	RvButton({
+					   		variant: 'ghost',
+					   		color: 'dark',
+					   		label: 'Edit',
+					   		icon: 'edit',
+					   		fluid_width: true,
+					   		onclick: 'editAffiliation(' + affiliationTableId + ')'
+					   	}) +
+					  "</div>" +
+					  "<div class='rv-contributor-form_button--group-button'>" +
+					   	RvButton({
+					   		variant: 'ghost',
+					   		color: 'dark',
+					   		label: 'Delete',
+					   		icon: 'x',
+					   		fluid_width: true,
+					   		onclick: 'deleteAffiliation(' + affiliationTableId + ')'
+					   	}) +
+					  "</div>" +
+				  "</div>" +
 				"</td>" +
 			"</tr>"
 			$("#addAffiliation").append(affiliationGrid);
@@ -109,12 +184,138 @@ $(document).ready(function() {
 		$("#list_of_uni").hide()
 	}
 
-	function deleteAcademicProfile(id)
-	{
-	/*
-		Delete Academic Profile Row
-	*/
+	function replaceWithTextInput (parent, label, placeholder) {
+		var newInput = document.createElement('div')
+		newInput.innerHTML = RvTextInput({
+			label: label,
+			value: parent.firstChild.textContent,
+			placeholder: placeholder
+		})
+		parent.replaceChild(newInput, parent.firstChild)
+	}
 
+	function replaceWithSelect (selectRow, parent, label, placeholder) {
+		var options = []
+		var items = selectRow.getElementsByTagName('LI')
+
+		for (var i = 0; i < items.length; i++) {
+			var option = items[i]
+			if (option.getAttribute('class') !== 'rv-select_option--placeholder') {
+				options.push(option.textContent)
+			}
+		}
+
+		var current = parent.firstChild
+
+		var edit = document.createElement('div')
+		edit.innerHTML = RvSelect({
+			label: label,
+			placeholder: placeholder,
+			value: current.textContent,
+			options: options,
+			editable: true
+		})
+
+		parent.replaceChild(edit, current)	
+	}
+
+	function hideLabels (row) {
+		var labels = row.getElementsByClassName('rv-contributor-form_table--item-label')
+		for (var i = 0; i < labels.length; i++) {
+			labels[i].setAttribute('style', 'display: none')
+		}
+	}
+
+	function showLabels (row) {
+		var labels = row.getElementsByClassName('rv-contributor-form_table--item-label')
+		for (var i = 0; i < labels.length; i++) {
+			labels[i].setAttribute('style', 'display: block')
+		}
+	}
+
+	function convertEditToSaveButton (id, row, onclick) {
+		var buttonGroup = row.getElementsByClassName('rv-contributor-form_button--group-button')[0]
+		var editButton = buttonGroup.firstElementChild
+
+		replaceButton(editButton, 'Save', 'primary', 'save', onclick)
+	}
+
+	function convertSaveToEditButton (id, row, onclick) {
+		var buttonGroup = row.getElementsByClassName('rv-contributor-form_button--group-button')[0]
+		var editButton = buttonGroup.firstElementChild
+
+		replaceButton(editButton, 'Edit', 'dark', 'edit', onclick)
+	}
+
+	function replaceButton(oldButton, label, color, icon, onclick) {
+		var parent = oldButton.parentElement
+		var newButton = document.createElement('div')
+		newButton.innerHTML = RvButton({
+			label: label,
+			type: 'button',
+			variant: 'ghost',
+			color: color,
+			icon: icon,
+			fluid_width: true,
+			onclick: onclick
+		})
+
+		parent.replaceChild(newButton.firstElementChild, oldButton)
+		
+		// Focus the replaced button for keyboard accessibility
+		var buttons = parent.querySelectorAll('button')
+		for (var i = 0; i < buttons.length; i++) {
+			var button = buttons[i]
+			if (button.textContent.trim() === label) {
+				button.focus()
+			}
+		}
+	}
+
+	function editAcademicProfile (id) {
+		var row = document.getElementById('acaProf' + id)
+		var rowItems = row.getElementsByClassName('rv-contributor-form_table--item-content')
+
+		hideLabels(row)
+
+		var program = rowItems[0]
+		replaceWithTextInput(program, 'Program', 'Ex. Psychology')
+
+		replaceWithSelect(
+			document.getElementById('acaProfCreate'), 
+			rowItems[1], 
+			'Level of Study',
+			'Enter your level of study'
+		)
+
+		var institution = rowItems[2]
+		replaceWithTextInput(institution, 'Institution', 'Ex. Kansas State')
+
+		convertEditToSaveButton(id, row, 'saveAcademicProfileEdit(' + id + ')')
+	}
+
+	function saveAcademicProfileEdit (id) {
+		var row = document.getElementById('acaProf' + id)
+		var rowItems = row.getElementsByClassName('rv-contributor-form_table--item-content')
+
+		showLabels(row)
+
+		var program = rowItems[0].firstChild
+		program.innerHTML = program.getElementsByTagName('INPUT')[0].value
+
+		var study = rowItems[1].firstChild
+		study.innerHTML = study.getElementsByTagName('INPUT')[0].value
+
+		var institution = rowItems[2].firstChild
+		institution.innerHTML = institution.getElementsByTagName('INPUT')[0].value
+
+		convertSaveToEditButton(id, row, 'editAcademicProfile(' + id + ')')
+	}
+
+	function deleteAcademicProfile (id) {
+		/*
+			Delete Academic Profile Row
+		*/
 		$("#acaProf"+id).remove();
 		updateTablesUpdateInfo(true);
 
@@ -134,14 +335,66 @@ $(document).ready(function() {
 		$("#list_of_uni").hide()
 	}
 
+	function editCertificate (id) {
+		var row = document.getElementById('addCert' + id)
+		var rowItems = row.getElementsByClassName('rv-contributor-form_table--item-content')
 
-	function deleteCertificate(id){
+		hideLabels(row)
+
+		var certificate = rowItems[0]
+		replaceWithTextInput(certificate, 'Certifications', 'Enter a certification')
+
+		convertEditToSaveButton(id, row, 'saveCertificateEdit(' + id + ')')
+	}
+
+	function saveCertificateEdit (id) {
+		var row = document.getElementById('addCert' + id)
+		var rowItems = row.getElementsByClassName('rv-contributor-form_table--item-content')
+
+		showLabels(row)
+
+		var certificate = rowItems[0].firstChild
+		certificate.innerHTML = certificate.getElementsByTagName('INPUT')[0].value
+
+		convertSaveToEditButton(id, row, 'editCertificate(' + id + ')')
+	}
+
+
+	function deleteCertificate (id) {
 	/*
 		Delete Certification Row
 	*/
 		$("#addCert"+id).remove();
 		updateTablesUpdateInfo(false);
 		$("#list_of_uni").hide()
+	}
+
+	function editAffiliation (id) {
+		var row = document.getElementById('addAffiliation' + id)
+		var rowItems = row.getElementsByClassName('rv-contributor-form_table--item')
+
+		hideLabels(row)
+
+		replaceWithSelect(
+			document.getElementById('affiliationCreate'), 
+			rowItems[0], 
+			'Organizational Affiliations',
+			'Ex. NCFR'
+		)
+
+		convertEditToSaveButton(id, row, 'saveAffiliationEdit(' + id + ')')
+	}
+
+	function saveAffiliationEdit (id) {
+		var row = document.getElementById('addAffiliation' + id)
+		var rowItems = row.getElementsByClassName('rv-contributor-form_table--item-content')
+
+		showLabels(row)
+
+		var affiliation = rowItems[0].firstChild
+		affiliation.innerHTML = affiliation.getElementsByTagName('INPUT')[0].value
+
+		convertSaveToEditButton(id, row, 'editAffiliation(' + id + ')')
 	}
 
 	function deleteAffiliation(id){

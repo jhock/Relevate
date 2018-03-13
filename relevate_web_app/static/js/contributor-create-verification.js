@@ -268,8 +268,6 @@ $(document).ready(function()
       }
       if (n == (x.length - 1)) {
         document.getElementById("nextBtn").innerHTML = "Submit";
-      } else {
-        document.getElementById("nextBtn").innerHTML = "Next";
       }
       // ... and run a function that displays the correct step indicator:
       fixStepIndicator(n)

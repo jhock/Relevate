@@ -26,6 +26,7 @@
 
 .rv-text-input_input {
   width: 100%;
+  box-sizing: border-box;
   border: none;
   border-bottom: 1px solid $rv-color-dark;
   font-size: 1rem;
@@ -51,7 +52,7 @@
 .rv-text-input_icon {
   position: absolute;
   display: block;
-  bottom: 1rem;
+  bottom: 0.5rem;
   right: 0.25rem;
   pointer-events: none;
 }

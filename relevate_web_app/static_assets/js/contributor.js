@@ -16,6 +16,7 @@ $(document).ready(function() {
 	var certificationTable;
 	var affiliationTable;
 	var universitySearchUrl;
+
 	function addAcademicProfile(){
 		/*
 			Add academic profile row

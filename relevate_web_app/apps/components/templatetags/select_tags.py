@@ -27,7 +27,7 @@ def text_input(parser, token):
   label = get_prop_value('label', picked_props, None)
   editable = get_prop_value('editable', picked_props, 'False')
   options = get_prop_value('options', picked_props, None)
-  
+
   children = None
   if not options:
     children, _ = parse_tag(parser, token, 'end_select')
@@ -65,6 +65,7 @@ class Select(Node):
       'options_id': str(uuid.uuid4())
     })
     markup = select_html.render(context)
+
     html_props = convert_props_to_html(input_props)
     markup = amend_html_props_to_tag(html_props, markup, 'input')
     return markup

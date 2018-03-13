@@ -22,6 +22,7 @@
       variant: props.variant,
       color: props.color,
       label: props.label,
+      fluid_width: props.fluid_width || false,
       icon: props.icon
     }
 
@@ -31,10 +32,19 @@
     var button_container = document.createElement('div')
     button_container.innerHTML = markup
     var button = button_container.getElementsByTagName('BUTTON')[0]
+
+    if (buttonProps.fluid_width) {
+      button.classList.add('fluid-width')
+    }
+
     ammendPropsToElement(omitProps(props, buttonProps), button)
 
     if (buttonProps.icon) {
-      button.innerHTML = RvIcon({ variant: buttonProps.icon }) + button.textContent
+      button.innerHTML = RvIcon({ 
+        variant: buttonProps.icon, 
+        size: 'small', 
+        rotate: 0 
+      }) + button.textContent
       markup = button_container.innerHTML
     }
     return markup

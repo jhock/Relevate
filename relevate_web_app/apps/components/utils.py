@@ -89,12 +89,13 @@ def resolve_variable(prop_value, context):
   if not prop_value:
     return None
 
-  if type(prop_value) is list or type(prop_value) is tuple:
-    prop_value = prop_value[0]
-    if prop_value is None:
+  variable = prop_value
+  if type(variable) is list or type(variable) is tuple:
+    variable = variable[0]
+    if variable is None:
       return None
 
-  variable = template.Variable(prop_value)
+  variable = template.Variable(variable)
   try:
     resolved = variable.resolve(context)
     return resolved
@@ -102,6 +103,9 @@ def resolve_variable(prop_value, context):
     return prop_value
 
 def resolve_prop_variables(props, context):
+  if props is None:
+    return None
+
   for i in range(0, len(props)):
     parsed = parse_prop(props[i])
     if parsed[1] is not None:
@@ -109,6 +113,9 @@ def resolve_prop_variables(props, context):
   return props
 
 def convert_props_to_html(props):
+  if props is None:
+    return ''
+
   for i in range(0, len(props)):
     parsed = parse_prop(props[i])
     if parsed[1] is not None:

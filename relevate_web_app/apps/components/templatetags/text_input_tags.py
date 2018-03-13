@@ -16,7 +16,6 @@ from ..utils import (
   amend_html_props_to_tag,
   get_prop_from_tag
 )
-import pdb
 
 register = template.Library()
 

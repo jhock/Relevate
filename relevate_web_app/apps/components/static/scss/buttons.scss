@@ -3,7 +3,7 @@
 
 @mixin baseButton() {
   position: relative;
-  border-radius: 2rem;
+  border-radius: 999rem;
   box-sizing: border-box;
   font-size: 1rem;
   font-weight: $rv-font-weight-semibold;
@@ -33,7 +33,7 @@
     border: 0;
   }
 
-  @include buttonFocus(0.3rem, 0.33rem, 0.3rem, 0.32rem);
+  @include buttonFocus(0.3rem, 0.3rem, 0.3rem, 0.3rem);
 }
 
 @mixin buttonColor ($color, $background, $border, $hover, $active) {
@@ -74,14 +74,6 @@
   }
 
   [data-icon] {
-    margin-right: 0.4rem;
+    margin: 0 0.2rem;
   }
-}
-
-.rv-button-label {
-  margin: 0 0.5rem;
-}
-
-.rv-button-icon {
-  margin-right: 0.2rem;
 }

@@ -22,7 +22,7 @@ def text_input(parser, token):
   enforce_required_props(['label'], props)
 
   picked_props, input_props = split_props(['id', 'input', 'label', 'editable', 'options'], props)
-  input_id = get_prop_value('id', picked_props, str(uuid.uuid4()))
+  input_id = get_prop_value('id', picked_props, str(uuid.uuid4().int))
   alt_input = get_prop_value('input', picked_props, None)
   label = get_prop_value('label', picked_props, None)
   editable = get_prop_value('editable', picked_props, 'False')

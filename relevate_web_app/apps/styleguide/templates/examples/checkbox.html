@@ -1,0 +1,22 @@
+{% extends "styleguide_layout.html" %}
+{% load example_tags %}
+{% load checkbox_tags %}
+
+{% block content%}
+  {% example with
+    heading="Requirements"
+    caption="Within your template file, load the custom icon tags"
+    codeOnly="True"
+  %}
+{% load checkbox_tags %}
+  {% end_example %}
+
+  {% example with 
+    heading="Example" 
+    caption="A checkbox component" 
+  %}
+{% checkbox 
+  label="hello click on me"
+%}
+  {% end_example %}
+{% endblock content %}

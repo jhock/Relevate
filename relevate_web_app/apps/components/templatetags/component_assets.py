@@ -12,6 +12,10 @@ def dropdown_menu_assets():
 def button_assets():
   return {}
 
+@register.inclusion_tag('checkbox/assets.html')
+def checkbox_assets():
+  return {}
+
 @register.inclusion_tag('icons/assets.html')
 def icon_assets():
   return {}

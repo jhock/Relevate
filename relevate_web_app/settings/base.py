@@ -90,6 +90,7 @@ TEMPLATES = [
 			],
 			'libraries':{
 				'button_tags': 'apps.components.templatetags.button_tags',
+				'checkbox_tags': 'apps.components.templatetags.checkbox_tags',
         'dropdown_menu_tags': 'apps.components.templatetags.dropdown_menu_tags',
        	'icon_tags': 'apps.components.templatetags.icon_tags',
        	'progress_tags': 'apps.components.templatetags.progress_tags',

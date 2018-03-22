@@ -73,10 +73,23 @@
   margin-bottom: 2rem;
 }
 
+.rv-contributor-form_footer--button {
+  margin: 0 0.125rem
+}
+
 .rv-contributor-form_table--item-label {
   font-size: 0.875rem;
   font-weight: $rv-font-weight-bold;
   display: none;
+}
+
+.rv-contributor-form_checkbox {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.rv-contributor-form_subheader--caption {
+  margin-bottom: 2rem;
 }
 
 @media only screen and (max-width: 1000px) {
@@ -95,7 +108,7 @@
 
   .rv-contributor-form_box {
     margin-bottom: 1.5rem;
-    padding: 1.5rem;
+    padding: 3rem;
     border: 1px solid $rv-color-light-gray;
   }
 
@@ -111,7 +124,7 @@
 
   .rv-contributor-form_box {
     border: none;
-    margin: 0;
+    margin: 0 0 2rem 0;
     padding: 0;
   }
 
@@ -170,10 +183,21 @@
   }
 
   .rv-contributor-form_subheader {
-    text-align: center;
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+
+  .rv-contributor-form_subheader--caption {
+    margin-left: 2rem;
+    margin-right: 2rem;
   }
 
   .rv-contributor-form_progress {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+
+  .rv-contributor-form_checkbox {
     margin-left: 2rem;
     margin-right: 2rem;
   }

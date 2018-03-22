@@ -6,6 +6,8 @@ from ...contribution.models.topic_model import Topics
 from ..models.contributor_model import Degree
 from ...components.templatetags.select_tags import Select
 
+import pdb
+
 class AdviserModelChoiceField(forms.ModelChoiceField):
 	def label_from_instance(self, obj):
 		return "%s (%s)" % (obj.__str__(), obj.contributor_profile.user_profile.user.username)
@@ -23,7 +25,6 @@ class SelectWidget(forms.TextInput):
         text_html = super(SelectWidget, self).render(name, value, attrs=attrs)
         placeholder_prop = 'placeholder="' + self.placeholder + '"'
         return Select(None, self.label, None, text_html, [placeholder_prop], self.options).render(Context())
-
 
 class ContributorForm(forms.Form):
 	# Changed to false to prevent update page from throwing a fit
@@ -123,12 +124,8 @@ class ContributorForm(forms.Form):
 
 	area_of_expertise = forms.ModelMultipleChoiceField(
 		label="Area of Expertise Relevant to Romantic Relationships", 
-		queryset=Topics.objects.all(), 
-		widget=forms.CheckboxSelectMultiple(
-			attrs={
-				'class': 'expertise-checkbox'
-			}
-		), 
+		queryset=Topics.objects.all(),
+		widget=forms.CheckboxSelectMultiple(),
 		required=True
 	)
 

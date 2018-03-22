@@ -32,7 +32,7 @@ def text_input(parser, token):
   picked_props, input_props = split_props(['variant', 'label', 'id', 'icon', 'input', 'form'], props)
   
   label = get_prop_value('label', picked_props, None)
-  input_id = get_prop_value('id', picked_props, str(uuid.uuid4()))
+  input_id = get_prop_value('id', picked_props, str(uuid.uuid4().int))
   icon = get_prop_value('icon', picked_props, None)
   alt_input = get_prop_value('input', picked_props, None)
   alt_form = get_prop_value('form', picked_props, None)

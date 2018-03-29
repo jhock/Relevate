@@ -1,0 +1,48 @@
+@import "../../static/scss/base/variables";
+
+.rv-text-input {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  margin: 1.5rem 0;
+}
+
+.rv-text-input_label {
+  color: $rv-color-dark;
+  font-weight: $rv-font-weight-black;
+  left: 0;
+  font-size: 0.875rem;
+  transition: all 0.1s ease-in;
+  position: absolute;
+  display: block;
+  bottom: 2.6rem;
+
+  &.rv-text-input_focus {
+    color: $rv-color-primary;
+    transform-origin: left bottom;
+    transform: scale(1.1, 1.1);
+  }
+}
+
+.rv-text-input_input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid $rv-color-dark;
+  font-size: 1rem;
+  font-weight: $rv-font-weight-medium;
+  color: $rv-color-dark;
+  position: relative;
+  overflow: visible;
+  background: transparent;
+  padding: 0.8rem 0;
+  transition: all 0.1s ease-in;
+
+  &::placeholder {
+    font-weight: $rv-font-weight-regular;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $rv-color-primary;
+  }
+}

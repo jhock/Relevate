@@ -24,7 +24,7 @@
 			</div>
 		<div class="rv-content-card_preview">
 			<p>
-				{{ i.blurb | safe }}
+				{{ i.blurb | safe }}<a href="{% url 'contribution:infographic_view' p.slug %}" class="rv-content-card_heading-link">read more...</a>
 			</p>
 		</div>
 		<div class="rv-content-card_topics">

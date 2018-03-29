@@ -224,33 +224,43 @@ class InfographicsListView(LoginRequiredMixin, View):
 																  'user_prof': contributor_profile.user_profile})
 
 
-class InfographicView(LoginRequiredMixin, View):
+class InfographicView(View):
 
 	def get(self, request, slug):
 		'''
 		Gets the view for viewing an individual infographic.
+		Login no longer required, non-users can now access posts.
 
 		:param slug: Unique slug for the infographic
 		'''
 		post_ = Post.objects.get(slug=slug, is_deleted=False)
 		infographic_post = post_.infographic
-		user_prof = UserProfile.objects.get(user=request.user)
-		contributor = user_can_contribute(request.user)
 		is_user_article = False
-		if user_prof.is_contributor == True:
-			if contributor.id is post_.contributor.id or user_prof.user.email == "relevate@outlook.com":
-				is_user_article = True
+		#Check to see if user is logged in, if not do not pass user info.
+		if request.user.is_authenticated():
+			user_prof = UserProfile.objects.get(user=request.user)
+			contributor = user_can_contribute(request.user)
+			if user_prof:
+				if user_prof.is_contributor == True:
+					if contributor.id is post_.contributor.id or user_prof.user.email == "relevate@outlook.com":
+						is_user_article = True
+				else:
+					post_.views = post_.views + 1
+					post_.save()
+			return render(request, 'article_infographic_view.html',
+						  {'infographic':infographic_post,
+						   'user_prof':user_prof,
+						   'post':post_,
+						   'is_user_article':is_user_article,
+						   'first_name':request.user.first_name,
+							'last_name':request.user.last_name
+						   })
 		else:
-			post_.views = post_.views + 1
-			post_.save()
-		return render(request, 'article_infographic_view.html',
-					  {'infographic':infographic_post,
-					   'user_prof':user_prof,
-					   'post':post_,
-					   'is_user_article':is_user_article,
-					   'first_name':request.user.first_name,
-					   	'last_name':request.user.last_name
-					   })
+			return render(request, 'article_infographic_view.html',
+						  {'infographic': infographic_post,
+						   'post': post_,
+						   'is_user_article': is_user_article
+						   })
 
 	def post(self, request, slug):
 		'''

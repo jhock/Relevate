@@ -1,5 +1,27 @@
 {% extends "styleguide_layout.html" %}
+{% load example_tags %}
 
 {% block content%}
-  <div>Avatar example coming soon</div>
+  {% example with
+    heading="Requirements"
+    caption="Include the following in your HTML head (This imports the styles)"
+    codeOnly="True"
+  %}
+{% load component_assets %}
+{% avatar_assets %}
+  {% end_example %}
+
+  {% example with
+    heading="Avatar With Image"
+    caption="For when image source is provided"
+  %}
+{% avatar name="Joshua Hock" src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" %}
+  {% end_example %}
+
+    {% example with
+    heading="Avatar Without Image"
+    caption="For when image source is not provided"
+  %}
+{% avatar name="Joshua Andrew Zadfsd Hock" %}
+  {% end_example %}
 {% endblock content %}

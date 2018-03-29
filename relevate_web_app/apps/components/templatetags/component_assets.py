@@ -19,3 +19,7 @@ def link_assets():
 @register.inclusion_tag('text_input/assets.html')
 def text_input_assets():
   return {}
+
+@register.inclusion_tag('avatar/assets.html')
+def avatar_assets():
+  return {}

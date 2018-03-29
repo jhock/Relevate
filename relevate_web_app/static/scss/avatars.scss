@@ -1,0 +1,30 @@
+@import "../../static/scss/base/variables";
+
+.rv-avatar {
+  color: #246FF2;
+  text-decoration: none;
+  border-radius: 50%; }
+  .rv-avatar:focus, .rv-avatar:hover {
+    text-decoration: underline;
+    outline: none; }
+  .rv-avatar:active {
+    color: #0d56d6; }
+
+.avatar-img {
+  color: #246FF2;
+  text-decoration: none;
+  width: 2rem;
+  height: 2rem;
+  max-width: 2rem;
+  border-radius: 50%; }
+
+.avatar-def {
+  color: #246FF2;
+  background: #ff0000;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 2rem;
+  text-decoration: none;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%; }

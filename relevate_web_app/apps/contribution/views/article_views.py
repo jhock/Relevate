@@ -320,7 +320,7 @@ class ArticleUpdateView(LoginRequiredMixin, View):
 				})
 
 
-class ArticleIndividualView(LoginRequiredMixin, View):
+class ArticleIndividualView( View):
 	"""
 		Class for view individual articles
 	"""
@@ -328,31 +328,40 @@ class ArticleIndividualView(LoginRequiredMixin, View):
 	def get(self, request, slug):
 		"""
 		The get request for the view
+		Login no longer required, non-users can now access posts.
 
 		:param slug: this is a unique url identifier for each article
 
 		"""
-		user_prof = UserProfile.objects.get(user=request.user)
 		try:
 			post = Post.objects.get(slug=str(slug), is_deleted=False)
 			article = post.article
-			contributor = user_can_contribute(request.user)
 			is_user_article = False
-			if user_prof.is_contributor == True:
-				if contributor.id is post.contributor.id or user_prof.user.email == "relevate@outlook.com":
-					is_user_article = True
+			if request.user.is_authenticated():
+				user_prof = UserProfile.objects.get(user=request.user)
+				contributor = user_can_contribute(request.user)
+				if user_prof.is_contributor == True:
+					if contributor.id is post.contributor.id or user_prof.user.email == "relevate@outlook.com":
+						is_user_article = True
+				else:
+					post.views = post.views + 1
+					post.save()
+				return render(request, 'article_view.html',
+					{
+						'article':article,
+						'is_user_article':is_user_article,
+						'user_prof':user_prof,
+						'post': post,
+						'first_name':request.user.first_name,
+						'last_name':request.user.last_name
+					})
 			else:
-				post.views = post.views + 1
-				post.save()
-			return render(request, 'article_view.html', 
-				{
-					'article':article, 
-					'is_user_article':is_user_article, 
-					'user_prof':user_prof,
-					'post': post,
-					'first_name':request.user.first_name,
-					'last_name':request.user.last_name
-				})
+				return render(request, 'article_view.html',
+							  {
+								  'article': article,
+								  'is_user_article': is_user_article,
+								  'post': post
+							  })
 		except ObjectDoesNotExist:
 			return HttpResponseRedirect(reverse('contribution:all_posts'))
 

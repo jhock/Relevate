@@ -90,6 +90,7 @@ TEMPLATES = [
         'dropdown_menu_tags': 'apps.components.templatetags.dropdown_menu_tags',
         'text_input_tags': 'apps.components.templatetags.text_input_tags',
         'component_assets': 'apps.components.templatetags.component_assets',
+		'avatar_tags': 'apps.components.templatetags.avatar_tags',
         'example_tags': 'apps.styleguide.templatetags.example_tags'
 			}
 		},

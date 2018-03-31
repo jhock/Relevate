@@ -7,9 +7,11 @@
 @import "components/home-header";
 @import "components/content-card";
 
-@import "pages/styleguide";
-@import "pages/home";
 @import "pages/box-form";
+@import "pages/contributor";
+@import "pages/home";
+@import "pages/styleguide";
+
 
 
 // TODO: Remove this hack
@@ -23,5 +25,8 @@
 @import "./avatars";
 @import "../../apps/components/static/scss/buttons";
 @import "../../apps/components/static/scss/dropdown_menu";
+@import "../../apps/components/static/scss/icons";
 @import "../../apps/components/static/scss/links";
+@import "../../apps/components/static/scss/progress";
+@import "../../apps/components/static/scss/select";
 @import "../../apps/components/static/scss/text_input";

@@ -1,0 +1,5 @@
+{% load icon_tags %}
+
+<button class="rv-button {{color}} {{variant}}{% if fluid_width %} fluid-width {% endif %}" {% if href %} href="{% url href %}" {% endif %}>
+  {{children}}
+</button>

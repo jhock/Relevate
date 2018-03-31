@@ -3,6 +3,7 @@
 {% load staticfiles %}
 {% load compress %}
 {% load component_assets %}
+{% load templatetag_handlebars %}
 
 <head>
     <!--[if lt IE 9]>
@@ -26,7 +27,10 @@
 	{% avatar_assets %}
 	{% button_assets %}
   {% dropdown_menu_assets %}
+  {% icon_assets %}
   {% link_assets %}
+  {% progress_assets %}
+  {% select_assets %}
   {% text_input_assets %}
 
 	<script src="{% static 'ckeditor/ckeditor.js' %}"></script>
@@ -36,6 +40,8 @@
 	<script src="{% static 'uikit/js/uikit.min.js' %}"></script>
 	<script src="{% static 'js/WearProtection.js' %}"></script>
 	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'js/handlebars.js' %}"></script>
+	<script src="{% static 'js/utils/prop-ops.js' %}"></script>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/global.css' %}">
 	<link rel='icon' type='images/png'
 		  href="{% static 'static/images/favicon.png'%}">
@@ -78,11 +84,6 @@
 <!-- @US_TODO: Remove this after the migration -->
 <!-- <script src="https://getuikit.com/migrate.min.js"></script> -->
 </body>
-<div class="up-btn-container" uk-scroll="">
-	<div class="uk-padding-small">
-		<img src="/static/images/up-arrow.png">
-	</div>
-</div>
 <footer class="footer">
 	{% block footer %}
 	{% endblock %}

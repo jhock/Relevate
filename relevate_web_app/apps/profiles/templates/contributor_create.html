@@ -1,5 +1,10 @@
 {% extends "base-titlebar.html" %}
 {% load staticfiles %}
+{% load text_input_tags %}
+{% load select_tags %}
+{% load progress_tags %}
+{% load button_tags %}
+{% load icon_tags %}
 
 {% block head %}
 	{{ block.super }}
@@ -10,476 +15,491 @@
 {% endblock head %}
 
 {% block content %}
-<div id="contributorApplication">
-	<div class="uk-container uk-margin-top uk-margin-bottom">
-		<form id='contributor-create-form' action="{% url 'profile:contributor_create' %}" method="post" enctype='multipart/form-data' class="uk-form uk-form-stacked">
-			{% csrf_token %}
-			<div class="text-center">
-				<h1>Contributor Application</h1>
-				<p>All fields marked with an asterisk are required.</p>
-				<p>
-					Clicking a section header will open up that section for completion. The section
-					will be marked as "Done!" when all of the required fields within it are
-					completed.
-				</p>
+<div id="contributorApplication" class="rv-contributor-form">
+	<form id='contributor-create-form' action="{% url 'profile:contributor_create' %}" method="post" enctype='multipart/form-data'>
+		{% csrf_token %}
+		<h1 class="rv-h3 rv-contributor-form_header">Contributor Application</h1>
+		<div class="tab">
+			<div class="rv-contributor-form_progress">
+				{% progress %}
+					{% progress_item status="active" %}Degree and Affiliation{% end_progress_item %}
+					{% progress_item %}Professional Info{% end_progress_item %}
+	  			{% progress_item %}Topics{% end_progress_item %}
+	  			{% progress_item %}Terms and Conditions{% end_progress_item %}
+				{% end_progress %}
 			</div>
-			<h4>{{ user.first_name }} {{ user.last_name }}<br>{{ user.email }}</h4>
-				<div class="tab">
+			<div class="rv-contributor-form_box">
+				<h4 class="rv-contributor-form_subheader">Degrees</h4>
+				<input id="hiddenAcaTable" hidden name="academicList">
+					<table id="acaProf" data-name="acaProfTable" class="rv-contributor-form_table">
+						<tbody>
+							{% for each_academic in academic_profiles %}
+								<tr class="rv-contributor-form_box-row" id="acaProf{{ each_academic.id }}">
+									<td class="rv-contributor-form_table--item">
+										<div class='rv-contributor-form_table--item-label'>Program</div>
+										<div class='rv-contributor-form_table--item-content'>{{ each_academic.program }}</div>
+									</td>
+									<td class="rv-contributor-form_table--item">
+										<div class='rv-contributor-form_table--item-label'>Level of Study</div>
+										<div class='rv-contributor-form_table--item-content'>{{ each_academic.degree.name }}</div>
+									</td>
+									<td class="rv-contributor-form_table--item">
+										<div class='rv-contributor-form_table--item-label'>Institution</div>
+										<div class='rv-contributor-form_table--item-content'>{{ each_academic.institution }}</div>
+									</td>
+									<td class="rv-contributor-form_button--container">
+										<div class="rv-contributor-form_button--group">
+											{% with each_academic.id|stringformat:"i" as academic_id %}
+												{% with "editAcademicProfile("|add:academic_id|add:")" as editAcademicProfile  %}
+												{% with "deleteAcademicProfile("|add:academic_id|add:")" as deleteAcademicProfile %}
+													<div class="rv-contributor-form_button--group-button">
+														{% button
+															type="button"
+															variant="ghost"
+															color="dark"
+															onclick=editAcademicProfile
+														%}
+															{% icon_edit %}
+															Edit
+														{% end_button %}
+													</div>
+													<div class="rv-contributor-form_button--group-button">
+														{% button
+															type="button"
+															variant="ghost"
+															color="dark"
+															onclick=deleteAcademicProfile
+														%}
+															{% icon_x %}
+															Delete
+														{% end_button %}
+													</div>
+												{% endwith %}
+												{% endwith %}
+											{% endwith %}
+										</div>
+									</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+					<div class="rv-contributor-form_box-row" id="acaProfCreate">
+						<div class="rv-contributor-form_table--item">
+							{% text_input
+								label=form.program.label
+								input=form.program
+							%}
+						</div>
+						<div class="rv-contributor-form_table--item">
+							{{form.degree}}
+						</div>
+						<div class="rv-contributor-form_table--item">
+							{% text_input
+								label=form.institution.label
+								input=form.institution
+							%}
+						</div>
+						<div class="rv-contributor-form_button--container">
+							{% button 
+							  variant="ghost"
+							  color="primary" 
+							  id="degree-add-btn"
+							  type="button"
+							  onclick="addAcademicProfile()"
+							  fluid_width="True"
+							%}
+							  {% icon_add %}
+							  Add Degree
+							{% end_button %}
+						</div>
+					</div>
+				</div>
+				<div class="rv-contributor-form_box">
+					<h4 class="rv-contributor-form_subheader">Additional Certifications</h4>
+					<input id="hiddenCertTable" hidden name="certificateList" >
+					<table id="addCert" data-name="certTable" class="rv-contributor-form_table">
+						<tbody>
+							{% for each_cert in certifications %}
+								<tr class="rv-contributor-form_box-row" id="addCert{{ each_cert.id }}">
+									<td class="rv-contributor-form_table--item">
+										<div class='rv-contributor-form_table--item-label'>Certification</div>
+										<div class='rv-contributor-form_table--item-content'>{{ each_cert.name_of_certification }}</div>
+									</td>
+									<td class="rv-contributor-form_button--container">
+										<div class="rv-contributor-form_button--group">
+											{% with each_cert.id|stringformat:"i" as cert_id %}
+												{% with "editCertification("|add:cert_id|add:")" as editCertification %}
+												{% with "deleteCertification("|add:cert_id|add:")" as deleteCertification %}
+													<div class="rv-contributor-form_button--group-button">
+														{% button
+															type="button"
+															variant="ghost"
+															color="dark"
+															onclick=editCertification
+														%}
+															{% icon_edit %}
+															Edit
+														{% end_button %}
+													</div>
+													<div class="rv-contributor-form_button--group-button">
+														{% button
+															type="button"
+															variant="ghost"
+															color="dark"
+															onclick=deleteCertification
+														%}
+															{% icon_x %}
+															Delete
+														{% end_button %}
+													</div>
+												{% endwith %}
+												{% endwith %}
+											{% endwith %}
+										</div>
+									</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+					<div class="rv-contributor-form_box-row" id="certificationCreate">
+						<div class="rv-contributor-form_table--item">
+							{% text_input 
+								label=form.certification.label
+								input=form.certification
+							%}
+						</div>
+						<div class="rv-contributor-form_button--container">
+							{% button 
+							  variant="ghost"
+							  color="primary" 
+							  type="button"
+							  onclick="addCertificate()"
+							  fluid_width="True"
+							%}
+							  {% icon_add %}
+							  Add Certificate
+							{% end_button %}
+						</div>
+					</div>
+				</div>
+				<div class="rv-contributor-form_box">
+					<h4 class="rv-contributor-form_subheader">Organizational Affiliations</h4>
+					<input id="hiddenAffilTable" hidden name="affiliationList">
+					<table id="addAffiliation" data-name="affiliationTable" class="rv-contributor-form_table">
+						<tbody>
+							{% for each_org in organizational_affiliations %}
+								<tr class="rv-contributor-form_box-row" id="addAffiliation{{ each_org.id }}">
+									<td class="rv-contributor-form_table--item">
+										<div>
+											<div class='rv-contributor-form_table--item-label'>Affiliation</div>
+											<div class='rv-contributor-form_table--item-content'>{{ each_org.name_of_affiliation }}</div>
+										</div>
+									</td>
+									<td class="rv-contributor-form_button--container">
+										{% with each_org.id|stringformat:"i" as org_id %}
+											{% with "editAffiliation("|add:org_id|add:")" as editAffiliation %}
+											{% with "deleteAffiliation("|add:org_id|add:")" as deleteAffiliation %}
+												<div class="rv-contributor-form_button--group-button">
+													{% button
+														type="button"
+														variant="ghost"
+														color="dark"
+														onclick=editAffiliation
+													%}
+														{% icon_edit %}
+														Edit
+													{% end_button %}
+												</div>
+												<div class="rv-contributor-form_button--group-button">
+													{% button
+														type="button"
+														variant="ghost"
+														color="dark"
+														onclick=deleteAffiliation
+													%}
+														{% icon_x %}
+														Delete
+													{% end_button %}
+												</div>
+											{% endwith %}
+											{% endwith %}
+										{% endwith %}
+									</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+					<div class="rv-contributor-form_box-row" id="affiliationCreate">
+						<div class="rv-contributor-form_table--item">
+							{{form.organizational_affiliation}}
+						</div>
+						<div class="rv-contributor-form_button--container">
+							{% button 
+							  variant="ghost"
+							  color="primary" 
+							  type="button"
+							  onclick="addAffiliation()"
+							  fluid_width="True"
+							%}
+							  {% icon_add %}
+							  Add Affiliation
+							{% end_button %}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class='tab'>
 				<h3>
-					Degree, Certification, and Affiliation
-					<span class='incomplete-span' id='degree-incomplete'>
+					Expertise Topics
+					<span class='incomplete-span' id='topics-incomplete'>
 						<small><span><i>Incomplete</i></span></small>
 					</span>
-					<span class='done-span' id='degree-done' style='display: none;'>
+					<span class='done-span' id='topics-done' style='display: none;'>
 						<small><span><i>Done!</i></span></small><span uk-icon="icon: check;"></span>
 					</span>
 				</h3>
+				<div class='uk-accordion-content'>
+					<div  class="uk-form-row">
+						<label class='uk-form-label uk-text-bold'>
+							Area of Expertise Relevant to Romantic Relationships <span class="orange">*</span>
+						</label>
+						<p>
+							Select as many topics as you feel qualified to write about.
+						</p>
+						<div class="row">
+							<div class="uk-card uk-card-default uk-box-shadow-large">
+								<div class='uk-card-body'>
+									<div class="uk-form-controls">
+										{{ form.area_of_expertise }}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class='tab'>
+				<h3>
+					Professional Information
+					<span class='incomplete-span' id='professional-info-incomplete'>
+						<small><span><i>Incomplete</i></span></small>
+					</span>
+					<span class='done-span' id='professional-info-done' style='display: none;'>
+						<small><span><i>Done!</i></span></small><span uk-icon="icon: check;"></span>
+					</span>
+				</h3>
+				<div>
 					<div class='uk-card uk-card-default uk-box-shadow-large'>
 						<div class='uk-card-body'>
-							<div uk-grid>
-								<div id='adviser-div' class='uk-width-1-2 uk-hidden'>
-									<!-- <h3><label class="blue" for="id_adviser">Mentor<span class="orange">*</span><br></label></h3> -->
-									<span>
-										If your level of study is Student-Undergraduate or Student-Masters, you will need to select a mentor.
-									</span>
-									<br>
-									<button class='uk-button uk-button-primary' type='button' uk-toggle="target:#adviserListModal;">
-										List of Mentors
-									</button>
-									<br>
+							<!-- <h3 class="blue" >Professional Information<span class="orange">*</span></h3> -->
+							<div class='uk-grid'>
+								<div class='uk-width-1-2'>
 									<div class="uk-form-row">
-										<label class="uk-form-label uk-text-bold">{{ form.adviser.label }}</label>
+										<label class="uk-form-label uk-text-bold">{{ form.address.label }}<span class="orange">*</span></label>
 										<div class="uk-form-controls">
-											{{ form.adviser }}
+											{{ form.address }}
 										</div>
 									</div>
-									<div id='adviserListModal' class='uk-modal-container' uk-modal>
-										<div class="uk-modal-dialog">
-											<div class='uk-modal-body'>
-												<h1>Mentors</h1>
-												<span>
-													Identifying and communicating the main points of research articles in a way that is accurate and focused
-													takes an understanding of research methods and academic scholarship. In order to promote these skills,
-													undergraduate and masters students who apply to be MyRelevate contributors are required to have a mentor.
-													MyRelevate mentors are contributors with graduate degrees who value mentoring others (i.e., undergraduate
-													and masters students) in becoming educated consumers and communicators of relationship research.
-													Check out our impressive mentors below!
-												</span>
-												<br>
-												<br>
-												{% if not advisers %}
-													<h2 class="uk-text-center">No Mentors at this time.</h2>
-												{% else %}
-													{% for adviser in advisers %}
-													<div id="adviser_profile_{{ adviser.id }}">
-														<a  uk-toggle="target: #adviserProfile{{ adviser.id }};">
-															<h3 class="blue">
-																{{ adviser.contributor_profile.user_profile.user.first_name }}
-																{{adviser.contributor_profile.user_profile.user.last_name }}
-															</h3>
-														</a>
-													</div>
-													<div id="adviserProfile{{ adviser.id }}" class='uk-modal-container' uk-modal>
-														<div class='uk-modal-dialog'>
-															<div class='uk-modal-body'>
-																{% with contrib_prof=adviser.contributor_profile %}
-																	{% include 'partials/contributor_info_display.html' %}
-																{% endwith %}
-															</div>
-														</div>
-													</div>
-													{% endfor %}
-
-												{% endif %}
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class='uk-width-1-2'>
-								<!-- <h3><label class="blue" for="id_degree">Degree Completed<span class="orange">*</span></label></h3> -->
-							</div>
-							<p>
-								Please enter your most recent degree and click 'Add'. If you have multiple degrees, you may enter the earlier degrees after (e.g., Ph.D. and M.S.)
-							</p>
-							<input id="hiddenAcaTable" hidden name="academicList">
-							<div class='uk-child-width-1-4' uk-grid>
-								<div>
-									{{ form.program.label }}<span class="orange">*</span>
-									<div class="uk-form-controls">
-										{{ form.program }}
-									</div>
-								</div>
-								<div>
-									{{ form.degree.label }}<span class="orange">*</span>
-									<div class="uk-form-controls">
-										{{ form.degree }}
-									</div>
-								</div>
-								<div>
-									{{ form.institution.label }}<span class="orange">*</span>
-									<div id="uni_div">
-										<div class="uk-form-row">
-											<div class="uk-form-controls">
-												{{ form.institution }}
-											</div>
-										</div>
-										<!-- @US_TODO: Fix this so it works with new framework -->
-										<div id="list_of_uni" style="width: 500px;" class="uk-dropdown uk-dropdown-search uk-panel-scrollable">
-											<ul class="uk-nav uk-nav-search" id="items_to_search">
-
-											</ul>
-										</div>
-									</div>
-								</div>
-								<div>
 									<br>
-									<button id='degree-add-btn' type="button" class="uk-button uk-button-primary" onclick="addAcademicProfile()">Add</button>
 								</div>
-							</div>
-							<table id="acaProf" data-name="acaProfTable" class="uk-table">
-								<tbody>
-									{% for each_academic in academic_profiles %}
-										<tr class='acaRow' id="acaProf{{ each_academic.id }}">
-											<td>
-												<div  class='uk-form-controls'>
-													<span class='program'>{{ each_academic.program }}</span>
-												</div>
-											</td>
-											<td>
-												<div  class='uk-form-controls'>
-													<span class='degree'>{{ each_academic.degree.name }}</span>
-												</div>
-											</td>
-											<td>
-												<div class='uk-form-controls'>
-													<span class='institute'>{{ each_academic.institution }}</span>
-												</div>
-											</td>
-											<td>
-												<button type='button' class='uk-button uk-button-orange' onclick='deleteAcademicProfile({{ each_academic.id }})'>delete</button>
-											</td>
-										</tr>
-									{% endfor %}
-								</tbody>
-							</table>
-							<!-- <div class="uk-grid-small" uk-grid> -->
-							<input id="hiddenCertTable" hidden name="certificateList">
-							<!-- <h3><label class="blue">{{ form.certification.label }}</label></h3> -->
-							<p>
-								If you have any additional certifications, please enter them one at a time by clicking ‘Add’ after you type each one. You may enter as many
-								as you currently possess.
-							</p>
-							<div uk-grid>
-								<div class="uk-width-3-4">
-									<div class="uk-form-controls">
-										{{ form.certification }}
-									</div>
-								</div>
-								<div class='uk-width-1-4'>
-									<button type="button" class="uk-button uk-button-primary" onclick="addCertificate()">Add</button>
-								</div>
-							</div>
-							<table id="addCert" data-name="certTable" class="uk-table">
-								<tbody>
-									{% for each_cert in certifications %}
-										<tr class='certRow' id=addCert{{ each_cert.id }}>
-											<td>
-												<div  class='uk-form-controls'>
-													<span class='certName'>{{ each_cert.name_of_certification }}</span>
-												</div>
-											</td>
-											<td>
-												<button type='button' class='uk-button uk-button-orange' onclick='deleteCertificate({{ each_cert.id }})'>delete</button>
-											</td>
-										</tr>
-									{% endfor %}
-								</tbody>
-							</table>
-															<!-- <div class="uk-grid-small" uk-grid> -->
-							<input id="hiddenAffilTable" hidden name="affiliationList">
-							<!-- <h3><label class="blue">{{ form.certification.label }}</label></h3> -->
-							<p>
-								Enter a organizational affiliation (if any) and click 'Add'. If you have multiple
-								affiliations, you may enter as many as you possess.
-							</p>
-							<p>
-								Double-click on input box for a list of pre-determined organizations, or enter a custom organization.
-							</p>
-							<div uk-grid>
-								<div class="uk-width-3-4">
-									<div class="uk-form-controls">
-										{{ form.organizational_affiliation }}
-									</div>
-								</div>
-								<div class='uk-width-1-4'>
-									<button type="button" class="uk-button uk-button-primary" onclick="addAffiliation()">Add</button>
-								</div>
-							</div>
-							<table id="addAffiliation" data-name="affiliationTable" class="uk-table">
-								<tbody>
-									{% for each_org in organizational_affiliations %}
-										<tr class='affiliationRow' id=addAffiliation{{ each_org.id }}>
-											<td>
-												<div  class='uk-form-controls'>
-													<span class='affiliationName'>{{ each_org.name_of_affiliation }}</span>
-												</div>
-											</td>
-											<td>
-												<button type='button' class='uk-button uk-button-orange' onclick='deleteAffiliation({{ each_org.id }})'>delete</button>
-											</td>
-										</tr>
-									{% endfor %}
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-				<div class='tab'>
-					<h3>
-						Expertise Topics
-						<span class='incomplete-span' id='topics-incomplete'>
-							<small><span><i>Incomplete</i></span></small>
-						</span>
-						<span class='done-span' id='topics-done' style='display: none;'>
-							<small><span><i>Done!</i></span></small><span uk-icon="icon: check;"></span>
-						</span>
-					</h3>
-					<div class='uk-accordion-content'>
-						<!-- <h3  class="blue" >Area of Expertise Relevant to Romantic Relationships<span class="orange">*</span></h3> -->
-						<div  class="uk-form-row">
-							<label class='uk-form-label uk-text-bold'>
-								Area of Expertise Relevant to Romantic Relationships <span class="orange">*</span>
-							</label>
-							<p>
-								Select as many topics as you feel qualified to write about.
-							</p>
-							<div class="row">
-								<div class="uk-card uk-card-default uk-box-shadow-large">
-									<div class='uk-card-body'>
+								<div class='uk-width-1-2'>
+									<div class="uk-form-row">
+										<label class="uk-form-label uk-text-bold">{{ form.city.label }}<span class="orange">*</span></label>
 										<div class="uk-form-controls">
-											{{ form.area_of_expertise }}
+											{{ form.city }}
+										</div>
+									</div>
+									<br>
+								</div>
+								<div class='uk-width-1-2'>
+									<div class="uk-form-row">
+										<label class="uk-form-label uk-text-bold">{{ form.state.label }}<span class="orange">*</span></label>
+										<div class="uk-form-controls">
+											{{ form.state }}
+										</div>
+									</div>
+									<br>
+								</div>
+								<div class='uk-width-1-2'>
+									<div class="uk-form-row">
+										<label class="uk-form-label uk-text-bold">{{ form.country.label }}<span class="orange">*</span></label>
+										<div class="uk-form-controls">
+											{{ form.country }}
+										</div>
+									</div>
+									<br>
+								</div>
+								<div class='uk-width-1-2'>
+									<div class="uk-form-row">
+										<label class="uk-form-label uk-text-bold">{{ form.zipcode.label }}<span class="orange">*</span></label>
+										<div class="uk-form-controls">
+											{{ form.zipcode }}
+										</div>
+									</div>
+									<br>
+								</div>
+							</div>
+							<div class="uk-form-row">
+								<label class="uk-form-label uk-text-bold">{{ form.website_url.label }}</label>
+								<div class="uk-form-controls">
+									{{ form.website_url }}
+								</div>
+							</div>
+							<br>
+							<div class='uk-grid'>
+								<div class='uk-width-1-2'>
+									<!-- <h3 class="blue" >Upload your cv/resume</h3> -->
+									<div class="uk-form-row">
+										<label class="uk-form-label uk-text-bold">{{ form.cv.label }}</label>
+										<div class="uk-form-controls">
+											{{ form.cv }}
+										</div>
+									</div>
+								</div>
+								<div class='uk-width-1-2'>
+									<!-- <h3 class="blue">Profile Picture</h3> -->
+									<div class="uk-form-row">
+										<label class="uk-form-label uk-text-bold">{{ form.avatar.label }}</label>
+										<div class="uk-form-controls">
+											{{ form.avatar }}
+										<div class="uk-hidden">
+											{{ form.x }}
+											{{ form.y }}
+											{{ form.height }}
+											{{ form.width }}
+										</div>
+										  <!-- MODAL TO CROP THE IMAGE -->
+										  <div class="modal fade" id="modalCrop">
+											<div class="modal-dialog">
+											  <div class="modal-content">
+												<div class="modal-header">
+												  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												  </button>
+												  <h4 class="modal-title">Crop the photo</h4>
+												</div>
+												<div class="modal-body">
+												  <img src="" id="image" style="max-width: 100%;">
+												</div>
+												<div class="modal-footer">
+												  <div class="btn-group pull-left" role="group">
+													<button type="button" class="btn btn-default js-zoom-in">
+													  <span class="glyphicon glyphicon-zoom-in"></span>
+													</button>
+													<button type="button" class="btn btn-default js-zoom-out">
+													  <span class="glyphicon glyphicon-zoom-out"></span>
+													</button>
+												  </div>
+												  <button type="button" class="btn btn-default" data-dismiss="modal">Nevermind</button>
+												  <button type="button" class="btn btn-primary js-crop-and-upload">Crop and upload</button>
+												</div>
+											  </div>
+											</div>
+										  </div>
+										  <!-- CONTAINER TO DISPLAY THE CROPPED IMAGES -->
+										  <div class="row uk-hidden" style="margin-top: 20px">
+											  <div class="col-sm-4 col-md-3" id="cropped_thumbnail">
+												<img src="{{ form.avatar.url }}" class="thumbnail">
+											  </div>
+										  </div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					</div>
-				</div>
-				<div class='tab'>
-					<h3>
-						Professional Information
-						<span class='incomplete-span' id='professional-info-incomplete'>
-							<small><span><i>Incomplete</i></span></small>
-						</span>
-						<span class='done-span' id='professional-info-done' style='display: none;'>
-							<small><span><i>Done!</i></span></small><span uk-icon="icon: check;"></span>
-						</span>
-					</h3>
-					<div>
-						<div class='uk-card uk-card-default uk-box-shadow-large'>
-							<div class='uk-card-body'>
-								<!-- <h3 class="blue" >Professional Information<span class="orange">*</span></h3> -->
-								<div class='uk-grid'>
-									<div class='uk-width-1-2'>
-										<div class="uk-form-row">
-											<label class="uk-form-label uk-text-bold">{{ form.address.label }}<span class="orange">*</span></label>
-											<div class="uk-form-controls">
-												{{ form.address }}
-											</div>
-										</div>
-										<br>
-									</div>
-									<div class='uk-width-1-2'>
-										<div class="uk-form-row">
-											<label class="uk-form-label uk-text-bold">{{ form.city.label }}<span class="orange">*</span></label>
-											<div class="uk-form-controls">
-												{{ form.city }}
-											</div>
-										</div>
-										<br>
-									</div>
-									<div class='uk-width-1-2'>
-										<div class="uk-form-row">
-											<label class="uk-form-label uk-text-bold">{{ form.state.label }}<span class="orange">*</span></label>
-											<div class="uk-form-controls">
-												{{ form.state }}
-											</div>
-										</div>
-										<br>
-									</div>
-									<div class='uk-width-1-2'>
-										<div class="uk-form-row">
-											<label class="uk-form-label uk-text-bold">{{ form.country.label }}<span class="orange">*</span></label>
-											<div class="uk-form-controls">
-												{{ form.country }}
-											</div>
-										</div>
-										<br>
-									</div>
-									<div class='uk-width-1-2'>
-										<div class="uk-form-row">
-											<label class="uk-form-label uk-text-bold">{{ form.zipcode.label }}<span class="orange">*</span></label>
-											<div class="uk-form-controls">
-												{{ form.zipcode }}
-											</div>
-										</div>
-										<br>
-									</div>
-								</div>
-								<div class="uk-form-row">
-									<label class="uk-form-label uk-text-bold">{{ form.website_url.label }}</label>
-									<div class="uk-form-controls">
-										{{ form.website_url }}
-									</div>
+							<!-- <h3 class="blue" >Professional Interests, Experience, and Expertise<span class="orange">*</span></h3> -->
+							<br><br>
+							<div class="uk-form-row">
+								<label class='uk-form-label uk-text-bold'>
+									{{ form.biography.label }} <span class="orange">*</span>
+								</label>
+								<div>
+									Please provide a brief background about who you are! What are your special interests?
+									Why do you want to be a contributor for Relevate? Are there any other things you want
+									readers to know about you? If approved, this biography will go on your contributor
+									profile page, so be sure to write it thought you are speaking directly to the users
+									of Relevate who may explore and view your profile. This means avoiding jargon and
+									acronyms, and writing at a lower reading level.
 								</div>
 								<br>
-								<div class='uk-grid'>
-									<div class='uk-width-1-2'>
-										<!-- <h3 class="blue" >Upload your cv/resume</h3> -->
-										<div class="uk-form-row">
-											<label class="uk-form-label uk-text-bold">{{ form.cv.label }}</label>
-											<div class="uk-form-controls">
-												{{ form.cv }}
-											</div>
-										</div>
-									</div>
-									<div class='uk-width-1-2'>
-										<!-- <h3 class="blue">Profile Picture</h3> -->
-										<div class="uk-form-row">
-											<label class="uk-form-label uk-text-bold">{{ form.avatar.label }}</label>
-											<div class="uk-form-controls">
-												{{ form.avatar }}
-											<div class="uk-hidden">
-												{{ form.x }}
-												{{ form.y }}
-												{{ form.height }}
-												{{ form.width }}
-											</div>
-											  <!-- MODAL TO CROP THE IMAGE -->
-											  <div class="modal fade" id="modalCrop">
-												<div class="modal-dialog">
-												  <div class="modal-content">
-													<div class="modal-header">
-													  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-														<span aria-hidden="true">&times;</span>
-													  </button>
-													  <h4 class="modal-title">Crop the photo</h4>
-													</div>
-													<div class="modal-body">
-													  <img src="" id="image" style="max-width: 100%;">
-													</div>
-													<div class="modal-footer">
-													  <div class="btn-group pull-left" role="group">
-														<button type="button" class="btn btn-default js-zoom-in">
-														  <span class="glyphicon glyphicon-zoom-in"></span>
-														</button>
-														<button type="button" class="btn btn-default js-zoom-out">
-														  <span class="glyphicon glyphicon-zoom-out"></span>
-														</button>
-													  </div>
-													  <button type="button" class="btn btn-default" data-dismiss="modal">Nevermind</button>
-													  <button type="button" class="btn btn-primary js-crop-and-upload">Crop and upload</button>
-													</div>
-												  </div>
-												</div>
-											  </div>
-											  <!-- CONTAINER TO DISPLAY THE CROPPED IMAGES -->
-											  <div class="row uk-hidden" style="margin-top: 20px">
-												  <div class="col-sm-4 col-md-3" id="cropped_thumbnail">
-													<img src="{{ form.avatar.url }}" class="thumbnail">
-												  </div>
-											  </div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!-- <h3 class="blue" >Professional Interests, Experience, and Expertise<span class="orange">*</span></h3> -->
-								<br><br>
-								<div class="uk-form-row">
-									<label class='uk-form-label uk-text-bold'>
-										{{ form.biography.label }} <span class="orange">*</span>
-									</label>
-									<div>
-										Please provide a brief background about who you are! What are your special interests?
-										Why do you want to be a contributor for Relevate? Are there any other things you want
-										readers to know about you? If approved, this biography will go on your contributor
-										profile page, so be sure to write it thought you are speaking directly to the users
-										of Relevate who may explore and view your profile. This means avoiding jargon and
-										acronyms, and writing at a lower reading level.
-									</div>
-									<br>
-									<div class="uk-form-controls">
-										{{ form.biography }}
-									</div>
+								<div class="uk-form-controls">
+									{{ form.biography }}
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class='tab'>
-					<h3>
-						Terms And Conditions
-						<span class='incomplete-span' id='terms-incomplete'>
-							<small><span><i>Incomplete</i></span></small>
-						</span>
-						<span class='done-span' style='display:none;' id='terms-done'>
-							<small><span><i>Done!</i></span></small><span uk-icon="icon: check;"></span>
-						</span>
-					</h3>
-					<div>
-						<div class='uk-card uk-card-default uk-box-shadow-large'>
-							<div class='uk-card-body'>
-								<!-- <h3 class="blue" >Terms and Conditions<span class="orange">*</span></h3> -->
-								<div class="uk-panel-scrollable" style='background-color: white;'>
-									<span>
-										Any information on any topic given by Relevate, its members, its contributors,
-										and/or its community members should not be considered to be advice, diagnosis,
-										and/or any treatment appropriate for its readers. Appropriate advice, diagnosis,
-										and/or treatment can only be given by licensed professionals within a professional
-										setting. Relevate makes no claim to be a professional setting appropriate for
-										giving advice, diagnosis, and/or treatment. Although many contributors to Relevate
-										topics are licensed professionals, the information shared by Relevate, its members,
-										its contributors, and its community members is subject to error and should not be
-										used to make any major life choices. The purpose of Relevate is to share general
-										research findings, which is subject to error and may not apply to each reader.
-										Relevate information may contain a call to action, which is subject to error and
-										may not apply to each reader. The reader assumes all risks of making decisions and
-										choices based on information that he/she found on Relevate's website, app, social
-										media pages, or any other source of Relevate information. The reader withdraws any
-										right to civil or legal claims or litigation of any type against Relevate, its
-										members, and its contributors due to any consequences of choices made by the reader
-										based on information gained through Relevate or any of its parties.
-									</span>
-									<br><br><br>
-									<span>
-										Relevate reserves the right to remove any information that it believes to be contrary to its
-										purpose or inappropriate in nature. Examples of material subject to removal include but are not
-										limited to any material that is inflammatory, illegal, commercial in nature, off topic,
-										discriminatory, dangerous, plagiarized material, personally identifiable information, and any
-										other material Relevate decides to remove. Relevate reserves the right to remove any
-										contributor or community member and any material added from any contributor or community member
-										from its database including but not limited to screen name, comments, contributions, ratings,
-										and any other material.
-									</span>
-								</div>
-								<p>I agree to terms and conditions<span class="orange">*</span>: {{ form.accept_terms }}</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			<!-- Circles which indicates the steps of the form: -->
-			<div style="text-align:center;margin-top:40px;">
-			  <span class="step"></span>
-			  <span class="step"></span>
-			  <span class="step"></span>
-			  <span class="step"></span>
 			</div>
-			<button type="button" id="prevBtn">Previous</button>
-			<button type="button" id="nextBtn">Next</button>
-			<button type="button" id="save">Save</button>
-		</form>
-	</div>
+			<div class='tab'>
+				<h3>
+					Terms And Conditions
+					<span class='incomplete-span' id='terms-incomplete'>
+						<small><span><i>Incomplete</i></span></small>
+					</span>
+					<span class='done-span' style='display:none;' id='terms-done'>
+						<small><span><i>Done!</i></span></small><span uk-icon="icon: check;"></span>
+					</span>
+				</h3>
+				<div>
+					<div class='uk-card uk-card-default uk-box-shadow-large'>
+						<div class='uk-card-body'>
+							<!-- <h3 class="blue" >Terms and Conditions<span class="orange">*</span></h3> -->
+							<div class="uk-panel-scrollable" style='background-color: white;'>
+								<span>
+									Any information on any topic given by Relevate, its members, its contributors,
+									and/or its community members should not be considered to be advice, diagnosis,
+									and/or any treatment appropriate for its readers. Appropriate advice, diagnosis,
+									and/or treatment can only be given by licensed professionals within a professional
+									setting. Relevate makes no claim to be a professional setting appropriate for
+									giving advice, diagnosis, and/or treatment. Although many contributors to Relevate
+									topics are licensed professionals, the information shared by Relevate, its members,
+									its contributors, and its community members is subject to error and should not be
+									used to make any major life choices. The purpose of Relevate is to share general
+									research findings, which is subject to error and may not apply to each reader.
+									Relevate information may contain a call to action, which is subject to error and
+									may not apply to each reader. The reader assumes all risks of making decisions and
+									choices based on information that he/she found on Relevate's website, app, social
+									media pages, or any other source of Relevate information. The reader withdraws any
+									right to civil or legal claims or litigation of any type against Relevate, its
+									members, and its contributors due to any consequences of choices made by the reader
+									based on information gained through Relevate or any of its parties.
+								</span>
+								<br><br><br>
+								<span>
+									Relevate reserves the right to remove any information that it believes to be contrary to its
+									purpose or inappropriate in nature. Examples of material subject to removal include but are not
+									limited to any material that is inflammatory, illegal, commercial in nature, off topic,
+									discriminatory, dangerous, plagiarized material, personally identifiable information, and any
+									other material Relevate decides to remove. Relevate reserves the right to remove any
+									contributor or community member and any material added from any contributor or community member
+									from its database including but not limited to screen name, comments, contributions, ratings,
+									and any other material.
+								</span>
+							</div>
+							<p>I agree to terms and conditions<span class="orange">*</span>: {{ form.accept_terms }}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		<div class="rv-contributor-form_footer">
+			{% button
+				id="prevBtn"
+				type="button"
+				color="primary"
+			%}
+				{% icon_arrow rotate="90" %}
+				Previous
+			{% end_button %}
+			{% button 
+			  id="nextBtn"
+			  type="button"
+			%}
+			  Next
+			  {% icon_arrow rotate="270" %}
+			{% end_button %}
+		</div>
+		{# Temp hide this for the demo #}
+		<button style="display: none;" type="button" id="save">Save</button>
+	</form>
 </div>
 <input type="hidden" id="contributor_temp_save" name="variable" value="{% url 'profile:contributor_temp_save' %}">
 {% endblock %}

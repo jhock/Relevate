@@ -1,0 +1,25 @@
+{% extends "styleguide_layout.html" %}
+{% load example_tags %}
+{% load icon_tags %}
+
+{% block content%}
+  {% example with
+    heading="Requirements"
+    caption="Within your template file, load the custom icon tags"
+    codeOnly="True"
+  %}
+{% load icon_tags %}
+  {% end_example %}
+
+  {% example with 
+    heading="Example" 
+    caption="Icons have a set height 1rem by default. The rotate property can be used to change directions." 
+  %}
+{% icon_arrow title="arrow" %}
+{% icon_edit title="edit" %}
+{% icon_circle_check title="circle" %}
+{% icon_cloud title="cloud" size="x-large" %}
+{% icon_x title="x" %}
+{% icon_add title="add" %}
+  {% end_example %}
+{% endblock content %}

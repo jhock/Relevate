@@ -1,6 +1,52 @@
 {% load staticfiles %}
 {% load compress %}
+{% load button_tags %}
+{% load icon_tags %}
+{% load templatetag_handlebars %}
 
 {% compress css %}
   <link rel="stylesheet" type="text/x-scss" href="{% static "scss/buttons.scss" %}" />
 {% endcompress %}
+
+{% tplhandlebars "rv_button" %}
+  {% button variant={{variant}} color={{color}} %}
+    {% verbatim %}
+      {{label}}
+    {% endverbatim %}
+  {% end_button %}
+{% endtplhandlebars %}
+
+<script>
+  function RvButton(props) {
+    var buttonProps = {
+      variant: props.variant,
+      color: props.color,
+      label: props.label,
+      fluid_width: props.fluid_width || false,
+      icon: props.icon
+    }
+
+    var template = Handlebars.compile(document.getElementById('rv_button').innerHTML)
+    var markup = template(buttonProps)
+
+    var button_container = document.createElement('div')
+    button_container.innerHTML = markup
+    var button = button_container.getElementsByTagName('BUTTON')[0]
+
+    if (buttonProps.fluid_width) {
+      button.classList.add('fluid-width')
+    }
+
+    ammendPropsToElement(omitProps(props, buttonProps), button)
+
+    if (buttonProps.icon) {
+      button.innerHTML = RvIcon({ 
+        variant: buttonProps.icon, 
+        size: 'small', 
+        rotate: 0 
+      }) + button.textContent
+      markup = button_container.innerHTML
+    }
+    return markup
+  }
+</script>

@@ -1,0 +1,34 @@
+{% extends "styleguide_layout.html" %}
+{% load example_tags %}
+{% load progress_tags %}
+
+{% block content%}
+  {% example with
+    heading="Requirements"
+    caption="Include the following in your HTML head"
+    codeOnly="True"
+  %}
+{% load component_assets %}
+{% progress_assets %}
+  {% end_example %}
+
+  {% example with
+    heading=""
+    caption="Within your template file, load the custom select tags"
+    codeOnly="True"
+  %}
+{% load progress_tags %}
+  {% end_example %}
+
+  {% example with 
+    heading="A Progress Component" 
+    caption="Used for displaying user progress at a given task" 
+  %}
+{% progress %}
+  {% progress_item status="complete" %}Professional Info{% end_progress_item %}
+  {% progress_item status="active" %}Degree, Certification, and Affiliation{% end_progress_item %}
+  {% progress_item %}Topics{% end_progress_item %}
+  {% progress_item %}Terms and Conditions{% end_progress_item %}
+{% end_progress %}
+  {% end_example %}
+{% endblock content %}

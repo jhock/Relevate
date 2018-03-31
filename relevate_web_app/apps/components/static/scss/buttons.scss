@@ -1,41 +1,79 @@
 @import "../../../../static/scss/base/variables";
 @import "../../../../static/scss/mixins/focus";
 
-@mixin baseButton($color, $background, $border) {
+@mixin baseButton() {
   position: relative;
-  border-radius: 2em;
+  border-radius: 999rem;
   box-sizing: border-box;
-  border: 2px solid $border;
-  color: $color;
-  background: $background;
   font-size: 1rem;
   font-weight: $rv-font-weight-semibold;
-  padding: 0.4em 1em;
+  padding: 0.2rem 1rem;
   transition: background 200ms linear;
   text-decoration: none;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  user-select: none;
+  overflow: visible;
+  margin: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  vertical-align: middle;
+  text-decoration: none;
+  touch-action: manipulation;
+  height: 2.25rem;
+
+  &.fluid-width {
+    width: 100%;
+  }
+
+  &::-moz-focus-inner {
+    border: 0;
+  }
+
+  @include buttonFocus(0.3rem, 0.3rem, 0.3rem, 0.3rem);
+}
+
+@mixin buttonColor ($color, $background, $border, $hover, $active) {
+  border: 2px solid $border;
+  color: $color;
+  background: $background;
 
   &:hover {
-    background: darken($background, 10%);
+    background: $hover;
     transition: background 200ms linear;
   }
 
   &:active {
-    background: darken($background, 20%);
+    background: $active;
     box-shadow: inset 0 0 0.15rem $rv-color-dark;
   }
+}
 
-  @include buttonFocus(0.3rem, 0.33rem, 0.3rem, 0.32rem);
+@mixin buttonVariants ($color) {
+  &.solid {
+    @include buttonColor($rv-color-white, $color, $color, darken($color, 10%), darken($color, 20%))
+  }
+
+  &.ghost {
+    @include buttonColor($color, $rv-color-white, $color, lighten($color, 44%), lighten($color, 40%))
+  }
 }
 
 .rv-button {
-  @include baseButton($rv-color-white, $rv-color-primary, $rv-color-primary);
-}
+  @include baseButton()
 
-.rv-button-secondary {
-  @include baseButton($rv-color-white, $rv-color-neutral, $rv-color-neutral);
-}
+  &.primary {
+    @include buttonVariants($rv-color-primary)
+  }
 
-.fill-button {
-  width: 100%;
+  &.dark {
+    @include buttonVariants($rv-color-neutral)
+  }
+
+  [data-icon] {
+    margin: 0 0.2rem;
+  }
 }

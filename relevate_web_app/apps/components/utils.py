@@ -76,9 +76,11 @@ def split_props(requested_props, props):
 def create_chained_function(query, function_to_chain, props):
   index = prop_index(query, props)
   if index > -1:
-    if props[index][:-1] != ';':
-      props[index] = props[index] + ';'
-    props[index] = props[index] + function_to_chain
+    close_str = props[index][-1:]
+    function_prop = props[index][:-1]
+    if function_prop[:-1] != ';':
+      function_prop = function_prop + ';'
+    props[index] = function_prop + function_to_chain + close_str
   else:
     props.append(query + '=' + function_to_chain)
   return props
@@ -87,12 +89,13 @@ def resolve_variable(prop_value, context):
   if not prop_value:
     return None
 
-  if type(prop_value) is list or type(prop_value) is tuple:
-    prop_value = prop_value[0]
-    if prop_value is None:
+  variable = prop_value
+  if type(variable) is list or type(variable) is tuple:
+    variable = variable[0]
+    if variable is None:
       return None
 
-  variable = template.Variable(prop_value)
+  variable = template.Variable(variable)
   try:
     resolved = variable.resolve(context)
     return resolved
@@ -100,16 +103,22 @@ def resolve_variable(prop_value, context):
     return prop_value
 
 def resolve_prop_variables(props, context):
+  if props is None:
+    return None
+
   for i in range(0, len(props)):
     parsed = parse_prop(props[i])
-    if len(parsed) > 1:
+    if parsed[1] is not None:
       props[i] = parsed[0] + '=' + resolve_variable(parsed[1], context)
   return props
 
 def convert_props_to_html(props):
+  if props is None:
+    return ''
+
   for i in range(0, len(props)):
     parsed = parse_prop(props[i])
-    if len(parsed) > 1:
+    if parsed[1] is not None:
       props[i] = parsed[0] + '=' + '\"' + parsed[1] + '\"'
   return ' '.join(props)
 
@@ -132,3 +141,12 @@ def get_prop_from_tag(query, markup, tag):
   else:
     return None
 
+def replace_tag(markup, tag, replace):
+  open_tag = '<' + tag
+  open_idx = markup.find(open_tag) + len(open_tag)
+  markup = '<' + replace + markup[open_idx:]
+
+  close_tag = '</' + tag + '>'
+  close_idx = markup.find(close_tag) + len(close_tag)
+  markup = markup[:close_idx] + '</' + replace + '>'
+  return markup

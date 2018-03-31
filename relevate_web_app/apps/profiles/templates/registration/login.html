@@ -1,6 +1,7 @@
 {% extends "base-titlebar.html" %}
 {% load staticfiles %}
 {% load i18n %}
+{% load button_tags %}
 {% load text_input_tags %}
 
 {% block content %}
@@ -25,7 +26,9 @@
 				maxlength="30" 
 			%}
 			<div class="rv-box-form_submit">
-				<button class="rv-button fill-button" type="submit">{% trans "Log in" %}</button>
+				{% button fluid_width="True" type="submit" %}
+					{% trans "Log in" %}
+				{% end_button %}
 				{# <input class='rv-button fill-button' type="submit" value="{% trans 'Log in' %}" /> #}
 				{# <input type="hidden" name="next" value="{{ next }}" /> #}
 			</div>

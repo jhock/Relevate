@@ -1,0 +1,42 @@
+{% load staticfiles %}
+{% load compress %}
+{% load icon_tags %}
+{% load templatetag_handlebars %}
+
+{% compress css %}
+  <link rel="stylesheet" type="text/x-scss" href="{% static "scss/icons.scss" %}" />
+{% endcompress %}
+
+{# TODO: Kill the duplication with icons #}
+{% tplhandlebars "rv_icon_add" %}
+  {% icon_add title={{title}} size={{size}} rotate={{rotate}} color={{color}} %}
+{% endtplhandlebars %}
+
+{% tplhandlebars "rv_icon_arrow" %}
+  {% icon_arrow title={{title}} size={{size}} rotate={{rotate}} color={{color}} %}
+{% endtplhandlebars %}
+
+{% tplhandlebars "rv_icon_edit" %}
+  {% icon_edit title={{title}} size={{size}} rotate={{rotate}} color={{color}} %}
+{% endtplhandlebars %}
+
+{% tplhandlebars "rv_icon_save" %}
+  {% icon_save title={{title}} size={{size}} rotate={{rotate}} color={{color}} %}
+{% endtplhandlebars %}
+
+{% tplhandlebars "rv_icon_x" %}
+  {% icon_x title={{title}} size={{size}} rotate={{rotate}} color={{color}} %}
+{% endtplhandlebars %}
+
+<script>
+  function RvIcon(props) {
+    iconProps = {
+      size: props.size,
+      rotate: props.rotate,
+      color: props.color
+    }
+
+    var icon = Handlebars.compile(document.getElementById('rv_icon_' + props.variant).innerHTML)
+    return icon(iconProps)
+  }
+</script>

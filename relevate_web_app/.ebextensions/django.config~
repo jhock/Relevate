@@ -3,10 +3,13 @@ packages:
     libjpeg-turbo-devel: []
     libpng-devel: []
     freetype-devel: []
+    gcc-c++: []
 
 container_commands:
   01_reinstall_pil:
     command: "source /opt/python/run/venv/bin/activate && yes | pip install Pillow --no-cache-dir"
+  04_compress:
+    command: "./manage.py compress --force"
 
 #  02_migrate:
 #    command: "django-admin.py migrate"
@@ -16,10 +19,11 @@ container_commands:
  #   command: "python3 manage.py createsu"
  #   leader_only: true
 
+
 option_settings:
   aws:elasticbeanstalk:application:environment:
     DJANGO_SETTINGS_MODULE: settings.beta
 
 option_settings:
   aws:elasticbeanstalk:container:python:
-    WSGIPath: relevate_web_app/wsgi.py
+    WSGIPath: wsgi.py

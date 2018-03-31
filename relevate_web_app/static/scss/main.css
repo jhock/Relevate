@@ -207,6 +207,11 @@ p {
 
 /**
 ----------------
+  Font Size
+----------------
+**/
+/**
+----------------
   Colors
 ----------------
 **/
@@ -393,6 +398,11 @@ h6,
 
 /**
 ----------------
+  Font Size
+----------------
+**/
+/**
+----------------
   Colors
 ----------------
 **/
@@ -419,6 +429,11 @@ h6,
 /**
 ----------------
   Breakpoints
+----------------
+**/
+/**
+----------------
+  Font Size
 ----------------
 **/
 /**
@@ -486,8 +501,7 @@ h6,
     left: -0.3rem;
     border: 1px solid #246FF2;
     transform: scale(0.8, 0.8);
-    transition: transform 100ms ease-in;
-    z-index: -1; }
+    transition: transform 100ms ease-in; }
   .rv-navbar_logo-link:focus {
     outline: 0; }
     .rv-navbar_logo-link:focus:before {
@@ -505,6 +519,10 @@ h6,
 
 .rv-navbar_shadow {
   box-shadow: 0 0.3rem 0.3rem rgba(0, 0, 0, 0.3); }
+
+.rv-navbar_submenu {
+  display: flex;
+  align-items: center; }
 
 .rv-navbar_options-container {
   display: flex;
@@ -534,8 +552,7 @@ h6,
     left: -0.5rem;
     border: 1px solid #246FF2;
     transform: scale(0.8, 0.8);
-    transition: transform 100ms ease-in;
-    z-index: -1; }
+    transition: transform 100ms ease-in; }
   .rv-navbar_option:focus {
     outline: 0; }
     .rv-navbar_option:focus:before {
@@ -561,6 +578,11 @@ h6,
 .rv-navbar_option-text-input {
   margin: 0 1rem; }
 
+/**
+----------------
+  Font Size
+----------------
+**/
 /**
 ----------------
   Colors
@@ -628,6 +650,11 @@ h6,
     opacity: 1;
     transform: translate3d(0, 0, 0); } }
 
+/**
+----------------
+  Font Size
+----------------
+**/
 /**
 ----------------
   Colors
@@ -733,6 +760,260 @@ h6,
 .rv-content-card_topics {
   display: none; }
 
+/**
+----------------
+  Font Size
+----------------
+**/
+/**
+----------------
+  Colors
+----------------
+**/
+/**
+----------------
+  Typography
+----------------
+**/
+/**
+----------------
+  Navbar
+----------------
+**/
+/**
+----------------
+  Shadows
+----------------
+**/
+/**
+----------------
+  Cards
+----------------
+**/
+/**
+----------------
+  Breakpoints
+----------------
+**/
+.rv-box-form_header {
+  margin-bottom: 2rem; }
+
+.rv-box-form_header-with-text {
+  margin-bottom: 1rem; }
+
+.rv-box-form_submit {
+  margin-top: 1rem;
+  text-align: right; }
+
+.rv-box-form_links {
+  text-align: center; }
+
+/**
+----------------
+  Font Size
+----------------
+**/
+/**
+----------------
+  Colors
+----------------
+**/
+/**
+----------------
+  Typography
+----------------
+**/
+/**
+----------------
+  Navbar
+----------------
+**/
+/**
+----------------
+  Shadows
+----------------
+**/
+/**
+----------------
+  Cards
+----------------
+**/
+/**
+----------------
+  Breakpoints
+----------------
+**/
+.rv-contributor-form {
+  margin: 1rem 5rem; }
+
+.rv-contributor-form_header {
+  line-height: 0.5;
+  margin: 0; }
+
+.rv-contributor-form_progress {
+  margin: 3rem 0; }
+
+.rv-contributor-form_box {
+  margin-bottom: 3rem;
+  padding: 3rem;
+  border: 1px solid #D6D6D6; }
+
+.rv-contributor-form_box-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px dashed #D6D6D6;
+  padding: 1rem 0; }
+  .rv-contributor-form_box-row:last-child {
+    border: none; }
+
+.rv-contributor-form_table {
+  width: 100%;
+  border-bottom: 1px dashed #D6D6D6; }
+
+.rv-contributor-form_table--item {
+  width: 100%;
+  flex: 1 1 auto;
+  margin: 0.5rem; }
+  .rv-contributor-form_table--item:first-child {
+    margin-left: 0; }
+
+.rv-contributor-form_button--container {
+  flex: 0 0 13.5rem;
+  margin: 0.5rem; }
+
+.rv-contributor-form_button--group {
+  display: flex; }
+
+.rv-contributor-form_button--group-button {
+  flex: 1; }
+  .rv-contributor-form_button--group-button:first-child {
+    margin-right: 0.25rem; }
+  .rv-contributor-form_button--group-button:last-child {
+    margin-left: 0.25rem; }
+
+.rv-contributor-form_footer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem; }
+
+.rv-contributor-form_table--item-label {
+  font-size: 0.875rem;
+  font-weight: 700;
+  display: none; }
+
+@media only screen and (max-width: 1000px) {
+  .rv-contributor-form {
+    margin: 0; }
+  .rv-contributor-form_header {
+    margin: 0 1.5rem;
+    text-align: center; }
+  .rv-contributor-form_progress {
+    margin: 0; }
+  .rv-contributor-form_box {
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    border: 1px solid #D6D6D6; }
+  .rv-contributor-form_progress {
+    margin: 3rem; } }
+
+@media only screen and (max-width: 900px) {
+  .rv-contributor-form {
+    margin: 0 10rem; }
+  .rv-contributor-form_box {
+    border: none;
+    margin: 0;
+    padding: 0; }
+  .rv-contributor-form_progress {
+    margin: 3rem 0 2rem 0; }
+  .rv-contributor-form_table {
+    margin-top: 1rem;
+    border-bottom: none; }
+  .rv-contributor-form_box-row {
+    flex-direction: column;
+    border-top: 1px solid #D6D6D6;
+    border: 1px solid #D6D6D6;
+    border-bottom: none;
+    box-sizing: border-box;
+    padding: 2rem; }
+    .rv-contributor-form_box-row:last-child {
+      border: 1px solid #D6D6D6;
+      margin-bottom: 3rem; }
+  tr.rv-contributor-form_box-row:last-child {
+    margin-bottom: 0; }
+  td.rv-contributor-form_table--item {
+    border-top: 1px dashed #D6D6D6;
+    padding-top: 1rem; }
+    td.rv-contributor-form_table--item:first-child {
+      padding-top: 0;
+      border-top: none; }
+  .rv-contributor-form_button--container {
+    width: 100%;
+    flex-basis: auto; }
+  .rv-contributor-form_table--item-label {
+    display: block; } }
+
+@media only screen and (max-width: 720px) {
+  .rv-contributor-form {
+    margin: 0; }
+  .rv-contributor-form_subheader {
+    text-align: center; }
+  .rv-contributor-form_progress {
+    margin-left: 2rem;
+    margin-right: 2rem; } }
+
+/**
+----------------
+  Font Size
+----------------
+**/
+/**
+----------------
+  Colors
+----------------
+**/
+/**
+----------------
+  Typography
+----------------
+**/
+/**
+----------------
+  Navbar
+----------------
+**/
+/**
+----------------
+  Shadows
+----------------
+**/
+/**
+----------------
+  Cards
+----------------
+**/
+/**
+----------------
+  Breakpoints
+----------------
+**/
+.rv-home_body {
+  margin: 2rem; }
+
+.rv-home_header {
+  color: #246FF2;
+  margin-bottom: 2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #D6D6D6; }
+
+.rv-home_welcome {
+  text-align: center; }
+
+/**
+----------------
+  Font Size
+----------------
+**/
 /**
 ----------------
   Colors
@@ -886,89 +1167,9 @@ h6,
 
 /**
 ----------------
-  Colors
+  Font Size
 ----------------
 **/
-/**
-----------------
-  Typography
-----------------
-**/
-/**
-----------------
-  Navbar
-----------------
-**/
-/**
-----------------
-  Shadows
-----------------
-**/
-/**
-----------------
-  Cards
-----------------
-**/
-/**
-----------------
-  Breakpoints
-----------------
-**/
-.rv-home_body {
-  margin: 2rem; }
-
-.rv-home_header {
-  color: #246FF2;
-  margin-bottom: 2rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid #D6D6D6; }
-
-.rv-home_welcome {
-  text-align: center; }
-
-/**
-----------------
-  Colors
-----------------
-**/
-/**
-----------------
-  Typography
-----------------
-**/
-/**
-----------------
-  Navbar
-----------------
-**/
-/**
-----------------
-  Shadows
-----------------
-**/
-/**
-----------------
-  Cards
-----------------
-**/
-/**
-----------------
-  Breakpoints
-----------------
-**/
-.rv-box-form_header {
-  margin-bottom: 2rem; }
-
-.rv-box-form_header-with-text {
-  margin-bottom: 1rem; }
-
-.rv-box-form_submit {
-  margin-top: 1rem;
-  text-align: right; }
-
-.rv-box-form_links {
-  text-align: center; }
-
 /**
 ----------------
   Colors
@@ -1003,11 +1204,13 @@ h6,
   color: #246FF2;
   text-decoration: none;
   border-radius: 50%; }
-  .rv-avatar:focus, .rv-avatar:hover {
-    text-decoration: underline;
-    outline: none; }
-  .rv-avatar:active {
-    color: #0d56d6; }
+
+.rv-avatar:focus, .rv-avatar:hover {
+  text-decoration: underline;
+  outline: none; }
+
+.rv-avatar:active {
+  color: #0d56d6; }
 
 .avatar-img {
   color: #246FF2;
@@ -1028,6 +1231,11 @@ h6,
   height: 2rem;
   border-radius: 50%; }
 
+/**
+----------------
+  Font Size
+----------------
+**/
 /**
 ----------------
   Colors
@@ -1056,6 +1264,11 @@ h6,
 /**
 ----------------
   Breakpoints
+----------------
+**/
+/**
+----------------
+  Font Size
 ----------------
 **/
 /**
@@ -1090,36 +1303,43 @@ h6,
 **/
 .rv-button {
   position: relative;
-  border-radius: 2em;
+  border-radius: 999rem;
   box-sizing: border-box;
-  border: 2px solid #246FF2;
-  color: #ffffff;
-  background: #246FF2;
   font-size: 1rem;
   font-weight: 600;
-  padding: 0.4em 1em;
+  padding: 0.2rem 1rem;
   transition: background 200ms linear;
   text-decoration: none;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  user-select: none;
+  overflow: visible;
+  margin: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  vertical-align: middle;
+  text-decoration: none;
+  touch-action: manipulation;
+  height: 2.25rem;
   position: relative; }
-  .rv-button:hover {
-    background: #0d56d6;
-    transition: background 200ms linear; }
-  .rv-button:active {
-    background: #0a43a6;
-    box-shadow: inset 0 0 0.15rem #3A3A3A; }
+  .rv-button.fluid-width {
+    width: 100%; }
+  .rv-button::-moz-focus-inner {
+    border: 0; }
   .rv-button:before {
     content: "";
     position: absolute;
     opacity: 0;
     top: -0.3rem;
-    right: -0.33rem;
+    right: -0.3rem;
     bottom: -0.3rem;
-    left: -0.32rem;
+    left: -0.3rem;
     border: 1px solid #246FF2;
     transform: scale(0.8, 0.8);
-    transition: transform 100ms ease-in;
-    z-index: -1; }
+    transition: transform 100ms ease-in; }
   .rv-button:focus {
     outline: 0; }
     .rv-button:focus:before {
@@ -1128,51 +1348,54 @@ h6,
       transform: scale(1, 1); }
   .rv-button:before {
     border-radius: 999rem; }
+  .rv-button.primary.solid {
+    border: 2px solid #246FF2;
+    color: #ffffff;
+    background: #246FF2; }
+    .rv-button.primary.solid:hover {
+      background: #0d56d6;
+      transition: background 200ms linear; }
+    .rv-button.primary.solid:active {
+      background: #0a43a6;
+      box-shadow: inset 0 0 0.15rem #3A3A3A; }
+  .rv-button.primary.ghost {
+    border: 2px solid #246FF2;
+    color: #246FF2;
+    background: #ffffff; }
+    .rv-button.primary.ghost:hover {
+      background: #f8faff;
+      transition: background 200ms linear; }
+    .rv-button.primary.ghost:active {
+      background: #e5eefd;
+      box-shadow: inset 0 0 0.15rem #3A3A3A; }
+  .rv-button.dark.solid {
+    border: 2px solid #737373;
+    color: #ffffff;
+    background: #737373; }
+    .rv-button.dark.solid:hover {
+      background: #5a5a5a;
+      transition: background 200ms linear; }
+    .rv-button.dark.solid:active {
+      background: #404040;
+      box-shadow: inset 0 0 0.15rem #3A3A3A; }
+  .rv-button.dark.ghost {
+    border: 2px solid #737373;
+    color: #737373;
+    background: #ffffff; }
+    .rv-button.dark.ghost:hover {
+      background: #e3e3e3;
+      transition: background 200ms linear; }
+    .rv-button.dark.ghost:active {
+      background: #d9d9d9;
+      box-shadow: inset 0 0 0.15rem #3A3A3A; }
+  .rv-button [data-icon] {
+    margin: 0 0.2rem; }
 
-.rv-button-secondary {
-  position: relative;
-  border-radius: 2em;
-  box-sizing: border-box;
-  border: 2px solid #737373;
-  color: #ffffff;
-  background: #737373;
-  font-size: 1rem;
-  font-weight: 600;
-  padding: 0.4em 1em;
-  transition: background 200ms linear;
-  text-decoration: none;
-  cursor: pointer;
-  position: relative; }
-  .rv-button-secondary:hover {
-    background: #5a5a5a;
-    transition: background 200ms linear; }
-  .rv-button-secondary:active {
-    background: #404040;
-    box-shadow: inset 0 0 0.15rem #3A3A3A; }
-  .rv-button-secondary:before {
-    content: "";
-    position: absolute;
-    opacity: 0;
-    top: -0.3rem;
-    right: -0.33rem;
-    bottom: -0.3rem;
-    left: -0.32rem;
-    border: 1px solid #246FF2;
-    transform: scale(0.8, 0.8);
-    transition: transform 100ms ease-in;
-    z-index: -1; }
-  .rv-button-secondary:focus {
-    outline: 0; }
-    .rv-button-secondary:focus:before {
-      opacity: 1;
-      transition: transform 100ms ease-in;
-      transform: scale(1, 1); }
-  .rv-button-secondary:before {
-    border-radius: 999rem; }
-
-.fill-button {
-  width: 100%; }
-
+/**
+----------------
+  Font Size
+----------------
+**/
 /**
 ----------------
   Colors
@@ -1249,6 +1472,89 @@ h6,
 
 /**
 ----------------
+  Font Size
+----------------
+**/
+/**
+----------------
+  Colors
+----------------
+**/
+/**
+----------------
+  Typography
+----------------
+**/
+/**
+----------------
+  Navbar
+----------------
+**/
+/**
+----------------
+  Shadows
+----------------
+**/
+/**
+----------------
+  Cards
+----------------
+**/
+/**
+----------------
+  Breakpoints
+----------------
+**/
+.rv-icon {
+  display: inline-block;
+  vertical-align: center; }
+  .rv-icon svg {
+    width: 100%;
+    height: 100%; }
+  .rv-icon.x-small {
+    width: 1rem;
+    height: 1rem; }
+  .rv-icon.small {
+    width: 1.25rem;
+    height: 1.25rem; }
+  .rv-icon.medium {
+    width: 1.5rem;
+    height: 1.5rem; }
+  .rv-icon.large {
+    width: 1.75rem;
+    height: 1.75rem; }
+  .rv-icon.x-large {
+    width: 3.5rem;
+    height: 3.5rem; }
+  .rv-icon.fill {
+    width: 100%;
+    height: 100%; }
+  .rv-icon.primary svg g {
+    fill: #246FF2; }
+  .rv-icon.inverse svg g {
+    fill: #ffffff; }
+  .rv-icon.dark svg g {
+    fill: #3A3A3A; }
+  .rv-icon.neutral svg g {
+    fill: #737373; }
+  .rv-icon.light-gray svg g {
+    fill: #D6D6D6; }
+  .rv-icon.rotate-0 svg {
+    transform: rotate(0deg); }
+  .rv-icon.rotate-90 svg {
+    transform: rotate(90deg); }
+  .rv-icon.rotate-180 svg {
+    transform: rotate(180deg); }
+  .rv-icon.rotate-270 svg {
+    transform: rotate(270deg); }
+
+/**
+----------------
+  Font Size
+----------------
+**/
+/**
+----------------
   Colors
 ----------------
 **/
@@ -1286,6 +1592,224 @@ h6,
   .rv-link:active {
     color: #0d56d6; }
 
+/**
+----------------
+  Font Size
+----------------
+**/
+/**
+----------------
+  Colors
+----------------
+**/
+/**
+----------------
+  Typography
+----------------
+**/
+/**
+----------------
+  Navbar
+----------------
+**/
+/**
+----------------
+  Shadows
+----------------
+**/
+/**
+----------------
+  Cards
+----------------
+**/
+/**
+----------------
+  Breakpoints
+----------------
+**/
+.rv-progress {
+  margin-top: 4rem;
+  width: 100%;
+  position: relative;
+  display: flex; }
+
+.rv-progress-item {
+  width: 100%;
+  text-align: center;
+  position: relative; }
+  .rv-progress-item:first-child {
+    margin-left: 0; }
+  .rv-progress-item:last-child {
+    margin-right: 0; }
+  .rv-progress-item.complete .rv-progress-item_icon {
+    color: #246FF2; }
+  .rv-progress-item.complete .rv-progress-item_box--start {
+    background: #246FF2; }
+  .rv-progress-item.complete .rv-progress-item_box--end {
+    background: #246FF2; }
+  .rv-progress-item.complete .rv-progress-item_text {
+    color: #246FF2; }
+  .rv-progress-item.active .rv-progress-item_box--start {
+    background: #246FF2; }
+  .rv-progress-item.active .rv-progress-item_box--end {
+    background: #D6D6D6; }
+  .rv-progress-item.active .rv-progress-item_text {
+    color: #246FF2;
+    font-weight: 800; }
+
+.rv-progress-item_text {
+  margin-top: 0.75rem;
+  color: #737373; }
+
+.rv-progress-item_icon {
+  color: #D6D6D6;
+  background: #ffffff;
+  padding: 0 0.25rem; }
+
+.rv-progress-item_icon--cloud {
+  padding-bottom: 0.75rem;
+  animation: 0.3s ease-in 0s 1 enterCloud; }
+
+.rv-progress-item_box {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 0.16rem;
+  margin-bottom: 0.25rem; }
+
+.rv-progress-item_box--start {
+  width: 50%;
+  height: 100%;
+  background: #D6D6D6; }
+
+.rv-progress-item_box--end {
+  width: 50%;
+  height: 100%;
+  background: #D6D6D6; }
+
+.rv-progress-item_position {
+  display: none; }
+
+@media only screen and (max-width: 780px) {
+  .rv-progress {
+    margin-top: 2.5rem; }
+  .rv-progress-item {
+    position: static;
+    padding-top: 0; }
+    .rv-progress-item.active .rv-progress-item_text {
+      display: block;
+      color: #737373;
+      position: absolute;
+      top: -3rem;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      font-weight: 500; }
+    .rv-progress-item.active .rv-progress-item_box--end {
+      background: #246FF2; }
+    .rv-progress-item.active .rv-progress-item_position {
+      display: initial; }
+  .rv-progress-item_text {
+    display: none; }
+  .rv-progress-item_icon {
+    display: none; }
+  .rv-progress-item_box--start {
+    margin-left: 0.25rem; }
+  .rv-progress-item_box--end {
+    margin-right: 0.25rem; } }
+
+@keyframes enterCloud {
+  0% {
+    transform: scale(0); }
+  50% {
+    transform: scale(1.1); }
+  100% {
+    transform: scale(1); } }
+
+/**
+----------------
+  Font Size
+----------------
+**/
+/**
+----------------
+  Colors
+----------------
+**/
+/**
+----------------
+  Typography
+----------------
+**/
+/**
+----------------
+  Navbar
+----------------
+**/
+/**
+----------------
+  Shadows
+----------------
+**/
+/**
+----------------
+  Cards
+----------------
+**/
+/**
+----------------
+  Breakpoints
+----------------
+**/
+.rv-select {
+  position: relative; }
+  .rv-select input:read-only {
+    cursor: pointer; }
+
+.rv-select_dropdown {
+  display: none;
+  padding: 0.25rem 0;
+  position: absolute;
+  background: #ffffff;
+  border-radius: 0.25rem;
+  border: 1px solid #D6D6D6;
+  box-shadow: 0 0.3rem 0.3rem rgba(0, 0, 0, 0.3);
+  top: 2.25rem;
+  left: 0;
+  right: 0;
+  max-height: 12rem;
+  overflow-y: scroll;
+  z-index: 1; }
+
+.rv-select_option {
+  list-style: none;
+  padding: 0.25rem 0.75rem;
+  cursor: pointer;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+  .rv-select_option:focus {
+    outline: none; }
+
+.rv-select_option--highlighted {
+  background: #246FF2;
+  color: #ffffff; }
+
+.rv-select_option--hidden {
+  display: none; }
+
+.rv-select_option--placeholder {
+  display: none;
+  padding: 0.25rem 0.75rem;
+  font-weight: 700;
+  font-style: italic; }
+
+/**
+----------------
+  Font Size
+----------------
+**/
 /**
 ----------------
   Colors
@@ -1338,6 +1862,7 @@ h6,
 
 .rv-text-input_input {
   width: 100%;
+  box-sizing: border-box;
   border: none;
   border-bottom: 1px solid #3A3A3A;
   font-size: 1rem;
@@ -1347,9 +1872,17 @@ h6,
   overflow: visible;
   background: transparent;
   padding: 0.8rem 0;
+  padding-right: 1.25rem;
   transition: all 0.1s ease-in; }
   .rv-text-input_input::placeholder {
     font-weight: 400; }
   .rv-text-input_input:focus {
     outline: none;
     border-color: #246FF2; }
+
+.rv-text-input_icon {
+  position: absolute;
+  display: block;
+  bottom: 0.5rem;
+  right: 0.25rem;
+  pointer-events: none; }

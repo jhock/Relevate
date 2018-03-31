@@ -46,10 +46,11 @@ INSTALLED_APPS = [
 	'django.contrib.sessions',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
+	'templatetag_handlebars',
 	'storages',
 	'rest_framework',
 	'ckeditor',
-	'ckeditor_uploader',
+	'ckeditor_uploader'
 
 	#formset-dependencies
 ]
@@ -87,7 +88,11 @@ TEMPLATES = [
 				'django.contrib.messages.context_processors.messages',
 			],
 			'libraries':{
+				'button_tags': 'apps.components.templatetags.button_tags',
         'dropdown_menu_tags': 'apps.components.templatetags.dropdown_menu_tags',
+       	'icon_tags': 'apps.components.templatetags.icon_tags',
+       	'progress_tags': 'apps.components.templatetags.progress_tags',
+        'select_tags': 'apps.components.templatetags.select_tags',
         'text_input_tags': 'apps.components.templatetags.text_input_tags',
         'component_assets': 'apps.components.templatetags.component_assets',
 		'avatar_tags': 'apps.components.templatetags.avatar_tags',
@@ -147,7 +152,7 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 STATIC_URL = '/static/'
 STATIC_DIRS = (os.path.join(BASE_DIR, 'static'))
-STATIC_ROOT = os.path.join(BASE_DIR,'static_assets')
+STATIC_ROOT = (os.path.join(BASE_DIR,'static_assets'))
 COMPRESS_ROOT = (os.path.join(BASE_DIR, 'static/__cache__'))
 
 STATICFILES_DIRS = [

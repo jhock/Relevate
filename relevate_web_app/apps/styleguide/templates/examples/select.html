@@ -1,0 +1,61 @@
+{% extends "styleguide_layout.html" %}
+{% load example_tags %}
+{% load select_tags %}
+{% load text_input_tags %}
+
+{% block content%}
+  {% example with
+    heading="Requirements"
+    caption="Include the following in your HTML head"
+    codeOnly="True"
+  %}
+{% load component_assets %}
+{% select_assets %}
+  {% end_example %}
+
+  {% example with
+    heading=""
+    caption="Within your template file, load the custom select tags"
+    codeOnly="True"
+  %}
+{% load select_tags %}
+  {% end_example %}
+
+  {% example with 
+    heading="A standard select" 
+    caption="Behaves as a regular html select component" 
+  %}
+{% select 
+  label="Favorite instrument" 
+  placeholder="Select an instrument"
+%}
+  <option>The Clarinet</option> 
+  <option>A Saxaphone</option>
+  <option>Several Small Drums</option>
+{% end_select %}
+  {% end_example %}
+
+  {% example with
+    heading="An editable select"
+    caption="With editable set to true, you can type to filter down the list of options."
+  %}
+{% select 
+  label="Favorite color" 
+  placeholder="Enter a your favorite color"
+  editable="True"
+%}
+  <option>Plum</option> 
+  <option>Tulip</option>
+  <option>Watermelon</option> 
+  <option>Sour Apple</option>
+  <option>Ocean</option>
+  <option>Grapefruit</option>
+  <option>Clay</option>
+  <option>Burgundy</option> 
+  <option>Fuzzy Peach</option>
+  <option>Bluejay</option>
+  <option>Orange</option> 
+  <option>Buttercream</option>
+{% end_select %}
+  {% end_example %}
+{% endblock content %}

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% load button_tags %}
 {% load dropdown_menu_tags %}
 
 {% block body %}
@@ -27,7 +28,7 @@
 			</li>
  #}
 			{% if user.is_staff %}
-			<li>
+			<li class="rv-navbar_submenu">
 				{% dropdown_menu %}
 				  {% dm_trigger with
 				    id="main_navbar_ddmenu_0"
@@ -51,7 +52,7 @@
 			{% endif %}
 			{% if user_prof.is_contributor %}
 				{% if user_prof.is_adviser %}
-					<li>
+					<li class="rv-navbar_submenu">
 						{% dropdown_menu %}
 						  {% dm_trigger with
 						    id="main_navbar_ddmenu_1"
@@ -69,7 +70,7 @@
 						{% end_dropdown_menu %}
 					</li>
 				{% else %}
-					<li>
+					<li class="rv-navbar_submenu">
 						{% dropdown_menu %}
 						  {% dm_trigger with
 						    id="main_navbar_ddmenu_2"
@@ -85,7 +86,7 @@
 						{% end_dropdown_menu %}
 					</li>
 				{% endif %}
-				<li>
+				<li class="rv-navbar_submenu">
 					{% dropdown_menu %}
 					  {% dm_trigger with
 					    id="main_navbar_ddmenu_3"
@@ -102,7 +103,7 @@
 					{% end_dropdown_menu %}
 				</li>
 
-				<li>
+				<li class="rv-navbar_submenu">
 					{% dropdown_menu %}
 					  {% dm_trigger with
 					    id="main_navbar_ddmenu_4"
@@ -119,7 +120,7 @@
 					{% end_dropdown_menu %}
 				</li>
 
-				<li>
+				<li class="rv-navbar_submenu">
 					{% dropdown_menu %}
 					  {% dm_trigger with
 					    id="main_navbar_ddmenu_5"
@@ -137,7 +138,7 @@
 					{% end_dropdown_menu %}
 				</li>
 			{% else %}
-				<li>
+				<li class="rv-navbar_submenu">
 					{% dropdown_menu %}
 					  {% dm_trigger with
 					    id="main_navbar_ddmenu_6"
@@ -154,9 +155,9 @@
 				</li>
 
 				{% if user.is_authenticated %}
-					<li><a class="rv-navbar_option" href="{% url 'profile:contributor_create' %}">Contributor Application</a></li>
+					<li class="rv-navbar_submenu"><a class="rv-navbar_option" href="{% url 'profile:contributor_create' %}">Contributor Application</a></li>
 					{% if not user_prof.confirmed %}
-						<li><a class="rv-navbar_option" href="{% url 'profile:confirmation' %}">Confirm Account</a></li>
+						<li class="rv-navbar_submenu"><a class="rv-navbar_option" href="{% url 'profile:confirmation' %}">Confirm Account</a></li>
 					{% endif %}
 					<!-- <li><a href="{%url 'profile:password_reset_form' %}">Reset Password</a></li> -->
 				{% endif %}
@@ -164,15 +165,17 @@
 			<li>
 				<!--<a class="rv-navbar_option" href="{% url 'profile:user_update' %}">Update Profile</a>-->
 			</li>
-			<li>
+			<li class="rv-navbar_submenu">
 				<a class="rv-navbar_option" href="{% url 'contribution:about' %}">About</a>
-			</li>
+			</li class="rv-navbar_submenu">
 			{% if not user.is_authenticated %}
-			<li>
+			<li class="rv-navbar_submenu">
 				<a class="rv-navbar_option" href="{% url 'profile:login' %}">Sign In</a>
 			</li>
-			<li>
-				<a class="rv-button" href="{% url 'profile:registration' %}">Create Account</a>
+			<li class="rv-navbar_submenu">
+				{% button variant="ghost" href="profile:registration" %}
+					Create Account
+				{% end_button %}
 			</li>
 			{% else %}
 			<!--<li><a class="rv-navbar_option" href="{% url 'profile:logged_out' %}">Logout</a></li>-->

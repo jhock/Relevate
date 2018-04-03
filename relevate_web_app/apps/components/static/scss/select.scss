@@ -36,6 +36,8 @@ $max-options: 6;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  height: $option-height;
+  box-sizing: border-box;
 
   &:focus {
     outline: none;

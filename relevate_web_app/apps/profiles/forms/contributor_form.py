@@ -15,16 +15,19 @@ class AdviserModelChoiceField(forms.ModelChoiceField):
 		pass
 
 class SelectWidget(forms.TextInput):
-    def __init__(self, options, label, placeholder, *args, **kwargs):
+    def __init__(self, options, label, placeholder, editable='True', default_value="", *args, **kwargs):
         super(SelectWidget, self).__init__(*args, **kwargs)
         self.options = options
         self.label = label
         self.placeholder = placeholder
+        self.editable = editable
+        self.default_value = default_value
 
     def render(self, name, value, attrs=None):
-        text_html = super(SelectWidget, self).render(name, value, attrs=attrs)
-        placeholder_prop = 'placeholder="' + self.placeholder + '"'
-        return Select(None, self.label, None, text_html, [placeholder_prop], self.options).render(Context())
+    		text_html = super(SelectWidget, self).render(name, value, attrs=attrs)
+    		props = ['placeholder="' + self.placeholder + '"', 'value="' + self.default_value + '"']
+
+    		return Select(None, self.label, None, text_html, props, self.options, self.editable).render(Context())
 
 class ContributorForm(forms.Form):
 	# Changed to false to prevent update page from throwing a fit
@@ -43,34 +46,33 @@ class ContributorForm(forms.Form):
 
 	address = forms.CharField(
 		label="Professional Address", 
-		widget=forms.TextInput(attrs={'class': 'uk-input'}),
+		widget=forms.TextInput(attrs={'placeholder': 'Enter your address'}),
 		required=True
 	)
 
 	city = forms.CharField(
 		label="City", 
-		widget=forms.TextInput(attrs={'class': 'uk-input'}),
+		widget=forms.TextInput(attrs={'placeholder': 'Enter your city'}),
 		required=True
 	)
 
-	state = forms.ChoiceField(
-		label="State", 
-		choices=get_states(), 
-		widget=forms.Select(attrs={'class': 'uk-select'}),
-		required=True
-	)
+	state = forms.CharField(widget=SelectWidget(
+		options=[state[0] for state in get_states()], 
+		label='State', 
+		placeholder='Choose your state'
+	))
 
-	country = forms.ChoiceField(
-		label="Country", 
-		choices=get_countries(), 
-		widget=forms.Select(attrs={'class': 'uk-select'}),
-		required=True
-	)
+	country = forms.CharField(widget=SelectWidget(
+		options=[country[1] for country in get_countries()], 
+		label='Country', 
+		default_value='United States',
+		placeholder='Choose your country'
+	))
 
 	zipcode = forms.CharField(
 		label="Zip Code", 
-		max_length=5, 
-		widget=forms.TextInput(attrs={'class': 'uk-input'}), 
+		max_length=5,
+		widget=forms.TextInput(attrs={'placeholder': 'Zip Code'}), 
 		required=True
 	)
 	
@@ -99,8 +101,7 @@ class ContributorForm(forms.Form):
 		label="Website", 
 		widget=forms.TextInput(
 			attrs={
-				'placeholder': 'Website URL',
-				'class': 'uk-input uk-form-width-large'
+				'placeholder': 'Website URL'
 			}
 		), 
 		required=False

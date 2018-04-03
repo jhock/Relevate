@@ -307,7 +307,9 @@ function selectItem (item, input) {
       items[i].setAttribute('aria-selected', 'false')
     }
   }
-  input.value = item.textContent.trim()
+  var value = item.textContent.trim()
+  input.setAttribute('value', value)
+  input.value = value
   item.setAttribute('aria-selected', 'true')
   hideMenu(menu, input)
   input.focus()

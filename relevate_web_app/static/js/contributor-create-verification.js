@@ -6,7 +6,7 @@
 
 $(document).ready(function()
 {
-    var currentTab = 1; // Current tab is set to be the first tab (0)
+    var currentTab = 2; // Current tab is set to be the first tab (0)
     showTab(currentTab); // Display the current tab
 
 	verificationFlags = {

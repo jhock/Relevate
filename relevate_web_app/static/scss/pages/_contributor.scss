@@ -9,6 +9,12 @@
   margin: 0;
 }
 
+.rv-contributor-form_subheader {
+  &.with-margin {
+    margin-bottom: 1rem;
+  }
+}
+
 .rv-contributor-form_progress {
   margin: 3rem 0;
 }
@@ -31,6 +37,12 @@
   }
 }
 
+.rv-contributor-form_box-row--borderless {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
 .rv-contributor-form_table {
   width: 100%;
   border-bottom: 1px dashed $rv-color-light-gray;
@@ -43,6 +55,14 @@
 
   &:first-child {
     margin-left: 0;
+  }
+
+  &.quarter {
+    flex: 1 1.485 auto;
+  }
+
+  &.half {
+    flex: 0 0 48.5%;
   }
 }
 
@@ -90,6 +110,7 @@
 
 .rv-contributor-form_subheader--caption {
   margin-bottom: 2rem;
+  font-style: italic;
 }
 
 @media only screen and (max-width: 1000px) {
@@ -137,6 +158,12 @@
     border-bottom: none;
   }
 
+  .rv-contributor-form_content {
+    border: 1px solid $rv-color-light-gray;
+    padding: 2rem;
+    margin-top: 1rem;
+  }
+
   .rv-contributor-form_box-row {
     flex-direction: column;
     border-top: 1px solid $rv-color-light-gray;
@@ -149,6 +176,10 @@
       border: 1px solid $rv-color-light-gray;
       margin-bottom: 3rem;
     }
+  }
+
+  .rv-contributor-form_box-row--borderless {
+    flex-direction: column;
   }
 
   tr.rv-contributor-form_box-row {
@@ -182,22 +213,16 @@
     margin: 0;
   }
 
+  .rv-contributor-form_box-row--borderless {
+    box-sizing: border-box;
+  }
+
   .rv-contributor-form_subheader {
     margin-left: 2rem;
     margin-right: 2rem;
   }
 
-  .rv-contributor-form_subheader--caption {
-    margin-left: 2rem;
-    margin-right: 2rem;
-  }
-
   .rv-contributor-form_progress {
-    margin-left: 2rem;
-    margin-right: 2rem;
-  }
-
-  .rv-contributor-form_checkbox {
     margin-left: 2rem;
     margin-right: 2rem;
   }

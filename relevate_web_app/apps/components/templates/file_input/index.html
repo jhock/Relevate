@@ -1,0 +1,15 @@
+{% load icon_tags %}
+
+<div class="rv-file-input">
+  <div data-dragging class="rv-file-input_dragging hidden">
+    <div class="rv-file-input_dragging-icon">{% icon_file_add size="x-large" %}</div>
+  </div>
+  <div>
+    <label class="rv-file-input_upload" for="{{id}}">{{label}}</label>
+  </div>
+  <div class="rv-file-input_content">
+    <span data-file-icon class="rv-file-input_icon hidden">{% icon_file %}</span>
+    <span data-filename class="rv-file-input_instructions">No file chosen</span>
+  </div>
+  <input class="rv-file-input_input" type="file" id="{{id}}" accept="{{accept}}" />
+</div>

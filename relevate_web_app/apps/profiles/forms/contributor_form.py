@@ -32,7 +32,7 @@ class SelectWidget(forms.TextInput):
 class ContributorForm(forms.Form):
 	# Changed to false to prevent update page from throwing a fit
 	cv = forms.FileField(
-		label='Upload CV (must be a .pdf)', 
+		label='Upload your CV (PDF)', 
 		required=False, 
 		widget=forms.FileInput(attrs={'accept': '.pdf'})
 	)

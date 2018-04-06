@@ -41,6 +41,7 @@
   width: 100%;
   display: flex;
   align-items: center;
+  box-sizing: border-box;
 }
 
 .rv-contributor-form_table {
@@ -111,6 +112,11 @@
 .rv-contributor-form_subheader--caption {
   margin-bottom: 2rem;
   font-style: italic;
+}
+
+.rv-contributor-form_separator {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 @media only screen and (max-width: 1000px) {

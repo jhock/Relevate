@@ -16,6 +16,10 @@ def button_assets():
 def checkbox_assets():
   return {}
 
+@register.inclusion_tag('file_input/assets.html')
+def file_input_assets():
+  return {}
+
 @register.inclusion_tag('icons/assets.html')
 def icon_assets():
   return {}

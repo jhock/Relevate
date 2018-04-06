@@ -51,6 +51,14 @@ def icon_circle(parser, token):
 def icon_circle_check(parser, token):
   return create_icon(parser, token, 'circle_check')
 
+@register.tag('icon_file')
+def icon_file(parser, token):
+  return create_icon(parser, token, 'file')
+
+@register.tag('icon_file_add')
+def icon_file_add(parser, token):
+  return create_icon(parser, token, 'file_add')
+
 @register.tag('icon_edit')
 def icon_edit(parser, token):
   return create_icon(parser, token, 'edit')

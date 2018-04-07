@@ -111,8 +111,7 @@ class ContributorForm(forms.Form):
 		max_length=2999, 
 		widget=forms.Textarea(
 			attrs={
-				'placeholder': 'Write a brief biography about yourself.',
-				'style': 'font-size: 16px; width: 100%; overflow:scroll;resize:none;'
+				'placeholder': 'Write a brief biography about yourself.'
 			}
 		)
 	)

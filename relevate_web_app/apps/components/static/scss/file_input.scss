@@ -80,6 +80,8 @@
   color: $rv-color-primary;
   font-weight: $rv-font-weight-bold;
   padding: 0.25rem 0.75rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .rv-file-input_content {

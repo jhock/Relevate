@@ -1,0 +1,19 @@
+<span class="rv-text-area">
+  {% if alt_form %}
+    {{ alt_form }}
+  {% else %}
+    {% if alt_input %}
+      <label class="rv-text-area_label">{{label}}</label>
+      {% if description %}
+        <div class="rv-text-area_description">{{description}}</div>
+      {% endif %}
+      {{ alt_input }}
+    {% else %}
+      <label for="{{id}}" class="rv-text-area_label">{{label}}</label>
+      {% if description %}
+        <div class="rv-text-area_description">{{description}}</div>
+      {% endif %}
+      <textarea id="{{id}}" class="rv-text-area_input"></textarea>
+    {% endif %}
+  {% endif %}
+</span>

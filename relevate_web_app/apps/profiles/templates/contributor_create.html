@@ -7,6 +7,7 @@
 {% load icon_tags %}
 {% load progress_tags %}
 {% load select_tags %}
+{% load text_area_tags %}
 {% load text_input_tags %}
 
 {% block head %}
@@ -339,26 +340,14 @@
 								%}
 							</div>
 						</div>
-					</div>
-					<div class='uk-grid'>
-						<!-- <h3 class="blue" >Professional Interests, Experience, and Expertise<span class="orange">*</span></h3> -->
-						<br><br>
-						<div class="uk-form-row">
-							<label class='uk-form-label uk-text-bold'>
-								{{ form.biography.label }} <span class="orange">*</span>
-							</label>
-							<div>
-								Please provide a brief background about who you are! What are your special interests?
-								Why do you want to be a contributor for Relevate? Are there any other things you want
-								readers to know about you? If approved, this biography will go on your contributor
-								profile page, so be sure to write it thought you are speaking directly to the users
-								of Relevate who may explore and view your profile. This means avoiding jargon and
-								acronyms, and writing at a lower reading level.
-							</div>
-							<br>
-							<div class="uk-form-controls">
-								{{ form.biography }}
-							</div>
+						<div class="rv-contributor-form_separator"></div>
+						<div class="rv-contributor-form_separator"></div>
+						<div class="rv-contributor-form_box-row--borderless">
+							{% text_area
+								label=form.biography.label
+								input=form.biography
+								description="Please provide a brief background about who you are! What are your special interests? Why do you want to be a contributor for Relevate? Are there any other things you want readers to know about you? If approved, this biography will go on your contributor profile page, so be sure to write it thought you are speaking directly to the users of Relevate who may explore and view your profile. This means avoiding jargon and acronyms, and writing at a lower reading level."
+							%}
 						</div>
 					</div>
 				</div>

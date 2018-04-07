@@ -1,0 +1,56 @@
+@import "../../../../static/scss/base/variables";
+
+.rv-text-area {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  margin: 1.5rem 0;
+}
+
+.rv-text-area_label {
+  color: $rv-color-dark;
+  font-weight: $rv-font-weight-black;
+  left: 0;
+  font-size: 0.875rem;
+  transition: all 0.1s ease-in;
+  position: absolute;
+  display: block;
+  top: -1.75rem;
+
+  &.rv-text-area_focus {
+    color: $rv-color-primary;
+    transform-origin: left bottom;
+    transform: scale(1.1, 1.1);
+  }
+}
+
+.rv-text-area_input {
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 0.125rem;
+  border: 2px solid $rv-color-light-gray;
+  font-size: 1rem;
+  font-weight: $rv-font-weight-medium;
+  color: $rv-color-dark;
+  position: relative;
+  overflow: visible;
+  background: transparent;
+  padding: 0.8rem 0.8rem;
+  padding-right: 1.25rem;
+  transition: all 0.1s ease-in;
+  line-height: 1.6rem;
+
+  &::placeholder {
+    font-weight: $rv-font-weight-regular;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $rv-color-primary;
+  }
+}
+
+.rv-text-area_description {
+  margin-bottom: 0.75rem;
+  font-style: italic;
+}

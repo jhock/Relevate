@@ -36,6 +36,10 @@ def link_assets():
 def select_assets():
   return {}
 
+@register.inclusion_tag('text_area/assets.html')
+def text_area_assets():
+  return {}
+
 @register.inclusion_tag('text_input/assets.html')
 def text_input_assets():
   return {}

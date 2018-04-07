@@ -16,6 +16,8 @@ from ..utils import (
   get_prop_from_tag
 )
 
+import pdb
+
 register = template.Library()
 
 @register.tag('checkbox')
@@ -48,20 +50,27 @@ class Checkbox(Node):
 
     alt_input = resolve_variable(self.alt_input, context)
     if alt_input:
-      soup = BeautifulSoup(alt_input.render(), 'html.parser')
-      self.parse_id(soup)
+      try:
+        soup = BeautifulSoup(alt_input.render(), 'html.parser')
+        self.parse_id(soup)
+      except:
+        self.checkbox_id = alt_input.id_for_label
 
     alt_form = resolve_variable(self.alt_form, context)
     if alt_form:
-      soup = BeautifulSoup(alt_form.render(), 'html.parser')
-      self.parse_id(soup)
-      self.parse_label(soup)
+      try:
+        soup = BeautifulSoup(alt_form.render(), 'html.parser')
+        self.parse_id(soup)
+        self.parse_label(soup)
+      except:
+        self.checkbox_id = alt_input.id_for_label
+        self.label = alt_input.label
+
 
     checkbox_html = get_template("checkbox/index.html")
     context.update({
       'label' : resolve_variable(self.label, context),
-      'id': resolve_variable(self.checkbox_id, context),
-      'alt_input': alt_input
+      'id': resolve_variable(self.checkbox_id, context)
     })
 
     return checkbox_html.render(context)

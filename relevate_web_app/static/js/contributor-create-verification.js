@@ -6,7 +6,7 @@
 
 $(document).ready(function()
 {
-    var currentTab = 2; // Current tab is set to be the first tab (0)
+    var currentTab = 0; // Current tab is set to be the first tab (0)
     showTab(currentTab); // Display the current tab
 
 	verificationFlags = {
@@ -267,7 +267,14 @@ $(document).ready(function()
         document.getElementById("prevBtn_container").style.display = "initial";
       }
       if (n == (x.length - 1)) {
-        document.getElementById("nextBtn").innerHTML = "Submit";
+        var submit = document.getElementById("nextBtn")
+        submit.parentElement.innerHTML = RvButton({
+          label: 'Submit',
+          color: 'primary',
+          variant: 'solid',
+          type: 'button',
+          id: submit.id
+        })
       }
       // ... and run a function that displays the correct step indicator:
       fixStepIndicator(n)

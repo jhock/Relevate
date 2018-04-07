@@ -151,7 +151,7 @@ class ContributorForm(forms.Form):
 	)
 
 	accept_terms = forms.BooleanField(
-		widget=forms.CheckboxInput(attrs={'class': 'uk-checkbox'})
+		widget=forms.CheckboxInput()
 	)
 
 	certification = forms.CharField(

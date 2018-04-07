@@ -1,11 +1,7 @@
 {% load icon_tags %}
 
 <span class="rv-checkbox">
-  {% if alt_input %}
-    {{ alt_input }}
-  {% else %}
-    <input class="rv-checkbox_input" type="checkbox" id="{{id}}" />
-  {% endif%}
+  <input class="rv-checkbox_input" type="checkbox" id="{{id}}" />
   <span class="rv-checkbox_facade">
     {% icon_check %}
   </span>

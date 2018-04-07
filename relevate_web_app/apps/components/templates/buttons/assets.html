@@ -26,9 +26,11 @@
       icon: props.icon
     }
 
+    // pass button props and create a button template
     var template = Handlebars.compile(document.getElementById('rv_button').innerHTML)
     var markup = template(buttonProps)
 
+    // convert to an actual button html element
     var button_container = document.createElement('div')
     button_container.innerHTML = markup
     var button = button_container.getElementsByTagName('BUTTON')[0]
@@ -36,7 +38,8 @@
     if (buttonProps.fluid_width) {
       button.classList.add('fluid-width')
     }
-
+    
+    // ammend any additional props to html element
     ammendPropsToElement(omitProps(props, buttonProps), button)
 
     if (buttonProps.icon) {
@@ -45,8 +48,8 @@
         size: 'small', 
         rotate: 0 
       }) + button.textContent
-      markup = button_container.innerHTML
     }
+    markup = button_container.innerHTML
     return markup
   }
 </script>

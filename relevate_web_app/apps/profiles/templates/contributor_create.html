@@ -8,7 +8,7 @@
 
 {% block head %}
 	{{ block.super }}
-	<link rel="stylesheet" type="text/css" href="{% static 'css/contributor-create2.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/contributor-create.css' %}">
 	<script type="text/javascript" src="{% static 'js/contributor.js' %}"></script>
 	<script type="text/javascript" src="{% static 'js/degree.js' %}"></script>
 	<script type="text/javascript" src="{% static 'js/contributor-create-verification.js' %}"></script>
@@ -34,18 +34,18 @@
 					<table id="acaProf" data-name="acaProfTable" class="rv-contributor-form_table">
 						<tbody>
 							{% for each_academic in academic_profiles %}
-								<tr class="rv-contributor-form_box-row" id="acaProf{{ each_academic.id }}">
+								<tr class="rv-contributor-form_box-row acaRow" id="acaProf{{ each_academic.id }}">
 									<td class="rv-contributor-form_table--item">
 										<div class='rv-contributor-form_table--item-label'>Program</div>
-										<div class='rv-contributor-form_table--item-content'>{{ each_academic.program }}</div>
+										<div class='rv-contributor-form_table--item-content program'>{{ each_academic.program }}</div>
 									</td>
 									<td class="rv-contributor-form_table--item">
 										<div class='rv-contributor-form_table--item-label'>Level of Study</div>
-										<div class='rv-contributor-form_table--item-content'>{{ each_academic.degree.name }}</div>
+										<div class='rv-contributor-form_table--item-content degree'>{{ each_academic.degree.name }}</div>
 									</td>
 									<td class="rv-contributor-form_table--item">
 										<div class='rv-contributor-form_table--item-label'>Institution</div>
-										<div class='rv-contributor-form_table--item-content'>{{ each_academic.institution }}</div>
+										<div class='rv-contributor-form_table--item-content institute'>{{ each_academic.institution }}</div>
 									</td>
 									<td class="rv-contributor-form_button--container">
 										<div class="rv-contributor-form_button--group">
@@ -98,6 +98,11 @@
 								label=form.institution.label
 								input=form.institution
 							%}
+							<!-- @US_TODO: Fix this so it works with new framework -->
+							<div id="list_of_uni" style="width: 500px;" class="uk-dropdown uk-dropdown-search uk-panel-scrollable">
+								<ul class="uk-nav uk-nav-search" id="items_to_search">
+								</ul>
+							</div>
 						</div>
 						<div class="rv-contributor-form_button--container">
 							{% button 
@@ -120,10 +125,10 @@
 					<table id="addCert" data-name="certTable" class="rv-contributor-form_table">
 						<tbody>
 							{% for each_cert in certifications %}
-								<tr class="rv-contributor-form_box-row" id="addCert{{ each_cert.id }}">
+								<tr class="rv-contributor-form_box-row certRow" id="addCert{{ each_cert.id }}">
 									<td class="rv-contributor-form_table--item">
 										<div class='rv-contributor-form_table--item-label'>Certification</div>
-										<div class='rv-contributor-form_table--item-content'>{{ each_cert.name_of_certification }}</div>
+										<span class='rv-contributor-form_table--item-content certName'>{{ each_cert.name_of_certification }}</span>
 									</td>
 									<td class="rv-contributor-form_button--container">
 										<div class="rv-contributor-form_button--group">
@@ -188,15 +193,15 @@
 					<table id="addAffiliation" data-name="affiliationTable" class="rv-contributor-form_table">
 						<tbody>
 							{% for each_org in organizational_affiliations %}
-								<tr class="rv-contributor-form_box-row" id="addAffiliation{{ each_org.id }}">
+								<tr class="rv-contributor-form_box-row affiliationRow" id="addAffiliation{{ each_org.id }}">
 									<td class="rv-contributor-form_table--item">
 										<div>
 											<div class='rv-contributor-form_table--item-label'>Affiliation</div>
-											<div class='rv-contributor-form_table--item-content'>{{ each_org.name_of_affiliation }}</div>
+											<div class='rv-contributor-form_table--item-content affilName'>{{ each_org.name_of_affiliation }}</div>
 										</div>
 									</td>
 									<td class="rv-contributor-form_button--container">
-										{% with each_org.id|stringformat:"i" as org_id %}
+											{% with each_org.id|stringformat:"i" as org_id %}
 											{% with "editAffiliation("|add:org_id|add:")" as editAffiliation %}
 											{% with "deleteAffiliation("|add:org_id|add:")" as deleteAffiliation %}
 												<div class="rv-contributor-form_button--group-button">
@@ -489,9 +494,15 @@
 				{% icon_arrow rotate="90" %}
 				Previous
 			{% end_button %}
-			{% button 
-			  id="nextBtn"
+			<div style="text-align:center;margin-top:40px;">
+			  <span class="step"></span>
+			  <span class="step"></span>
+			  <span class="step"></span>
+			  <span class="step"></span>
+			</div>
+			{% button
 			  type="button"
+			  id="nextBtn"
 			%}
 			  Next
 			  {% icon_arrow rotate="270" %}

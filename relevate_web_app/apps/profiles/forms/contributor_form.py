@@ -115,11 +115,18 @@ class ContributorForm(forms.Form):
 		)
 	)
 
-	degree = forms.CharField(widget=SelectWidget(
-			options=[degree for degree in Degree.objects.all().values_list('name', flat=True)], 
-			label='Level of Study', 
-			placeholder='Enter your level of study'
-	))
+	# degree = forms.CharField(widget=SelectWidget(
+	# 		options=[degree for degree in Degree.objects.all().values_list('name', flat=True)],
+	# 		label='Level of Study',
+	# 		placeholder='Enter your level of study'
+	# ))
+
+	degree = forms.ChoiceField(
+		choices=[(degree, degree) for degree in Degree.objects.all().values_list('name', flat=True)],
+			label='Level of Study',
+			widget=forms.Select,
+			required=False
+	)
 
 	area_of_expertise = forms.ModelMultipleChoiceField(
 		label="Area of Expertise Relevant to Romantic Relationships", 
@@ -163,7 +170,9 @@ class ContributorForm(forms.Form):
 		widget=forms.TextInput(attrs={'placeholder': 'Enter a certification'})
 	)
 
-	organizational_affiliation = forms.CharField()
+	organizational_affiliation = forms.CharField(
+		label="Affiliations",
+		required=False	)
 
 
 	# widget = forms.TextInput(attrs={'placeholder': 'Organizational Affiliation ex:NCFR',

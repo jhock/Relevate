@@ -145,7 +145,7 @@ class ContributorCreateView(LoginRequiredMixin, View):
         If the ``BETA`` variable is set to true, the contributor is automatically approved. Otherwise,
         they are placed into the ``PendingContributors`` table for staff approval.
         """
-        form = ContributorForm(request.POST, request.FILES)
+        form = ContributorForm(request.POST, request.FILES, data_list=organization_list)
         user_prof = UserProfile.objects.get(user=request.user)
         academics_req = request.POST.get('academicList')
         print ("academic_req ", academics_req)

@@ -9,6 +9,7 @@ $(document).ready(function()
     var currentTab = 0; // Current tab is set to be the first tab (0)
     showTab(currentTab); // Display the current tab
 
+    console.log("test next button function");
 	verificationFlags = {
 		mentor: {
 			sectionDone: false,
@@ -263,8 +264,10 @@ $(document).ready(function()
       // ... and fix the Previous/Next buttons:
       if (n == 0) {
         document.getElementById("prevBtn").style.display = "none";
+        document.getElementById("nextBtn").innerHTML = "Next";
       } else {
         document.getElementById("prevBtn").style.display = "inline";
+        document.getElementById("nextBtn").innerHTML = "Next";
       }
       if (n == (x.length - 1)) {
         document.getElementById("nextBtn").innerHTML = "Submit";
@@ -294,7 +297,7 @@ $(document).ready(function()
         showTab(currentTab);
     });
 
-        $('#nextBtn').on('click', function()
+    $('#nextBtn').on('click', function()
 	{
 	    console.log("next");
         // This function will figure out which tab to display
@@ -398,7 +401,8 @@ $(document).ready(function()
 
     function fixStepIndicator(n) {
       // This function removes the "active" class of all steps...
-      var i, x = document.getElementsByClassName("step");
+      var i;
+      var x = document.getElementsByClassName("step");
       for (i = 0; i < x.length; i++) {
         x[i].className = x[i].className.replace(" active", "");
       }

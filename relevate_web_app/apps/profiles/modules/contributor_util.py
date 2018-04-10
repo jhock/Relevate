@@ -116,7 +116,7 @@ def update_contributor_qualification(academics_req, cert_req, org_req, contribut
 	affiliation_dic = convert_affiliation_req_to_dic(org_req)
 	for item in academics_dic:
 		print(academics_dic)
-		degree = Degree.objects.get(name=item['degree'])
+		degree = Degree.objects.filter(name=item['degree']).first()
 		program = item['program']
 		institution = item['institute']
 		new_qualification = AcademicProfile(degree=degree, program=program,

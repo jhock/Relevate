@@ -23,27 +23,30 @@ $(document).ready(function() {
 		*/
 		var academicProgram = $("#id_program").val();
 		var degree = $("#id_degree").val();
+		console.log(academicProgram);
 		var institution = $("#id_institution").val();
+        console.log(institution);
+        console.log("asdfasdfffdd");
 
 		var tableId = academicId;
 		if(academicProgram && degree && institution){
-			var academicGrid = "<tr class='rv-contributor-form_box-row' id=acaProf"+academicId+">" +
+			var academicGrid = "<tr class='rv-contributor-form_box-row acaRow' id=acaProf"+academicId+">" +
 					"<td class='rv-contributor-form_table--item'>" +
 						"<div>" +
 							"<div class='rv-contributor-form_table--item-label'>Program</div>" +
-							"<div class='rv-contributor-form_table--item-content' value="+academicProgram+">" + academicProgram + "</span>" +
+							"<span class='rv-contributor-form_table--item-content program' value="+academicProgram+">" + academicProgram + "</span>" +
 						"</div>" +
 					"</td>" +
 					"<td class='rv-contributor-form_table--item'>" +
 						"<div>" +
 							"<div class='rv-contributor-form_table--item-label'>Level of Study</div>" +
-							"<div class='rv-contributor-form_table--item-content' value="+degree+">" + degree + "</div>" +
+							"<span class='rv-contributor-form_table--item-content degree' value="+degree+">" + degree + "</span>" +
 						"</div>" +
 					"</td>" +
 					"<td class='rv-contributor-form_table--item'>" +
 						"<div>" + 
 							"<div class='rv-contributor-form_table--item-label'>Institution</div>" +
-							"<div class='rv-contributor-form_table--item-content' value="+institution+">" + institution + "</div>" +
+							"<span class='rv-contributor-form_table--item-content institute' value="+institution+">" + institution + "</span>" +
 						"</div>" +
 					"</td>" +
 					"<td class='rv-contributor-form_button--container'>" +
@@ -92,13 +95,14 @@ $(document).ready(function() {
 	*/
 		var certificate = $("#id_certification").val();
 		var certTableId = certId;
-
+console.log('cert');
 		if(certificate){
-			var certGrid = "<tr class='rv-contributor-form_box-row' id=addCert"+certTableId+">" +
+		    console.log('cert yes');
+			var certGrid = "<tr class='rv-contributor-form_box-row certRow' id=addCert"+certTableId+">" +
 				"<td class='rv-contributor-form_table--item'>" +
 					"<div>" +
 						"<div class='rv-contributor-form_table--item-label'>Certification</div>" +
-						"<div class='rv-contributor-form_table--item-content' value="+certificate+">" + certificate + "</div>" +
+						"<span class='rv-contributor-form_table--item-content certName' value="+certificate+">" + certificate + "</span>" +
 					"</div>" +
 				"</td>" +
 			   "<td class='rv-contributor-form_button--container'>" +
@@ -128,7 +132,7 @@ $(document).ready(function() {
 			"</tr>"
 			$("#addCert").append(certGrid);
 			certId++;
-
+            console.log('cert end');
 			updateTablesUpdateInfo(false);
 			$("#id_certification").val("");
 		}
@@ -143,11 +147,11 @@ $(document).ready(function() {
 		var affiliationTableId = affiliationId;
 
 		if(affiliation){
-			var affiliationGrid = "<tr class='rv-contributor-form_box-row' id=addAffiliation"+affiliationTableId+">" +
+			var affiliationGrid = "<tr class='rv-contributor-form_box-row affiliationRow' id=addAffiliation"+affiliationTableId+">" +
 				"<td class='rv-contributor-form_table--item'>" +
 					"<div>" +
 						"<div class='rv-contributor-form_table--item-label'>Affiliation</div>" +
-						"<div class='rv-contributor-form_table--item-content' value="+affiliation+">" + affiliation + "</div>" +
+						"<span class='rv-contributor-form_table--item-content affilName' value="+affiliation+">" + affiliation + "</span>" +
 					"</div>" +
 				"</td>" +
 			   "<td class='rv-contributor-form_button--container'>" +
@@ -423,12 +427,14 @@ $(document).ready(function() {
 		var sudoDic;
 		var newSudoDic;
 		if(is_academic_update == true){
+            		console.log('tesatd');
 
 			var academicTableName = '#acaProf > tbody  > tr.acaRow';
 
 			 academicTable = [];
 
 			$(academicTableName).each(function() {
+			console.log('acalog');
 				$this = $(this)
 				var dicObj = {};
 				instituteVal = $this.find('span.institute').html();
@@ -448,11 +454,15 @@ $(document).ready(function() {
 		}else{
 			var certTableName = '#addCert > tbody  > tr.certRow';
 			certificationTable = [];
+			console.log('else');
 			 $(certTableName).each(function() {
+			    console.log('yescesadart');
 				$this = $(this)
 				certificate = $this.find('span.certName').html();
 				sudoDic = certificate;
 				newSudoDic = sudoDic.concat(makeSureString);
+				console.log(newSudoDic);
+				console.log("hello");
 				certificationTable.push(newSudoDic);
 			 });
 			 var acLength = certificationTable.length;
@@ -464,8 +474,9 @@ $(document).ready(function() {
 			 var affiliationTableName = '#addAffiliation > tbody > tr.affiliationRow';
 			 affiliationTable = [];
 			  $(affiliationTableName).each(function() {
+			  console.log('affillog');
 			    $this = $(this)
-			    affiliation = $this.find('span.affiliationName').html();
+			    affiliation = $this.find('span.affilName').html();
 			    sudoDicAffil = affiliation;
 			    newSudoDicAffil = sudoDicAffil.concat(makeSureString);
 			    affiliationTable.push(newSudoDicAffil);
@@ -478,7 +489,10 @@ $(document).ready(function() {
              }
 		 }
 		 $("#hiddenAcaTable").val(academicTable);
+		 console.log($("#hiddenAcaTable").val());
 		 $("#hiddenCertTable").val(certificationTable);
+		 console.log($("#hiddenCertTable").val());
+		 console.log(certificationTable);
 		 $("#hiddenAffilTable").val(affiliationTable);
 
 		$("#list_of_uni").hide()

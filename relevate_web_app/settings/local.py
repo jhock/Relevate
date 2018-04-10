@@ -3,7 +3,7 @@ from .base import *
 DATABASES = {
 	'default': {
 			'ENGINE': 'django.db.backends.mysql',
-			'NAME': 'relevate_dev_db2',
+			'NAME': 'relevate_dev_db',
 			'USER': 'rel_user',
 			'PASSWORD': 'relevate_dev_pass',
 		}

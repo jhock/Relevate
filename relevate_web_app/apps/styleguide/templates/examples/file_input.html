@@ -1,0 +1,32 @@
+{% extends "styleguide_layout.html" %}
+{% load example_tags %}
+{% load file_input_tags %}
+
+{% block content%}
+  {% example with
+    heading="Requirements"
+    caption="Include the following in your HTML head (This imports the styles)"
+    codeOnly="True"
+  %}
+{% load component_assets %}
+{% file_input_assets %}
+  {% end_example %}
+
+  {% example with
+    heading=""
+    caption="Within your template file, load the custom file input tags"
+    codeOnly="True"
+  %}
+{% load file_input_tags %}
+  {% end_example %}
+
+  {% example with 
+    heading="Example" 
+    caption="A checkbox component" 
+  %}
+{% file_input 
+  label="Choose a profile picture" 
+  accept=".pdf"
+%}
+  {% end_example %}
+{% endblock content %}

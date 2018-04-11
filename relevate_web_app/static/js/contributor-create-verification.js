@@ -263,14 +263,24 @@ $(document).ready(function()
       x[n].style.display = "block";
       // ... and fix the Previous/Next buttons:
       if (n == 0) {
-        document.getElementById("prevBtn").style.display = "none";
+        document.getElementById("prevBtn_container").style.display = "none";
         document.getElementById("nextBtn").innerHTML = "Next";
       } else {
-        document.getElementById("prevBtn").style.display = "inline";
+        document.getElementById("prevBtn_container").style.display = "inline";
         document.getElementById("nextBtn").innerHTML = "Next";
+//        document.getElementById("prevBtn_container").style.display = "none";
+//      } else {
+//        document.getElementById("prevBtn_container").style.display = "initial";
       }
       if (n == (x.length - 1)) {
-        document.getElementById("nextBtn").innerHTML = "Submit";
+        var submit = document.getElementById("nextBtn")
+        submit.parentElement.innerHTML = RvButton({
+          label: 'Submit',
+          color: 'primary',
+          variant: 'solid',
+          type: 'button',
+          id: submit.id
+        })
       }
       // ... and run a function that displays the correct step indicator:
       fixStepIndicator(n)

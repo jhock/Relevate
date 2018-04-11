@@ -1,0 +1,34 @@
+{% extends "styleguide_layout.html" %}
+{% load example_tags %}
+{% load text_area_tags %}
+
+{% block content%}
+  {% example with
+    heading="Requirements"
+    caption="Include the following in your HTML head (This imports the styles)"
+    codeOnly="True"
+  %}
+{% load component_assets %}
+{% text_area_assets %}
+  {% end_example %}
+
+  {% example with
+    heading=""
+    caption="Within your template file, load the custom text area tags"
+    codeOnly="True"
+  %}
+{% load text_area_tags %}
+  {% end_example %}
+
+  {% example with 
+    heading="Example" 
+    caption="A text area component" 
+  %}
+{% text_area 
+  label="Biography"
+  description="Some additional instructions here on filling this out"
+  placeholder="Tell us a little about yourself" 
+  rows="5"
+%}
+  {% end_example %}
+{% endblock content %}

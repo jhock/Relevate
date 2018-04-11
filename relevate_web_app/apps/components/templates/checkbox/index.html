@@ -1,0 +1,9 @@
+{% load icon_tags %}
+
+<span class="rv-checkbox">
+  <input class="rv-checkbox_input" type="checkbox" id="{{id}}" />
+  <span class="rv-checkbox_facade">
+    {% icon_check %}
+  </span>
+  <label class="rv-checkbox_label" for="{{id}}">{{label}}</label>
+</span>

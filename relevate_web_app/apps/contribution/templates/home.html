@@ -13,8 +13,7 @@
 	<div class="rv-home_body">
 		{% if user.is_authenticated %}
 			<div class="rv-home_body_top">
-				<div style="text-align:center;">
-					  {% include 'global-partials/clouds-welcome-svg.html' %}
+				<div><h2 class="rv-home_welcome"> Welcome {{ user.first_name }}</h2></div>
 				{% if not user_prof.confirmed %}
 				<!--TODO: we should provide some useful feedback here. How do they go about confirming the account? -->
 				<p class="uk-badge uk-badge-notification uk-badge-danger">Looks like you still need to confirm your account</p>
@@ -49,34 +48,33 @@
 
 		{% if user.is_authenticated and preference_posts %}
 		<h4 class="rv-home_header">Suggested posts</h4>
-<!-- temporarily commenting this out until we figure out what to do here  -->
-<!-- 			<div id="chosen-item-list" class="rv-home_header-topics-tags">
-				{% for each_sel in already_sel %}
-					{% include 'global-partials/already-selected-topic-partial.html' %}
-				{% endfor %}
-			</div> -->
-
-		<div class="rv-masonry_container">
-			<div class="rv-masonry">
-				{% for p in preference_posts %}
-					{% if p.is_link %}
-						{% with l=p.link %}
-							{% include 'partials/link_card_partial.html' %}
-						{% endwith %}
-					{% elif p.is_article %}
-						{% with a=p.article %}
-							{% include 'partials/article_card_partial.html' %}
-						{% endwith %}
-					{% elif p.is_infographic %}
-						{% with i=p.infographic %}
-							{% include 'partials/infographic_card_partial.html' %}
-						{% endwith %}
-					{% endif %}
-				{% endfor %}
+	<!-- temporarily commenting this out until we figure out what to do here  -->
+	<!-- 			<div id="chosen-item-list" class="rv-home_header-topics-tags">
+					{% for each_sel in already_sel %}
+						{% include 'global-partials/already-selected-topic-partial.html' %}
+					{% endfor %}
+				</div> -->
+			<div class="rv-masonry_container">
+				<div class="rv-masonry">
+					{% for p in preference_posts %}
+						{% if p.is_link %}
+							{% with l=p.link %}
+								{% include 'partials/link_card_partial.html' %}
+							{% endwith %}
+						{% elif p.is_article %}
+							{% with a=p.article %}
+								{% include 'partials/article_card_partial.html' %}
+							{% endwith %}
+						{% elif p.is_infographic %}
+							{% with i=p.infographic %}
+								{% include 'partials/infographic_card_partial.html' %}
+							{% endwith %}
+						{% endif %}
+					{% endfor %}
+				</div>
 			</div>
-		</div>
 
-		<h4 class="rv-home_header">All Other Posts</h4>
+			<h4 class="rv-home_header">All Other Posts</h4>
 		{% endif %}
 
 		{% if published_posts %}

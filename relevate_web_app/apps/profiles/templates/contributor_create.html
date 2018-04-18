@@ -34,7 +34,7 @@
 			</div>
 			<div class="rv-contributor-form_box">
 				<h4 class="rv-contributor-form_subheader">Degrees</h4>
-				<input id="hiddenAcaTable" hidden name="academicList">
+					<input id="hiddenAcaTable" hidden name="hiddenAcaTable">
 					<table id="acaProf" data-name="acaProfTable" class="rv-contributor-form_table">
 						<tbody>
 							{% for each_academic in academic_profiles %}
@@ -272,13 +272,7 @@
 						<p class="rv-contributor-form_subheader--caption">
 							Select as many topics as you feel qualified to write about.
 						</p>
-						{% for choice in form.area_of_expertise %}
-							<div class="rv-contributor-form_checkbox">
-								{% checkbox 
-									form=choice
-								%}
-							</div>
-						{% endfor %}
+						{{ form.area_of_expertise }}
 					</div>
 				</div>
 			</div>
@@ -337,6 +331,7 @@
 									label=form.cv.label
 									input=form.cv
 									accept=".pdf"
+									name=form.cv.name
 								%}
 							</div>
 							<div class="rv-contributor-form_table--item">
@@ -344,6 +339,7 @@
 									label=form.avatar.label
 									input=form.avatar
 									accept=".jpg,.jpeg,.png"
+									name=form.avatar.name
 								%}
 							</div>
 						</div>
@@ -395,9 +391,10 @@
 							Relevate reserves the right to remove any information that it believes to be contrary to its purpose or inappropriate in nature. Examples of material subject to removal include but are not limited to any material that is inflammatory, illegal, commercial in nature, off topic, discriminatory, dangerous, plagiarized material, personally identifiable information, and any other material Relevate decides to remove. Relevate reserves the right to remove any contributor or community member and any material added from any contributor or community member from its database including but not limited to screen name, comments, contributions, ratings, and any other material.
 						</p>
 						<br/>
-						{% checkbox 
+						{% checkbox
 							label="I agree to these terms and conditions"
 							input=form.accept_terms
+							name=form.accept_terms.name
 						%}
 					</div>
 				</div>
@@ -414,12 +411,6 @@
 					Previous
 				{% end_button %}
 			</span>
-			<div style="text-align:center;margin-top:40px;">
-			  <span class="step"></span>
-			  <span class="step"></span>
-			  <span class="step"></span>
-			  <span class="step"></span>
-			</div>
 			<span class="rv-contributor-form_footer--button" id="nextBtn_container">
 				{% button 
 				  id="nextBtn"

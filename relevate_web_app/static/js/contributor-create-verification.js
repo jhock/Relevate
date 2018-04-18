@@ -116,6 +116,7 @@ $(document).ready(function()
 	{
 		var len = $('#id_area_of_expertise input[type=checkbox]:checked').length;
 		verificationFlags.topics.counter = len;
+		console.log(len);
 		if (len > 0)
 		{
 			markSection("#topics-done", "#topics-incomplete", true);
@@ -257,6 +258,7 @@ $(document).ready(function()
         $("#modalCrop").modal("hide");
       });
 
+
     function showTab(n) {
       // This function will display the specified tab of the form ...
       var x = document.getElementsByClassName("tab");
@@ -264,23 +266,13 @@ $(document).ready(function()
       // ... and fix the Previous/Next buttons:
       if (n == 0) {
         document.getElementById("prevBtn_container").style.display = "none";
-        document.getElementById("nextBtn").innerHTML = "Next";
       } else {
-        document.getElementById("prevBtn_container").style.display = "inline";
-        document.getElementById("nextBtn").innerHTML = "Next";
-//        document.getElementById("prevBtn_container").style.display = "none";
-//      } else {
-//        document.getElementById("prevBtn_container").style.display = "initial";
+        document.getElementById("prevBtn_container").style.display = "initial";
+        document.getElementById("nextBtn").innerHTML = 'Next';
       }
       if (n == (x.length - 1)) {
-        var submit = document.getElementById("nextBtn")
-        submit.parentElement.innerHTML = RvButton({
-          label: 'Submit',
-          color: 'primary',
-          variant: 'solid',
-          type: 'button',
-          id: submit.id
-        })
+        document.getElementById("nextBtn").innerHTML = 'Submit';
+        document.getElementById("nextBtn").style.color = 'primary';
       }
       // ... and run a function that displays the correct step indicator:
       fixStepIndicator(n)
@@ -297,12 +289,7 @@ $(document).ready(function()
         x[currentTab].style.display = "none";
         // Increase or decrease the current tab by 1:
         currentTab = currentTab + -1;
-        // if you have reached the end of the form... :
-        if (currentTab >= x.length) {
-        //...the form gets submitted:
-        $("form").submit();
-        return false;
-        }
+                console.log(currentTab);
         // Otherwise, display the correct tab:
         showTab(currentTab);
     });
@@ -318,11 +305,13 @@ $(document).ready(function()
         x[currentTab].style.display = "none";
         // Increase or decrease the current tab by 1:
         currentTab = currentTab + 1;
+        console.log(currentTab);
+        console.log(x.length);
         // if you have reached the end of the form... :
         if (currentTab >= x.length) {
         //...the form gets submitted:
+        console.log("submiting form");
         $("form").submit();
-        return false;
         }
         // Otherwise, display the correct tab:
         showTab(currentTab);
@@ -400,7 +389,7 @@ $(document).ready(function()
         }
         // If the valid status is true, mark the step as finished and valid:
         if (valid) {
-          document.getElementsByClassName("step")[currentTab].className += " finish";
+          document.getElementsByClassName("tab")[currentTab].className += " finish";
         }
         if (!valid) {
             UIkit.modal.alert(errorMsg + "</ul>");
@@ -412,7 +401,7 @@ $(document).ready(function()
     function fixStepIndicator(n) {
       // This function removes the "active" class of all steps...
       var i;
-      var x = document.getElementsByClassName("step");
+      var x = document.getElementsByClassName("tab");
       for (i = 0; i < x.length; i++) {
         x[i].className = x[i].className.replace(" active", "");
       }

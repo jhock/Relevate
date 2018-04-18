@@ -850,6 +850,9 @@ h6,
   line-height: 0.5;
   margin: 0; }
 
+.rv-contributor-form_subheader.with-margin {
+  margin-bottom: 1rem; }
+
 .rv-contributor-form_progress {
   margin: 3rem 0; }
 
@@ -867,6 +870,12 @@ h6,
   .rv-contributor-form_box-row:last-child {
     border: none; }
 
+.rv-contributor-form_box-row--borderless {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box; }
+
 .rv-contributor-form_table {
   width: 100%;
   border-bottom: 1px dashed #D6D6D6; }
@@ -877,6 +886,10 @@ h6,
   margin: 0.5rem; }
   .rv-contributor-form_table--item:first-child {
     margin-left: 0; }
+  .rv-contributor-form_table--item.quarter {
+    flex: 1 1.485 auto; }
+  .rv-contributor-form_table--item.half {
+    flex: 0 0 48.5%; }
 
 .rv-contributor-form_button--container {
   flex: 0 0 13.5rem;
@@ -897,10 +910,24 @@ h6,
   justify-content: center;
   margin-bottom: 2rem; }
 
+.rv-contributor-form_footer--button {
+  margin: 0 0.125rem; }
+
 .rv-contributor-form_table--item-label {
   font-size: 0.875rem;
   font-weight: 700;
   display: none; }
+
+.rv-contributor-form_checkbox {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem; }
+
+.rv-contributor-form_subheader--caption {
+  margin-bottom: 2rem;
+  font-style: italic; }
+
+.rv-contributor-form_separator {
+  height: 2rem; }
 
 @media only screen and (max-width: 1000px) {
   .rv-contributor-form {
@@ -912,7 +939,7 @@ h6,
     margin: 0; }
   .rv-contributor-form_box {
     margin-bottom: 1.5rem;
-    padding: 1.5rem;
+    padding: 3rem;
     border: 1px solid #D6D6D6; }
   .rv-contributor-form_progress {
     margin: 3rem; } }
@@ -922,13 +949,17 @@ h6,
     margin: 0 10rem; }
   .rv-contributor-form_box {
     border: none;
-    margin: 0;
+    margin: 0 0 2rem 0;
     padding: 0; }
   .rv-contributor-form_progress {
     margin: 3rem 0 2rem 0; }
   .rv-contributor-form_table {
     margin-top: 1rem;
     border-bottom: none; }
+  .rv-contributor-form_content {
+    border: 1px solid #D6D6D6;
+    padding: 2rem;
+    margin-top: 1rem; }
   .rv-contributor-form_box-row {
     flex-direction: column;
     border-top: 1px solid #D6D6D6;
@@ -939,6 +970,8 @@ h6,
     .rv-contributor-form_box-row:last-child {
       border: 1px solid #D6D6D6;
       margin-bottom: 3rem; }
+  .rv-contributor-form_box-row--borderless {
+    flex-direction: column; }
   tr.rv-contributor-form_box-row:last-child {
     margin-bottom: 0; }
   td.rv-contributor-form_table--item {
@@ -956,9 +989,15 @@ h6,
 @media only screen and (max-width: 720px) {
   .rv-contributor-form {
     margin: 0; }
+  .rv-contributor-form_box-row--borderless {
+    box-sizing: border-box; }
   .rv-contributor-form_subheader {
-    text-align: center; }
+    margin-left: 2rem;
+    margin-right: 2rem; }
   .rv-contributor-form_progress {
+    margin-left: 2rem;
+    margin-right: 2rem; }
+  .rv-contributor-form_terms {
     margin-left: 2rem;
     margin-right: 2rem; } }
 
@@ -1320,7 +1359,6 @@ h6,
   margin: 0;
   max-width: 100%;
   box-sizing: border-box;
-  vertical-align: middle;
   text-decoration: none;
   touch-action: manipulation;
   height: 2.25rem;
@@ -1426,6 +1464,89 @@ h6,
   Breakpoints
 ----------------
 **/
+.rv-checkbox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0.25rem 0; }
+
+.rv-checkbox_input {
+  padding: 0;
+  margin: 0;
+  font-size: inherit;
+  line-height: inherit;
+  width: auto;
+  position: absolute;
+  top: 0;
+  z-index: -1;
+  opacity: 0.0001; }
+
+.rv-checkbox_facade {
+  width: 1.25rem;
+  height: 1.25rem;
+  display: inline-block;
+  border: 1px solid #737373;
+  position: absolute;
+  pointer-events: none;
+  border-radius: 0.25rem; }
+  .rv-checkbox_facade svg {
+    stroke: #ffffff; }
+
+.rv-checkbox_input:checked + .rv-checkbox_facade {
+  background: #246FF2;
+  border-color: #D6D6D6;
+  transition: .2s; }
+
+.rv-checkbox_input:focus + .rv-checkbox_facade:before {
+  content: "";
+  position: absolute;
+  top: -0.2rem;
+  bottom: -0.2rem;
+  left: -0.2rem;
+  right: -0.2rem;
+  border: 1px solid #246FF2;
+  border-radius: 0.35rem; }
+
+.rv-checkbox_label {
+  font-weight: 700;
+  padding-left: 2rem;
+  cursor: pointer; }
+
+/**
+----------------
+  Font Size
+----------------
+**/
+/**
+----------------
+  Colors
+----------------
+**/
+/**
+----------------
+  Typography
+----------------
+**/
+/**
+----------------
+  Navbar
+----------------
+**/
+/**
+----------------
+  Shadows
+----------------
+**/
+/**
+----------------
+  Cards
+----------------
+**/
+/**
+----------------
+  Breakpoints
+----------------
+**/
 .rv-dropdown-menu_container {
   position: relative; }
 
@@ -1469,6 +1590,183 @@ h6,
 .rv-dropdown-menu_separator {
   margin: 1rem 0;
   border-bottom: 1px solid #3A3A3A; }
+
+/**
+----------------
+  Font Size
+----------------
+**/
+/**
+----------------
+  Colors
+----------------
+**/
+/**
+----------------
+  Typography
+----------------
+**/
+/**
+----------------
+  Navbar
+----------------
+**/
+/**
+----------------
+  Shadows
+----------------
+**/
+/**
+----------------
+  Cards
+----------------
+**/
+/**
+----------------
+  Breakpoints
+----------------
+**/
+/**
+----------------
+  Font Size
+----------------
+**/
+/**
+----------------
+  Colors
+----------------
+**/
+/**
+----------------
+  Typography
+----------------
+**/
+/**
+----------------
+  Navbar
+----------------
+**/
+/**
+----------------
+  Shadows
+----------------
+**/
+/**
+----------------
+  Cards
+----------------
+**/
+/**
+----------------
+  Breakpoints
+----------------
+**/
+.rv-file-input {
+  border: 2px dashed #246FF2;
+  border-radius: 0.25rem;
+  position: relative;
+  padding: 1rem;
+  text-align: center;
+  transition: background 200ms linear;
+  min-height: 4.125rem; }
+  .rv-file-input:focus-within .rv-file-input_upload:before {
+    content: "";
+    position: absolute;
+    top: -0.25rem;
+    bottom: -0.25rem;
+    left: -0.25rem;
+    right: -0.25rem;
+    border: 1px solid #246FF2;
+    border-radius: 999rem; }
+  .rv-file-input:hover {
+    background: #246FF2;
+    border: 2px dashed #ffffff; }
+    .rv-file-input:hover .rv-file-input_file-name,
+    .rv-file-input:hover .rv-file-input_instructions,
+    .rv-file-input:hover .rv-file-input_icon,
+    .rv-file-input:hover .rv-file-input_upload {
+      color: #ffffff; }
+    .rv-file-input:hover .rv-file-input_upload {
+      border-color: #ffffff; }
+      .rv-file-input:hover .rv-file-input_upload:before {
+        border-color: #ffffff; }
+
+.rv-file-input_dragging {
+  position: absolute;
+  background: #246FF2;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 200ms linear; }
+  .rv-file-input_dragging.hidden {
+    opacity: 0; }
+
+.rv-file-input_dragging-caption {
+  font-weight: 700;
+  margin-top: 0.5rem; }
+
+.rv-file-input_upload {
+  position: relative;
+  border: 2px solid #246FF2;
+  border-radius: 999rem;
+  color: #246FF2;
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  white-space: nowrap;
+  text-overflow: ellipsis; }
+
+.rv-file-input_content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.5rem; }
+
+.rv-file-input_instructions {
+  font-style: italic;
+  font-weight: 500;
+  margin-top: 0.125rem; }
+
+.rv-file-input_file-name {
+  font-weight: 700; }
+
+.rv-file-input_file-name,
+.rv-file-input_instructions {
+  color: #246FF2;
+  font-size: 1rem; }
+
+.rv-file-input_icon {
+  display: inline-block;
+  margin-right: 0.25rem;
+  margin-top: 0.25rem;
+  color: #246FF2; }
+  .rv-file-input_icon.hidden {
+    display: none; }
+
+.rv-file-input_accepts {
+  font-size: 0.875rem;
+  font-style: italic;
+  color: #246FF2;
+  margin-top: 0.25rem; }
+
+.rv-file-input_input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  opacity: 0; }
+  .rv-file-input_input:focus {
+    outline: none; }
 
 /**
 ----------------
@@ -1788,7 +2086,9 @@ h6,
   font-weight: 700;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; }
+  text-overflow: ellipsis;
+  height: 2rem;
+  box-sizing: border-box; }
   .rv-select_option:focus {
     outline: none; }
 
@@ -1803,6 +2103,86 @@ h6,
   display: none;
   padding: 0.25rem 0.75rem;
   font-weight: 700;
+  font-style: italic; }
+
+/**
+----------------
+  Font Size
+----------------
+**/
+/**
+----------------
+  Colors
+----------------
+**/
+/**
+----------------
+  Typography
+----------------
+**/
+/**
+----------------
+  Navbar
+----------------
+**/
+/**
+----------------
+  Shadows
+----------------
+**/
+/**
+----------------
+  Cards
+----------------
+**/
+/**
+----------------
+  Breakpoints
+----------------
+**/
+.rv-text-area {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  margin: 1.5rem 0; }
+
+.rv-text-area_label {
+  color: #3A3A3A;
+  font-weight: 900;
+  left: 0;
+  font-size: 0.875rem;
+  transition: all 0.1s ease-in;
+  position: absolute;
+  display: block;
+  top: -1.75rem; }
+  .rv-text-area_label.rv-text-area_focus {
+    color: #246FF2;
+    transform-origin: left bottom;
+    transform: scale(1.1, 1.1); }
+
+.rv-text-area_input {
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 0.125rem;
+  border: 2px solid #D6D6D6;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #3A3A3A;
+  position: relative;
+  overflow: visible;
+  background: transparent;
+  padding: 0.8rem 0.8rem;
+  padding-right: 1.25rem;
+  transition: all 0.1s ease-in;
+  line-height: 1.6rem; }
+  .rv-text-area_input::placeholder {
+    font-weight: 400; }
+  .rv-text-area_input:focus {
+    outline: none;
+    border-color: #246FF2; }
+
+.rv-text-area_description {
+  margin-bottom: 0.75rem;
   font-style: italic; }
 
 /**

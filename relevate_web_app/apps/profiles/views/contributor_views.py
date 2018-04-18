@@ -147,7 +147,7 @@ class ContributorCreateView(LoginRequiredMixin, View):
         """
         form = ContributorForm(request.POST, request.FILES, data_list=organization_list)
         user_prof = UserProfile.objects.get(user=request.user)
-        academics_req = request.POST.get('academicList')
+        academics_req = request.POST.get('hiddenAcaTable')
         print ("academic_req ", academics_req)
         cert_req = request.POST.get('certificateList')
         print ("cert req ", cert_req)
@@ -179,14 +179,15 @@ class ContributorCreateView(LoginRequiredMixin, View):
                 accept_terms=form.cleaned_data.get('accept_terms'),
             )
             if (form.cleaned_data.get('avatar')):
-                # Gets the original image to be cropped
-                photo = Image.open(form.cleaned_data.get('avatar'))
-                # Cropps the image using values x,y,w,and h from the form
-                cropped_image = photo.crop((x, y, w + x, h + y))
-                # Splits the file name and the extension
-                filename, file_extension = os.path.splitext(os.path.basename(urlparse(contributor_profile.avatar.url).path))
-                cropped_image.save(settings.BASE_DIR + "/media/user_profiles/avatar/" + filename + file_extension)
-                contributor_profile.avatar = "user_profiles/avatar/" + filename + file_extension
+                # # Gets the original image to be cropped
+                # photo = Image.open(form.cleaned_data.get('avatar'))
+                # # Cropps the image using values x,y,w,and h from the form
+                # cropped_image = photo.crop((x, y, w + x, h + y))
+                # # Splits the file name and the extension
+                # filename, file_extension = os.path.splitext(os.path.basename(urlparse(contributor_profile.avatar.url).path))
+                # cropped_image.save(settings.BASE_DIR + "/media/user_profiles/avatar/" + filename + file_extension)
+                # contributor_profile.avatar = "user_profiles/avatar/" + filename + file_extension
+                contributor_profile.avatar = form.cleaned_data.get('avatar')
             if (form.cleaned_data.get('adviser') != None):
                 contributor_profile.has_adviser = True
                 contributor_profile.advisers_profile = form.cleaned_data.get('adviser')
@@ -269,7 +270,7 @@ class ContributorTempSaveView(LoginRequiredMixin, View):
             OrganizationalAffiliationUnfinished.objects.filter(contributor_profile=previous_form.id).delete()
             AddressUnfinished.objects.filter(id=previous_form.address_id).delete()
             previous_form.delete()
-        academics_req = request.POST.get('academicList')
+        academics_req = request.POST.get('hiddenAcaTable')
         print ("academic_req ", academics_req)
         cert_req = request.POST.get('certificateList')
         print ("cert req ", cert_req)
@@ -391,7 +392,7 @@ class ContributorUpdateView(LoginRequiredMixin, View):
         user_form = UpdateUserForm(request.POST)
         user_prof = UserProfile.objects.get(user=request.user)
         cp = ContributorProfile.objects.get(user_profile=user_prof)
-        academics_req = request.POST.get('academicList')
+        academics_req = request.POST.get('hiddenAcaTable')
         cert_req = request.POST.get('certificateList')
         org_req = request.POST.get('affiliationList')
         is_academics_and_cert_valid = validate_academic_and_cert(academics_req, request)

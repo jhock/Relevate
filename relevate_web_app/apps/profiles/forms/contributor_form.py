@@ -116,23 +116,24 @@ class ContributorForm(forms.Form):
 		)
 	)
 
-	# degree = forms.CharField(widget=SelectWidget(
-	# 		options=[degree for degree in Degree.objects.all().values_list('name', flat=True)],
-	# 		label='Level of Study',
-	# 		placeholder='Enter your level of study'
-	# ))
-
-	degree = forms.ChoiceField(
-		choices=[(degree, degree) for degree in Degree.objects.all().values_list('name', flat=True)],
+	degree = forms.CharField(widget=SelectWidget(
+			options=[degree for degree in Degree.objects.all().values_list('name', flat=True)],
 			label='Level of Study',
-			widget=forms.Select,
-			required=False
-	)
+			placeholder='Enter your level of study',
+			editable='False'
+	))
+
+	# degree = forms.ChoiceField(
+	# 	choices=[(degree, degree) for degree in Degree.objects.all().values_list('name', flat=True)],
+	# 		label='Level of Study',
+	# 		widget=forms.Select,
+	# 		required=False
+	# )
 
 	area_of_expertise = forms.ModelMultipleChoiceField(
 		label="Area of Expertise Relevant to Romantic Relationships", 
 		queryset=Topics.objects.all(),
-		widget=forms.CheckboxSelectMultiple(),
+		widget=forms.CheckboxSelectMultiple(attrs={'class': 'expertise-checkbox'}),
 		required=True
 	)
 
@@ -171,6 +172,9 @@ class ContributorForm(forms.Form):
 		label="Affiliations",
 		required=False	)
 
+	hiddenAcaTable = forms.CharField(
+		required=False
+	)
 
 	# widget = forms.TextInput(attrs={'placeholder': 'Organizational Affiliation ex:NCFR',
 	# 								'class': 'uk-search-field uk-input uk-form-width-large'})

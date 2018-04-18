@@ -2,7 +2,7 @@ from django import template
 from django.template.loader import get_template
 from django.template.base import Node, Token, TemplateSyntaxError
 from bs4 import BeautifulSoup
-import uuid
+import uuid, re
 from ..utils import (
   enforce_required_props, 
   split_props, 
@@ -27,22 +27,24 @@ def checkbox(parser, token):
   if not fetch_prop('form', props):
     enforce_required_props(['label'], props)
 
-  picked_props, checkbox_props = split_props(['label', 'id', 'input', 'form'], props)
+  picked_props, checkbox_props = split_props(['label', 'id', 'input', 'form', 'name'], props)
   
   label = get_prop_value('label', picked_props, None)
   checkbox_id = get_prop_value('id', picked_props, str(uuid.uuid4().int))
   alt_input = get_prop_value('input', picked_props, None)
   alt_form = get_prop_value('form', picked_props, None)
+  checkbox_name = get_prop_value('name', picked_props, None)
 
-  return Checkbox(label, checkbox_id, alt_input, alt_form, checkbox_props)
+  return Checkbox(label, checkbox_id, alt_input, alt_form, checkbox_name, checkbox_props)
 
 
 class Checkbox(Node):
-  def __init__(self, label, checkbox_id, alt_input, alt_form, checkbox_props):
+  def __init__(self, label, checkbox_id, alt_input, alt_form, checkbox_name,checkbox_props):
     self.label = label
     self.checkbox_id = checkbox_id,
     self.alt_input = alt_input,
     self.alt_form = alt_form,
+    self.checkbox_name = checkbox_name,
     self.checkbox_props = checkbox_props
 
   def render(self, context):
@@ -69,8 +71,9 @@ class Checkbox(Node):
 
     checkbox_html = get_template("checkbox/index.html")
     context.update({
-      'label' : resolve_variable(self.label, context),
-      'id': resolve_variable(self.checkbox_id, context)
+      'label': resolve_variable(self.label, context),
+      'id': resolve_variable(self.checkbox_id, context),
+      'name': resolve_variable(self.checkbox_name, context),
     })
 
     return checkbox_html.render(context)

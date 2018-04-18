@@ -23,10 +23,7 @@ $(document).ready(function() {
 		*/
 		var academicProgram = $("#id_program").val();
 		var degree = $("#id_degree").val();
-		console.log(academicProgram);
 		var institution = $("#id_institution").val();
-        console.log(institution);
-        console.log("asdfasdfffdd");
 
 		var tableId = academicId;
 		if(academicProgram && degree && institution){
@@ -46,7 +43,7 @@ $(document).ready(function() {
 					"<td class='rv-contributor-form_table--item'>" +
 						"<div>" + 
 							"<div class='rv-contributor-form_table--item-label'>Institution</div>" +
-							"<span class='rv-contributor-form_table--item-content institute' value="+institution+">" + institution + "</span>" +
+							"<span class='rv-contributor-form_table--item-content institute value="+institution+">" + institution + "</span>" +
 						"</div>" +
 					"</td>" +
 					"<td class='rv-contributor-form_button--container'>" +

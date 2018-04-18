@@ -31,25 +31,28 @@ def file_input(parser, token):
   props = create_chained_function('ondragleave', 'handleFileInputDragLeave(event);', props)
   props = create_chained_function('ondrop', 'handleFileInputDrop(event);', props)
 
-  picked_props, file_input_props = split_props(['label', 'accept', 'id', 'input', 'form'], props)
+  picked_props, file_input_props = split_props(['label', 'accept', 'id', 'input', 'name' 'form'], props)
   
   label = get_prop_value('label', picked_props, None)
   accept = get_prop_value('accept', picked_props, None)
   file_input_id = get_prop_value('id', picked_props, str(uuid.uuid4().int))
   alt_input = get_prop_value('input', picked_props, None)
   alt_form = get_prop_value('form', picked_props, None)
+  name = get_prop_value('name', picked_props, None)
 
-  return FileInput(label, accept, file_input_id, alt_input, alt_form, file_input_props)
+
+  return FileInput(label, accept, file_input_id, alt_input, alt_form, name, file_input_props)
 
 
 class FileInput(Node):
-  def __init__(self, label, accept, file_input_id, alt_input, alt_form, file_input_props):
+  def __init__(self, label, accept, file_input_id, alt_input, alt_form, name, file_input_props):
     self.label = label
     self.accept = accept
     self.file_input_id = file_input_id
     self.alt_input = alt_input
     self.alt_form = alt_form
     self.file_input_props = file_input_props
+    self.name = name
 
   def render(self, context):
     self.file_input_props = resolve_prop_variables(self.file_input_props, context)

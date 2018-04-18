@@ -38,3 +38,61 @@ input.invalid {
 .step.finish {
   background-color: #4CAF50;
 }
+
+.rv-checkbox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0.25rem 0;
+}
+
+.rv-checkbox_input {
+  padding: 0;
+  margin: 0;
+  font-size: inherit;
+  line-height: inherit;
+  width: auto;
+  position: absolute;
+  top: 0;
+  z-index: -1;
+  opacity: 0.0001;
+}
+
+.rv-checkbox_facade {
+  width: 1.25rem;
+  height: 1.25rem;
+  display: inline-block;
+  border: 1px solid $rv-color-neutral;
+  position: absolute;
+  pointer-events: none;
+  border-radius: 0.25rem;
+
+  svg {
+    stroke: $rv-color-white;
+  }
+}
+
+.rv-checkbox_input:checked + .rv-checkbox_facade {
+  background: $rv-color-primary;
+  border-color: $rv-color-light-gray;
+  transition: .2s;
+}
+
+.rv-checkbox_input:focus + .rv-checkbox_facade {
+  &:before {
+    content: "";
+    position: absolute;
+    top: -0.2rem;
+    bottom: -0.2rem;
+    left: -0.2rem;
+    right: -0.2rem;
+    border: 1px solid $rv-color-primary;
+    border-radius: 0.35rem;
+  }
+}
+
+.rv-checkbox_label {
+  font-weight: $rv-font-weight-bold;
+  padding-left: 2rem;
+  cursor: pointer;
+}

@@ -24,6 +24,7 @@ $(document).ready(function() {
 		var academicProgram = $("#id_program").val();
 		var degree = $("#id_degree").val();
 		var institution = $("#id_institution").val();
+		console.log(institution);
 
 		var tableId = academicId;
 		if(academicProgram && degree && institution){
@@ -43,7 +44,7 @@ $(document).ready(function() {
 					"<td class='rv-contributor-form_table--item'>" +
 						"<div>" + 
 							"<div class='rv-contributor-form_table--item-label'>Institution</div>" +
-							"<span class='rv-contributor-form_table--item-content institute value="+institution+">" + institution + "</span>" +
+							"<span class='rv-contributor-form_table--item-content institute' value="+institution+">" + institution + "</span>" +
 						"</div>" +
 					"</td>" +
 					"<td class='rv-contributor-form_button--container'>" +
@@ -424,7 +425,6 @@ console.log('cert');
 		var sudoDic;
 		var newSudoDic;
 		if(is_academic_update == true){
-            		console.log('tesatd');
 
 			var academicTableName = '#acaProf > tbody  > tr.acaRow';
 
@@ -451,15 +451,12 @@ console.log('cert');
 		}else{
 			var certTableName = '#addCert > tbody  > tr.certRow';
 			certificationTable = [];
-			console.log('else');
 			 $(certTableName).each(function() {
-			    console.log('yescesadart');
 				$this = $(this)
 				certificate = $this.find('span.certName').html();
 				sudoDic = certificate;
 				newSudoDic = sudoDic.concat(makeSureString);
 				console.log(newSudoDic);
-				console.log("hello");
 				certificationTable.push(newSudoDic);
 			 });
 			 var acLength = certificationTable.length;
@@ -471,7 +468,6 @@ console.log('cert');
 			 var affiliationTableName = '#addAffiliation > tbody > tr.affiliationRow';
 			 affiliationTable = [];
 			  $(affiliationTableName).each(function() {
-			  console.log('affillog');
 			    $this = $(this)
 			    affiliation = $this.find('span.affilName').html();
 			    sudoDicAffil = affiliation;

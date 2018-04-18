@@ -41,10 +41,10 @@ $(document).ready(function()
 					done: $("#id_zipcode").val().length > 0,
 					message: "You must enter a zip code.",
 				},
-				biography: {
-					done: $("#id_biography").val().length > 0,
-					message: "You must complete the professional interests section",
-				},
+//				biography: {
+//					done: $("#id_biography").val().length > 0,
+//					message: "You must complete the professional interests section",
+//				},
 			},
 		},
 		terms: {
@@ -165,12 +165,12 @@ $(document).ready(function()
 			'#professional-info-done', '#professional-info-incomplete');
 	});
 
-	$("#id_biography").on('keyup', function()
-	{
-		var len = $(this).val().length;
-		verifyTextInput(len, 'professional_info', 'biography',
-			'#professional-info-done', '#professional-info-incomplete');
-	});
+//	$("#id_biography").on('keyup', function()
+//	{
+//		var len = $(this).val().length;
+//		verifyTextInput(len, 'professional_info', 'biography',
+//			'#professional-info-done', '#professional-info-incomplete');
+//	});
 
 	$('#id_accept_terms').on('change', function()
 	{

@@ -617,8 +617,7 @@ h6,
   padding-bottom: 5rem;
   overflow: hidden;
   display: flex;
-  justify-content: center;
-  animation: fadein 1s; }
+  justify-content: center; }
 
 .rv-home-header_logo {
   text-align: center;
@@ -641,14 +640,6 @@ h6,
 .rv-home-header_button {
   margin-top: 1.5em;
   text-align: center; }
-
-@keyframes fadein {
-  from {
-    opacity: 0;
-    transform: translate3d(0, 20px, 0); }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0); } }
 
 /**
 ----------------

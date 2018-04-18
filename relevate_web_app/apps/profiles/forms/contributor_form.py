@@ -108,7 +108,8 @@ class ContributorForm(forms.Form):
 	)
 
 	biography = forms.CharField(
-		max_length=2999, 
+		max_length=2999,
+		required=False,
 		widget=forms.Textarea(
 			attrs={
 				'placeholder': 'Write a brief biography about yourself.'

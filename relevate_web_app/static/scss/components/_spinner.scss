@@ -1,0 +1,58 @@
+@import "../base/variables";
+
+$offset: 187;
+$duration: 1.4s;
+
+.rv-spinner {
+  animation: rotator $duration linear infinite;
+}
+
+.rv-spinner_container {
+   width: 100%;
+   margin-top: 10rem;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+}
+
+@keyframes rotator {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(270deg); }
+}
+
+.rv-spinner_path {
+  stroke-dasharray: $offset;
+  stroke-dashoffset: 0;
+  transform-origin: center;
+  animation:
+    dash $duration ease-in-out infinite, 
+    colors ($duration*4) ease-in-out infinite;
+}
+
+.rv-spinner_loading-message {
+  text-align: center;
+  margin-top: 1rem;
+  font-weight: $rv-font-weight-bold;
+  color: $rv-color-primary;
+}
+
+@keyframes colors {
+  0% { stroke: $rv-color-primary; }
+  25% { stroke: $rv-color-primary; }
+  50% { stroke: $rv-color-primary; }
+  75% { stroke: $rv-color-primary; }
+  100% { stroke: $rv-color-primary; }
+}
+
+@keyframes dash {
+ 0% { stroke-dashoffset: $offset; }
+ 50% {
+   stroke-dashoffset: $offset/4;
+   transform:rotate(135deg);
+ }
+ 100% {
+   stroke-dashoffset: $offset;
+   transform:rotate(450deg);
+ }
+}

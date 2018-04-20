@@ -62,7 +62,7 @@
 }
 
 .rv-button {
-  @include baseButton()
+  @include baseButton();
 
   &.primary {
     @include buttonVariants($rv-color-primary)

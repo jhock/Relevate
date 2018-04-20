@@ -4,8 +4,8 @@ from django.template.base import Node, Token, TemplateSyntaxError
 
 register = template.Library()
 
-@register.inclusion_tag('dropdown_menu/assets.html')
-def dropdown_menu_assets():
+@register.inclusion_tag('avatar/assets.html')
+def avatar_assets():
   return {}
 
 @register.inclusion_tag('buttons/assets.html')
@@ -14,6 +14,10 @@ def button_assets():
 
 @register.inclusion_tag('checkbox/assets.html')
 def checkbox_assets():
+  return {}
+
+@register.inclusion_tag('dropdown_menu/assets.html')
+def dropdown_menu_assets():
   return {}
 
 @register.inclusion_tag('file_input/assets.html')

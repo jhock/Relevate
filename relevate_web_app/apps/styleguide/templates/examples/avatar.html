@@ -1,5 +1,6 @@
 {% extends "styleguide_layout.html" %}
 {% load example_tags %}
+{% load avatar_tags %}
 
 {% block content%}
   {% example with
@@ -12,16 +13,43 @@
   {% end_example %}
 
   {% example with
-    heading="Avatar With Image"
-    caption="For when image source is provided"
+    heading=""
+    caption="Within your template file, load the custom avatar tags"
+    codeOnly="True"
   %}
-{% avatar name="Joshua Hock" src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" %}
+{% load avatar_tags %}
   {% end_example %}
 
-    {% example with
-    heading="Avatar Without Image"
-    caption="For when image source is not provided"
+  {% example with 
+    heading="Usage" 
+    caption="The avatar displays the image when the source attribute is present. It will grow to dynamically fill the width of it's container."  
   %}
-{% avatar name="Joshua Andrew Zadfsd Hock" %}
+<div style="width: 100px;">
+  {% avatar
+    src="https://courses.cs.washington.edu/courses/cse576/13sp/images/panorama.jpg"
+    name="Some City"
+  %}
+</div>
+  {% end_example %}
+
+  {% example with 
+    heading="When no image source is provided" 
+    caption="If the image is not provided with the source, it displays the initials of the user's name instead"  
+  %}
+<div style="width: 200px">
+  {% avatar
+    name="Don Quixote"
+  %}
+</div>
+<div style="width: 150px">
+  {% avatar
+    name="Jay Gatsby"
+  %}
+</div>
+<div style="width: 100px">
+  {% avatar
+    name="Elizabeth Bennett"
+  %}
+</div>
   {% end_example %}
 {% endblock content %}

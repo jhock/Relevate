@@ -281,6 +281,9 @@ $(document).ready(function()
 //    function nextPrev(n) {
     $('#prevBtn').on('click', function()
 	{
+        window.scrollTo({
+          top: 0
+        })
         // This function will figure out which tab to display
         var x = document.getElementsByClassName("tab");
         // Exit the function if any field in the current tab is invalid:
@@ -297,6 +300,9 @@ $(document).ready(function()
     $('#nextBtn').on('click', function()
 	{
 	    console.log("next");
+        window.scrollTo({
+          top: 0
+        })
         // This function will figure out which tab to display
         var x = document.getElementsByClassName("tab");
         // Exit the function if any field in the current tab is invalid:

@@ -2,8 +2,6 @@
 {% load compress %}
 
 <script src="{% static 'js/avatar.js' %}"></script>
-<script> document.getElementByClass("avatar-def").innerHTML = 5 + 6;
-</script>
 {% compress css %}
   <link rel="stylesheet" type="text/x-scss" href="{% static "scss/avatars.scss" %}" />
 {% endcompress %}

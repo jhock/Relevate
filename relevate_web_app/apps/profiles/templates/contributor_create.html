@@ -34,7 +34,7 @@
 			</div>
 			<div class="rv-contributor-form_box">
 				<h4 class="rv-contributor-form_subheader">Degrees</h4>
-					<input id="hiddenAcaTable" name="hiddenAcaTable">
+					<input id="hiddenAcaTable" hidden name="hiddenAcaTable">
 					<table id="acaProf" data-name="acaProfTable" class="rv-contributor-form_table">
 						<tbody>
 							{% for each_academic in academic_profiles %}
@@ -103,10 +103,16 @@
 								input=form.institution
 							%}
 							<!-- @US_TODO: Fix this so it works with new framework -->
-							<div id="list_of_uni" style="width: 500px;" class="uk-dropdown uk-dropdown-search uk-panel-scrollable">
+							<!-- I'm temp disabling this. The async is taking too long, and the box
+									 appears but just hangs there. We can integrate these options with the
+									 existing select component, we'll just need to enable asynchronus loading
+									 for the options. That should be when we revisit this for Contributor page
+									 2.0. Until then, we should leave it out as the ui kit version is inconsistent
+									 with the other UI in the contrib application, and will be poor UX -->
+{# 							<div id="list_of_uni" style="width: 500px;" class="uk-dropdown uk-dropdown-search uk-panel-scrollable">
 								<ul class="uk-nav uk-nav-search" id="items_to_search">
 								</ul>
-							</div>
+							</div> #}
 						</div>
 						<div class="rv-contributor-form_button--container">
 							{% button 

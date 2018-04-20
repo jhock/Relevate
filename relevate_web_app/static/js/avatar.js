@@ -1,9 +1,3 @@
-$(document).ready(function()
-{
-    this.getElementsByClassName('avatar-def').style.backgroundColor = avatarRandomColor();
-});
-
-
 //List of acceptable colors to choose from
 var colours = ['#345321', '#888888', '#000011'];
 

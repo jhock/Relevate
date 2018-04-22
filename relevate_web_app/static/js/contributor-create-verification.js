@@ -268,53 +268,72 @@ $(document).ready(function()
         document.getElementById("prevBtn_container").style.display = "none";
       } else {
         document.getElementById("prevBtn_container").style.display = "initial";
-        document.getElementById("nextBtn").innerHTML = 'Next';
+        var nextBtn = document.getElementById("nextBtn")
+        nextBtn.classList.remove('solid')
+        nextBtn.classList.add('ghost')
+        nextBtn.innerHTML = 'Next';
       }
       if (n == (x.length - 1)) {
-        document.getElementById("nextBtn").innerHTML = 'Submit';
-        document.getElementById("nextBtn").style.color = 'primary';
+        var nextBtn = document.getElementById("nextBtn")
+        nextBtn.classList.remove('ghost')
+        nextBtn.classList.add('solid')
+        nextBtn.innerHTML = 'Submit'
       }
       // ... and run a function that displays the correct step indicator:
       fixStepIndicator(n)
     }
 
 //    function nextPrev(n) {
-    $('#prevBtn').on('click', function()
-	{
-        // This function will figure out which tab to display
-        var x = document.getElementsByClassName("tab");
-        // Exit the function if any field in the current tab is invalid:
-        if (-1 == 1 && !validateForm()) return false;
-        // Hide the current tab:
-        x[currentTab].style.display = "none";
-        // Increase or decrease the current tab by 1:
-        currentTab = currentTab + -1;
-                console.log(currentTab);
-        // Otherwise, display the correct tab:
-        showTab(currentTab);
+    $('#prevBtn').on('click', function() {
+      // scroll to the top of the page on previous
+      window.scrollTo({
+        top: 0
+      })
+      // This function will figure out which tab to display
+      var x = document.getElementsByClassName("tab");
+      // Exit the function if any field in the current tab is invalid:
+      if (-1 == 1 && !validateForm()) return false;
+      // Hide the current tab:
+      x[currentTab].style.display = "none";
+      // Increase or decrease the current tab by 1:
+      currentTab = currentTab + -1;
+      console.log(currentTab);
+      // Otherwise, display the correct tab:
+      showTab(currentTab);
     });
 
-    $('#nextBtn').on('click', function()
-	{
-	    console.log("next");
-        // This function will figure out which tab to display
-        var x = document.getElementsByClassName("tab");
-        // Exit the function if any field in the current tab is invalid:
-        if (1 == 1 && !validateForm()) return false;
-        // Hide the current tab:
-        x[currentTab].style.display = "none";
-        // Increase or decrease the current tab by 1:
-        currentTab = currentTab + 1;
-        console.log(currentTab);
-        console.log(x.length);
-        // if you have reached the end of the form... :
-        if (currentTab >= x.length) {
+    $('#nextBtn').on('click', function() {
+      console.log("next");
+      window.scrollTo({
+        top: 0
+      })
+      // This function will figure out which tab to display
+      var x = document.getElementsByClassName("tab");
+      // Exit the function if any field in the current tab is invalid:
+      if (1 == 1 && !validateForm()) return false;
+      // Hide the current tab:
+      x[currentTab].style.display = "none";
+      // Increase or decrease the current tab by 1:
+      currentTab = currentTab + 1;
+      console.log(currentTab);
+      console.log(x.length);
+      // if you have reached the end of the form... :
+      if (currentTab >= x.length) {
         //...the form gets submitted:
         console.log("submiting form");
         $("form").submit();
-        }
-        // Otherwise, display the correct tab:
-        showTab(currentTab);
+
+        // hide the footer
+        var footer = document.getElementsByClassName('rv-contributor-form_footer')[0]
+        footer.style.display = 'none'
+
+        // display the spinner
+        var container = document.getElementById('contributorApplication')
+        container.classList.remove('rv-contributor-form')
+        renderSpinner('contributorApplication', 'Submitting')
+      }
+      // Otherwise, display the correct tab:
+      showTab(currentTab);
     });
 
     function validateForm() {

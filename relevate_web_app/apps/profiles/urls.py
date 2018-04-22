@@ -47,6 +47,7 @@ urlpatterns = [
 	url(r'contributors_approve/$', contributor_views.ContributorApproveView.as_view(), name="contributor_approve"),
 	url(r'approve_contributor/$', contributor_views.ApproveButtonView.as_view(), name="approve_contributor"),
 	url(r'deny_contributor/$', contributor_views.DenyButtonView.as_view(), name="deny_contributor"),
+	url(r'request_revison_contributor/$', contributor_views.RequestRevisonButtonView.as_view(), name="request_revison_contributor"),
 	url(r'contributors_create/$', contributor_views.ContributorCreateView.as_view(), name="contributor_create"),
 	url(r'contributors_temp_save/$', contributor_views.ContributorTempSaveView.as_view(), name="contributor_temp_save"),
 

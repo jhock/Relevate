@@ -154,12 +154,15 @@
 					{% end_dropdown_menu %}
 				</li>
 
-				{% if user.is_authenticated %}
+				{% if user.is_authenticated and not user_prof.is_pending_contributor %}
 					<li class="rv-navbar_submenu"><a class="rv-navbar_option" href="{% url 'profile:contributor_create' %}">Contributor Application</a></li>
 					{% if not user_prof.confirmed %}
 						<li class="rv-navbar_submenu"><a class="rv-navbar_option" href="{% url 'profile:confirmation' %}">Confirm Account</a></li>
 					{% endif %}
 					<!-- <li><a href="{%url 'profile:password_reset_form' %}">Reset Password</a></li> -->
+				{% endif %}
+				{% if user_prof.is_pending_contributor %}
+					<li class="rv-navbar_submenu"><a class="rv-navbar_option" href="{% url 'profile:contributor_profile' %}">My Contributor Profile</a></li>
 				{% endif %}
 			{% endif %}
 			<li>
@@ -167,7 +170,7 @@
 			</li>
 			<li class="rv-navbar_submenu">
 				<a class="rv-navbar_option" href="{% url 'contribution:about' %}">About</a>
-			</li class="rv-navbar_submenu">
+			</li>
 			{% if not user.is_authenticated %}
 			<li class="rv-navbar_submenu">
 				<a class="rv-navbar_option" href="{% url 'profile:login' %}">Sign In</a>

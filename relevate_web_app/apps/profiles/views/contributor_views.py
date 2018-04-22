@@ -27,6 +27,9 @@ from ...contribution.modules.post_util import display_error
 from ...contribution.modules.search_util import find_universities
 from ..forms.authentication_forms import UpdateUserForm
 from django.core.files.storage import FileSystemStorage
+from django.template.loader import get_template
+from django.core.mail import EmailMessage
+from django.template import Context
 try:
     from urllib.parse import urlparse
 except ImportError:
@@ -36,7 +39,7 @@ from django.conf import settings
 from PIL import Image
 
 DEBUG = False
-BETA = True
+BETA = False
 organization_list = ('National Council on Family Relations (NCFR)',
                      'American Association for Marriage and Family Therapy (AAMFT)',
                      'Society for the Study of Emerging Adulthood (SSEA)',
@@ -66,7 +69,7 @@ class ContributorCreateView(LoginRequiredMixin, View):
                              'Society for Prevention Research (SPR)')
         user_prof = UserProfile.objects.get(user=request.user)
         #check for previous saved information to fill out form with
-        if not (user_prof.is_contributor):
+        if not (user_prof.is_contributor and not user_prof.is_pending_contributor):
             advisers = Adviser.objects.filter(is_active=True)
             previous_form = ContributorProfileUnfinished.objects.filter(user_profile_id=user_prof.id).first()
             if previous_form:
@@ -146,7 +149,8 @@ class ContributorCreateView(LoginRequiredMixin, View):
         they are placed into the ``PendingContributors`` table for staff approval.
         """
         form = ContributorForm(request.POST, request.FILES, data_list=organization_list)
-        user_prof = UserProfile.objects.get(user=request.user)
+        user = request.user
+        user_prof = UserProfile.objects.get(user=user)
         academics_req = request.POST.get('hiddenAcaTable')
         print ("academic_req ", academics_req)
         cert_req = request.POST.get('certificateList')
@@ -213,7 +217,25 @@ class ContributorCreateView(LoginRequiredMixin, View):
             # @US_TODO: Remove this after Beta
             if (not BETA):
                 pending_contributors = PendingContributors(contributor=contributor_profile)
+                user_prof.is_pending_contributor = True
                 pending_contributors.save()
+                user_prof.save()
+                # Setting up confirmation email.
+                user_name = user.first_name + user.last_name
+                user_email = user.email
+                template = get_template('contributor_confirmation_email.html')
+                context = Context({'userName': user_name,
+                                   'email': user_email})
+                content = template.render(context)
+                email_message = EmailMessage('Your contributor application is under review', content,
+                                             'relevate@outlook.com', [user_email],
+                                             headers={'Reply-To': 'relevate@outlook.com'})
+                email_message.content_subtype = "html"
+                try:
+                    email_message.send()
+                except:
+                    messages.error(request, 'Email could not be sent')
+                # confirmation email sent.
                 messages.success(request, 'Your application has been submitted and being reviewed!')
             else:
                 user_prof.is_contributor = True
@@ -516,7 +538,7 @@ class ContributorProfileView(LoginRequiredMixin, View):
         '''
         user = request.user
         user_prof = UserProfile.objects.get(user=user)
-        if (user_prof.is_contributor):
+        if (user_prof.is_contributor or user_prof.is_pending_contributor):
             contributor_profile = ContributorProfile.objects.get(user_profile=user_prof)
             expertise_topics = contributor_profile.expertise_topics.all().order_by('name')
             academic_prof = AcademicProfile.objects.filter(contributor_profile=contributor_profile)
@@ -687,11 +709,51 @@ class ApproveButtonView(View):
         user_prof = contrib_prof.user_profile
         print("Approving User: " + user_prof.user.first_name + " " + user_prof.user.last_name)
         user_prof.is_contributor = True
+        user_prof.is_pending_contributor = False
         user_prof.save()
         contrib_prof.is_approved = True
         contrib_prof.save()
         PendingContributors.objects.filter(contributor_id=contrib_prof.id).delete()
         return HttpResponse('')
+
+class RequestRevisonButtonView(View):
+    '''
+    AJAX View
+    '''
+
+    def post(self, request):
+        '''
+        Actually handles the AJAX request to deny a contributor
+        and remove them from the pending contributors queue
+        '''
+        request_id = request.POST.get("id")
+        reason = request.POST.get('reason')
+        contrib_prof = ContributorProfile.objects.get(id=int(request_id))
+        user_prof = contrib_prof.user_profile
+        PendingContributors.objects.filter(contributor_id=contrib_prof.id).delete()
+        denial = DeniedContributors(contributor=contrib_prof,
+                                    date_denied=dt.utcnow(),
+                                    reason=reason)
+        denial.save()
+        # @US_TODO: Send an email here upon denial
+        user_name = user_prof.user.first_name + user_prof.user.last_name
+        user_email = user_prof.user.email
+        template = get_template('contributor_temp_denied_email.html')
+        context = Context({'userName': user_name,
+                           'email': user_email,
+                           'reason': reason})
+        content = template.render(context)
+        email_message = EmailMessage('Relevate requests that you edit your contributor application', content,
+                                     'relevate@outlook.com', [user_email],
+                                     headers={'Reply-To': 'relevate@outlook.com'})
+        email_message.content_subtype = "html"
+        try:
+            email_message.send()
+        except:
+            messages.error(request, 'Email could not be sent')
+        # confirmation email sent.
+        messages.success(request, 'Temp Email has been sent.')
+        return HttpResponse("")
 
 
 class DenyButtonView(View):
@@ -708,6 +770,8 @@ class DenyButtonView(View):
         reason = request.POST.get('reason')
         contrib_prof = ContributorProfile.objects.get(id=int(request_id))
         user_prof = contrib_prof.user_profile
+        user_prof.is_pending_contributor = False
+        user_prof.save()
         print("Denying User: " + user_prof.user.first_name + " " + user_prof.user.last_name)
         PendingContributors.objects.filter(contributor_id=contrib_prof.id).delete()
         denial = DeniedContributors(contributor=contrib_prof,
@@ -715,6 +779,23 @@ class DenyButtonView(View):
                                     reason=reason)
         denial.save()
         # @US_TODO: Send an email here upon denial
+        user_name = user_prof.user.first_name + user_prof.user.last_name
+        user_email = user_prof.user.email
+        template = get_template('contributor_denied_email.html')
+        context = Context({'userName': user_name,
+                           'email': user_email,
+                           'reason': reason})
+        content = template.render(context)
+        email_message = EmailMessage('Your contributor application has been denied', content,
+                                     'relevate@outlook.com', [user_email],
+                                     headers={'Reply-To': 'relevate@outlook.com'})
+        email_message.content_subtype = "html"
+        try:
+            email_message.send()
+        except:
+            messages.error(request, 'Email could not be sent')
+        # confirmation email sent.
+        messages.success(request, 'Email has been sent.')
         return HttpResponse("")
 
 

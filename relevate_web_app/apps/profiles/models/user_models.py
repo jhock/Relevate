@@ -8,6 +8,7 @@ class UserProfile(models.Model):
 	confirmed = models.BooleanField(default=False)
 	is_adviser = models.BooleanField(default=False)
 	is_contributor = models.BooleanField(default=False)
+	is_pending_contributor = models.BooleanField(default=False)
 	topics_preferences = models.ManyToManyField('contribution.Topics', blank=True)
 	#user_avatar = models.ImageField(upload_to='user_profiles/user_avatar', null=True, blank=True)
 

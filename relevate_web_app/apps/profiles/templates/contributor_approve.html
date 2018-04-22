@@ -23,11 +23,14 @@
 					<div class='uk-card-body'>
 						<div class="uk-float-right">
 							<button name="{{ contrib_prof.id }}" id='approve-{{ contrib_prof.id }}' class="uk-button-success uk-button-large contrib_approve_btn">Approve</button>
+							<a uk-toggle="target: #contributorTempDeny{{contrib_prof.id}}" class="uk-button uk-button-large uk-button-danger" style='color: white;' name="{{ contrib_prof.id }}">Temporary Deny</a>
 							<a uk-toggle="target: #contributorDeny{{contrib_prof.id}}" class="uk-button uk-button-large uk-button-danger" style='color: white;' name="{{ contrib_prof.id }}">Deny</a>
 						</div>
 						<a uk-toggle="target: #contributorProfile{{ contrib_prof.id }};">
 							<h3 class="blue uk-card-title">{{ contrib_prof.user_profile.user.first_name }} 
-								{{ contrib_prof.user_profile.user.last_name }}</h3>
+								{{ contrib_prof.user_profile.user.last_name }}
+								{{ contrib_prof.user_profile.user.email }}
+							</h3>
 						</a>
 					</div>
 				</div>
@@ -41,6 +44,23 @@
 							<textarea id="text-area-{{ contrib_prof.id }}" cols="120" rows="10"
 							style="font-size: 18px;"> </textarea>
 							<button name="{{ contrib_prof.id }}" id='deny-{{contrib_prof.id}}' class="uk-button-danger uk-button-large contrib_deny_btn">Deny</button>
+							<p style="dislay:none;"></p>
+						</div>
+					</div>
+				</div>
+				<div id="contributorTempDeny{{contrib_prof.id}}" class="uk-modal-container" uk-modal>
+					<div class="uk-modal-dialog">
+						<div class='uk-modal-body'>
+							<h3>Reason for Denial:</h3>
+							<p><i>This will be emailed to the contributor:</i><br>
+							"Thank you for your interest in becoming a Relevate contributor. However, we ask that you add or edit the following entries and
+							resubmit your application before you can be accepted:"<br>
+							</p>
+							<p id="warning-tag-temp-{{ contrib_prof.id }}" style="display: none; color: red;">
+								A reason is required</p>
+							<textarea id="text-area-temp-{{ contrib_prof.id }}" cols="120" rows="10"
+							style="font-size: 18px;"> </textarea>
+							<button name="{{ contrib_prof.id }}" id='temp-deny-{{contrib_prof.id}}' class="uk-button-danger uk-button-large contrib_temp_deny_btn">Temporary Deny</button>
 							<p style="dislay:none;"></p>
 						</div>
 					</div>
@@ -94,6 +114,50 @@
 		String.prototype.trim = function() 
 		{
 			return this.replace(/^\s+|\s+$/g,"");
+		}
+
+		$('.contrib_temp_deny_btn').click( function()
+		{
+			var id = $(this).attr("name");
+			var input = $('#text-area-temp-'+id);
+			if (input.val().trim() == '')
+			{
+				$('#warning-tag-temp-' + id).css('display', "");
+			}
+			else
+			{
+				if($(this).text() !== "Contributor Denied!")
+				{
+					console.log("Temp Denied Contributor: ", + id);
+					var reason = input.val();
+					tempDenyContributor(id, reason);
+				}
+			}
+		});
+
+		function tempDenyContributor(id, reason)
+		{
+			$.ajaxSetup({
+				data: {csrfmiddlewaretoken: '{{ csrf_token }}'}
+			});
+			$.ajax({
+				url: '{% url 'profile:request_revison_contributor' %}',
+				type: "POST",
+				data: { id: id, reason: reason},
+				success: function()
+				{
+					$("#temp-deny-" + id).text("Contributor Denied!");
+					var modal = $("#modal-" + id);
+					modal.text("Contributor Denied!");
+					$("#approve-" + id).hide(100);
+					console.log("Successfully temp denied contributor");
+				},
+				error: function(xhr)
+				{
+					// $("#error-message").text(xhr.responseText).show();
+					console.log("ERROR: " + xhr.responseText);
+				}
+			})
 		}
 
 		$('.contrib_deny_btn').click( function()

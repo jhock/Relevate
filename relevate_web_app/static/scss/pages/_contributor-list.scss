@@ -1,0 +1,79 @@
+@import "../base/variables";
+
+$rv-contributor-list-avatar-size: 8rem;
+
+.rv-contributor-list_intro {
+  margin-bottom: 4rem;
+}
+
+.rv-contributor-list_layout {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.rv-contributor-list_card {
+  box-shadow: $rv-box-shadow;
+  padding: 2rem;
+  margin-right: 1rem;
+  margin-bottom: 2rem;
+  width: $rv-card-width;
+  position: relative;
+
+  &:hover {
+    box-shadow: $rv-card-box-shadow-hover;
+  }
+}
+
+.rv-contributor-list_card-header {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  padding-top: 2rem;
+}
+
+.rv-contributor-list_link {
+  box-sizing: border-box;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+
+  &:focus {
+    outline: 1px solid $rv-color-primary;
+  }
+}
+
+.rv-contributor-list_avatar {
+  width: $rv-contributor-list-avatar-size;
+  margin-bottom: 1rem;
+}
+
+.rv-contributor-list_separator {
+  border-bottom: 1px solid $rv-color-light-gray;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.rv-contributor-list_subtitle {
+  margin-top: 1rem;
+}
+
+.rv-contributor-list_heading-link {
+  text-decoration: none;
+  text-align: center;
+  display: block;
+  margin-bottom: 1rem;
+  margin-top: $rv-contributor-list-avatar-size + 1rem;
+
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+    outline: none;
+  }
+}
+
+.rv-contributor-list_institution {
+  font-style: italic;
+  margin-bottom: 1rem;
+}

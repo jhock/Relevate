@@ -13,7 +13,7 @@ $menu-width: 14rem;
   box-shadow: $rv-box-shadow;
   transform: translateX(-50%);
   left: 50%;
-  top: 2rem;
+  top: 120%;
   display: none;
   padding: 1rem;
   border-radius: 0.25rem;
@@ -22,6 +22,28 @@ $menu-width: 14rem;
 
 .rv-dropdown-menu_trigger {
   cursor: pointer;
+}
+
+.rv-dropdown-menu_label {
+  display: flex;
+  align-items: center;
+}
+
+.rv-dropdown-menu_label--node {
+  min-width: 2rem;
+}
+
+.rv-dropdown-menu_icon {
+  width: 0.4rem;
+  margin-left: 0.5rem;
+
+  svg {
+    transform: rotate(0deg);
+    transition: transform 100ms ease-in;
+    g {
+      fill: $rv-color-primary;
+    }
+  }
 }
 
 .rv-dropdown-menu_item {

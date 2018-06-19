@@ -1,8 +1,12 @@
 {% load staticfiles %}
+{% load avatar_tags %}
 
 <div class='uk-children-1-3' uk-grid>
-	<div>
-			<img style="max-width: 150px;" class="profile_avatar" src="{{ contributor_prof.avatar_image_url }}">
+	<div style="width: 150px;">
+		{% avatar
+			src=contributor_prof.avatar_image_url
+			name=contributor_prof
+		%}
 	</div>
 	<div>
 		{% if highest_ranking_degree %}

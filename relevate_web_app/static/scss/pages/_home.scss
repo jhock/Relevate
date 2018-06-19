@@ -6,8 +6,12 @@
 
 .rv-home_header {
   color: $rv-color-primary;
+  margin-bottom: 0.5rem;
+  margin-left: 1rem;
+}
+
+.rv-home_header--rule {
   margin-bottom: 2rem;
-  padding-bottom: 0.5rem;
   border-bottom: 1px solid $rv-color-light-gray;
 }
 

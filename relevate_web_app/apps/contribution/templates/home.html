@@ -48,6 +48,7 @@
 
 		{% if user.is_authenticated and preference_posts %}
 		<h4 class="rv-home_header">Suggested posts</h4>
+		<div class="rv-home_header--rule"></div>
 	<!-- temporarily commenting this out until we figure out what to do here  -->
 	<!-- 			<div id="chosen-item-list" class="rv-home_header-topics-tags">
 					{% for each_sel in already_sel %}
@@ -75,6 +76,7 @@
 			</div>
 
 			<h4 class="rv-home_header">All Other Posts</h4>
+			<div class="rv-home_header--rule"></div>
 		{% endif %}
 
 		{% if published_posts %}

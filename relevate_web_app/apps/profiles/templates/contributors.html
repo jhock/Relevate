@@ -1,5 +1,6 @@
 {% extends "base-titlebar.html" %}
 {% load staticfiles %}
+{% load avatar_tags %}
 
 {% block content %}
 	<div class="uk-container uk-margin-top">
@@ -21,9 +22,12 @@
             >
               <div class="rv-contributor-list_card-header">
                 <div class="rv-contributor-list_avatar">
-                  <div class="rv-avatar">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWdyo9v0VzLbEuNF2LyhWtreGcr_B3xtoByzMqmyrMYU0fewdDoA">
-                  </div>
+                  {% with ""|add:contrib_prof.first_name|add:" "|add:contrib_prof.last_name as name %}
+                    {% avatar
+                      src="http://keyassets.timeincuk.net/inspirewp/live/wp-content/uploads/sites/12/2016/09/iStock-landscape-600x400.jpg"
+                      name=name
+                    %}
+                  {% endwith %}
                 </div>
               </div>
     					<a 

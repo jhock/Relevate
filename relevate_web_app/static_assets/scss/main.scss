@@ -6,10 +6,13 @@
 @import "components/navbar";
 @import "components/home-header";
 @import "components/content-card";
+@import "components/spinner";
 
-@import "pages/styleguide";
-@import "pages/home";
 @import "pages/box-form";
+@import "pages/contributor";
+@import "pages/home";
+@import "pages/styleguide";
+
 
 
 // TODO: Remove this hack
@@ -20,8 +23,14 @@
 // components directory here so they will get compiled into
 // main.css for production
 
-@import "../../apps/components/static/scss/avatars";
+@import "./avatars";
 @import "../../apps/components/static/scss/buttons";
+@import "../../apps/components/static/scss/checkbox";
 @import "../../apps/components/static/scss/dropdown_menu";
+@import "../../apps/components/static/scss/file_input";
+@import "../../apps/components/static/scss/icons";
 @import "../../apps/components/static/scss/links";
+@import "../../apps/components/static/scss/progress";
+@import "../../apps/components/static/scss/select";
+@import "../../apps/components/static/scss/text_area";
 @import "../../apps/components/static/scss/text_input";

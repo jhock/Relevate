@@ -1,0 +1,239 @@
+@import "../base/variables";
+
+.rv-contributor-form {
+  margin: 1rem 5rem;
+}
+
+.rv-contributor-form_header {
+  line-height: 0.5;
+  margin: 0;
+}
+
+.rv-contributor-form_subheader {
+  &.with-margin {
+    margin-bottom: 1rem;
+  }
+}
+
+.rv-contributor-form_progress {
+  margin: 3rem 0;
+}
+
+.rv-contributor-form_box {
+  margin-bottom: 3rem;
+  padding: 3rem;
+  border: 1px solid $rv-color-light-gray;
+}
+
+.rv-contributor-form_box-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px dashed $rv-color-light-gray;
+  padding: 1rem 0;
+
+  &:last-child {
+    border: none;
+  }
+}
+
+.rv-contributor-form_box-row--borderless {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.rv-contributor-form_table {
+  width: 100%;
+  border-bottom: 1px dashed $rv-color-light-gray;
+}
+
+.rv-contributor-form_table--item {
+  width: 100%;
+  flex: 1 1 auto;
+  margin: 0.5rem;
+
+  &:first-child {
+    margin-left: 0;
+  }
+
+  &.quarter {
+    flex: 1 1.485 auto;
+  }
+
+  &.half {
+    flex: 0 0 48.5%;
+  }
+}
+
+.rv-contributor-form_button--container {
+  flex: 0 0 13.5rem;
+  margin: 0.5rem;
+}
+
+.rv-contributor-form_button--group {
+  display: flex;
+}
+
+.rv-contributor-form_button--group-button {
+  flex: 1;
+
+  &:first-child {
+    margin-right: 0.25rem;
+  }
+
+  &:last-child {
+    margin-left: 0.25rem;
+  }
+}
+
+.rv-contributor-form_footer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.rv-contributor-form_footer--button {
+  margin: 0 0.125rem
+}
+
+.rv-contributor-form_table--item-label {
+  font-size: 0.875rem;
+  font-weight: $rv-font-weight-bold;
+  display: none;
+}
+
+.rv-contributor-form_checkbox {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.rv-contributor-form_subheader--caption {
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+
+.rv-contributor-form_separator {
+  height: 2rem;
+}
+
+@media only screen and (max-width: 1000px) {
+  .rv-contributor-form {
+    margin: 0;
+  }
+
+  .rv-contributor-form_header {
+    margin: 0 1.5rem;
+    text-align: center;
+  }
+
+  .rv-contributor-form_progress {
+    margin: 0;
+  }
+
+  .rv-contributor-form_box {
+    margin-bottom: 1.5rem;
+    padding: 3rem;
+    border: 1px solid $rv-color-light-gray;
+  }
+
+  .rv-contributor-form_progress {
+    margin: 3rem;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .rv-contributor-form {
+    margin: 0 10rem;
+  }
+
+  .rv-contributor-form_box {
+    border: none;
+    margin: 0 0 2rem 0;
+    padding: 0;
+  }
+
+  .rv-contributor-form_progress {
+    margin: 3rem 0 2rem 0;
+  }
+
+  .rv-contributor-form_table {
+    margin-top: 1rem;
+    border-bottom: none;
+  }
+
+  .rv-contributor-form_content {
+    border: 1px solid $rv-color-light-gray;
+    padding: 2rem;
+    margin-top: 1rem;
+  }
+
+  .rv-contributor-form_box-row {
+    flex-direction: column;
+    border-top: 1px solid $rv-color-light-gray;
+    border: 1px solid $rv-color-light-gray;
+    border-bottom: none;
+    box-sizing: border-box;
+    padding: 2rem;
+
+    &:last-child {
+      border: 1px solid $rv-color-light-gray;
+      margin-bottom: 3rem;
+    }
+  }
+
+  .rv-contributor-form_box-row--borderless {
+    flex-direction: column;
+  }
+
+  tr.rv-contributor-form_box-row {
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  td.rv-contributor-form_table--item {
+    border-top: 1px dashed $rv-color-light-gray;
+    padding-top: 1rem;
+
+    &:first-child {
+      padding-top: 0;
+      border-top: none;
+    }
+  }
+
+  .rv-contributor-form_button--container {
+    width: 100%;
+    flex-basis: auto;
+  }
+
+  .rv-contributor-form_table--item-label {
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  .rv-contributor-form {
+    margin: 0;
+  }
+
+  .rv-contributor-form_box-row--borderless {
+    box-sizing: border-box;
+  }
+
+  .rv-contributor-form_subheader {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+
+  .rv-contributor-form_progress {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+
+  .rv-contributor-form_terms {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+}

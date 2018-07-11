@@ -1,0 +1,88 @@
+/**
+----------------
+  Font Size
+----------------
+**/
+/**
+----------------
+  Colors
+----------------
+**/
+/**
+----------------
+  Typography
+----------------
+**/
+/**
+----------------
+  Navbar
+----------------
+**/
+/**
+----------------
+  Shadows
+----------------
+**/
+/**
+----------------
+  Cards
+----------------
+**/
+/**
+----------------
+  Breakpoints
+----------------
+**/
+/* line 6, apps/components/static/scss/select.scss */
+.rv-select {
+  position: relative; }
+  /* line 8, apps/components/static/scss/select.scss */
+  .rv-select input:read-only {
+    cursor: pointer; }
+
+/* line 15, apps/components/static/scss/select.scss */
+.rv-select_dropdown {
+  display: none;
+  padding: 0.25rem 0;
+  position: absolute;
+  background: #ffffff;
+  border-radius: 0.25rem;
+  border: 1px solid #D6D6D6;
+  box-shadow: 0 0.3rem 0.3rem rgba(0, 0, 0, 0.3);
+  top: 2.25rem;
+  left: 0;
+  right: 0;
+  max-height: 12rem;
+  overflow-y: scroll;
+  z-index: 1; }
+
+/* line 31, apps/components/static/scss/select.scss */
+.rv-select_option {
+  list-style: none;
+  padding: 0.25rem 0.75rem;
+  cursor: pointer;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 2rem;
+  box-sizing: border-box; }
+  /* line 42, apps/components/static/scss/select.scss */
+  .rv-select_option:focus {
+    outline: none; }
+
+/* line 47, apps/components/static/scss/select.scss */
+.rv-select_option--highlighted {
+  background: #246FF2;
+  color: #ffffff; }
+
+/* line 52, apps/components/static/scss/select.scss */
+.rv-select_option--hidden {
+  display: none; }
+
+/* line 56, apps/components/static/scss/select.scss */
+.rv-select_option--placeholder {
+  display: none;
+  padding: 0.25rem 0.75rem;
+  font-weight: 700;
+  font-style: italic; }

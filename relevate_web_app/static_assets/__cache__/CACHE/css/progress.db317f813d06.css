@@ -1,0 +1,160 @@
+/**
+----------------
+  Font Size
+----------------
+**/
+/**
+----------------
+  Colors
+----------------
+**/
+/**
+----------------
+  Typography
+----------------
+**/
+/**
+----------------
+  Navbar
+----------------
+**/
+/**
+----------------
+  Shadows
+----------------
+**/
+/**
+----------------
+  Cards
+----------------
+**/
+/**
+----------------
+  Breakpoints
+----------------
+**/
+/* line 3, apps/components/static/scss/progress.scss */
+.rv-progress {
+  margin-top: 4rem;
+  width: 100%;
+  position: relative;
+  display: flex; }
+
+/* line 10, apps/components/static/scss/progress.scss */
+.rv-progress-item {
+  width: 100%;
+  text-align: center;
+  position: relative; }
+  /* line 15, apps/components/static/scss/progress.scss */
+  .rv-progress-item:first-child {
+    margin-left: 0; }
+  /* line 19, apps/components/static/scss/progress.scss */
+  .rv-progress-item:last-child {
+    margin-right: 0; }
+  /* line 24, apps/components/static/scss/progress.scss */
+  .rv-progress-item.complete .rv-progress-item_icon {
+    color: #246FF2; }
+  /* line 28, apps/components/static/scss/progress.scss */
+  .rv-progress-item.complete .rv-progress-item_box--start {
+    background: #246FF2; }
+  /* line 32, apps/components/static/scss/progress.scss */
+  .rv-progress-item.complete .rv-progress-item_box--end {
+    background: #246FF2; }
+  /* line 36, apps/components/static/scss/progress.scss */
+  .rv-progress-item.complete .rv-progress-item_text {
+    color: #246FF2; }
+  /* line 42, apps/components/static/scss/progress.scss */
+  .rv-progress-item.active .rv-progress-item_box--start {
+    background: #246FF2; }
+  /* line 46, apps/components/static/scss/progress.scss */
+  .rv-progress-item.active .rv-progress-item_box--end {
+    background: #D6D6D6; }
+  /* line 50, apps/components/static/scss/progress.scss */
+  .rv-progress-item.active .rv-progress-item_text {
+    color: #246FF2;
+    font-weight: 800; }
+
+/* line 57, apps/components/static/scss/progress.scss */
+.rv-progress-item_text {
+  margin-top: 0.75rem;
+  color: #737373; }
+
+/* line 62, apps/components/static/scss/progress.scss */
+.rv-progress-item_icon {
+  color: #D6D6D6;
+  background: #ffffff;
+  padding: 0 0.25rem; }
+
+/* line 68, apps/components/static/scss/progress.scss */
+.rv-progress-item_icon--cloud {
+  padding-bottom: 0.75rem;
+  animation: 0.3s ease-in 0s 1 enterCloud; }
+
+/* line 73, apps/components/static/scss/progress.scss */
+.rv-progress-item_box {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 0.16rem;
+  margin-bottom: 0.25rem; }
+
+/* line 81, apps/components/static/scss/progress.scss */
+.rv-progress-item_box--start {
+  width: 50%;
+  height: 100%;
+  background: #D6D6D6; }
+
+/* line 87, apps/components/static/scss/progress.scss */
+.rv-progress-item_box--end {
+  width: 50%;
+  height: 100%;
+  background: #D6D6D6; }
+
+/* line 93, apps/components/static/scss/progress.scss */
+.rv-progress-item_position {
+  display: none; }
+
+@media only screen and (max-width: 780px) {
+  /* line 98, apps/components/static/scss/progress.scss */
+  .rv-progress {
+    margin-top: 2.5rem; }
+  /* line 102, apps/components/static/scss/progress.scss */
+  .rv-progress-item {
+    position: static;
+    padding-top: 0; }
+    /* line 107, apps/components/static/scss/progress.scss */
+    .rv-progress-item.active .rv-progress-item_text {
+      display: block;
+      color: #737373;
+      position: absolute;
+      top: -3rem;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      font-weight: 500; }
+    /* line 118, apps/components/static/scss/progress.scss */
+    .rv-progress-item.active .rv-progress-item_box--end {
+      background: #246FF2; }
+    /* line 122, apps/components/static/scss/progress.scss */
+    .rv-progress-item.active .rv-progress-item_position {
+      display: initial; }
+  /* line 128, apps/components/static/scss/progress.scss */
+  .rv-progress-item_text {
+    display: none; }
+  /* line 132, apps/components/static/scss/progress.scss */
+  .rv-progress-item_icon {
+    display: none; }
+  /* line 136, apps/components/static/scss/progress.scss */
+  .rv-progress-item_box--start {
+    margin-left: 0.25rem; }
+  /* line 140, apps/components/static/scss/progress.scss */
+  .rv-progress-item_box--end {
+    margin-right: 0.25rem; } }
+
+@keyframes enterCloud {
+  0% {
+    transform: scale(0); }
+  50% {
+    transform: scale(1.1); }
+  100% {
+    transform: scale(1); } }

@@ -3,12 +3,6 @@
 	* Function that rely on this script include select button and adding academic credentials dynamically
 
 **/
-
-$(document).ready(function() {
-	$(".selected-topics").css('visibility', 'hidden');
-    mentorDegreeIds = [];
-
-});
 	var academicId;
 	var certId;
 	var affiliationId;
@@ -16,6 +10,77 @@ $(document).ready(function() {
 	var certificationTable;
 	var affiliationTable;
 	var universitySearchUrl;
+$(document).ready(function() {
+	$(".selected-topics").css('visibility', 'hidden');
+    mentorDegreeIds = [];
+console.log("document ready");
+    var i = '{{academics_req}}';
+    console.log
+    if('{{academics_req}}'){
+        console.log('academics');
+        var tableId = academicId;
+        var res = '{{academics_req}}';
+        while(res.length > 0){
+            var res = res.split(/[,|]/);
+            res[1] = res[1].substring(2);
+            res[2] = res[2].substring(2);
+                    var academicGrid = "<tr class='rv-contributor-form_box-row acaRow' id=acaProf"+academicId+">" +
+                    "<td class='rv-contributor-form_table--item'>" +
+                        "<div>" +
+                            "<div class='rv-contributor-form_table--item-label'>Program</div>" +
+                            "<span class='rv-contributor-form_table--item-content program' value="+res[2]+">" + res[2] + "</span>" +
+                        "</div>" +
+                    "</td>" +
+                    "<td class='rv-contributor-form_table--item'>" +
+                        "<div>" +
+                            "<div class='rv-contributor-form_table--item-label'>Level of Study</div>" +
+                            "<span class='rv-contributor-form_table--item-content degree' value="+res[1]+">" + res[1] + "</span>" +
+                        "</div>" +
+                    "</td>" +
+                    "<td class='rv-contributor-form_table--item'>" +
+                        "<div>" +
+                            "<div class='rv-contributor-form_table--item-label'>Institution</div>" +
+                            "<span class='rv-contributor-form_table--item-content institute' value="+res[0]+">" + res[0] + "</span>" +
+                        "</div>" +
+                    "</td>" +
+                    "<td class='rv-contributor-form_button--container'>" +
+                    "<div class='rv-contributor-form_button--group'>" +
+                        "<div class='rv-contributor-form_button--group-button'>" +
+                            RvButton({
+                                variant: 'ghost',
+                                color: 'dark',
+                                label: 'Edit',
+                                icon: 'edit',
+                                fluid_width: true,
+                                onclick: 'editAcademicProfile(' + tableId + ')'
+                            }) +
+                          "</div>" +
+                          "<div class='rv-contributor-form_button--group-button'>" +
+                            RvButton({
+                                variant: 'ghost',
+                                color: 'dark',
+                                label: 'Delete',
+                                icon: 'x',
+                                fluid_width: true,
+                                onclick: 'deleteAcademicProfile(' + tableId + ')'
+                            }) +
+                          "</div>" +
+                    "</div>" +
+                    "</td>" +
+                "</tr>"
+            $("#acaProf").append(academicGrid);
+            mentorDegreeIds.push(academicId);
+            academicId++;
+            updateTablesUpdateInfo(true);
+            $("#id_program").val("");
+            $("#id_institution").val("");
+            $('#id_degree option[value="1"]').prop('selected', true);
+            res = res.slice(3);
+        }
+        $("#list_of_uni").hide()
+    }
+
+});
 //	var saveInterval = setInterval(saveUnfinished, 15000);
 	function addAcademicProfile(){
 		/*

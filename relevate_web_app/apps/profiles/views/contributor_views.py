@@ -12,7 +12,7 @@ from django.urls import reverse_lazy
 from django.views.generic import View
 
 from apps.profiles.modules.list_of_universities import WORLD_UNIVERSITIES_LISTS
-from ..forms.contributor_form import ContributorForm
+from ..forms.contributor_form import ContributorForm, ContributorUpdateForm
 from ..models.adviser_model import Adviser
 from ..models.contributor_model import ContributorProfile, Address, PendingContributors, DeniedContributors, \
     AcademicProfile, ContributorCertification, OrganizationalAffiliation, ContributorProfileUnfinished, \
@@ -252,6 +252,7 @@ class ContributorCreateView(LoginRequiredMixin, View):
                           {
                               'form': form,
                               'user_prof': user_prof,
+                              'academics_req': academics_req,
                               'tag_names': Topics.objects.all().order_by('name'),
                               # 'institute': WORLD_UNIVERSITIES_LISTS[0:30], @TODO might need to use own database eventually
                           })
@@ -340,7 +341,6 @@ class ContributorTempSaveView(LoginRequiredMixin, View):
         unfinished_contributor_qualification(academics_req, cert_req, affiliation_req, contributor_profile)
         return HttpResponse(json.dumps({'message': message}))
 
-
 class ContributorUpdateView(LoginRequiredMixin, View):
     """
     Contains LoginRequiredMixin that checks for a log in status
@@ -352,6 +352,10 @@ class ContributorUpdateView(LoginRequiredMixin, View):
         '''
         user = request.user
         user_prof = UserProfile.objects.get(user=user)
+        topics = user_prof.topics_preferences.all()
+        user_already_sel = []
+        for t in topics:
+            user_already_sel.append(t)
         contributor_profile = ContributorProfile.objects.get(user_profile=user_prof)
         if contributor_profile.has_adviser:
             adviser_id = contributor_profile.advisers_profile.id
@@ -365,14 +369,10 @@ class ContributorUpdateView(LoginRequiredMixin, View):
         academic_profile = AcademicProfile.objects.filter(contributor_profile=contributor_profile)
         certifications = ContributorCertification.objects.filter(contributor_profile=contributor_profile)
         max_certification_id = get_max_certificate_id(certifications)
-        organizational_affiliations = OrganizationalAffiliation.objects.filter(contributor_profile=contributor_profile)
+        organizational_affiliations = OrganizationalAffiliation.objects.filter(
+            contributor_profile=contributor_profile)
         max_academic_id = get_max_academic_id(academic_profile)
-        user_form = UpdateUserForm({
-            'first_name': user.first_name,
-            'last_name': user.last_name,
-            "email": user.email
-        })
-        contribution_form = ContributorForm({
+        contribution_form = ContributorUpdateForm({
             'user_profile': user_prof,
             'address': contributor_profile.address.street_address,
             'city': contributor_profile.address.city,
@@ -385,11 +385,16 @@ class ContributorUpdateView(LoginRequiredMixin, View):
             'avatar': contributor_profile.avatar,
             'adviser': adviser_id,
             'biography': contributor_profile.biography_text,
-            'accept_terms': contributor_profile.accept_terms,
+            'accept_terms': True,
+            'first_name': user.first_name,
+            'last_name': user.last_name,
+            "email": user.email,
+            'password1': user.password,
+            'password2': user.password,
+            'area_of_expertise_user': user_already_sel,
         }, data_list=organization_list)
         obj = {
             'form': contribution_form,
-            'user_form': user_form,
             'user_prof': user_prof,
             'already_sel': already_sel,
             'contrib_prof': contributor_profile,
@@ -411,7 +416,6 @@ class ContributorUpdateView(LoginRequiredMixin, View):
         validity of the form.
         '''
         form = ContributorForm(request.POST, request.FILES)
-        user_form = UpdateUserForm(request.POST)
         user_prof = UserProfile.objects.get(user=request.user)
         cp = ContributorProfile.objects.get(user_profile=user_prof)
         academics_req = request.POST.get('hiddenAcaTable')
@@ -419,17 +423,17 @@ class ContributorUpdateView(LoginRequiredMixin, View):
         org_req = request.POST.get('affiliationList')
         is_academics_and_cert_valid = validate_academic_and_cert(academics_req, request)
         print("here are errors!!!!!!!!!")
-        print (user_form.errors)
-        if user_form.is_valid() and form.is_valid() and is_academics_and_cert_valid:
+        print (form.errors)
+        if form.is_valid() and is_academics_and_cert_valid:
             x = form.cleaned_data.get('x')
             y = form.cleaned_data.get('y')
             w = form.cleaned_data.get('width')
             h = form.cleaned_data.get('height')
             avatar = form.cleaned_data.get('avatar')
             # Update User name, email
-            user_prof.user.first_name = user_form.cleaned_data.get('first_name')
-            user_prof.user.last_name = user_form.cleaned_data.get('last_name')
-            user_prof.user.email = user_form.cleaned_data.get('email')
+            user_prof.user.first_name = form.cleaned_data.get('first_name')
+            user_prof.user.last_name = form.cleaned_data.get('last_name')
+            user_prof.user.email = form.cleaned_data.get('email')
             user_prof.user.save()
             # Address Stuff
             cp.address.street_address = form.cleaned_data.get('address')
@@ -771,6 +775,8 @@ class DenyButtonView(View):
         contrib_prof = ContributorProfile.objects.get(id=int(request_id))
         user_prof = contrib_prof.user_profile
         user_prof.is_pending_contributor = False
+        # Should we delete profiles that are permanently denied?
+        # contrib_prof.delete()
         user_prof.save()
         print("Denying User: " + user_prof.user.first_name + " " + user_prof.user.last_name)
         PendingContributors.objects.filter(contributor_id=contrib_prof.id).delete()

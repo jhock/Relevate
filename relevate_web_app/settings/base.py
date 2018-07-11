@@ -67,7 +67,7 @@ MIDDLEWARE_CLASSES = [
 	'django.contrib.auth.middleware.AuthenticationMiddleware',
 	'django.contrib.messages.middleware.MessageMiddleware',
 	'django.middleware.clickjacking.XFrameOptionsMiddleware',
-	'apps.contribution.middleware.mobile_redirect_middleware.DetectMobileBrowser'
+	# 'apps.contribution.middleware.mobile_redirect_middleware.DetectMobileBrowser'
 ]
 
 ROOT_URLCONF = 'urls'

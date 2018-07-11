@@ -163,6 +163,9 @@
 				{% endif %}
 				{% if user_prof.is_pending_contributor %}
 					<li class="rv-navbar_submenu"><a class="rv-navbar_option" href="{% url 'profile:contributor_profile' %}">My Contributor Profile</a></li>
+					{% if not user_prof.confirmed %}
+						<li class="rv-navbar_submenu"><a class="rv-navbar_option" href="{% url 'profile:confirmation' %}">Confirm Account</a></li>
+					{% endif %}
 				{% endif %}
 			{% endif %}
 			<li>
@@ -200,7 +203,7 @@
 					<ul class="uk-nav uk-dropdown-nav">
 						<li><a class="rv-navbar_option" href="{% url 'profile:user_update' %}">Update Profile</a></li>
 						<br>
-						{% if user_prof.is_contributor %}
+						{% if user_prof.is_contributor or user_prof.is_pending_contributor %}
 						<li><a class="rv-navbar_option" href="{% url 'profile:contributor_profile' %}">My Contributor Profile</a></li>
 						<br>
 						{% else %}

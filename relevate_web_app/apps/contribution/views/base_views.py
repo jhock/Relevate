@@ -9,6 +9,7 @@ from ..models.post_model import Post
 from ..forms.search_forms import SearchForm
 from ..modules.search_util import get_query
 from ..models.post_model import Post
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.urls import reverse_lazy
 from itertools import chain
 
@@ -24,7 +25,17 @@ class HomeView(View):
         Returns the home page.
         """
         posts = Post.objects.all()
-        published_posts = posts.filter(isPublished=True)
+        published = posts.filter(isPublished=True)
+
+        page = request.GET.get('page', 1)
+        paginator = Paginator(published, 8)
+        try:
+            published_posts = paginator.page(page)
+        except PageNotAnInteger:
+            published_posts = paginator.page(1)
+        except EmptyPage:
+            published_posts = paginator.page(paginator.num_pages)
+
         search_form = SearchForm()
         if request.user.is_authenticated:
             user_prof = UserProfile.objects.get(user=request.user)

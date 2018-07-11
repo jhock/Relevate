@@ -22,7 +22,7 @@
 }
 
 .rv-navbar_avatar-container {
-    line-height: 10px;
+  line-height: 10px;
   margin: 0px 1rem;
 }
 
@@ -44,6 +44,11 @@
 
 .rv-navbar_shadow {
   box-shadow: $rv-box-shadow;
+}
+
+.rv-navbar_submenu {
+  display: flex;
+  align-items: center;
 }
 
 .rv-navbar_options-container {

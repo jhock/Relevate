@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from ..forms.authentication_forms import RegistrationForm, LoginForm, ConfirmationForm
 from ..forms.authentication_forms import PasswordChangeForm, PasswordResetRequestForm, SetPasswordForm, UpdateUserForm
+from ...profiles.forms.contributor_form import ContributorForm
 from ...profiles.models.user_models import User, UserProfile
 from django.template.loader import get_template
 from django.contrib.auth import authenticate, login, logout
@@ -220,6 +221,7 @@ class UserUpdateView(LoginRequiredMixin, View):
 			'already_sel': already_sel,
 			'tag_names': tag_names,
 		}
+
 		return render(request, 'user_update.html', obj)
 
 	def post(self, request):
@@ -236,7 +238,6 @@ class UserUpdateView(LoginRequiredMixin, View):
 			if user_form.cleaned_data.get('password1'):
 				user_prof.user.set_password(user_form.cleaned_data.get('password1'))
 			user_prof.user.save()
-
 			curr_topics = user_prof.topics_preferences.all()
 			for each_topic in curr_topics:
 				try:
@@ -247,8 +248,13 @@ class UserUpdateView(LoginRequiredMixin, View):
 				user_prof.topics_preferences.add(each_topic)
 			user_prof.save()
 			messages.success(request, 'Your profile has been updated!')
-			return HttpResponseRedirect(reverse('profile:user_update'))
+			if (user_prof.is_contributor or user_prof.is_pending_contributor):
+				return HttpResponseRedirect(reverse('profile:contributor_profile'))
+			else:
+				return HttpResponseRedirect(reverse('profile:user_update'))
 		else:
+			if ContributorForm(request.POST):
+				contributor_form = ContributorForm(request.POST)
 			display_error(user_form, request)
 			topics = user_prof.expertise_topics.all()
 			already_sel = []

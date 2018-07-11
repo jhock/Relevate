@@ -1,0 +1,86 @@
+/**
+----------------
+  Font Size
+----------------
+**/
+/**
+----------------
+  Colors
+----------------
+**/
+/**
+----------------
+  Typography
+----------------
+**/
+/**
+----------------
+  Navbar
+----------------
+**/
+/**
+----------------
+  Shadows
+----------------
+**/
+/**
+----------------
+  Cards
+----------------
+**/
+/**
+----------------
+  Breakpoints
+----------------
+**/
+/* line 3, apps/components/static/scss/text_area.scss */
+.rv-text-area {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  margin: 1.5rem 0; }
+
+/* line 10, apps/components/static/scss/text_area.scss */
+.rv-text-area_label {
+  color: #3A3A3A;
+  font-weight: 900;
+  left: 0;
+  font-size: 0.875rem;
+  transition: all 0.1s ease-in;
+  position: absolute;
+  display: block;
+  top: -1.75rem; }
+  /* line 20, apps/components/static/scss/text_area.scss */
+  .rv-text-area_label.rv-text-area_focus {
+    color: #246FF2;
+    transform-origin: left bottom;
+    transform: scale(1.1, 1.1); }
+
+/* line 27, apps/components/static/scss/text_area.scss */
+.rv-text-area_input {
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 0.125rem;
+  border: 2px solid #D6D6D6;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #3A3A3A;
+  position: relative;
+  overflow: visible;
+  background: transparent;
+  padding: 0.8rem 0.8rem;
+  padding-right: 1.25rem;
+  transition: all 0.1s ease-in;
+  line-height: 1.6rem; }
+  /* line 43, apps/components/static/scss/text_area.scss */
+  .rv-text-area_input::placeholder {
+    font-weight: 400; }
+  /* line 47, apps/components/static/scss/text_area.scss */
+  .rv-text-area_input:focus {
+    outline: none;
+    border-color: #246FF2; }
+
+/* line 53, apps/components/static/scss/text_area.scss */
+.rv-text-area_description {
+  margin-bottom: 0.75rem;
+  font-style: italic; }

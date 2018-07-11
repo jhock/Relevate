@@ -1,0 +1,195 @@
+/**
+----------------
+  Font Size
+----------------
+**/
+/**
+----------------
+  Colors
+----------------
+**/
+/**
+----------------
+  Typography
+----------------
+**/
+/**
+----------------
+  Navbar
+----------------
+**/
+/**
+----------------
+  Shadows
+----------------
+**/
+/**
+----------------
+  Cards
+----------------
+**/
+/**
+----------------
+  Breakpoints
+----------------
+**/
+/**
+----------------
+  Font Size
+----------------
+**/
+/**
+----------------
+  Colors
+----------------
+**/
+/**
+----------------
+  Typography
+----------------
+**/
+/**
+----------------
+  Navbar
+----------------
+**/
+/**
+----------------
+  Shadows
+----------------
+**/
+/**
+----------------
+  Cards
+----------------
+**/
+/**
+----------------
+  Breakpoints
+----------------
+**/
+/* line 4, apps/components/static/scss/file_input.scss */
+.rv-file-input {
+  border: 2px dashed #246FF2;
+  border-radius: 0.25rem;
+  position: relative;
+  padding: 1rem;
+  text-align: center;
+  transition: background 200ms linear;
+  min-height: 4.125rem; }
+  /* line 15, apps/components/static/scss/file_input.scss */
+  .rv-file-input:focus-within .rv-file-input_upload:before {
+    content: "";
+    position: absolute;
+    top: -0.25rem;
+    bottom: -0.25rem;
+    left: -0.25rem;
+    right: -0.25rem;
+    border: 1px solid #246FF2;
+    border-radius: 999rem; }
+  /* line 28, apps/components/static/scss/file_input.scss */
+  .rv-file-input:hover {
+    background: #246FF2;
+    border: 2px dashed #ffffff; }
+    /* line 32, apps/components/static/scss/file_input.scss */
+    .rv-file-input:hover .rv-file-input_file-name,
+    .rv-file-input:hover .rv-file-input_instructions,
+    .rv-file-input:hover .rv-file-input_icon,
+    .rv-file-input:hover .rv-file-input_upload {
+      color: #ffffff; }
+    /* line 39, apps/components/static/scss/file_input.scss */
+    .rv-file-input:hover .rv-file-input_upload {
+      border-color: #ffffff; }
+      /* line 42, apps/components/static/scss/file_input.scss */
+      .rv-file-input:hover .rv-file-input_upload:before {
+        border-color: #ffffff; }
+
+/* line 49, apps/components/static/scss/file_input.scss */
+.rv-file-input_dragging {
+  position: absolute;
+  background: #246FF2;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 200ms linear; }
+  /* line 66, apps/components/static/scss/file_input.scss */
+  .rv-file-input_dragging.hidden {
+    opacity: 0; }
+
+/* line 71, apps/components/static/scss/file_input.scss */
+.rv-file-input_dragging-caption {
+  font-weight: 700;
+  margin-top: 0.5rem; }
+
+/* line 76, apps/components/static/scss/file_input.scss */
+.rv-file-input_upload {
+  position: relative;
+  border: 2px solid #246FF2;
+  border-radius: 999rem;
+  color: #246FF2;
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  white-space: nowrap;
+  text-overflow: ellipsis; }
+
+/* line 87, apps/components/static/scss/file_input.scss */
+.rv-file-input_content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.5rem; }
+
+/* line 94, apps/components/static/scss/file_input.scss */
+.rv-file-input_instructions {
+  font-style: italic;
+  font-weight: 500;
+  margin-top: 0.125rem; }
+
+/* line 100, apps/components/static/scss/file_input.scss */
+.rv-file-input_file-name {
+  font-weight: 700; }
+
+/* line 104, apps/components/static/scss/file_input.scss */
+.rv-file-input_file-name,
+.rv-file-input_instructions {
+  color: #246FF2;
+  font-size: 1rem; }
+
+/* line 110, apps/components/static/scss/file_input.scss */
+.rv-file-input_icon {
+  display: inline-block;
+  margin-right: 0.25rem;
+  margin-top: 0.25rem;
+  color: #246FF2; }
+  /* line 116, apps/components/static/scss/file_input.scss */
+  .rv-file-input_icon.hidden {
+    display: none; }
+
+/* line 121, apps/components/static/scss/file_input.scss */
+.rv-file-input_accepts {
+  font-size: 0.875rem;
+  font-style: italic;
+  color: #246FF2;
+  margin-top: 0.25rem; }
+
+/* line 128, apps/components/static/scss/file_input.scss */
+.rv-file-input_input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  opacity: 0; }
+  /* line 137, apps/components/static/scss/file_input.scss */
+  .rv-file-input_input:focus {
+    outline: none; }

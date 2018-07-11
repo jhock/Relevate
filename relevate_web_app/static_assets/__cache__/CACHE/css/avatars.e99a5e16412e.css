@@ -1,0 +1,43 @@
+/**
+----------------
+  Colors
+----------------
+**/
+/**
+----------------
+  Typography
+----------------
+**/
+/**
+----------------
+  Navbar
+----------------
+**/
+/**
+----------------
+  Shadows
+----------------
+**/
+/**
+----------------
+  Cards
+----------------
+**/
+/**
+----------------
+  Breakpoints
+----------------
+**/
+/* line 3, static/scss/avatars.scss */
+.rv-avatar {
+  color: #246FF2;
+  text-decoration: none;
+  width: 50px;
+  height: 50 px; }
+  /* line 9, static/scss/avatars.scss */
+  .rv-avatar:focus, .rv-avatar:hover {
+    text-decoration: underline;
+    outline: none; }
+  /* line 15, static/scss/avatars.scss */
+  .rv-avatar:active {
+    color: #0d56d6; }

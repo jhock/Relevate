@@ -1,0 +1,78 @@
+/**
+----------------
+  Font Size
+----------------
+**/
+/**
+----------------
+  Colors
+----------------
+**/
+/**
+----------------
+  Typography
+----------------
+**/
+/**
+----------------
+  Navbar
+----------------
+**/
+/**
+----------------
+  Shadows
+----------------
+**/
+/**
+----------------
+  Cards
+----------------
+**/
+/**
+----------------
+  Breakpoints
+----------------
+**/
+/* line 3, static/scss/text_input.scss */
+.rv-text-input {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  margin: 1.5rem 0; }
+
+/* line 10, static/scss/text_input.scss */
+.rv-text-input_label {
+  color: #3A3A3A;
+  font-weight: 900;
+  left: 0;
+  font-size: 0.875rem;
+  transition: all 0.1s ease-in;
+  position: absolute;
+  display: block;
+  bottom: 2.6rem; }
+  /* line 20, static/scss/text_input.scss */
+  .rv-text-input_label.rv-text-input_focus {
+    color: #246FF2;
+    transform-origin: left bottom;
+    transform: scale(1.1, 1.1); }
+
+/* line 27, static/scss/text_input.scss */
+.rv-text-input_input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #3A3A3A;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #3A3A3A;
+  position: relative;
+  overflow: visible;
+  background: transparent;
+  padding: 0.8rem 0;
+  transition: all 0.1s ease-in; }
+  /* line 40, static/scss/text_input.scss */
+  .rv-text-input_input::placeholder {
+    font-weight: 400; }
+  /* line 44, static/scss/text_input.scss */
+  .rv-text-input_input:focus {
+    outline: none;
+    border-color: #246FF2; }

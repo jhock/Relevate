@@ -1,0 +1,21 @@
+
+	/* Style the tab content */
+	.tabcontent {
+		display: none;
+		padding: 6px 12px;
+		border: 1px solid #ccc;
+		border-top: none;
+	}
+
+	/* Style the submit button container */
+	#submitBtn_container {
+	    position: fixed;
+	    bottom: 0;
+	    right: 0;
+	}
+
+	#helloid {
+	    	    position: fixed;
+	    bottom: 0;
+	    right: 0;
+	}

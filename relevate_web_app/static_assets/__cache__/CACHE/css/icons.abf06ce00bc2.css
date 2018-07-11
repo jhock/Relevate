@@ -1,0 +1,94 @@
+/**
+----------------
+  Font Size
+----------------
+**/
+/**
+----------------
+  Colors
+----------------
+**/
+/**
+----------------
+  Typography
+----------------
+**/
+/**
+----------------
+  Navbar
+----------------
+**/
+/**
+----------------
+  Shadows
+----------------
+**/
+/**
+----------------
+  Cards
+----------------
+**/
+/**
+----------------
+  Breakpoints
+----------------
+**/
+/* line 22, apps/components/static/scss/icons.scss */
+.rv-icon {
+  display: inline-block;
+  vertical-align: center; }
+  /* line 25, apps/components/static/scss/icons.scss */
+  .rv-icon svg {
+    width: 100%;
+    height: 100%; }
+  /* line 33, apps/components/static/scss/icons.scss */
+  .rv-icon.x-small {
+    width: 1rem;
+    height: 1rem; }
+  /* line 37, apps/components/static/scss/icons.scss */
+  .rv-icon.small {
+    width: 1.25rem;
+    height: 1.25rem; }
+  /* line 41, apps/components/static/scss/icons.scss */
+  .rv-icon.medium {
+    width: 1.5rem;
+    height: 1.5rem; }
+  /* line 45, apps/components/static/scss/icons.scss */
+  .rv-icon.large {
+    width: 1.75rem;
+    height: 1.75rem; }
+  /* line 49, apps/components/static/scss/icons.scss */
+  .rv-icon.x-large {
+    width: 3.5rem;
+    height: 3.5rem; }
+  /* line 53, apps/components/static/scss/icons.scss */
+  .rv-icon.fill {
+    width: 100%;
+    height: 100%; }
+  /* line 10, apps/components/static/scss/icons.scss */
+  .rv-icon.primary svg g {
+    fill: #246FF2; }
+  /* line 10, apps/components/static/scss/icons.scss */
+  .rv-icon.inverse svg g {
+    fill: #ffffff; }
+  /* line 10, apps/components/static/scss/icons.scss */
+  .rv-icon.dark svg g {
+    fill: #3A3A3A; }
+  /* line 10, apps/components/static/scss/icons.scss */
+  .rv-icon.neutral svg g {
+    fill: #737373; }
+  /* line 10, apps/components/static/scss/icons.scss */
+  .rv-icon.light-gray svg g {
+    fill: #D6D6D6; }
+  /* line 17, apps/components/static/scss/icons.scss */
+  .rv-icon.rotate-0 svg {
+    transform: rotate(0deg); }
+  /* line 17, apps/components/static/scss/icons.scss */
+  .rv-icon.rotate-90 svg {
+    transform: rotate(90deg); }
+  /* line 17, apps/components/static/scss/icons.scss */
+  .rv-icon.rotate-180 svg {
+    transform: rotate(180deg); }
+  /* line 17, apps/components/static/scss/icons.scss */
+  .rv-icon.rotate-270 svg {
+    transform: rotate(270deg); }

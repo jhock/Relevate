@@ -79,8 +79,9 @@
 
 		{% if published_posts %}
 		<div class="rv-masonry_container">
-			<div class="rv-masonry">
+			<div class="rv-masonry  infinite-container">
 				{% for p in published_posts %}
+					<div class="infinite-item">
 					{% if p.is_link %}
 						{% with l=p.link %}
 							{% include 'partials/link_card_partial.html' %}
@@ -94,11 +95,20 @@
 							{% include 'partials/infographic_card_partial.html' %}
 						{% endwith %}
 					{% endif %}
+					</div>
 				{% endfor %}
 			</div>
 		</div>
 		{% endif %}
 	</div>
+
+			  <div class="loading" style="display: none;">
+			Loading...
+		  </div>
+
+		  {% if published_posts.has_next %}
+			<a class="infinite-more-link" href="?page={{ published_posts.next_page_number }}">More</a>
+		  {% endif %}
 
 
         <script type="text/javascript">
@@ -109,6 +119,17 @@
                 document.getElementById('posts').style.background = color; // Setting the random color on your div element.
             }
         </script>
+		<script>
+			var infinite = new Waypoint.Infinite({
+			  element: $('.infinite-container')[0],
+			  onBeforePageLoad: function () {
+				$('.loading').show();
+			  },
+			  onAfterPageLoad: function ($items) {
+				$('.loading').hide();
+			  }
+			});
+		</script>
 		<script src="{% static 'js/card_partial.js' %}"></script>
  <script type="text/javascript" src="{% static 'js/home.js' %}"></script>
 <script src="{% static 'uikit-old/js/components/slideset.min.js' %}"></script>

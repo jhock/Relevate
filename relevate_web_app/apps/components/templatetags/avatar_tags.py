@@ -1,53 +1,61 @@
 from django import template
 from django.template.loader import get_template
-from django.template.base import Node
+from django.template.base import Node, Token
 from ..utils import (
-    split_props,
-    get_prop_value,
-    resolve_variable,
-    resolve_prop_variables
+  enforce_required_props,
+  get_prop_value,
+  resolve_variable,
 )
+
+import pdb
 
 register = template.Library()
 
-
 @register.tag('avatar')
 def avatar(parser, token):
-    props = token.split_contents()[1:]
+  props = token.split_contents()[1:]
 
-    # picked_props = split_props(['name', 'img_source'], props)
+  enforce_required_props(['name'], props)
 
-    name = get_prop_value('name', props, None)
-    src = get_prop_value('src', props, None)
+  src = get_prop_value('src', props, None)
+  name = get_prop_value('name', props, None)    
 
-    return Avatar(name, src)
+  return Avatar(src, name)
 
 
 class Avatar(Node):
-    def __init__(self, name, src):
-        self.name = self.makeInitialsFromName(name)
-        self.src = src
+  def __init__(self, src, name):
+    self.src = src
+    self.name = name
 
-    def render(self, context):
-        # self.input_props = resolve_prop_variables(self.input_props, context)
+  def render(self, context):
+    name = str(resolve_variable(self.name, context))
+    initials = self.parse_initials(name)
+    initial_svgs = []
+    for initial in initials:
+      try:
+        initial_svgs.append(get_template("avatar/letter_svgs/" + initial.lower() + ".html").render(context))
+      except:
+        initial_svgs.append(initial)
 
-        avatar_html = get_template("avatar/index.html")
-        context.update({
-            'name': resolve_variable(self.name, context),
-            'src': resolve_variable(self.src, context)
-        })
-        return avatar_html.render(context)
+    avatar_html = get_template("avatar/index.html")
 
-    def makeInitialsFromName(self, name):
-        name_list = name.split()
+    context.update({
+      'src': resolve_variable(self.src, context),
+      'name': name,
+      'initials': initial_svgs
+    })
 
-        initials = ""
-        number_of_initials = 0
+    return avatar_html.render(context)
 
-        for name in name_list:
-            initials += name[0].upper()
-            number_of_initials += 1
-        if number_of_initials > 3:
-            x = len(initials)
-            initials = initials[0:x:x-1]
-        return initials
+  def parse_initials(self, name):
+    if not name:
+      return ['']
+
+    name_array = name.split(' ')
+    initials = name_array[0][0].upper()
+
+    if len(name_array) > 1:
+      initials += name_array[len(name_array) - 1][0].upper()
+
+    return initials

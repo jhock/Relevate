@@ -1,7 +1,15 @@
-<span class="rv-avatar">
+{% load staticfiles %}
+
+<div class="rv-avatar-component" style='background-image: url("{{src}}");'>
   {% if src %}
-    <img class='avatar-img' id="{{id}}" src="{{src}}" alt="{{name}}" >
+    <img class="rv-avatar-component_image--accessible" src="{{src}}" alt="{{name}}" />
   {% else %}
-    <div class="avatar-def">{{name}}</div>
+    <div class="rv-avatar-component_initials">
+      <div class="rv-avatar-component_initials--container">
+        {% for letter in initials %}
+          {{ letter }}
+        {% endfor%}
+      </div>
+    </div>
   {% endif %}
-</span>
+</div>

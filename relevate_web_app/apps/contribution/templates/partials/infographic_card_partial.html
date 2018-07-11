@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load avatar_tags %}
 
 <div class='rv-content-card'>
 		<a href="{% url 'contribution:infographic_view' p.slug %}">
@@ -13,9 +14,10 @@
 	    </a>
 	    <div class="rv-content-card_contributor-info">
   			<div class="rv-content-card_avatar">
-	        	<div class="rv-avatar">
-	          	<img src="{{ p.contributor.avatar_image_url }}">
-	          </div>
+	        {% avatar 
+	          src=p.contributor.avatar_image_url
+	          name=p.contributor
+	        %}
 	      </div>
 	      <div class="rv-content-card_contributor-name">
 					{{ p.contributor }}

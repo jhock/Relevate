@@ -1,46 +1,60 @@
 {% extends "base-titlebar.html" %}
 {% load staticfiles %}
+{% load avatar_tags %}
 
 {% block content %}
 	<div class="uk-container uk-margin-top">
 		<div>
-			<h2 class="orange">Meet Our Contributors</h2>
-			<p>
-				<span>
-					Our contributors at Relevate are scholars and practitioners with expert knowledge to share about interpersonal
-					relationships. Our contributors range from University professors, graduate students, certified therapists
-					and relationship educators, and undergraduate students studying relationships under mentorship. Each contributor
-					has been vetted by the Relevate team to ensure that all content is trustworthy and grounded in interpersonal
-					relationship theory and research in order to ensure that everyone has access to the cutting edge knowledge
-					and skills they need to elevate their current and future relationships.
-				</span>
+			<h2>Meet Our Contributors</h2>
+			<p class="rv-contributor-list_intro">
+				Our contributors at Relevate are scholars and practitioners with expert knowledge to share about interpersonal
+				relationships. They range from university professors, graduate students, certified therapists
+				and relationship educators, and undergraduate students studying relationships under mentorship. Each contributor
+				has been vetted by the Relevate team to ensure that all content is trustworthy and grounded in theory and research in order to ensure that everyone has access to the cutting edge knowledge
+				and skills they need to elevate their current and future relationships.
 			</p>
-			{% for contrib_prof in contributors %}
-				<div class='uk-card uk-card-default uk-box-shadow-large'>
-					<div class='uk-card-body'>
-						<a href="{% url 'profile:public_contributor_profile' contrib_prof.id %}">
-							<h3 class="blue">{{ contrib_prof.first_name }}
-								{{ contrib_prof.last_name }}
-                            </h3>
-						</a>
-                        <h4 class="blue">Degree(s)</h4>
-                        {% for aca_prof in contrib_prof.credentials.academic_profile %}
-                            {{ aca_prof.degree.abbreviation }}
-                            {{ aca_prof.program }}
-                            {{ aca_prof.institution }}
-                            <br>
-                        {% endfor %}
-                        <hr>
-                        {% if contrib_prof.credentials.certifications %}
-                            <h4 class="blue">Certifications</h4>
-                            {% for cert_cred in contrib_prof.credentials.certifications %}
-                                {{ cert_cred.name_of_certification }}<br>
-                            {% endfor %}
-                        {% endif %}
-					</div>
-				</div>
-				<br>
-			{% endfor %}
+      <div class="rv-contributor-list_layout">
+  			{% for contrib_prof in contributors %}
+          <div class="rv-contributor-list_card">
+            <a
+              class="rv-contributor-list_link"
+              href="{% url 'profile:public_contributor_profile' contrib_prof.id %}"
+            >
+              <div class="rv-contributor-list_card-header">
+                <div class="rv-contributor-list_avatar">
+                  {% with ""|add:contrib_prof.first_name|add:" "|add:contrib_prof.last_name as name %}
+                    {% avatar
+                      src="http://keyassets.timeincuk.net/inspirewp/live/wp-content/uploads/sites/12/2016/09/iStock-landscape-600x400.jpg"
+                      name=name
+                    %}
+                  {% endwith %}
+                </div>
+              </div>
+    					<a 
+                class="rv-h3 rv-contributor-list_heading-link" 
+                href="{% url 'profile:public_contributor_profile' contrib_prof.id %}"
+              >
+                {{ contrib_prof.first_name }}
+  							{{ contrib_prof.last_name }}
+    					</a>
+              <div class="rv-contributor-list_separator"></div>
+              <h5 class="rv-contributor-list_subtitle">Degree(s)</h5>
+              {% for aca_prof in contrib_prof.credentials.academic_profile %}
+                <div>
+                  {{ aca_prof.degree.abbreviation }} in {{ aca_prof.program.strip }},
+                  <div class="rv-contributor-list_institution">{{ aca_prof.institution }}</div>
+                </div>
+              {% endfor %}
+              {% if contrib_prof.credentials.certifications %}
+                <h5 class="rv-contributor-list_subtitle">Certifications</h5>
+                {% for cert_cred in contrib_prof.credentials.certifications %}
+                    {{ cert_cred.name_of_certification }}<br>
+                {% endfor %}
+              {% endif %}
+            </a>
+  				</div>
+  			{% endfor %}
+      </div>
 		</div>
 	</div>
 

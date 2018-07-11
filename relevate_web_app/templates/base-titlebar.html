@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% load avatar_tags %}
 {% load button_tags %}
 {% load dropdown_menu_tags %}
 
@@ -175,47 +176,46 @@
 				<a class="rv-navbar_option" href="{% url 'contribution:about' %}">About</a>
 			</li>
 			{% if not user.is_authenticated %}
-			<li class="rv-navbar_submenu">
-				<a class="rv-navbar_option" href="{% url 'profile:login' %}">Sign In</a>
-			</li>
-			<li class="rv-navbar_submenu">
-				{% button variant="ghost" href="profile:registration" %}
-					Create Account
-				{% end_button %}
-			</li>
+				<li class="rv-navbar_submenu">
+					<a class="rv-navbar_option" href="{% url 'profile:login' %}">Sign In</a>
+				</li>
+				<li class="rv-navbar_submenu">
+					{% button variant="ghost" href="profile:registration" %}
+						Create Account
+					{% end_button %}
+				</li>
 			{% else %}
-			<!--<li><a class="rv-navbar_option" href="{% url 'profile:logged_out' %}">Logout</a></li>-->
+				<li>
+					{% dropdown_menu %}
+						{% dm_trigger with
+					    id="main_navbar_ddmenu_7"
+					    className="rv-navbar_option"
+					  %}
+							{% if user.is_contributor %}
+								{% avatar
+									src=contrib_prof.avatar_image_url
+									name=contrib_prof.contributor
+								%}
+							{% else %}
+								{% avatar
+									name=user.userprofile
+								%}
+							{% endif %}
+					  {% end_dm_trigger %}
+
+					  {% dm_content %}
+					    {% dm_item with href="profile:user_update" %}Update Profile{% end_dm_item %}
+					    {% if user_prof.is_contributor %}
+					    	{% dm_item with href="profile:contributor_profile" %}My Contributor Profile{% end_dm_item %}
+					    {% else %}
+					    	{% dm_item with href="profile:contributor_create" %}Contributor Application{% end_dm_item %}
+					    {% endif %}
+					    {% dm_item with href="profile:logged_out" %}Logout{% end_dm_item %}
+					  {% end_dm_content %}
+					{% end_dropdown_menu %}
+				</li>
 			{% endif %}
 		</ul>
-		<div class="container">
-		<div class="rv-navbar_avatar-container" style="display: block; float:right;">
-			{% if user.is_authenticated %}
-				{% if user.is_contributor %}
-					<a href="#">
-					<img style="max-width: 50px; max-height: 50px;" class="profile_avatar uk-border-circle" src="{{ contrib_prof.avatar_image_url }}">
-					</a>
-				{% else %}
-				<a href="#">
-					<img style="max-width: 50px; max-height: 50px;" class="profile_avatar uk-border-circle" src="{% static 'images/profile-placeholder.png' %}">
-					</a>
-				{% endif %}
-				<div uk-dropdown="mode: click">
-					<ul class="uk-nav uk-dropdown-nav">
-						<li><a class="rv-navbar_option" href="{% url 'profile:user_update' %}">Update Profile</a></li>
-						<br>
-						{% if user_prof.is_contributor or user_prof.is_pending_contributor %}
-						<li><a class="rv-navbar_option" href="{% url 'profile:contributor_profile' %}">My Contributor Profile</a></li>
-						<br>
-						{% else %}
-						<li><a class="rv-navbar_option" href="{% url 'profile:contributor_create' %}">Contributor Application</a></li>
-						<br>
-						{% endif %}
-						<li><a class="rv-navbar_option" href="{% url 'profile:logged_out' %}">Logout</a></li>
-					</ul>
-				</div>
-			{% endif %}
-		</div>
-		</div>
 	</nav>
 </div>
 	<div id="messages">

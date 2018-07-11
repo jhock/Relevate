@@ -55,8 +55,6 @@ class ContributorProfile(models.Model):
 		# Pseudocode:
 		if self.avatar:
 			return self.avatar.url
-		else:
-			return static("images/profile-placeholder.png")
 
 class DeniedContributors(models.Model):
 	class Meta:
@@ -147,8 +145,6 @@ class ContributorProfileUnfinished(models.Model):
 		# Pseudocode:
 		if self.avatar:
 			return self.avatar.url
-		else:
-			return static("images/profile-placeholder.png")
 
 
 class AcademicProfileUnfinished(models.Model):

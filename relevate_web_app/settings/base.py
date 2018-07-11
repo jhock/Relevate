@@ -88,6 +88,7 @@ TEMPLATES = [
 				'django.contrib.messages.context_processors.messages',
 			],
 			'libraries':{
+				'avatar_tags': 'apps.components.templatetags.avatar_tags',
 				'button_tags': 'apps.components.templatetags.button_tags',
 				'checkbox_tags': 'apps.components.templatetags.checkbox_tags',
 				'file_input_tags': 'apps.components.templatetags.file_input_tags',

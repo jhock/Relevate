@@ -24,7 +24,9 @@
         %}
       </div>
       <div class="rv-content-card_contributor-name">
-  	   {{ p.contributor }}
+          <a href="{% url 'profile:public_contributor_profile' p.contributor.id %}" style="text-decoration:none; color :inherit;">
+              {{ p.contributor }}
+          </a>
       </div>
       <hr class="rv-content-card_contributor-rule" />
     </div>

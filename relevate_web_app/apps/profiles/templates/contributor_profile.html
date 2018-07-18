@@ -1,13 +1,64 @@
 {% extends "base-titlebar.html" %}
 {% load staticfiles %}
 
+{% load button_tags %}
+
+{% block head %}
+	{{ block.super }}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/contributor-update.css' %}">
+	<script type="text/javascript" src="{% static 'js/contributor-update.js' %}"></script>
+{% endblock head %}
+
 {% block content %}
 
 <div class="uk-container uk-margin-top uk-clearfix">
-	<div class="uk-float-right">
-		<button id="update-btn" class="uk-button uk-button-primary">Update Profile</button>
+	<div class="select-tabs">
+  		<button class="tablinks rv-h3 rv-contributor-form_header" onclick="switchTab(event, 'Edit Contributor Profile')">Contributor Profile</button>
+  		<button class="tablinks rv-h3 rv-contributor-form_header" onclick="switchTab(event, 'Edit User Profile')">User Profile</button>
+		{% button
+		  id="update-btn"
+		  type="button"
+		  variant="solid"
+		%}
+		  Update Profile
+		{% end_button %}
 	</div>
-	{% include 'partials/contributor_info_display.html' %}
+	<form id="contrib-update-form" action="{% url 'profile:contributor_update' %}" method="post" enctype='multipart/form-data'>
+	{% csrf_token %}
+	<div id="Edit Contributor Profile" class="tabcontent" style="display:block">
+		{% include 'partials/contributor_info_display.html' %}
+	</div>
+	<div id="Edit User Profile" class="tabcontent">
+		<div class="uk-container uk-margin-top">
+			<div>
+				<label class="uk-text-bold">First Name:</label>
+				{{ user.first_name }}
+			</div>
+			<br>
+			<div>
+				<label class="uk-text-bold">Last Name:</label>
+				{{ user.last_name }}
+			</div>
+			<br>
+			<div>
+				<label class="uk-text-bold">Email:</label>
+				{{ user.email }}
+			</div>
+			<br>
+			<ul uk-accordion>
+				<li>
+					<h3 class='uk-accordion-title'>
+						Topics of Interest
+					</h3>
+					<div class='uk-accordion-content'>
+						<div class="rv-contributor-form_box">
+							{{ user_prof.topics_preferences }}
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
 </div>
 
 <script>

@@ -13,6 +13,7 @@ from .views import content_creation_views
 urlpatterns = [
 
 	url(r'^$', base_views.HomeView.as_view(), name='home'),
+  url(r'^(page=(\d+)/)?$', base_views.HomeView.as_view(), name='home'),
 	url(r'^new_post/$', article_views.NewPostView.as_view(), name='new_post'),
 	# Articles
 	# url(r'^articles/$', article_views.ArticleListView.as_view(), name="articles"),

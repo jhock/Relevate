@@ -20,10 +20,12 @@
 	        %}
 	      </div>
 	      <div class="rv-content-card_contributor-name">
-					{{ p.contributor }}
-				</div>
-				<hr class="rv-content-card_contributor-rule" />
+			<a href="{% url 'profile:public_contributor_profile' p.contributor.id %}" style="text-decoration:none; color :inherit;">
+				  {{ p.contributor }}
+			  </a>
 			</div>
+		<hr class="rv-content-card_contributor-rule" />
+		</div>
 		<div class="rv-content-card_preview">
 			<p>
 				{{ i.blurb | safe }}<a href="{% url 'contribution:infographic_view' p.slug %}" class="rv-content-card_heading-link">read more...</a>

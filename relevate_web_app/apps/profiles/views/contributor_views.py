@@ -553,6 +553,7 @@ class ContributorProfileView(LoginRequiredMixin, View):
             return render(request, "contributor_profile.html",
                           {
                               "user_prof": user_prof,
+                              "user":user,
                               "contrib_prof": contributor_profile,
                               "expertise_topics": expertise_topics,
                               "academic_prof": academic_prof,
@@ -578,6 +579,7 @@ class PublicContributorProfileView(View):
         else:
             user_prof = None
 
+        #Check if contributor id provided maps to existing contributor profile
         try:
             contributor_prof = ContributorProfile.objects.get(id=contrib_id)
         except ObjectDoesNotExist:
@@ -588,8 +590,9 @@ class PublicContributorProfileView(View):
         certifications = ContributorCertification.objects.filter(contributor_profile=contributor_prof)
         organizational_affiliations = OrganizationalAffiliation.objects.filter(contributor_profile=contributor_prof)
         highest_ranking_degree = get_contributor_highest_degree(academic_prof)
-        if user_prof.is_contributor:
-            contrib_prof = ContributorProfile.objects.get(user_profile=user_prof)
+        contrib_prof = ContributorProfile.objects.get(id=contrib_id)
+        #Check if contributor profile is confirmed and viewable to public
+        if contrib_prof.is_approved:
             return render(request, 'public_contributor_profile.html',
                   {
                       'user_prof': user_prof,
@@ -601,17 +604,8 @@ class PublicContributorProfileView(View):
                       "highest_ranking_degree": highest_ranking_degree,
                       'organizational_affiliations': organizational_affiliations
                   })
-
-        return render(request, 'public_contributor_profile.html',
-                      {
-                          'user_prof': user_prof,
-                          'contributor_prof': contributor_prof,
-                          'expertise_topics': expertise_topics,
-                          "academic_prof": academic_prof,
-                          "certifications": certifications,
-                          "highest_ranking_degree": highest_ranking_degree,
-                          'organizational_affiliations': organizational_affiliations
-                      })
+        #If not, return to home page
+        return HttpResponseRedirect(reverse_lazy('contribution:home'))
 
 
 # =-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-

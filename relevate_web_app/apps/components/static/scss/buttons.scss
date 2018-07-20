@@ -1,5 +1,4 @@
 @import "../../../../static/scss/base/variables";
-@import "../../../../static/scss/mixins/focus";
 
 @mixin baseButton() {
   position: relative;
@@ -70,6 +69,14 @@
 
   &.dark {
     @include buttonVariants($rv-color-neutral)
+  }
+
+  &.success {
+    @include buttonVariants($rv-color-success)
+  }
+
+  &.warning {
+    @include buttonVariants($rv-color-warning)
   }
 
   [data-icon] {

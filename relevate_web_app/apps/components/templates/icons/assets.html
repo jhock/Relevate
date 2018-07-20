@@ -28,7 +28,15 @@
   {% icon_add title={{title}} size={{size}} rotate={{rotate}} color={{color}} %}
 {% endtplhandlebars %}
 
+{% tplhandlebars "rv_icon_like" %}
+  {% icon_like title={{title}} size={{size}} rotate={{rotate}} color={{color}} %}
+{% endtplhandlebars %}
+
 {% tplhandlebars "rv_icon_save" %}
+  {% icon_save title={{title}} size={{size}} rotate={{rotate}} color={{color}} %}
+{% endtplhandlebars %}
+
+{% tplhandlebars "rv_icon_trash" %}
   {% icon_save title={{title}} size={{size}} rotate={{rotate}} color={{color}} %}
 {% endtplhandlebars %}
 

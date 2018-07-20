@@ -63,9 +63,17 @@ def icon_file_add(parser, token):
 def icon_edit(parser, token):
   return create_icon(parser, token, 'edit')
 
+@register.tag('icon_like')
+def icon_like(parser, token):
+  return create_icon(parser, token, 'like')
+
 @register.tag('icon_save')
 def icon_save(parser, token):
   return create_icon(parser, token, 'save')
+
+@register.tag('icon_trash')
+def icon_save(parser, token):
+  return create_icon(parser, token, 'trash')
 
 @register.tag('icon_x')
 def icon_x(parser, token):

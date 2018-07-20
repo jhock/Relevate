@@ -40,6 +40,10 @@ def link_assets():
 def select_assets():
   return {}
 
+@register.inclusion_tag('tag/assets.html')
+def tag_assets():
+  return {}
+
 @register.inclusion_tag('text_area/assets.html')
 def text_area_assets():
   return {}

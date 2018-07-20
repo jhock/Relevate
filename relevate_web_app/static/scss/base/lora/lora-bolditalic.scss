@@ -1,0 +1,11 @@
+@font-face {
+  font-family: 'Lora';
+  src: url('#{$lora-font-path}/lora-bolditalic/lora-bolditalic.eot');
+  src: local('Lora Bold Italic'),
+       local('Lora-BoldItalic'),
+       url('#{$lora-font-path}/lora-bolditalic/lora-bolditalic.woff2') format('woff2'),
+       url('#{$lora-font-path}/lora-bolditalic/lora-bolditalic.woff') format('woff'),
+       url('#{$lora-font-path}/lora-bolditalic/lora-bolditalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}

@@ -62,3 +62,34 @@
     padding: 2rem 2rem;
   }
 }
+
+//--------------------
+// Content Layout
+//--------------------
+
+.rv-content-layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 2rem;
+}
+
+.rv-content-layout_children {
+  max-width: 45rem;
+}
+
+@media only screen and (max-width: $rv-breakpoint-tablet) {
+  .rv-content-layout {
+    margin: 0 1rem;
+  }
+
+  .rv-content-layout_children {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: $rv-breakpoint-phone) {
+  .rv-content-layout {
+    margin: 0;
+  }
+}

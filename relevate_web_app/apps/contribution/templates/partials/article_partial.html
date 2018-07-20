@@ -1,40 +1,63 @@
-<div class="uk-card uk-card-default uk-box-shadow-large">
-	<div class='uk-card-body'>
-		<div class='uk-clearfix uk-grid'>
-			<div class='uk-panel-title uk-width-1-2'>
-				<h3>Article: <a href="{% url 'contribution:article_view' p.slug %}">{{ a.title }}</a></h3>
-			</div>
-			<div class='uk-width-1-2'>
-				{% if p.contributor == contrib_prof or superuser_override %}
-				<form class='uk-float-right' action="{% url 'contribution:post_remove' p.pk %}" method="post">
-					{% csrf_token %}
-					<a style='color: white;' class='uk-button uk-button-primary' href="{% url 'contribution:article_update' p.slug %}">
-						Edit
-					</a>
-					<input style='color: white; background-color: red;' class='uk-button uk-button-primary' type="submit" value="Delete" />
-				</form>
-				{% endif %}
-			</div>
-		</div>
-		<br>
-		<div>
-		<a style="text-align:center" href="{% url 'contribution:article_view' p.slug %}">
-			<div class=".uk-container-center">
-				<img style="max-width:70%;" src="{{ a.image.url }}">
-			</div>
+{% load avatar_tags %}
+{% load icon_tags %}
+{% load tag_tags %}
+
+<div class="rv-article">
+	{% if p.contributor == contrib_prof or superuser_override %}
+	<form class='uk-float-right' action="{% url 'contribution:post_remove' p.pk %}" method="post">
+		{% csrf_token %}
+		<a style='color: white;' class='uk-button uk-button-primary' href="{% url 'contribution:article_update' p.slug %}">
+			Edit
 		</a>
-			</div>
-		<p>{{ a.blurb | safe }} </p>
-		<hr>
-		<small>Topics: </small>
-		<div class="uk-grid">	
-			{% for topic in a.article_topics.all %}
-				<div class='uk-width-1-6'>
-					<a href="#"><small>{{ topic.name }}</small></a>
-					<div class="uk-dropdown uk-dropdown-small">
-						<span>{{ topic.description }}</span>
+		<input style='color: white; background-color: red;' class='uk-button uk-button-primary' type="submit" value="Delete" />
+	</form>
+	{% endif %}
+	<div class="rv-article_image--header" style='background-image: url("{{a.image.url}}");'></div>
+	<div class="rv-article_content">
+		<div>
+			<h1 class="rv-article_header">{{ a.title }}</h1>
+		</div>
+		<div class="rv-article_details">
+			<div class="rv-article_author">
+				<div class="rv-article_avatar">
+					{% avatar 
+						name=post.contributor.user_profile
+						src=post.contributor.avatar_image_url
+					%}
+				</div>
+				<div class="rv-article_author--text">
+					<div>
+						{{ post.contributor.user_profile.user.first_name }} {{ post.contributor.user_profile.user.last_name }}
+					</div>
+					<div class="rv-article_author--degree">
+						{# TODO: Replace this with the actual degree #}
+						PhD Advanced Relationship Stuff
 					</div>
 				</div>
+			</div>
+			<div class="rv-article_like">
+				<div class="rv-article_like--content">
+					<div class="rv-article_like--number">{{ post.likes }}</div>
+					<div class="rv-article_like--icon">
+						{% icon_like size="medium" %}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="rv-article_image">
+			<img src="{{ a.image.url }}" alt="{{a.title}}">
+		</div>
+		<div class="rv-article_text">
+			{{ a.content | safe }}
+		</div>
+		<h6 class="rv-article_topics">Related Topics:</h6>
+		<div class="rv-article_tag--container">	
+			{% for topic in a.article_topics.all %}
+				{% tag 
+					href="#"
+					title=topic.name
+					margin="0 0.5rem 0.5rem 0"
+				%}
 			{% endfor %}
 		</div>
 	</div>

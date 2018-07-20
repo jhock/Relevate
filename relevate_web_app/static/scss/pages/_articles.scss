@@ -1,0 +1,155 @@
+@import "../base/variables";
+
+$rv-article-font-size: 1.2rem;
+
+.rv-article_controls {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.rv-article_image {
+  display: inline-block;
+  float: left;
+  margin-right: 1rem;
+  padding-top: 0.5rem;
+
+  img {
+    max-height: 20rem;
+    max-width: 20rem;
+  }
+}
+
+.rv-article_image--header {
+  display: none;
+}
+
+.rv-article_header {
+  margin-top: 2rem;
+  font-size: 3rem;
+}
+
+.rv-article_details {
+  display: flex;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+  justify-content: space-between;
+}
+
+.rv-article_avatar {
+  width: 4rem;
+  min-width: 3rem;
+}
+
+.rv-article_author {
+  display: flex;
+  align-items: center;
+}
+
+.rv-article_author--text {
+  font-family: $rv-article-font-family;
+  font-size: $rv-article-font-size;
+  margin: 0 1rem;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+.rv-article_text {
+  p {
+    font-family: $rv-article-font-family;
+    font-size: $rv-article-font-size;
+    margin-bottom: 1rem;
+  }
+
+  p:first-child:first-letter {
+    float: left;
+    font-family: $rv-font-family;
+    font-size: 3.4rem;
+    line-height: 2rem;
+    padding-top: 0.8rem;
+    padding-right: 0.6rem;
+  }
+}
+
+.rv-article_author--degree {
+  font-family: $rv-article-font-family;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.rv-article_like {
+  display: flex;
+  align-items: center;
+}
+
+.rv-article_like--content {
+  display: flex;
+}
+
+.rv-article_like--number {
+  margin-right: 0.2rem;
+  font-weight: bold;
+  font-size: $rv-article-font-size;
+}
+
+.rv-article_tag--container {
+  margin-bottom: 5rem;
+}
+
+.rv-article_topics {
+  margin-top: 3rem;
+}
+
+@media only screen and (max-width: $rv-breakpoint-tablet) {
+  .rv-article_image {
+    img {
+      max-width: 10rem;
+      max-height: 10rem;
+    }
+  }
+}
+
+@media only screen and (max-width: $rv-breakpoint-phone) {
+  .rv-article_image {
+    margin-right: 0;
+
+    img {
+      display: none;
+    }
+  }
+
+  .rv-article_image--header {
+    display: inherit;
+    width: 100%;
+    padding-bottom: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .rv-article_header {
+    margin-top: 2rem;
+    font-size: 2rem;
+  }
+
+  .rv-article_author--text {
+    font-size: $rv-base-font-size;
+  }
+
+  .rv-article_text {
+    p {
+      font-size: $rv-base-font-size;
+    }
+
+    p:first-child:first-letter {
+      padding-top: 0.6rem;
+      font-size: 2.8rem;
+      padding-right: 0.5rem;
+    }
+  }
+
+  .rv-article_content {
+    margin: 0 1rem;
+  }
+}

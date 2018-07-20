@@ -1,6 +1,6 @@
 function ddmenuHandleMenuTriggerClick (trigger) {
   var menu = trigger.parentElement.getElementsByClassName('rv-dropdown-menu')[0]
-  var arrow = menu.parentElement.getElementsByTagName('svg')[0]
+  var arrow = ddmenuGetArrow(menu)
 
   menu.style.display = 'initial'
   menu.setAttribute('aria-hidden', 'false')
@@ -16,11 +16,20 @@ function ddmenuHandleMenuTriggerClick (trigger) {
   }
 }
 
+function ddmenuGetArrow (menu) {
+  var icon = menu.parentElement.getElementsByTagName('svg')[0]
+  if (icon.parentElement.classList.contains('rv-dropdown-menu_icon')) {
+    return icon
+  } else {
+    return null
+  }
+}
+
 function ddmenuHandleMenuItemKeyDown (event, item) {
   var menu = item.parentElement.parentElement
   var items = menu.getElementsByClassName('rv-dropdown-menu_item')
   var trigger = menu.parentElement.getElementsByClassName('rv-dropdown-menu_trigger')[0]
-  var arrow = menu.parentElement.getElementsByTagName('svg')[0]
+  var arrow = ddmenuGetArrow(menu)
 
   if (event.key === 'Escape') {
     menu.style.display = 'none'

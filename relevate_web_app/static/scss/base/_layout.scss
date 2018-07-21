@@ -1,29 +1,10 @@
 //--------------------
 // Masonry Layout
 //--------------------
-
-@media only screen and (min-width: 1160px) {
-  .rv-masonry {
-    width: ($rv-card-margin + $rv-card-width) * 3;
-    column-count: 3;
-    column-gap: 0;
-  }
-}
-
-@media only screen and (max-width: 1159px) {
-  .rv-masonry {
-    width: ($rv-card-margin + $rv-card-width) * 2;
-    column-count: 2;
-    column-gap: 0;
-  }
-}
-
-@media only screen and (max-width: 670px) {
-  .rv-masonry {
-    width: $rv-card-margin + $rv-card-width;
-    column-count: 1;
-    column-gap: 0;
-  }
+.rv-masonry {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .rv-masonry_container {

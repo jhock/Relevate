@@ -4,6 +4,7 @@
 .rv-navbar {
   position: fixed;
   top: 0;
+  height: 4rem;
   width: 100%;
   background: rgba($rv-color-white, 0.98);
   z-index: 999;
@@ -76,6 +77,10 @@
   }
 
   @include buttonFocus(0.5rem, 0.5rem, 0.5rem, 0.5rem);
+}
+
+.rv-navbar_avatar {
+  width: 2rem;
 }
 
 .rv-navbar_option-text-input {

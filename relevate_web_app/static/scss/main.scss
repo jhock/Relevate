@@ -14,26 +14,3 @@
 @import "pages/contributor-list";
 @import "pages/home";
 @import "pages/styleguide";
-
-
-
-// TODO: Remove this hack
-// We are having trouble getting sass to compile when the app
-// is deployed to production. As a temp fix, we are manually 
-// compiling scss for the deploy. To simplify that process,
-// I've included imports to all other sass files from the
-// components directory here so they will get compiled into
-// main.css for production
-
-@import "../../../apps/components/static/scss/avatar";
-@import "../../../apps/components/static/scss/buttons";
-@import "../../../apps/components/static/scss/checkbox";
-@import "../../../apps/components/static/scss/dropdown_menu";
-@import "../../../apps/components/static/scss/file_input";
-@import "../../../apps/components/static/scss/icons";
-@import "../../../apps/components/static/scss/links";
-@import "../../../apps/components/static/scss/progress";
-@import "../../../apps/components/static/scss/select";
-@import "../../../apps/components/static/scss/tag";
-@import "../../../apps/components/static/scss/text_area";
-@import "../../../apps/components/static/scss/text_input";

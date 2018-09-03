@@ -197,9 +197,11 @@
 									name=contrib_prof.contributor
 								%}
 							{% else %}
-								{% avatar
-									name=user.userprofile
-								%}
+								<div class="rv-navbar_avatar">
+									{% avatar
+										name=user.userprofile
+									%}
+								</div>
 							{% endif %}
 					  {% end_dm_trigger %}
 

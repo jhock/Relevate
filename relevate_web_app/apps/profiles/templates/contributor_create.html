@@ -34,8 +34,10 @@
 			</div>
 			<div class="rv-contributor-form_box">
 				<h4 class="rv-contributor-form_subheader">Degrees</h4>
-					{{ form.hiddenAcaTable }}
-					<input id="hiddenAcaTable" name="hiddenAcaTable">
+					<span class="rv-contributor-form_hidden-fields">
+						{{ form.hiddenAcaTable }}
+						<input id="hiddenAcaTable" name="hiddenAcaTable">
+					</span>
 					<table id="acaProf" data-name="acaProfTable" class="rv-contributor-form_table">
 						<tbody>
 							{% for each_academic in academic_profiles %}

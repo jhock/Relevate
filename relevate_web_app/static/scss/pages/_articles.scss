@@ -2,6 +2,10 @@
 
 $rv-article-font-size: 1.2rem;
 
+.rv-article {
+  max-width: 45rem;
+}
+
 .rv-article_controls {
   margin-bottom: 1rem;
   display: flex;

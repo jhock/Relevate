@@ -1,7 +1,6 @@
 $(document).ready(function()
 {
-	$(".submit-button").on('click', function()	{
-
+	$("#submit-btn").on('click', function()	{
 		var flags = {
 			content: {
 				done: validContentLength(),
@@ -66,11 +65,13 @@ $(document).ready(function()
 
 	 /* SCRIPT TO OPEN THE MODAL WITH THE PREVIEW */
       $("#id_image").change(function () {
+        console.log("modal open");
         if (this.files && this.files[0]) {
           var reader = new FileReader();
           reader.onload = function (e) {
             $("#image").attr("src", e.target.result);
             $("#modalCrop").modal("show");
+            console.log("modal shown");
           }
           reader.readAsDataURL(this.files[0]);
         }

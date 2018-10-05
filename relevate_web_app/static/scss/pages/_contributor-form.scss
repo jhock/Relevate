@@ -118,6 +118,14 @@
   height: 2rem;
 }
 
+.rv-contributor-form_hidden-fields {
+  opacity: 0;
+  width: 0.01rem;
+  height: 0.01rem;
+  display: block;
+  position: absolute;
+}
+
 @media only screen and (max-width: 1000px) {
   .rv-contributor-form {
     margin: 0;

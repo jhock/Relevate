@@ -19,11 +19,7 @@
 	<!-- <link rel="stylesheet" href="{% static 'uikit/css/uikit.min.css' %}"/> -->
 	<link rel="stylesheet" href="{% static 'uikit/css/uikit.css' %}"/>
 
-	{# <link rel="stylesheet" href="{% static "scss/main.css" %}" /> #}
-
-	{% compress css %}
-		<link rel="stylesheet" type="text/x-scss" href="{% static "scss/main.scss" %}" />
-	{% endcompress %}
+	<link rel="stylesheet" href="{% static "scss/main.css" %}" />
 
 	{% avatar_assets %}
 	{% button_assets %}
@@ -34,6 +30,7 @@
   {% link_assets %}
   {% progress_assets %}
   {% select_assets %}
+  {% tag_assets %}
   {% text_area_assets %}
   {% text_input_assets %}
 

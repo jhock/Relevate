@@ -96,10 +96,10 @@ TEMPLATES = [
        	'icon_tags': 'apps.components.templatetags.icon_tags',
        	'progress_tags': 'apps.components.templatetags.progress_tags',
         'select_tags': 'apps.components.templatetags.select_tags',
+        'tag_tags': 'apps.components.templatetags.tag_tags',
         'text_area_tags': 'apps.components.templatetags.text_area_tags',
         'text_input_tags': 'apps.components.templatetags.text_input_tags',
         'component_assets': 'apps.components.templatetags.component_assets',
-		'avatar_tags': 'apps.components.templatetags.avatar_tags',
         'example_tags': 'apps.styleguide.templatetags.example_tags'
 			}
 		},

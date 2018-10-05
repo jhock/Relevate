@@ -1,0 +1,29 @@
+{% extends "styleguide_layout.html" %}
+{% load example_tags %}
+{% load tag_tags %}
+
+{% block content%}
+  {% example with
+    heading="Requirements"
+    caption="Include the following in your HTML head (This imports the styles)"
+    codeOnly="True"
+  %}
+{% load component_assets %}
+{% tag_assets %}
+  {% end_example %}
+
+  {% example with
+    heading=""
+    caption="Within your template file, load the custom avatar tags"
+    codeOnly="True"
+  %}
+{% load tag_tags %}
+  {% end_example %}
+
+  {% example with 
+    heading="Usage" 
+    caption="Description of tag"  
+  %}
+{% tag title="Relationship Education" href="#" %}
+  {% end_example %}
+{% endblock content %}

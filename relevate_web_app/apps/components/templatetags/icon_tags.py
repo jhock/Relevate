@@ -51,6 +51,10 @@ def icon_circle(parser, token):
 def icon_circle_check(parser, token):
   return create_icon(parser, token, 'circle_check')
 
+@register.tag('icon_edit')
+def icon_edit(parser, token):
+  return create_icon(parser, token, 'edit')
+
 @register.tag('icon_file')
 def icon_file(parser, token):
   return create_icon(parser, token, 'file')
@@ -59,13 +63,29 @@ def icon_file(parser, token):
 def icon_file_add(parser, token):
   return create_icon(parser, token, 'file_add')
 
-@register.tag('icon_edit')
-def icon_edit(parser, token):
-  return create_icon(parser, token, 'edit')
+@register.tag('icon_file_text')
+def icon_file_text(parser, token):
+  return create_icon(parser, token, 'file_text')
+
+@register.tag('icon_grid')
+def icon_grid(parser, token):
+  return create_icon(parser, token, 'grid')
+
+@register.tag('icon_like')
+def icon_like(parser, token):
+  return create_icon(parser, token, 'like')
+
+@register.tag('icon_link')
+def icon_link(parser, token):
+  return create_icon(parser, token, 'link')
 
 @register.tag('icon_save')
 def icon_save(parser, token):
   return create_icon(parser, token, 'save')
+
+@register.tag('icon_trash')
+def icon_save(parser, token):
+  return create_icon(parser, token, 'trash')
 
 @register.tag('icon_x')
 def icon_x(parser, token):

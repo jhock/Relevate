@@ -90,3 +90,12 @@ settings/access_keys.py
 
 # Don't push any ckeditor file uploads
 ck_media/
+
+# Ignore static assets
+static_assets/
+
+# Ignore files pertaining to webpack output
+static/scss/main.js
+
+# Ignore node modules
+node_modules/

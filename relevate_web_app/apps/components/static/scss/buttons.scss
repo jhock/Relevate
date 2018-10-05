@@ -72,6 +72,14 @@
     @include buttonVariants($rv-color-neutral)
   }
 
+  &.success {
+    @include buttonVariants($rv-color-success)
+  }
+
+  &.warning {
+    @include buttonVariants($rv-color-warning)
+  }
+
   [data-icon] {
     margin: 0 0.2rem;
   }

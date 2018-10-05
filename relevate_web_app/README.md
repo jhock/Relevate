@@ -129,6 +129,27 @@ delete the migration files and make a fresh migration to the database.
 
 
 
+### Compiling SASS with webpack
+
+Sass is a css extension language that allows us to maintain our stylesheets and create consistent
+aesthetics across the site. We use webpack to compile sass. Webpack allows us to autoprefix our
+styles for cross browser compatibility. Executing the webpack build scripts programatically finds
+all scss (sass) files and compiles them into a single `main.css` file located in <static/scss>.
+
+To execute webpack, you will need to have node installed. You can download the latest node here https://nodejs.org/en/download/. Once node is installed, you need to install the package dependencies. From inside the <relevate_web_app> directory, run `npm install`
+
+Once your dependencies have installed, you should be able to run webpack.
+
+To compile sass for production deployment:
+* `npm run-script build`
+
+To have webpack watch for changes in scss (sass) files:
+* `npm run-script build:watch`
+With the `watch` option specified, webpack will dynamically watch for any changes in scss files and
+will update the site for development. If you refresh the page, you should see the changes.
+
+
+
 ### Managing the Live Site Using Amazon Web Services
 
 The relevate web app, "beta" database, and api are hosted on Amazon Web Services. To sign in, go to 
@@ -213,14 +234,12 @@ Note: Some existing code does not have documentation yet. If you see something w
 For general documentation, add to this README.
 
 
-
 ### Future Work
 
 - [ ] Dynamically add entries to various tabs on the About Us page
 - [ ] Have a request system for new tags, similar to how contributor applications/posts
 are approved denied
 - [ ] Finish the mobile app API
-
 
 
 ### Useful Things

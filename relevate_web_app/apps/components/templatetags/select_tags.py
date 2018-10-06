@@ -17,7 +17,7 @@ from ..utils import (
 register = template.Library()
 
 @register.tag('select')
-def text_input(parser, token):
+def select(parser, token):
   props = token.split_contents()[1:]
   enforce_required_props(['label'], props)
 

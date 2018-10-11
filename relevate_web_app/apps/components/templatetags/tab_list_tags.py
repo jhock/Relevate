@@ -9,7 +9,6 @@ from ..utils import (
   resolve_variable,
 )
 import uuid
-import pdb
 
 register = template.Library()
 

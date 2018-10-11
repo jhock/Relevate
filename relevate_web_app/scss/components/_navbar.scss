@@ -86,3 +86,80 @@
 .rv-navbar_option-text-input {
   margin: 0 1rem;
 }
+
+.rv-navbar_options--responsive {
+  margin-right: 1rem;
+}
+
+.rv-navbar_options--toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.rv-navbar_options--responsive-container {
+  margin-top: 3rem;
+}
+
+.rv-nav_responsive-link {
+  display: block;
+}
+
+.rv-navbar_avatar-title {
+  margin-top: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: $rv-font-weight-semibold;
+  text-align: center;
+  line-height: 1.125;
+}
+
+.rv-navbar_subheader {
+  margin-top: 1rem;
+  font-size: 1.125rem;
+  font-weight: $rv-font-weight-semibold;
+}
+
+.rv-nav_responsive-link {
+  color: $rv-color-primary;
+  text-decoration: none;
+  font-size: 1.125rem;
+
+  &:focus {
+    outline: none;
+    text-decoration: underline;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+@media only screen and (min-width: 780px) {
+  .rv-navbar_options--responsive {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 779px) {
+  .rv-navbar_options {
+    display: none;
+  }
+
+  .rv-navbar_options-container {
+    display: block;
+  }
+
+  .rv-navbar_avatar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+    width: 12rem;
+  }
+
+  .rv-navbar_avatar {
+    width: 4rem;
+  }
+}

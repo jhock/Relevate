@@ -1,0 +1,169 @@
+{% load staticfiles %}
+{% load avatar_tags %}
+{% load button_tags %}
+{% load dropdown_menu_tags %}
+
+<ul class="rv-navbar_options-container">
+  {#      
+    TODO: With the text input updates the input no longer fits within the navbar.
+    We will bring this back, but we need to come up with an alternative that will fit
+
+    <li class="rv-navbar_option-text-input">
+      <form action="{% url 'contribution:search_results' %}" method="get">
+        {% csrf_token %}
+        <input class="rv-text-input" id="searchbox" name="searchbox" type="text" placeholder="Search">
+      </form>
+    </li>
+   #}
+  {% if not user.is_authenticated %}
+    <li class="rv-navbar_submenu-responsive">
+      {% button
+        href="profile:login"
+        variant="ghost"
+        color="primary"
+        fluid_width="True"
+        margin="1rem 0 0.5rem 0"
+      %}
+        Sign In
+      {% end_button %}
+    </li>
+    <li class="rv-navbar_submenu-responsive">
+      {% button
+        variant="ghost"
+        href="profile:registration"
+        fluid_width="True"
+        margin="0 0 1rem 0"
+        color="dark"
+      %}
+        Create Account
+      {% end_button %}
+    </li>
+  {% else %}
+    <li class="rv-navbar_avatar-container">
+      {% if user.is_contributor %}
+        <div class="rv-navbar_avatar">
+          {% avatar
+            src=contrib_prof.avatar_image_url
+            name=contrib_prof.contributor
+          %}
+        </div>
+        <div class="rv-navbar_avatar-title">{{contrib_prof.contributor}}</div>
+      {% else %}
+        <div class="rv-navbar_avatar">
+          {% avatar
+            name=user.userprofile
+          %}
+        </div>
+        <div class="rv-navbar_avatar-title">{{user.userprofile}}</div>
+      {% endif %}
+    </li>
+    <li class="rv-navbar_submenu-responsive">
+      <div class="rv-navbar_subheader">Profile</div>
+      <a class="rv-nav_responsive-link" href="{% url 'profile:user_update' %}">Update Profile</a>
+      {% if user_prof.is_contributor %}
+        <a class="rv-nav_responsive-link" href="{% url 'profile:contributor_profile' %}">My Contributor Profile</a>
+      {% else %}
+        <a class="rv-nav_responsive-link" href="{% url 'profile:contributor_create' %}">Contributor Application</a>
+      {% endif %}
+    </li>
+  {% endif %}
+  {% if user.is_staff %}
+    <li class="rv-navbar_submenu-responsive">
+      <div class="rv-navbar_subheader">Staff</div>
+      Approve/Deny
+      <a class="rv-nav_responsive-link" href="{% url 'profile:adviser_approve' %}">Approve Advisors</a>
+      <a class="rv-nav_responsive-link" href="{% url 'profile:contributor_approve' %}">Approve Contributors</a>
+      List Denied
+      <a class="rv-nav_responsive-link" href="{% url 'profile:denied_adviser_list' %}">List Denied Advisors</a>
+      <a class="rv-nav_responsive-link" href="{% url 'profile:denied_contributor_list' %}">List Denied Contributors</a>
+    </li>
+  {% endif %}
+  {% if user_prof.is_contributor %}
+    {% if user_prof.is_adviser %}
+      <li class="rv-navbar_submenu-responsive">
+        <div class="rv-navbar_subheader">Mentors</div>
+        <a class="rv-nav_responsive-link" href="{% url 'profile:adviser_profile' %}">My Mentor Profile</a>
+        <a class="rv-nav_responsive-link" href="{% url 'profile:adviser_approve_posts' %}">Approve Mentee Posts</a>
+        <a class="rv-nav_responsive-link" href="{% url 'profile:adviser_create' %}">Mentor Application</a>
+      </li>
+    {% else %}
+      <li class="rv-navbar_submenu-responsive">
+        <div class="rv-navbar_subheader">Mentors</div>
+        <a class="rv-nav_responsive-link" href="{% url 'profile:adviser_create' %}">Mentor Application</a>
+      </li>
+    {% endif %}
+    <li class="rv-navbar_submenu-responsive">
+      <div class="rv-navbar_subheader">Contributors</div>
+      <a class="rv-nav_responsive-link" href="{% url 'profile:contributors' %}">
+        All Contributors
+      </a>
+      <a class="rv-nav_responsive-link" href="{% url 'profile:contributor_profile' %}">
+        My Contributor Profile
+      </a>
+    </li>
+
+    <li class="rv-navbar_submenu-responsive">
+      <div class="rv-navbar_subheader">Posts</div>
+      <a class="rv-nav_responsive-link" with href="{% url 'contribution:new_post' %}">Create A New Post</a>
+      <a class="rv-nav_responsive-link" href="{% url 'contribution:all_posts' %}">Posts To Date</a>
+    </li>
+
+    <li class="rv-navbar_submenu-responsive">
+      <div class="rv-navbar_subheader">Resource Collective</div>
+      <a class="rv-nav_responsive-link" href="{% url 'contribution:using_relevate' %}">Using Relevate</a>
+      <a class="rv-nav_responsive-link" href="{% url 'contribution:public_scholarship' %}">Public Scholarship</a>
+      <a class="rv-nav_responsive-link" href="{% url 'contribution:content_creation' %}">Content Creation</a>
+    </li>
+  {% else %}
+    <li class="rv-navbar_submenu-responsive">
+      <div class="rv-navbar_subheader">Contributors</div>
+      <a class="rv-nav_responsive-link" href="{% url 'profile:contributors' %}">All Contributors</a>
+    </li>
+
+    {% if user.is_authenticated and not user_prof.is_pending_contributor %}
+      <li class="rv-navbar_submenu-responsive">
+        <a class="rv-nav_responsive-link" href="{% url 'profile:contributor_create' %}">
+          Contributor Application
+        </a>
+      </li>
+      {% if not user_prof.confirmed %}
+        <li class="rv-navbar_submenu-responsive">
+          <a class="rv-nav_responsive-link" href="{% url 'profile:confirmation' %}">
+            Confirm Account
+          </a>
+        </li>
+      {% endif %}
+      <!-- <li><a href="{%url 'profile:password_reset_form' %}">Reset Password</a></li> -->
+    {% endif %}
+    {% if user_prof.is_pending_contributor %}
+      <li class="rv-navbar_submenu-responsive">
+        <a class="rv-nav_responsive-link" href="{% url 'profile:contributor_profile' %}">
+          My Contributor Profile
+        </a>
+      </li>
+      {% if not user_prof.confirmed %}
+        <li class="rv-navbar_submenu-responsive">
+          <a class="rv-nav_responsive-link" href="{% url 'profile:confirmation' %}">
+            Confirm Account
+          </a>
+        </li>
+      {% endif %}
+    {% endif %}
+  {% endif %}
+  <li class="rv-navbar_submenu-responsive">
+    <a class="rv-nav_responsive-link" href="{% url 'contribution:about' %}">About</a>
+  </li>
+  {% if user.is_authenticated %}
+    <li class="rv-navbar_submenu-responsive">
+      {% button
+        variant="ghost"
+        color="dark"
+        fluid_width="True"
+        href="profile:logged_out"
+        margin="1rem 0 0 0"
+      %}
+        Logout
+      {% end_button %}
+    </li>
+  {% endif %}
+</ul>

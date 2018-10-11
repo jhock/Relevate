@@ -20,6 +20,8 @@
 .rv-icon {
   display: inline-block;
   vertical-align: center;
+  pointer-events: none;
+
   svg {
     width: 100%;
     height: 100%;

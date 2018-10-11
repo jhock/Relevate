@@ -2,6 +2,8 @@
 {% load staticfiles %}
 {% load avatar_tags %}
 {% load button_tags %}
+{% load icon_tags %}
+{% load tray_tags %}
 {% load dropdown_menu_tags %}
 
 {% block body %}
@@ -16,208 +18,27 @@
 				</span>
 			</a>
 		</div>
-		<ul class="rv-navbar_options-container">
-{# 			
-			TODO: With the text input updates the input no longer fits within the navbar.
-			We will bring this back, but we need to come up with an alternative that will fit
-
-			<li class="rv-navbar_option-text-input">
-				<form action="{% url 'contribution:search_results' %}" method="get">
-					{% csrf_token %}
-					<input class="rv-text-input" id="searchbox" name="searchbox" type="text" placeholder="Search">
-				</form>
-			</li>
- #}
-			{% if user.is_staff %}
-			<li class="rv-navbar_submenu">
-				{% dropdown_menu %}
-				  {% dm_trigger with
-				    id="main_navbar_ddmenu_0"
-				    className="rv-navbar_option"
-				    withArrow="True"
-				  %}
-				    <span>Staff</span>
-				  {% end_dm_trigger %}
-
-				  {% dm_content %}
-				    {% dm_label %}Approve/Deny{% end_dm_label %}
-				    {% dm_item with href="profile:adviser_approve" %}Approve Advisors{% end_dm_item %}
-				    {% dm_item with href="profile:contributor_approve" %}Approve Contributors{% end_dm_item %}
-				    {% dm_separator %}
-				    {% dm_label %}List Denied{% end_dm_label %}
-				    {% dm_item with href="profile:denied_adviser_list" %}List Denied Advisors{% end_dm_item %}
-				    {% dm_item with href="profile:denied_contributor_list" %}List Denied Contributors{% end_dm_item %}
-				  {% end_dm_content %}
-				{% end_dropdown_menu %}
-			</li>
-			{% endif %}
-			{% if user_prof.is_contributor %}
-				{% if user_prof.is_adviser %}
-					<li class="rv-navbar_submenu">
-						{% dropdown_menu %}
-						  {% dm_trigger with
-						    id="main_navbar_ddmenu_1"
-						    className="rv-navbar_option"
-						    withArrow="True"
-						  %}
-						    <span>Mentors</span>
-						  {% end_dm_trigger %}
-
-						  {% dm_content %}
-						    {% dm_item with href="profile:adviser_profile" %}My Mentor Profile{% end_dm_item %}
-						    {% dm_item with href="profile:adviser_approve_posts" %}Approve Mentee Posts{% end_dm_item %}
-						    {% dm_item with href="profile:adviser_create" %}Mentor Application{% end_dm_item %}
-						  {% end_dm_content %}
-						{% end_dropdown_menu %}
-					</li>
-				{% else %}
-					<li class="rv-navbar_submenu">
-						{% dropdown_menu %}
-						  {% dm_trigger with
-						    id="main_navbar_ddmenu_2"
-						    className="rv-navbar_option"
-						    withArrow="True"
-						  %}
-						    <span>Mentors</span>
-						  {% end_dm_trigger %}
-
-						  {% dm_content %}
-						    {% dm_item with href="profile:adviser_create" %}Mentor Application{% end_dm_item %}
-						  {% end_dm_content %}
-						{% end_dropdown_menu %}
-					</li>
-				{% endif %}
-				<li class="rv-navbar_submenu">
-					{% dropdown_menu %}
-					  {% dm_trigger with
-					    id="main_navbar_ddmenu_3"
-					    className="rv-navbar_option"
-					    withArrow="True"
-					  %}
-					    <span>Contributors</span>
-					  {% end_dm_trigger %}
-
-					  {% dm_content %}
-					    {% dm_item with href="profile:contributors" %}All Contributors{% end_dm_item %}
-					    {% dm_item with href="profile:contributor_profile" %}My Contributor Profile{% end_dm_item %}
-					  {% end_dm_content %}
-					{% end_dropdown_menu %}
-				</li>
-
-				<li class="rv-navbar_submenu">
-					{% dropdown_menu %}
-					  {% dm_trigger with
-					    id="main_navbar_ddmenu_4"
-					    className="rv-navbar_option"
-					    withArrow="True"
-					  %}
-					    <span>Posts</span>
-					  {% end_dm_trigger %}
-
-					  {% dm_content %}
-					    {% dm_item with href="contribution:new_post" %}Create A New Post{% end_dm_item %}
-					    {% dm_item with href="contribution:all_posts" %}Posts To Date{% end_dm_item %}
-					  {% end_dm_content %}
-					{% end_dropdown_menu %}
-				</li>
-
-				<li class="rv-navbar_submenu">
-					{% dropdown_menu %}
-					  {% dm_trigger with
-					    id="main_navbar_ddmenu_5"
-					    className="rv-navbar_option"
-					    withArrow="True"
-					  %}
-					    <span>Resource Collective</span>
-					  {% end_dm_trigger %}
-
-					  {% dm_content %}
-					    {% dm_item with href="contribution:using_relevate" %}Using Relevate{% end_dm_item %}
-					    {% dm_item with href="contribution:public_scholarship" %}Public Scholarship{% end_dm_item %}
-					    {% dm_item with href="contribution:content_creation" %}Content Creation{% end_dm_item %}
-					  {% end_dm_content %}
-					{% end_dropdown_menu %}
-				</li>
-			{% else %}
-				<li class="rv-navbar_submenu">
-					{% dropdown_menu %}
-					  {% dm_trigger with
-					    id="main_navbar_ddmenu_6"
-					    className="rv-navbar_option"
-					    withArrow="True"
-					  %}
-					    <span>Contributors</span>
-					  {% end_dm_trigger %}
-
-					  {% dm_content %}
-					    {% dm_item with href="profile:contributors" %}All Contributors{% end_dm_item %}
-					  {% end_dm_content %}
-					{% end_dropdown_menu %}
-				</li>
-
-				{% if user.is_authenticated and not user_prof.is_pending_contributor %}
-					<li class="rv-navbar_submenu"><a class="rv-navbar_option" href="{% url 'profile:contributor_create' %}">Contributor Application</a></li>
-					{% if not user_prof.confirmed %}
-						<li class="rv-navbar_submenu"><a class="rv-navbar_option" href="{% url 'profile:confirmation' %}">Confirm Account</a></li>
-					{% endif %}
-					<!-- <li><a href="{%url 'profile:password_reset_form' %}">Reset Password</a></li> -->
-				{% endif %}
-				{% if user_prof.is_pending_contributor %}
-					<li class="rv-navbar_submenu"><a class="rv-navbar_option" href="{% url 'profile:contributor_profile' %}">My Contributor Profile</a></li>
-					{% if not user_prof.confirmed %}
-						<li class="rv-navbar_submenu"><a class="rv-navbar_option" href="{% url 'profile:confirmation' %}">Confirm Account</a></li>
-					{% endif %}
-				{% endif %}
-			{% endif %}
-			<li>
-				<!--<a class="rv-navbar_option" href="{% url 'profile:user_update' %}">Update Profile</a>-->
-			</li>
-			<li class="rv-navbar_submenu">
-				<a class="rv-navbar_option" href="{% url 'contribution:about' %}">About</a>
-			</li>
-			{% if not user.is_authenticated %}
-				<li class="rv-navbar_submenu">
-					<a class="rv-navbar_option" href="{% url 'profile:login' %}">Sign In</a>
-				</li>
-				<li class="rv-navbar_submenu">
-					{% button variant="ghost" href="profile:registration" %}
-						Create Account
+		<div class="rv-navbar_options">
+			{% include 'titlebar-options.html' %}
+		</div>
+		<div class="rv-navbar_options--responsive">
+			{% tray
+				label="Menu options"
+				placement="end"
+				closeButtonLabel="Close menu"
+			%}
+				{% tray_trigger %}
+					{% button variant="borderless" color="primary" aria-label="Open menu" %}
+						{% icon_menu size="large" %}
 					{% end_button %}
-				</li>
-			{% else %}
-				<li>
-					{% dropdown_menu %}
-						{% dm_trigger with
-					    id="main_navbar_ddmenu_7"
-					    className="rv-navbar_option"
-					  %}
-							{% if user.is_contributor %}
-								{% avatar
-									src=contrib_prof.avatar_image_url
-									name=contrib_prof.contributor
-								%}
-							{% else %}
-								<div class="rv-navbar_avatar">
-									{% avatar
-										name=user.userprofile
-									%}
-								</div>
-							{% endif %}
-					  {% end_dm_trigger %}
-
-					  {% dm_content %}
-					    {% dm_item with href="profile:user_update" %}Update Profile{% end_dm_item %}
-					    {% if user_prof.is_contributor %}
-					    	{% dm_item with href="profile:contributor_profile" %}My Contributor Profile{% end_dm_item %}
-					    {% else %}
-					    	{% dm_item with href="profile:contributor_create" %}Contributor Application{% end_dm_item %}
-					    {% endif %}
-					    {% dm_item with href="profile:logged_out" %}Logout{% end_dm_item %}
-					  {% end_dm_content %}
-					{% end_dropdown_menu %}
-				</li>
-			{% endif %}
-		</ul>
+				{% end_tray_trigger %}
+				{% tray_content %}
+					<div class="rv-navbar_options--responsive-container">
+						{% include 'titlebar-options-responsive.html' %}
+					</div>
+				{% end_tray_content %}
+			{% end_tray %}
+		</div>
 	</nav>
 </div>
 	<div id="messages">

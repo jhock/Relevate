@@ -26,11 +26,11 @@
   }
 }
 
-@mixin buttonFocus ($marginTop, $marginEnd, $marginBottom, $marginStart) {
+@mixin buttonFocus ($marginTop, $marginEnd, $marginBottom, $marginStart, $borderRadius: 999rem) {
   @include baseFocus($marginTop, $marginEnd, $marginBottom, $marginStart);
 
   &:before {
-    border-radius: 999rem;
+    border-radius: $borderRadius;
   }
 }
 

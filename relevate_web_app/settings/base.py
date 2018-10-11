@@ -100,6 +100,7 @@ TEMPLATES = [
         'tag_tags': 'apps.components.templatetags.tag_tags',
         'text_area_tags': 'apps.components.templatetags.text_area_tags',
         'text_input_tags': 'apps.components.templatetags.text_input_tags',
+        'tray_tags': 'apps.components.templatetags.tray_tags',
         'component_assets': 'apps.components.templatetags.component_assets',
         'example_tags': 'apps.styleguide.templatetags.example_tags'
 			}

@@ -252,6 +252,47 @@
     .rv-button.primary.ghost:active {
       background: #e5eefd;
       box-shadow: inset 0 0 0.15rem #3A3A3A; }
+  .rv-button.primary.borderless {
+    border: transparent;
+    color: #246FF2;
+    background: transparent;
+    padding: 0 0.25rem;
+    border-radius: 0.25rem;
+    position: relative; }
+    .rv-button.primary.borderless:before {
+      content: "";
+      position: absolute;
+      opacity: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      border: 1px solid #246FF2;
+      -webkit-transform: scale(0.8, 0.8);
+              transform: scale(0.8, 0.8);
+      transition: -webkit-transform 100ms ease-in;
+      transition: transform 100ms ease-in;
+      transition: transform 100ms ease-in, -webkit-transform 100ms ease-in; }
+    .rv-button.primary.borderless:focus {
+      outline: 0; }
+      .rv-button.primary.borderless:focus:before {
+        opacity: 1;
+        transition: -webkit-transform 100ms ease-in;
+        transition: transform 100ms ease-in;
+        transition: transform 100ms ease-in, -webkit-transform 100ms ease-in;
+        -webkit-transform: scale(1, 1);
+                transform: scale(1, 1); }
+    .rv-button.primary.borderless:before {
+      border-radius: 0.3rem; }
+    .rv-button.primary.borderless:hover {
+      transition: background 200ms linear; }
+      .rv-button.primary.borderless:hover.primary {
+        background: #f8faff; }
+      .rv-button.primary.borderless:hover.dark {
+        background: white; }
+    .rv-button.primary.borderless:active {
+      background: #e5eefd;
+      box-shadow: inset 0 0 0.15rem #246FF2; }
   .rv-button.dark.solid {
     border: 2px solid #737373;
     color: #ffffff;
@@ -272,6 +313,47 @@
     .rv-button.dark.ghost:active {
       background: #d9d9d9;
       box-shadow: inset 0 0 0.15rem #3A3A3A; }
+  .rv-button.dark.borderless {
+    border: transparent;
+    color: #737373;
+    background: transparent;
+    padding: 0 0.25rem;
+    border-radius: 0.25rem;
+    position: relative; }
+    .rv-button.dark.borderless:before {
+      content: "";
+      position: absolute;
+      opacity: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      border: 1px solid #246FF2;
+      -webkit-transform: scale(0.8, 0.8);
+              transform: scale(0.8, 0.8);
+      transition: -webkit-transform 100ms ease-in;
+      transition: transform 100ms ease-in;
+      transition: transform 100ms ease-in, -webkit-transform 100ms ease-in; }
+    .rv-button.dark.borderless:focus {
+      outline: 0; }
+      .rv-button.dark.borderless:focus:before {
+        opacity: 1;
+        transition: -webkit-transform 100ms ease-in;
+        transition: transform 100ms ease-in;
+        transition: transform 100ms ease-in, -webkit-transform 100ms ease-in;
+        -webkit-transform: scale(1, 1);
+                transform: scale(1, 1); }
+    .rv-button.dark.borderless:before {
+      border-radius: 0.3rem; }
+    .rv-button.dark.borderless:hover {
+      transition: background 200ms linear; }
+      .rv-button.dark.borderless:hover.primary {
+        background: #e3e3e3; }
+      .rv-button.dark.borderless:hover.dark {
+        background: #f3f3f3; }
+    .rv-button.dark.borderless:active {
+      background: #d9d9d9;
+      box-shadow: inset 0 0 0.15rem #246FF2; }
   .rv-button.success.solid {
     border: 2px solid #229748;
     color: #ffffff;
@@ -292,6 +374,47 @@
     .rv-button.success.ghost:active {
       background: #9ce9b5;
       box-shadow: inset 0 0 0.15rem #3A3A3A; }
+  .rv-button.success.borderless {
+    border: transparent;
+    color: #229748;
+    background: transparent;
+    padding: 0 0.25rem;
+    border-radius: 0.25rem;
+    position: relative; }
+    .rv-button.success.borderless:before {
+      content: "";
+      position: absolute;
+      opacity: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      border: 1px solid #246FF2;
+      -webkit-transform: scale(0.8, 0.8);
+              transform: scale(0.8, 0.8);
+      transition: -webkit-transform 100ms ease-in;
+      transition: transform 100ms ease-in;
+      transition: transform 100ms ease-in, -webkit-transform 100ms ease-in; }
+    .rv-button.success.borderless:focus {
+      outline: 0; }
+      .rv-button.success.borderless:focus:before {
+        opacity: 1;
+        transition: -webkit-transform 100ms ease-in;
+        transition: transform 100ms ease-in;
+        transition: transform 100ms ease-in, -webkit-transform 100ms ease-in;
+        -webkit-transform: scale(1, 1);
+                transform: scale(1, 1); }
+    .rv-button.success.borderless:before {
+      border-radius: 0.3rem; }
+    .rv-button.success.borderless:hover {
+      transition: background 200ms linear; }
+      .rv-button.success.borderless:hover.primary {
+        background: #adedc2; }
+      .rv-button.success.borderless:hover.dark {
+        background: #c6f2d4; }
+    .rv-button.success.borderless:active {
+      background: #9ce9b5;
+      box-shadow: inset 0 0 0.15rem #246FF2; }
   .rv-button.warning.solid {
     border: 2px solid #C96600;
     color: #ffffff;
@@ -312,6 +435,47 @@
     .rv-button.warning.ghost:active {
       background: #ffcb96;
       box-shadow: inset 0 0 0.15rem #3A3A3A; }
+  .rv-button.warning.borderless {
+    border: transparent;
+    color: #C96600;
+    background: transparent;
+    padding: 0 0.25rem;
+    border-radius: 0.25rem;
+    position: relative; }
+    .rv-button.warning.borderless:before {
+      content: "";
+      position: absolute;
+      opacity: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      border: 1px solid #246FF2;
+      -webkit-transform: scale(0.8, 0.8);
+              transform: scale(0.8, 0.8);
+      transition: -webkit-transform 100ms ease-in;
+      transition: transform 100ms ease-in;
+      transition: transform 100ms ease-in, -webkit-transform 100ms ease-in; }
+    .rv-button.warning.borderless:focus {
+      outline: 0; }
+      .rv-button.warning.borderless:focus:before {
+        opacity: 1;
+        transition: -webkit-transform 100ms ease-in;
+        transition: transform 100ms ease-in;
+        transition: transform 100ms ease-in, -webkit-transform 100ms ease-in;
+        -webkit-transform: scale(1, 1);
+                transform: scale(1, 1); }
+    .rv-button.warning.borderless:before {
+      border-radius: 0.3rem; }
+    .rv-button.warning.borderless:hover {
+      transition: background 200ms linear; }
+      .rv-button.warning.borderless:hover.primary {
+        background: #ffd5aa; }
+      .rv-button.warning.borderless:hover.dark {
+        background: #ffe4c9; }
+    .rv-button.warning.borderless:active {
+      background: #ffcb96;
+      box-shadow: inset 0 0 0.15rem #246FF2; }
   .rv-button [data-icon] {
     margin: 0 0.2rem; }
 
@@ -813,7 +977,8 @@
 **/
 .rv-icon {
   display: inline-block;
-  vertical-align: center; }
+  vertical-align: center;
+  pointer-events: none; }
   .rv-icon svg {
     width: 100%;
     height: 100%; }
@@ -1319,7 +1484,7 @@
   cursor: pointer;
   position: relative;
   border: 1px solid transparent;
-  border-radius: 0.2rem; }
+  border-radius: 0.2rem 0.2rem 0 0; }
   .rv-tab:first-child {
     margin-left: 1rem; }
   .rv-tab:hover {
@@ -1721,6 +1886,110 @@
   bottom: 0.5rem;
   right: 0.25rem;
   pointer-events: none; }
+
+/**
+----------------
+  Font Size
+----------------
+**/
+/**
+----------------
+  Colors
+----------------
+**/
+/**
+----------------
+  Typography
+----------------
+**/
+/**
+----------------
+  Navbar
+----------------
+**/
+/**
+----------------
+  Shadows
+----------------
+**/
+/**
+----------------
+  Cards
+----------------
+**/
+/**
+----------------
+  Breakpoints
+----------------
+**/
+/**
+----------------
+  Font Size
+----------------
+**/
+/**
+----------------
+  Colors
+----------------
+**/
+/**
+----------------
+  Typography
+----------------
+**/
+/**
+----------------
+  Navbar
+----------------
+**/
+/**
+----------------
+  Shadows
+----------------
+**/
+/**
+----------------
+  Cards
+----------------
+**/
+/**
+----------------
+  Breakpoints
+----------------
+**/
+.rv-tray {
+  position: relative;
+  background: #ffffff;
+  width: 18rem;
+  position: fixed;
+  top: 0;
+  height: 100%;
+  padding: 1rem;
+  transition: -webkit-transform 200ms;
+  transition: transform 200ms;
+  transition: transform 200ms, -webkit-transform 200ms; }
+
+.rv-tray--start {
+  left: 0;
+  -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
+  border-right: 1px solid #D6D6D6; }
+
+.rv-tray--end {
+  right: 0;
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+  border-left: 1px solid #D6D6D6; }
+
+.rv-tray--open {
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+  box-shadow: 0 0.8rem 0.8rem rgba(0, 0, 0, 0.3); }
+
+.rv-tray_close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem; }
 
 @charset "UTF-8";
 /**
@@ -2586,6 +2855,62 @@ h6,
 .rv-navbar_option-text-input {
   margin: 0 1rem; }
 
+.rv-navbar_options--responsive {
+  margin-right: 1rem; }
+
+.rv-navbar_options--toggle {
+  background: none;
+  border: none;
+  cursor: pointer; }
+
+.rv-navbar_options--responsive-container {
+  margin-top: 3rem; }
+
+.rv-nav_responsive-link {
+  display: block; }
+
+.rv-navbar_avatar-title {
+  margin-top: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.125; }
+
+.rv-navbar_subheader {
+  margin-top: 1rem;
+  font-size: 1.125rem;
+  font-weight: 600; }
+
+.rv-nav_responsive-link {
+  color: #246FF2;
+  text-decoration: none;
+  font-size: 1.125rem; }
+  .rv-nav_responsive-link:focus {
+    outline: none;
+    text-decoration: underline; }
+  .rv-nav_responsive-link:hover {
+    text-decoration: underline; }
+
+@media only screen and (min-width: 780px) {
+  .rv-navbar_options--responsive {
+    display: none; } }
+
+@media only screen and (max-width: 779px) {
+  .rv-navbar_options {
+    display: none; }
+  .rv-navbar_options-container {
+    display: block; }
+  .rv-navbar_avatar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+    width: 12rem; }
+  .rv-navbar_avatar {
+    width: 4rem; } }
+
 /**
 ----------------
   Font Size
@@ -3259,7 +3584,8 @@ h6,
 
 .rv-new-post_grid {
   display: flex;
-  flex-wrap: wrap; }
+  flex-wrap: wrap;
+  justify-content: center; }
 
 .rv-new-post_link {
   position: absolute;

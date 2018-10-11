@@ -1,0 +1,34 @@
+{% extends "styleguide_layout.html" %}
+{% load example_tags %}
+{% load tray_tags %}
+{% load button_tags %}
+
+{% block content%}
+  {% example with
+    heading=""
+    caption="Within your template file, load the custom tag tags"
+    codeOnly="True"
+  %}
+{% load tray_tags %}
+  {% end_example %}
+
+  {% example with 
+    heading="Usage" 
+    caption="Description of tag"  
+  %}
+{% tray
+  label="My tray"
+  placement="end"
+  closeButtonLabel="Close the tray"
+%}
+  {% tray_trigger %}
+    {% button %}
+      hello world
+    {% end_button %}
+  {% end_tray_trigger %}
+  {% tray_content %}
+    <div>hello world!</div>
+  {% end_tray_content%}
+{% end_tray %}
+  {% end_example %}
+{% endblock content %}

@@ -35,3 +35,7 @@ def text_area_assets():
 @register.inclusion_tag('text_input/assets.html')
 def text_input_assets():
   return {}
+
+@register.inclusion_tag('tray/assets.html')
+def tray_assets():
+  return {}

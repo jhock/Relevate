@@ -1,0 +1,33 @@
+.rv-tray {
+  position: relative;
+  background: $rv-color-white;
+  width: 18rem;
+  position: fixed;
+  top: 0;
+  height: 100%;
+  padding: 1rem;
+  transition: transform 200ms;
+}
+
+.rv-tray--start {
+  left: 0;
+  transform: translateX(-100%);
+  border-right: 1px solid $rv-color-light-gray;
+}
+
+.rv-tray--end {
+  right: 0;
+  transform: translateX(100%);
+  border-left: 1px solid $rv-color-light-gray;
+}
+
+.rv-tray--open {
+  transform: translateX(0);
+  box-shadow: $rv-overlay-box-shadow;
+}
+
+.rv-tray_close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}

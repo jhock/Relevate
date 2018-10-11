@@ -56,6 +56,32 @@
   &.ghost {
     @include buttonColor($color, $rv-color-white, $color, lighten($color, 44%), lighten($color, 40%))
   }
+
+  &.borderless {
+    border: transparent;
+    color: $color;
+    background: transparent;
+    padding: 0 0.25rem;
+    border-radius: 0.25rem;
+    @include buttonFocus(0, 0, 0, 0, 0.3rem);
+
+    &:hover {
+      &.primary {
+        background: lighten($color, 44%);
+      }
+
+      &.dark {
+        background: lighten($color, 50%);
+      }
+
+      transition: background 200ms linear;
+    }
+
+    &:active {
+      background: lighten($color, 40%);
+      box-shadow: inset 0 0 0.15rem $rv-color-primary;
+    }
+  }
 }
 
 .rv-button {

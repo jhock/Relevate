@@ -1,0 +1,115 @@
+{#
+  `infographic_create_title` -- the title text to read at the top of the create page
+  `infographic_create_type`  -- indicates if we are creating or updating. One of `create` or `update`
+#}
+
+{% extends "base-titlebar.html" %}
+{% load staticfiles %}
+{% load text_input_tags %}
+{% load file_input_tags %}
+{% load button_tags %}
+
+{% block head %}
+  {{ block.super }}
+  <script type="text/javascript" src="{% static 'js/topic-button.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/infographic-verification.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+<div class='rv-content-layout'>
+  <div class='rv-content-layout_children'>
+    <form action="{% url 'contribution:infographic_create_view' %}" enctype='multipart/form-data',
+        method="post">
+      {% csrf_token %}
+      <h1 class="rv-create-content_header">{{infographic_create_title}}</h1>
+      <div class="rv-create-content_input">
+        {% text_input
+          label=form.title.label
+          input=form.title
+          placeholder="Enter a title"
+        %}
+        <div class="rv-create-content_input--error">{{ form.title.error }}</div>
+      </div>
+      <div class="rv-create-content_editor">
+        <label class="rv-create-content_editor--label">
+          {{ form.blurb.label }}
+        </label>
+        <div>
+          {{ form.blurb }}
+        </div>
+        <div class="rv-create-content_remaining-text" id="blurb_count"></div>
+      </div>
+      <div>
+        <div class="rv-create-content_editor--label">
+          Infographic Image
+        </div>
+        {% file_input
+          label=form.contents.label
+          input=form.contents
+          accept=".png, .jpg, .jpeg"
+        %}
+      </div>
+
+      <div class="rv-create-content_topics">
+        <label class="rv-create-content_editor--label">Infographic Topics</label>
+        <p>You must select at least 1 topic for this infographic</p>
+        <div>
+          {{ form.topic_choices }}
+        </div>
+      </div>
+      <input id='hidden-publish-checkbox' name='hidden-publish-checkbox' type='checkbox' hidden />
+      <br />
+      {% if infographic_create_type == 'create' %}
+        <div>
+          {% button
+            type="button"
+            name="save_and_publish"
+          %}
+            Save and Publish
+          {% end_button %}
+          {% button
+            type="button"
+            variant="ghost"
+          %}
+            Save
+          {% end_button %}
+        </div>
+      {% elif infographic_create_type == 'update' %}
+        <div>
+          {% button
+            type="button"
+            name="save_and_publish"
+          %}
+            Update and Publish
+          {% end_button %}
+          {% button
+            type="button"
+            variant="ghost"
+          %}
+            Update
+          {% end_button %}
+        </div>
+      {% endif %}
+      <br>
+      {#<div id="preview-modal-info" uk-modal>
+          <div class="uk-modal-dialog uk-modal-body">
+              {% include 'previews/infographic_preview.html' %}
+          </div>
+      </div> #}
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+  {{ block.super }}
+  <script>
+    // Replace the <textarea id="editor1"> with a CKEditor
+    // instance, using default configuration.
+    CKEDITOR.replace('id_blurb',
+    {
+      customConfig: '{% static 'js/ckeditor_basic_config.js' %}'
+    });
+  </script>
+{% endblock %}

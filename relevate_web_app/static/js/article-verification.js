@@ -93,34 +93,34 @@ $(document).ready(function()
 
 	});
 
-	CKEDITOR.instances['id_blurb'].on('key', function(event){
+	CKEDITOR.instances['id_blurb'].on('change', function(event){
 		    var count = CKEDITOR.instances['id_blurb'].getData().length;
 			var left = 150 - count;
-			var word = "(" + left + " characters left )";
+			var word = left + " characters remaining";
 		    $("#blurb_count").text('');
 		    $("#blurb_count").text(word);
 		});
 
-	CKEDITOR.instances['id_references'].on('key', function(event){
+	CKEDITOR.instances['id_references'].on('change', function(event){
 		    var count = CKEDITOR.instances['id_references'].getData().length;
 			var left = 3000 - count;
-			var word = "(" + left + " characters left )";
+			var word = left + " characters remaining";
 		    $("#references_count").text('');
 		    $("#references_count").text(word);
 		});
 
-	CKEDITOR.instances['id_content'].on('key', function(event){
-		    var count = CKEDITOR.instances['id_content'].getData().length;
-			var left = 5000 - count;
-			var word = "(" + left + " characters left )";
-		    $("#content_count").text('');
-		    $("#content_count").text(word);
-		});
+	CKEDITOR.instances['id_content'].on('change', function (event) {
+    var count = CKEDITOR.instances['id_content'].getData().length;
+		var left = 5000 - count;
+		var word = left + " characters remaining";
+    $("#content_count").text('');
+    $("#content_count").text(word);
+	});
 
 	$("#id_title").keyup(function(){
 		var count = $("#id_title").val().length;
 		var left = 1000 - count;
-		var word = "(" + left + " characters left )";
+		var word = left + " characters remaining";
 		$("#title_count").text('');
 		$("#title_count").text(word);
 	});

@@ -26,6 +26,10 @@
   box-shadow: $rv-overlay-box-shadow;
 }
 
+.rv-tray--closed {
+  display: none;
+}
+
 .rv-tray_close-button {
   position: absolute;
   top: 1rem;

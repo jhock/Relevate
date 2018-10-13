@@ -79,15 +79,15 @@ $(document).ready(function()
 		}
 	});
 
-	CKEDITOR.instances['id_blurb'].on('key', function(event){
-		    var count = CKEDITOR.instances['id_blurb'].getData().length;
-			var left = 400 - count;
-			var word = "(" + left + " characters left )";
-		    $("#blurb_count").text('');
-		    $("#blurb_count").text(word);
+	CKEDITOR.instances['id_blurb'].on('change', function(event){
+		var count = CKEDITOR.instances['id_blurb'].getData().length;
+		var left = 400 - count;
+		var word = left + " characters remaining";
+    $("#blurb_count").text('');
+    $("#blurb_count").text(word);
 	});
 
-	$("#id_title").keyup(function(){
+	$("#id_title").change(function(){
 		var count = $("#id_title").val().length;
 		var left = 1000 - count;
 		var word = "(" + left + " characters left )";

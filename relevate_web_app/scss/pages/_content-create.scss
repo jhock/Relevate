@@ -1,0 +1,88 @@
+@mixin inputMessage ($bottom) {
+  position: absolute;
+  right: 0;
+  font-size: 0.875rem;
+  bottom: $bottom;
+}
+
+.rv-create-content_header {
+  margin-top: 1rem;
+  font-size: 2rem;
+}
+
+.rv-create-content_input {
+  position: relative;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+
+  &.row-child {
+    width: 50%;
+  }
+
+  &.row-child:first-child {
+    margin-right: 0.5rem;
+  }
+
+  &.row-child:last-child {
+    margin-left: 0.5rem;
+  }
+}
+
+.rv-create-content_input--row {
+  display: flex;
+}
+
+.rv-create-content_remaining-text--input {
+  @include inputMessage(0);
+}
+
+.rv-create-content_input--error {
+  @include inputMessage(0);
+  color: $rv-color-warning;
+}
+
+
+.rv-create-content_editor {
+  position: relative;
+  margin-bottom: 3rem;
+}
+
+.rv-create-content_editor--label {
+  font-size: 1.125rem;
+  margin-bottom: 1rem;
+  display: block;
+  font-weight: $rv-font-weight-bold;
+}
+
+.rv-create-content_remaining-text {
+  @include inputMessage(-1.5rem);
+}
+
+.rv-create-content_topics {
+  margin-top: 3rem;
+}
+
+.rv-create-content_topics--description {
+  margin-bottom: 0.5rem;
+  font-style: italic;
+}
+
+@media only screen and (max-width: 780px) {
+  .rv-create-content_input--row {
+    display: block;
+  }
+
+  .rv-create-content_input {
+    &.row-child {
+      width: 100%;
+    }
+
+    &.row-child:first-child {
+      margin-right: 0;
+    }
+
+    &.row-child:last-child {
+      margin-left: 0;
+    }
+  }
+}

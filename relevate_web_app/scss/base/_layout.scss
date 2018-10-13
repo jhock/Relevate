@@ -70,7 +70,7 @@
 }
 
 @media only screen and (max-width: $rv-breakpoint-phone) {
-  .rv-content-layout {
+  .rv-content-layout--marginless {
     margin: 0;
   }
 }

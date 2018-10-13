@@ -1,0 +1,191 @@
+{#
+  `article_create_title` -- the title text to read at the top of the create page
+  `article_create_type`  -- indicates if we are creating or updating. One of `create` or `update`
+#}
+
+{% extends "base-titlebar.html" %}
+{% load staticfiles %}
+{% load text_input_tags %}
+{% load file_input_tags %}
+{% load button_tags %}
+
+{% block head %}
+  {{ block.super }}
+  <script type="text/javascript" src="{% static 'js/topic-button.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/article-verification.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+<div class="rv-content-layout">
+  <div class="rv-content-layout_children">
+    <form id="formUpload" action="{% url 'contribution:article_create' %}" method="post" enctype='multipart/form-data'>
+      {% csrf_token %}
+      <h1 class="rv-create-content_header">{{article_create_title}}</h1>
+      <div class="rv-create-content_input">
+        {% text_input
+          label=form.title.label
+          input=form.title
+          placeholder="Enter an article title"
+        %}
+        <div class="rv-create-content_remaining-text--input" id="title_count"></div>
+      </div>
+      <div class="rv-create-content_editor">
+        <label class="rv-create-content_editor--label">
+          {{ form.content.label }}
+        </label>
+        <div>
+          {{ form.content }}
+        </div>
+        <div class="rv-create-content_remaining-text" id="content_count"></div>
+      </div>
+      <div class="rv-create-content_editor">
+        <label class="rv-create-content_editor--label">
+          {{ form.blurb.label }}
+        </label>
+        <div>
+          {{ form.blurb }}
+        </div>
+        <span class="rv-create-content_remaining-text" id="blurb_count"></span>
+      </div>
+      <div class="rv-create-content_editor">
+        <label class="rv-create-content_editor--label">
+          {{ form.references.label }}
+        </label>
+        <div>
+          {{ form.references }}
+        </div>
+        <span class="rv-create-content_remaining-text" id="references_count"></span>
+      </div>
+      <div class="rv-create-content_file-upload">
+        <div class="rv-create-content_editor--label">
+          Article Image
+        </div>
+        {% file_input
+          label=form.image.label
+          input=form.image
+          accept=".png, .jpg, .jpeg"
+        %}
+      </div>
+      {# TODO: Wait to put cropping back until we've discussed how we want it to look as a team #}
+      {# <div class="uk-hidden">
+        {{ form.x }}
+        {{ form.y }}
+        {{ form.height }}
+        {{ form.width }}
+      </div>
+
+        <!-- MODAL TO CROP THE IMAGE -->
+        <div class="modal fade" id="modalCrop">
+        <div class="modal-dialog">
+          <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">Crop the photo</h4>
+          </div>
+          <div class="modal-body">
+            <img src="" id="image" style="max-width: 100%;">
+          </div>
+          <div class="modal-footer">
+            <div class="btn-group pull-left" role="group">
+            <button type="button" class="btn btn-default js-zoom-in">
+              <span class="glyphicon glyphicon-zoom-in"></span>
+            </button>
+            <button type="button" class="btn btn-default js-zoom-out">
+              <span class="glyphicon glyphicon-zoom-out"></span>
+            </button>
+            </div>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Nevermind</button>
+            <button type="button" class="btn btn-primary js-crop-and-upload">Crop and upload</button>
+          </div>
+          </div>
+        </div>
+        </div>
+
+        <!-- CONTAINER TO DISPLAY THE CROPPED IMAGES -->
+        <div class="row uk-hidden" style="margin-top: 20px">
+          <div class="col-sm-4 col-md-3" id="cropped_thumbnail">
+          <img src="{{ form.image.url }}" class="thumbnail">
+          </div>
+        </div>
+      #}
+
+      <div class="rv-create-content_topics">
+        <label class="rv-create-content_editor--label">Article Topics</label>
+        <p class="rv-create-content_topics--description">
+          You must select at least 1 topic for this article
+        </p>
+        <div>
+          {{ form.topic_choices }}
+        </div>
+      </div>
+      <br>
+      <input id='hidden-publish-checkbox' name='hidden-publish-checkbox' type='checkbox' hidden />
+      {% if article_create_type == 'create' %}
+        <div>
+          {% button
+            type="button"
+            name="save_and_publish"
+          %}
+            Save and Publish
+          {% end_button %}
+          {% button
+            type="button"
+            variant="ghost"
+          %}
+            Save
+          {% end_button %}
+        </div>
+      {% elif article_create_type == 'update' %}
+        <div>
+          {% button
+            type="button"
+            name="save_and_publish"
+          %}
+            Update and Publish
+          {% end_button %}
+          {% button
+            type="button"
+            variant="ghost"
+          %}
+            Update
+          {% end_button %}
+        </div>
+      {% endif %}
+      {# TODO: reconfigure when we redesign article previews #}
+      {#<button id='preview-btn' type="button" uk-toggle="target: #preview-modal-article">
+        Preview
+      </button> #}
+      <br>
+    </form>
+  </div>
+    {# TODO: reconfigure when we redesign article previews #}
+    {#<div id="preview-modal-article" uk-modal>
+        <div class="uk-modal-dialog uk-modal-body">
+            {% include 'previews/article_preview.html' %}
+        </div>
+    </div> #}
+</div>
+{% endblock %}
+
+{% block footer %}
+  {{ block.super }}
+  <script>
+    // Replace the <textarea id="editor1"> with a CKEditor
+    // instance, using default configuration.
+    CKEDITOR.replace('id_content',
+    {
+      customConfig: '{% static 'js/ckeditor_basic_config.js' %}'
+    });
+    CKEDITOR.replace('id_references',
+    {
+      customConfig: '{% static 'js/ckeditor_basic_config.js' %}'
+    });
+    CKEDITOR.replace('id_blurb',
+    {
+      customConfig: '{% static 'js/ckeditor_basic_config.js' %}'
+    });
+  </script>
+{% endblock %}

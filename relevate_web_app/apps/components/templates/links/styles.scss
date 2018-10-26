@@ -1,0 +1,14 @@
+.rv-link {
+  color: $rv-color-primary;
+  text-decoration: none;
+
+  &:focus,
+  &:hover {
+    text-decoration: underline;
+    outline: none;
+  }
+
+  &:active {
+    color: darken($rv-color-primary, 10%);
+  }
+}

@@ -1,0 +1,98 @@
+@mixin iconSize($size) {
+  width: $size;
+  height: $size;
+}
+
+@mixin iconColor($color) {
+  svg {
+    g {
+      fill: $color;
+    }
+  }
+}
+
+@mixin iconRotate($rotate) {
+  svg {
+    transform: rotate($rotate);
+  }
+}
+
+.rv-icon {
+  display: inline-block;
+  vertical-align: center;
+  pointer-events: none;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+  
+  //------------
+  //  size
+  //------------
+  &.x-small {
+    @include iconSize(1rem);
+  }
+
+  &.small {
+    @include iconSize(1.25rem);
+  }
+
+  &.medium {
+    @include iconSize(1.5rem);
+  }
+
+  &.large {
+    @include iconSize(1.75rem);
+  }
+
+  &.x-large {
+    @include iconSize(3.5rem);
+  }
+
+  &.fill {
+    @include iconSize(100%);
+  }
+
+  //------------
+  //  color
+  //------------
+  &.primary {
+    @include iconColor($rv-color-primary);
+  }
+
+  &.inverse {
+    @include iconColor($rv-color-white);
+  }
+
+  &.dark {
+    @include iconColor($rv-color-dark);
+  }
+
+  &.neutral{
+    @include iconColor($rv-color-neutral);
+  }
+
+  &.light-gray {
+    @include iconColor($rv-color-light-gray);
+  }
+
+  //------------
+  //  rotate
+  //------------
+  &.rotate-0 {
+    @include iconRotate(0deg);
+  }
+
+  &.rotate-90 {
+    @include iconRotate(90deg);
+  }
+
+  &.rotate-180 {
+    @include iconRotate(180deg);
+  }
+
+  &.rotate-270 {
+    @include iconRotate(270deg);
+  }
+}

@@ -1,12 +1,8 @@
 {% load staticfiles %}
-{% load compress %}
 {% load select_tags %}
 {% load templatetag_handlebars %}
 
 <script src="{% static 'js/select.js' %}"></script>
-{% compress css %}
-  <link rel="stylesheet" type="text/x-scss" href="{% static "scss/select.scss" %}" />
-{% endcompress %}
 
 {% tplhandlebars "rv_select" %}
   {% select label={{label}} placeholder={{placeholder}} editable="True" %}

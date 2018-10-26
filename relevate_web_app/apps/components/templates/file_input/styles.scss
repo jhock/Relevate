@@ -1,0 +1,137 @@
+.rv-file-input {
+  border: 2px dashed $rv-color-primary;
+  border-radius: 0.25rem;
+  position: relative;
+  padding: 1rem;
+  text-align: center;
+  transition: background 200ms linear;
+  min-height: 4.125rem;
+
+  &:focus-within {
+    .rv-file-input_upload {
+      &:before {
+        content: "";
+        position: absolute;
+        top: -0.25rem;
+        bottom: -0.25rem;
+        left: -0.25rem;
+        right: -0.25rem;
+        border: 1px solid $rv-color-primary;
+        border-radius: 999rem;
+      }
+    }
+  }
+
+  &:hover {
+    background: $rv-color-primary;
+    border: 2px dashed $rv-color-white;
+
+    .rv-file-input_file-name,
+    .rv-file-input_instructions,
+    .rv-file-input_icon,
+    .rv-file-input_upload {
+      color: $rv-color-white;
+    }
+
+    .rv-file-input_upload {
+      border-color: $rv-color-white;
+
+      &:before {
+        border-color: $rv-color-white;
+      }
+    }
+  }
+}
+
+.rv-file-input_dragging {
+  position: absolute;
+  background: $rv-color-primary;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color: $rv-color-white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 200ms linear;
+
+  &.hidden {
+    opacity: 0;
+  }
+}
+
+.rv-file-input_dragging-caption {
+  font-weight: $rv-font-weight-bold;
+  margin-top: 0.5rem;
+}
+
+.rv-file-input_upload {
+  position: relative;
+  border: 2px solid $rv-color-primary;
+  border-radius: 999rem;
+  color: $rv-color-primary;
+  font-weight: $rv-font-weight-bold;
+  padding: 0.25rem 0.75rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.rv-file-input_content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.rv-file-input_instructions {
+  font-style: italic;
+  font-weight: $rv-font-weight-medium;
+  margin-top: 0.125rem;
+}
+
+.rv-file-input_file-name {
+  font-weight: $rv-font-weight-bold;
+}
+
+.rv-file-input_file-name,
+.rv-file-input_instructions {
+  color: $rv-color-primary;
+  font-size: 1rem;
+}
+
+.rv-file-input_icon {
+  display: inline-block;
+  margin-right: 0.25rem;
+  margin-top: 0.25rem;
+  color: $rv-color-primary;
+
+  &.hidden {
+    display: none;
+  }
+}
+
+.rv-file-input_accepts {
+  font-size: 0.875rem;
+  font-style: italic;
+  color: $rv-color-primary;
+  margin-top: 0.25rem;
+}
+
+.rv-file-input_input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  opacity: 0;
+
+  &:focus {
+    outline: none;
+  }
+}

@@ -1,0 +1,173 @@
+{#
+  `link_create_title` -- the title text to read at the top of the create page
+  `link_create_type`  -- indicates if we are creating or updating. One of `create` or `update`
+#}
+
+{% extends "base-titlebar.html" %}
+{% load staticfiles %}
+{% load text_input_tags %}
+{% load file_input_tags %}
+{% load button_tags %}
+
+{% block head %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/link-create.css' %}"/>
+  <script type="text/javascript" src="{% static 'js/contributor.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/link-create.js' %}"></script>
+
+  <script type="text/javascript" src="{% static 'js/topic-button.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/link-validation.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+<div class="rv-content-layout">
+  <div class="rv-content-layout_children">
+    <form id='link-form' action="{% url 'contribution:link_create' %}" method="post" enctype='multipart/form-data'>
+      {% csrf_token %}
+      <h1 class="rv-create-content_header">{{link_create_title}}</h1>
+      <div class="rv-create-content_input--row">
+        <div class="rv-create-content_input row-child">
+          {% text_input
+            label=form.title.label
+            input=form.title
+            placeholder="Enter a title"
+          %}
+        </div>
+        <div class="rv-create-content_input row-child">
+          {% text_input
+            label=form.link.label
+            input=form.link
+            placeholder="Enter a url (ex. http://articlelink.com)"
+          %}
+        </div>
+      </div>
+      <div class="rv-create-content_file-upload">
+        <div class="rv-create-content_editor--label">
+          Link Image
+        </div>
+        {% file_input
+          label=form.image.label
+          input=form.image
+          accept=".png, .jpg, .jpeg"
+        %}
+        <div class="uk-hidden">
+          {{ form.x }}
+          {{ form.y }}
+          {{ form.height }}
+          {{ form.width }}
+        </div>
+      </div>
+
+      {# TODO: Wait to put cropping back until we've discussed how we want it to look as a team #}
+      {#<div class="modal fade" id="modalCrop">
+        <div class="modal-dialog">
+          <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">Crop the photo</h4>
+          </div>
+          <div class="modal-body">
+            <img src="" id="image" style="max-width: 100%;">
+          </div>
+          <div class="modal-footer">
+            <div class="btn-group pull-left" role="group">
+            <button type="button" class="btn btn-default js-zoom-in">
+              <span class="glyphicon glyphicon-zoom-in"></span>
+            </button>
+            <button type="button" class="btn btn-default js-zoom-out">
+              <span class="glyphicon glyphicon-zoom-out"></span>
+            </button>
+            </div>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Nevermind</button>
+            <button type="button" class="btn btn-primary js-crop-and-upload">Crop and upload</button>
+          </div>
+          </div>
+        </div>
+        </div> #}
+
+      <br />
+      <br />
+      <div class="rv-create-content_editor">
+        <label class="rv-create-content_editor--label">
+          {{ form.blurb.label }}
+        </label>
+        <div>
+          {{ form.blurb }}
+        </div>
+        <div class="rv-create-content_remaining-text" id="blurb_count"></div>
+      </div>
+      <div class="rv-create-content_topics">
+        <label class="rv-create-content_editor--label">
+          Link Topics
+        </label>
+        <p class="rv-create-content_topics--description">
+          You must select at least 1 topic for this link
+        </p>
+        <div>
+          {{ form.topic_choices }}
+        </div>
+      </div>
+      <input id='hidden-checkbox' name='hidden-checkbox' type='checkbox' hidden />
+
+      <br />
+      <div>
+        {% if link_create_type == 'create' %}
+          {% button
+            type="button"
+            name="save_and_publish"
+          %}
+            Save and Publish
+          {% end_button %}
+          {% button
+            type="button"
+            variant="ghost"
+          %}
+            Save
+          {% end_button %}
+        {% elif link_create_type == 'update' %}
+          {% button
+            type="button"
+            name="save_and_publish"
+          %}
+            Update and Publish
+          {% end_button %}
+          {% button
+            type="button"
+            variant="ghost"
+          %}
+            Update
+          {% end_button %}
+        {% endif %}
+        {# TODO: reconfigure when we redesign article previews #}
+        {#<button id='preview-btn' type="button" class="uk-button uk-button-secondary"
+                                     uk-toggle="target: #preview-modal-link">
+            Preview
+        </button> #}
+        <div>
+          <div id='load-icon' class='loader invisible'></div>
+        </div>
+      </div>
+      <br />
+    </form>
+  </div>
+  {# TODO: reconfigure when we redesign article previews #}
+  {#<div id="preview-modal-link" uk-modal>
+      <div class="uk-modal-dialog uk-modal-body">
+          {% include 'previews/link_preview.html' %}
+      </div>
+  </div> #}
+</div>
+<script>
+    CKEDITOR.replace('id_blurb',
+    {
+      customConfig: '{% static 'js/ckeditor_basic_config.js' %}'
+    });
+</script>
+
+{% endblock %}
+
+
+

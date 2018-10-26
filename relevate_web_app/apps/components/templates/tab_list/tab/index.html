@@ -1,0 +1,12 @@
+<div
+  class="rv-tab"
+  aria-selected="{% if active %}true{% else %}false{% endif %}"
+  onClick="handleTabClick(event)"
+  onKeyDown="handleTabKeyDown(event)"
+  id="{{tab_id}}"
+  aria-controls="{{panel_id}}"
+  tabindex="{% if active %}0{% else %}-1{% endif %}"
+  role="tab"
+>
+  {{title}}
+</div>

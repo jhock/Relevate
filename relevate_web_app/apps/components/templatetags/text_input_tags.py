@@ -17,6 +17,8 @@ from ..utils import (
   get_prop_from_tag
 )
 
+import pdb
+
 register = template.Library()
 
 @register.tag('text_input')

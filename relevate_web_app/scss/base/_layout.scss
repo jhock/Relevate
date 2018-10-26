@@ -1,0 +1,76 @@
+//--------------------
+// Masonry Layout
+//--------------------
+.rv-masonry {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.rv-masonry_container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding: 0 4rem;
+}
+
+//--------------------
+// Box Layout
+//--------------------
+
+.rv-box-layout {
+  display: flex;
+  justify-content: center;
+  margin-top: 0rem;
+}
+
+.rv-box-layout_box {
+  border: none;
+  box-shadow: none;
+  padding: 0rem 2rem;
+  width: 22rem;
+  margin-bottom: 1rem;
+}
+
+@media only screen and (min-width: $rv-breakpoint-phone) {
+  .rv-box-layout {
+    margin-top: 3rem;
+  }
+
+  .rv-box-layout_box {
+    border: 1px solid $rv-color-light-gray;
+    box-shadow: $rv-box-shadow;
+    padding: 2rem 2rem;
+  }
+}
+
+//--------------------
+// Content Layout
+//--------------------
+
+.rv-content-layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 2rem;
+}
+
+.rv-content-layout_children {
+  max-width: 65rem;
+}
+
+@media only screen and (max-width: $rv-breakpoint-tablet) {
+  .rv-content-layout {
+    margin: 0 1rem;
+  }
+
+  .rv-content-layout_children {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: $rv-breakpoint-phone) {
+  .rv-content-layout--marginless {
+    margin: 0;
+  }
+}

@@ -79,6 +79,10 @@ def icon_like(parser, token):
 def icon_link(parser, token):
   return create_icon(parser, token, 'link')
 
+@register.tag('icon_menu')
+def icon_menu(parser, token):
+  return create_icon(parser, token, 'menu')
+
 @register.tag('icon_save')
 def icon_save(parser, token):
   return create_icon(parser, token, 'save')

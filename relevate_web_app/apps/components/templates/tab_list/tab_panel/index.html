@@ -1,0 +1,9 @@
+<div
+  class="rv-tab-panel {% if active %}rv-tab-panel--active{% endif %}"
+  id="{{panel_id}}"
+  aria-labelledby="{{tab_id}}"
+  aria-hidden="{% if active %}false{% else %}true{% endif %}"
+  role="tabpanel"
+>
+  {{children}}
+</div>

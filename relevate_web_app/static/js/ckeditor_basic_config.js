@@ -4,4 +4,5 @@ CKEDITOR.editorConfig = function( config ) {
         { name: 'basicstyles', groups: [ 'basicstyles'] },
     ];
     config.removeButtons = 'Superscript,Subscript,Strike';
+    config.uiColor = '#ffffff';
 };

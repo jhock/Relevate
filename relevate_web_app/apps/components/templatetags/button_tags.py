@@ -11,6 +11,7 @@ from ..utils import (
   amend_html_props_to_tag,
   replace_tag
 )
+import pdb
 
 register = template.Library()
 
@@ -45,12 +46,12 @@ class Button(Node):
 
     button_html = get_template("buttons/index.html")
     context.update({
-      'children': self.children.render(context),
-      'variant': resolve_variable(self.variant, context),
-      'color': resolve_variable(self.color, context),
-      'fluid_width' : resolve_variable(self.fluid_width, context),
-      'href': resolve_variable(self.href, context),
-      'margin': resolve_variable(self.margin, context)
+      'button_children': self.children.render(context),
+      'button_variant': resolve_variable(self.variant, context),
+      'button_color': resolve_variable(self.color, context),
+      'button_fluid_width' : resolve_variable(self.fluid_width, context),
+      'button_href': resolve_variable(self.href, context),
+      'button_margin': resolve_variable(self.margin, context)
     })
     markup = button_html.render(context)
     return self.process_markup(markup, self.href)

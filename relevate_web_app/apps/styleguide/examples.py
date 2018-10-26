@@ -3,6 +3,8 @@ from os.path import dirname, join, splitext
 from collections import namedtuple
 import string
 
+import pdb
+
 ExampleData = namedtuple('ExampleData', ['rawName', 'displayName', 'cssFilePath', 'jsFilePath'])
 
 examplesDir = 'templates/examples'
@@ -23,7 +25,7 @@ for example in examples:
 
   appName = 'relevate_web_app'
 
-  componentCssDir = 'apps/components/static/scss'
+  componentCssDir = 'apps/components/templates/' + example
   componentCssDirAbs = join(dirname(dirname(dirname(__file__))), componentCssDir)
   componentCssFiles = listdir(componentCssDirAbs)
   cssFileName = example + '.scss'

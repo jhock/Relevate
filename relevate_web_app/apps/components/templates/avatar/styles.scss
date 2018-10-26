@@ -1,0 +1,46 @@
+.rv-avatar-component {
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid $rv-color-light-gray;
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.rv-avatar-component_initials {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+.rv-avatar-component_initials--container {
+  height: 34%;
+  color: $rv-color-primary;
+  font-weight: $rv-font-weight-bold;
+  font-size: 0;
+
+  svg {
+    height: 100%;
+    margin: 0 0.04rem;
+
+    g {
+      fill: $rv-color-primary;
+      stroke: $rv-color-primary;
+    }
+  }
+}
+
+.rv-avatar-component_image--accessible {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}

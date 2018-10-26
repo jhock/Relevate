@@ -1,11 +1,6 @@
 {% load staticfiles %}
-{% load compress %}
 {% load icon_tags %}
 {% load templatetag_handlebars %}
-
-{% compress css %}
-  <link rel="stylesheet" type="text/x-scss" href="{% static "scss/icons.scss" %}" />
-{% endcompress %}
 
 {# TODO: Kill the duplication with icons #}
 {% tplhandlebars "rv_icon_add" %}

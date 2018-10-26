@@ -1,0 +1,23 @@
+{% load button_tags %}
+{% load icon_tags %}
+
+<div
+  class="rv-tray rv-tray--closed rv-tray--{{tray_placement}}"
+  role="dialog"
+  aria-label="{{tray_label}}"
+>
+  <div class="rv-tray_close-button">
+    {% button
+      variant="borderless"
+      color="dark"
+      onclick="handleTrayCloseButtonClick(event)"
+      aria-label=tray_close_button_label
+      data-tray-close-button="true"
+    %}
+      {% icon_x size="medium" %}
+    {% end_button %}
+  </div>
+  <div>
+    {{tray_content_children}}
+  </div>
+</div>

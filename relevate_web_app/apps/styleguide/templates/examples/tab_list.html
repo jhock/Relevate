@@ -1,0 +1,40 @@
+{% extends "styleguide_layout.html" %}
+{% load example_tags %}
+{% load avatar_tags %}
+{% load tab_list_tags %}
+
+{% block content%}
+  {% example with
+    heading="Requirements"
+    caption="Include the following in your HTML head (This imports the styles)"
+    codeOnly="True"
+  %}
+{% load component_assets %}
+{% tab_list_assets %}
+  {% end_example %}
+
+  {% example with
+    heading=""
+    caption="Within your template file, load the custom tab list tags"
+    codeOnly="True"
+  %}
+{% load tab_list_tags %}
+  {% end_example %}
+
+  {% example with 
+    heading="Usage" 
+    caption="Description of tab list"  
+  %}
+{% tab_list %}
+  {% tab_panel title="First tab" %}
+    <div>Hello from some content</div>
+  {% end_tab_panel %}
+  {% tab_panel title="Second tab" %}
+    <div>Different content in another tab</div>
+  {% end_tab_panel %}
+  {% tab_panel title="Third tab" %}
+    <div>Some more different content</div>
+  {% end_tab_panel %}
+{% end_tab_list %}
+  {% end_example %}
+{% endblock content %}

@@ -47,6 +47,7 @@ class ContributorProfile(models.Model):
 	is_approved = models.BooleanField(default=False)
 	date_joined = models.DateTimeField(null=True, blank=True)
 
+
 	def __str__(self):
 		return self.user_profile.user.first_name + " " + self.user_profile.user.last_name
 

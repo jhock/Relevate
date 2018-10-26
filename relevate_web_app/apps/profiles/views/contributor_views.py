@@ -626,7 +626,7 @@ class ContributorListView(View):
                     return render(request, 'contributors.html',
                                   {
                                       'user_prof': user_prof,
-                                      'contrib_prof':contrib_prof,
+                                      'contrib_prof': contrib_prof,
                                       'contributors': get_list_of_contributor_credentials(contributor_profiles),
                                   })
             else:

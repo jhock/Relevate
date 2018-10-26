@@ -79,6 +79,8 @@ def get_list_of_contributor_credentials(contributor_profile_list):
 			'credentials': credentials,
 			'first_name':each_contrib.user_profile.user.first_name,
 			'last_name':each_contrib.user_profile.user.last_name,
+			'avatar_image_url':each_contrib.avatar_image_url,
+			'user_profile':each_contrib.user_profile,
 			'id':each_contrib.id
 		}
 		credentials_list.append(contrib_prof)

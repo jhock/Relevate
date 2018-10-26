@@ -24,7 +24,7 @@ class HomeView(View):
         """
         Returns the home page.
         """
-        posts = Post.objects.all()
+        posts = Post.objects.all().order_by('-publishedDate')
         published = posts.filter(isPublished=True)
 
         page = request.GET.get('page', 1)

@@ -24,8 +24,8 @@
                 <div class="rv-contributor-list_avatar">
                   {% with ""|add:contrib_prof.first_name|add:" "|add:contrib_prof.last_name as name %}
                     {% avatar
-                      src="http://keyassets.timeincuk.net/inspirewp/live/wp-content/uploads/sites/12/2016/09/iStock-landscape-600x400.jpg"
-                      name=name
+						name=contrib_prof.user_profile
+						src=contrib_prof.avatar_image_url
                     %}
                   {% endwith %}
                 </div>

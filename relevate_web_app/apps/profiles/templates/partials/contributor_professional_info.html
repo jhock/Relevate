@@ -1,0 +1,27 @@
+{% load button_tags %}
+{% load checkbox_tags %}
+{% load file_input_tags %}
+{% load icon_tags %}
+{% load progress_tags %}
+{% load select_tags %}
+{% load text_area_tags %}
+{% load text_input_tags %}
+
+<div id="Topics" class="tabcontentContrib" style="display:block">
+    <div class="rv-contributor-form_progress">
+        {% progress %}
+            {% progress_item status="complete" %}Degree and Affiliation{% end_progress_item %}
+            {% progress_item status="active" %}Topics{% end_progress_item %}
+        {% progress_item %}Professional Info{% end_progress_item %}
+        {% end_progress %}
+    </div>
+    <div class="rv-contributor-form_box">
+        <h4 class="rv-contributor-form_subheader">Expertise Topics</h4>
+        <div class="rv-contributor-form_content">
+            <p class="rv-contributor-form_subheader--caption">
+                Select as many topics as you feel qualified to write about.
+            </p>
+            {{ form.area_of_expertise }}
+        </div>
+    </div>
+</div>

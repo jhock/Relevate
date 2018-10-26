@@ -30,8 +30,10 @@
 						{{ post.contributor.user_profile.user.first_name }} {{ post.contributor.user_profile.user.last_name }}
 					</div>
 					<div class="rv-article_author--degree">
-						{# TODO: Replace this with the actual degree #}
-						PhD Advanced Relationship Stuff
+						  {% for academicprofile in post.contributor.academicprofile_set.all %}
+							{{ academicprofile.degree }} at {{ academicprofile.institution }}{% if not forloop.last %},
+							{% endif %}
+						  {% endfor %}
 					</div>
 				</div>
 			</div>

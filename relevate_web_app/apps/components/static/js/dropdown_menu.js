@@ -5,7 +5,7 @@ function ddmenuHandleMenuTriggerClick (trigger) {
   menu.style.display = 'initial'
   menu.setAttribute('aria-hidden', 'false')
   trigger.setAttribute('aria-expanded', 'true')
-  
+
   if (arrow) {
     arrow.style.transform = 'rotate(90deg)'
   }
@@ -26,11 +26,11 @@ function ddmenuHandleMenuItemKeyDown (event, item) {
     menu.style.display = 'none'
     menu.setAttribute('aria-hidden', 'true')
     trigger.setAttribute('aria-expanded', 'false')
-    
+
     if (arrow) {
       arrow.style.transform = 'rotate(0deg)'
     }
-    
+
     trigger.focus()
     return
   }
@@ -89,7 +89,7 @@ function ddmenuHandleMenuItemBlur (event, item) {
     menu.style.display = 'none'
     menu.setAttribute('aria-hidden', 'true')
     trigger.setAttribute('aria-expanded', 'false')
-    
+
     if (arrow) {
       arrow.style.transform = 'rotate(0deg)'
     }

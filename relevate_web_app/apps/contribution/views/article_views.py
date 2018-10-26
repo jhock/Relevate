@@ -12,7 +12,7 @@ from datetime import datetime
 from ..models.topic_model import Topics
 from django.core.exceptions import ObjectDoesNotExist
 from ...profiles.models.user_models import UserProfile
-from ...profiles.models.contributor_model import ContributorProfile
+from ...profiles.models.contributor_model import ContributorProfile, AcademicProfile
 import json
 from ..models.post_model import Post, PendingPost
 from ..modules.post_util import display_error, is_image_file

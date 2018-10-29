@@ -224,17 +224,16 @@ class ContributorUpdateForm(forms.Form):
 		required=True
 	)
 
-	state = forms.ChoiceField(
-		widget=forms.Select(),
-		choices=get_states(),
-		initial="Alabama",
+	statelist=get_states()
+
+	state = forms.CharField(
+		initial='Alabama',
 		label='State'
 	)
 
+	countrylist=get_countries()
 
-	country = forms.ChoiceField(
-		widget=forms.Select(),
-		choices=get_countries(),
+	country = forms.CharField(
 		initial="United States",
 		label='Country'
 	)

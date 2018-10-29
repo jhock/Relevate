@@ -26,7 +26,12 @@
         </div>
         <div class="rv-contributor-form_box-row--borderless">
             <div class="rv-contributor-form_table--item quarter">
-                {{ form.state }}
+                {% select
+                      label=form.state.label
+                      placeholder=form.state.value
+                      input=form.state
+                      options=form.statelist
+                %}
             </div>
             <div class="rv-contributor-form_table--item quarter">
                 {% text_input
@@ -35,7 +40,12 @@
                 %}
             </div>
             <div class="rv-contributor-form_table--item">
-                {{ form.country }}
+                 {% select
+                      label=form.country.label
+                      placeholder=form.country.value
+                      input=form.country
+                      options=form.countrylist
+                %}
             </div>
         </div>
         <div class="rv-contributor-form_box-row--borderless">

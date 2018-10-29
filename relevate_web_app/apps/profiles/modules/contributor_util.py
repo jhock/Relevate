@@ -303,307 +303,62 @@ def get_contributor_highest_degree(academic_list):
 
 
 def get_states():
-	return [
-		("Alabama", "Alabama"),
-		("Alaska", "Alaska"),
-		("Arizona", "Arizona"),
-		("Arkansas", "Arkansas"),
-		("California", "California"),
-		("Colorado", "Colorado"),
-		("Connecticut", "Connecticut"),
-		("Delaware", "Delaware"),
-		("Florida", "Florida"),
-		("Georgia", "Georgia"),
-		("Hawaii", "Hawaii"),
-		("Idaho", "Idaho"),
-		("Illinois", "Illinois"),
-		("Indiana", "Indiana"),
-		("Iowa", "Iowa"),
-		("Kansas", "Kansas"),
-		("Kentucky", "Kentucky"),
-		("Louisiana", "Louisiana"),
-		("Maine", "Maine"),
-		("Maryland", "Maryland"),
-		("Massachusetts", "Massachusetts"),
-		("Michigan", "Michigan"),
-		("Minnesota", "Minnesota"),
-		("Mississippi", "Mississippi"),
-		("Missouri", "Missouri"),
-		("Montana", "Montana"),
-		("Nebraska", "Nebraska"),
-		("Nevada", "Nevada"),
-		("New Hampshire", "New Hampshire"),
-		("New Jersey", "New Jersey"),
-		("New Mexico", "New Mexico"),
-		("New York", "New York"),
-		("North Carolina", "North Carolina"),
-		("North Dakota", "North Dakota"),
-		("Ohio", "Ohio"),
-		("Oklahoma", "Oklahoma"),
-		("Oregon", "Oregon"),
-		("Pennsylvania", "Pennsylvania"),
-		("Rhode Island", "Rhode Island"),
-		("South Carolina", "South Carolina"),
-		("South Dakota", "South Dakota"),
-		("Tennessee", "Tennessee"),
-		("Texas", "Texas"),
-		("Utah", "Utah"),
-		("Vermont", "Vermont"),
-		("Virginia", "Virginia"),
-		("Washington", "Washington"),
-		("West Virginia", "West Virginia"),
-		("Wisconsin", "Wisconsin"),
-		("Wyoming", "Wyoming"),
-		("None", "None")
-	]
+	return ["Alabama","Alaska","Arizona","Arkansas","California","Colorado",
+  "Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois",
+  "Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland",
+  "Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana",
+  "Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York",
+  "North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania",
+  "Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah",
+  "Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"]
 
 def get_countries():
-	return [("AF", "Afghanistan"),(
-"AX", "Aland Islands"),(
-"AL", "Albania"),(
-"DZ", "Algeria"),(
-"AS", "American Samoa"),(
-"AD", "Andorra"),(
-"AO", "Angola"),(
-"AI", "Anguilla"),(
-"AQ", "Antarctica"),(
-"AG", "Antigua and Barbuda"),(
-"AR", "Argentina"),(
-"AM", "Armenia"),(
-"AW", "Aruba"),(
-"AU", "Australia"),(
-"AT", "Austria"),(
-"AZ", "Azerbaijan"),(
-"BS", "Bahamas"),(
-"BH", "Bahrain"),(
-"BD", "Bangladesh"),(
-"BB", "Barbados"),(
-"BY", "Belarus"),(
-"BE", "Belgium"),(
-"BZ", "Belize"),(
-"BJ", "Benin"),(
-"BM", "Bermuda"),(
-"BT", "Bhutan"),(
-"BO", "Bolivia"),(
-"BQ", "Bonaire"),(
-"BA", "Bosnia and Herzegovina"),(
-"BW", "Botswana"),(
-"BV", "Bouvet Island"),(
-"BR", "Brazil"),(
-"IO", "British Indian Ocean Territory"),(
-"BN", "Brunei Darussalam"),(
-"BG", "Bulgaria"),(
-"BF", "Burkina Faso"),(
-"BI", "Burundi"),(
-"KH", "Cambodia"),(
-"CM", "Cameroon"),(
-"CA", "Canada"),(
-"CV", "Cape Verde"),(
-"KY", "Cayman Islands"),(
-"CF", "Central African Republic"),(
-"TD", "Chad"),(
-"CL", "Chile"),(
-"CN", "China"),(
-"CX", "Christmas Island"),(
-"CC", "Cocos (Keeling) Islands"),(
-"CO", "Colombia"),(
-"KM", "Comoros"),(
-"CG", "Congo"),(
-"CD", "The Democratic Republic of the Congo"),(
-"CK", "Cook Islands"),(
-"CR", "Costa Rica"),(
-"CI", "Cote d'Ivoire"),(
-"HR", "Croatia"),(
-"CU", "Cuba"),(
-"CW", "Curacao"),(
-"CY", "Cyprus"),(
-"CZ", "Czech Republic"),(
-"DK", "Denmark"),(
-"DJ", "Djibouti"),(
-"DM", "Dominica"),(
-"DO", "Dominican Republic"),(
-"EC", "Ecuador"),(
-"EG", "Egypt"),(
-"SV", "El Salvador"),(
-"GQ", "Equatorial Guinea"),(
-"ER", "Eritrea"),(
-"EE", "Estonia"),(
-"ET", "Ethiopia"),(
-"FK", "Falkland Islands (Malvinas)"),(
-"FO", "Faroe Islands"),(
-"FJ", "Fiji"),(
-"FI", "Finland"),(
-"FR", "France"),(
-"GF", "French Guiana"),(
-"PF", "French Polynesia"),(
-"TF", "French Southern Territories"),(
-"GA", "Gabon"),(
-"GM", "Gambia"),(
-"GE", "Georgia"),(
-"DE", "Germany"),(
-"GH", "Ghana"),(
-"GI", "Gibraltar"),(
-"GR", "Greece"),(
-"GL", "Greenland"),(
-"GD", "Grenada"),(
-"GP", "Guadeloupe"),(
-"GU", "Guam"),(
-"GT", "Guatemala"),(
-"GG", "Guernsey"),(
-"GN", "Guinea"),(
-"GW", "Guinea-Bissau"),(
-"GY", "Guyana"),(
-"HT", "Haiti"),(
-"HM", "Heard Island and McDonald Islands"),(
-"VA", "Holy See (Vatican City State)"),(
-"HN", "Honduras"),(
-"HK", "Hong Kong"),(
-"HU", "Hungary"),(
-"IS", "Iceland"),(
-"IN", "India"),(
-"ID", "Indonesia"),(
-"IR", "Islamic Republic of Iran"),(
-"IQ", "Iraq"),(
-"IE", "Ireland"),(
-"IM", "Isle of Man"),(
-"IL", "Israel"),(
-"IT", "Italy"),(
-"JM", "Jamaica"),(
-"JP", "Japan"),(
-"JE", "Jersey"),(
-"JO", "Jordan"),(
-"KZ", "Kazakhstan"),(
-"KE", "Kenya"),(
-"KI", "Kiribati"),(
-"KP", "Democratic People's Republic of Korea"),(
-"KR", "Republic of Korea"),(
-"KW", "Kuwait"),(
-"KG", "Kyrgyzstan"),(
-"LA", "Lao People's Democratic Republic"),(
-"LV", "Latvia"),(
-"LB", "Lebanon"),(
-"LS", "Lesotho"),(
-"LR", "Liberia"),(
-"LY", "Libya"),(
-"LI", "Liechtenstein"),(
-"LT", "Lithuania"),(
-"LU", "Luxembourg"),(
-"MO", "Macao"),(
-"MK", "Republic of Macedonia"),(
-"MG", "Madagascar"),(
-"MW", "Malawi"),(
-"MY", "Malaysia"),(
-"MV", "Maldives"),(
-"ML", "Mali"),(
-"MT", "Malta"),(
-"MH", "Marshall Islands"),(
-"MQ", "Martinique"),(
-"MR", "Mauritania"),(
-"MU", "Mauritius"),(
-"YT", "Mayotte"),(
-"MX", "Mexico"),(
-"FM", "Federated States of Micronesia"),(
-"MD", "Republic of Moldova"),(
-"MC", "Monaco"),(
-"MN", "Mongolia"),(
-"ME", "Montenegro"),(
-"MS", "Montserrat"),(
-"MA", "Morocco"),(
-"MZ", "Mozambique"),(
-"MM", "Myanmar"),(
-"NA", "Namibia"),(
-"NR", "Nauru"),(
-"NP", "Nepal"),(
-"NL", "Netherlands"),(
-"NC", "New Caledonia"),(
-"NZ", "New Zealand"),(
-"NI", "Nicaragua"),(
-"NE", "Niger"),(
-"NG", "Nigeria"),(
-"NU", "Niue"),(
-"NF", "Norfolk Island"),(
-"MP", "Northern Mariana Islands"),(
-"NO", "Norway"),(
-"OM", "Oman"),(
-"PK", "Pakistan"),(
-"PW", "Palau"),(
-"PS", "Occupied Palestinian Territory"),(
-"PA", "Panama"),(
-"PG", "Papua New Guinea"),(
-"PY", "Paraguay"),(
-"PE", "Peru"),(
-"PH", "Philippines"),(
-"PN", "Pitcairn"),(
-"PL", "Poland"),(
-"PT", "Portugal"),(
-"PR", "Puerto Rico"),(
-"QA", "Qatar"),(
-"RE", "Reunion"),(
-"RO", "Romania"),(
-"RU", "Russian Federation"),(
-"RW", "Rwanda"),(
-"BL", "Saint Barthelemy"),(
-"SH", "Saint Helena"),(
-"KN", "Saint Kitts and Nevis"),(
-"LC", "Saint Lucia"),(
-"MF", "Saint Martin"),(
-"PM", "Saint Pierre and Miquelon"),(
-"VC", "Saint Vincent and the Grenadines"),(
-"WS", "Samoa"),(
-"SM", "San Marino"),(
-"ST", "Sao Tome and Principe"),(
-"SA", "Saudi Arabia"),(
-"SN", "Senegal"),(
-"RS", "Serbia"),(
-"SC", "Seychelles"),(
-"SL", "Sierra Leone"),(
-"SG", "Singapore"),(
-"SX", "Sint Maarten (Dutch part)"),(
-"SK", "Slovakia"),(
-"SI", "Slovenia"),(
-"SB", "Solomon Islands"),(
-"SO", "Somalia"),(
-"ZA", "South Africa"),(
-"GS", "South Georgia and the South Sandwich Islands"),(
-"ES", "Spain"),(
-"LK", "Sri Lanka"),(
-"SD", "Sudan"),(
-"SR", "Suriname"),(
-"SS", "South Sudan"),(
-"SJ", "Svalbard and Jan Mayen"),(
-"SZ", "Swaziland"),(
-"SE", "Sweden"),(
-"CH", "Switzerland"),(
-"SY", "Syrian Arab Republic"),(
-"TW", "Taiwan"),(
-"TJ", "Tajikistan"),(
-"TZ", "United Republic of Tanzania"),(
-"TH", "Thailand"),(
-"TL", "Timor-Leste"),(
-"TG", "Togo"),(
-"TK", "Tokelau"),(
-"TO", "Tonga"),(
-"TT", "Trinidad and Tobago"),(
-"TN", "Tunisia"),(
-"TR", "Turkey"),(
-"TM", "Turkmenistan"),(
-"TC", "Turks and Caicos Islands"),(
-"TV", "Tuvalu"),(
-"UG", "Uganda"),(
-"UA", "Ukraine"),(
-"AE", "United Arab Emirates"),(
-"GB", "United Kingdom"),(
-"US", "United States"),(
-"UM", "United States Minor Outlying Islands"),(
-"UY", "Uruguay"),(
-"UZ", "Uzbekistan"),(
-"VU", "Vanuatu"),(
-"VE", "Venezuela"),(
-"VN", "Viet Nam"),(
-"VG", "Virgin Islands, British"),(
-"VI", "Virgin Islands, U.S."),(
-"WF", "Wallis and Futuna"),(
-"EH", "Western Sahara"),(
-"YE", "Yemen"),(
-"ZM", "Zambia"),(
-"ZW", "Zimbabwe")]
+	return ['Afghanistan', 'Aland Islands', 'Albania', 'Algeria', 'American Samoa',
+					'Andorra', 'Angola', 'Anguilla', 'Antarctica', 'Antigua and Barbuda',
+					'Argentina', 'Armenia', 'Aruba', 'Australia', 'Austria', 'Azerbaijan',
+					'Bahamas', 'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium',
+					'Belize', 'Benin', 'Bermuda', 'Bhutan', 'Bolivia', 'Bonaire', 'Bosnia and Herzegovina',
+					'Botswana', 'Bouvet Island', 'Brazil', 'British Indian Ocean Territory',
+					'Brunei Darussalam', 'Bulgaria', 'Burkina Faso', 'Burundi', 'Cambodia',
+					'Cameroon', 'Canada', 'Cape Verde', 'Cayman Islands', 'Central African Republic',
+					'Chad', 'Chile', 'China', 'Christmas Island', 'Cocos (Keeling) Islands', 'Colombia',
+					'Comoros', 'Congo', 'The Democratic Republic of the Congo', 'Cook Islands', 'Costa Rica',
+					"Cote d'Ivoire", 'Croatia', 'Cuba', 'Curacao', 'Cyprus', 'Czech Republic', 'Denmark',
+					'Djibouti', 'Dominica', 'Dominican Republic', 'Ecuador', 'Egypt', 'El Salvador',
+					'Equatorial Guinea', 'Eritrea', 'Estonia', 'Ethiopia', 'Falkland Islands (Malvinas)',
+					'Faroe Islands', 'Fiji', 'Finland', 'France', 'French Guiana', 'French Polynesia',
+					'French Southern Territories', 'Gabon', 'Gambia', 'Georgia', 'Germany', 'Ghana', 'Gibraltar',
+					'Greece', 'Greenland', 'Grenada', 'Guadeloupe', 'Guam', 'Guatemala', 'Guernsey', 'Guinea',
+					'Guinea-Bissau', 'Guyana', 'Haiti', 'Heard Island and McDonald Islands', 'Holy See (Vatican City State)',
+					'Honduras', 'Hong Kong', 'Hungary', 'Iceland', 'India', 'Indonesia',
+					'Islamic Republic of Iran', 'Iraq', 'Ireland', 'Isle of Man', 'Israel', 'Italy', 'Jamaica',
+					'Japan', 'Jersey', 'Jordan', 'Kazakhstan', 'Kenya', 'Kiribati', "Democratic People's Republic of Korea",
+					'Republic of Korea', 'Kuwait', 'Kyrgyzstan', "Lao People's Democratic Republic", 'Latvia', 'Lebanon',
+					'Lesotho', 'Liberia', 'Libya', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Macao', 'Republic of Macedonia',
+					'Madagascar', 'Malawi', 'Malaysia', 'Maldives', 'Mali', 'Malta', 'Marshall Islands', 'Martinique',
+					'Mauritania', 'Mauritius', 'Mayotte', 'Mexico', 'Federated States of Micronesia', 'Republic of Moldova',
+					'Monaco', 'Mongolia', 'Montenegro', 'Montserrat', 'Morocco', 'Mozambique', 'Myanmar', 'Namibia', 'Nauru',
+					'Nepal', 'Netherlands', 'New Caledonia', 'New Zealand', 'Nicaragua', 'Niger', 'Nigeria', 'Niue',
+					'Norfolk Island', 'Northern Mariana Islands', 'Norway', 'Oman', 'Pakistan', 'Palau',
+					'Occupied Palestinian Territory', 'Panama', 'Papua New Guinea', 'Paraguay', 'Peru', 'Philippines',
+					'Pitcairn', 'Poland', 'Portugal', 'Puerto Rico', 'Qatar', 'Reunion', 'Romania', 'Russian Federation',
+					'Rwanda', 'Saint Barthelemy', 'Saint Helena', 'Saint Kitts and Nevis', 'Saint Lucia', 'Saint Martin',
+					'Saint Pierre and Miquelon', 'Saint Vincent and the Grenadines', 'Samoa', 'San Marino',
+					'Sao Tome and Principe', 'Saudi Arabia', 'Senegal', 'Serbia', 'Seychelles', 'Sierra Leone',
+					'Singapore', 'Sint Maarten (Dutch part)', 'Slovakia', 'Slovenia', 'Solomon Islands', 'Somalia',
+					'South Africa', 'South Georgia and the South Sandwich Islands', 'Spain', 'Sri Lanka', 'Sudan',
+					'Suriname', 'South Sudan', 'Svalbard and Jan Mayen', 'Swaziland', 'Sweden', 'Switzerland',
+					'Syrian Arab Republic', 'Taiwan', 'Tajikistan', 'United Republic of Tanzania', 'Thailand',
+					'Timor-Leste', 'Togo', 'Tokelau', 'Tonga', 'Trinidad and Tobago', 'Tunisia', 'Turkey',
+					'Turkmenistan', 'Turks and Caicos Islands', 'Tuvalu', 'Uganda', 'Ukraine', 'United Arab Emirates',
+					'United Kingdom', 'United States', 'United States Minor Outlying Islands', 'Uruguay', 'Uzbekistan',
+					'Vanuatu', 'Venezuela', 'Viet Nam', 'Virgin Islands, British', 'Virgin Islands, U.S.',
+					'Wallis and Futuna', 'Western Sahara', 'Yemen', 'Zambia', 'Zimbabwe']
+
+
+
+
+
+
+
+

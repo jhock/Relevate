@@ -9,6 +9,7 @@
 {% load select_tags %}
 {% load text_area_tags %}
 {% load text_input_tags %}
+{% load tab_list_tags %}
 
 {% block head %}
 	{{ block.super }}
@@ -23,62 +24,31 @@
 {% block content %}
 
 <div id="contributorApplication" class="rv-contributor-form">
-		<div class="select-tabs">
-            <button class="tablinks rv-h3 rv-contributor-form_header" onclick="switchTab(event, 'Edit Contributor Profile')">Edit Contributor Profile</button>
-            <button class="tablinks rv-h3 rv-contributor-form_header" onclick="switchTab(event, 'Edit User Profile')">Edit User Profile</button>
-            {% button color="dark"
-                id="cancelBtn"
-                href="profile:contributor_profile"
-            %}
-              Discard Changes
-            {% end_button %}
-            {% button
-              id="submitBtn"
-              type="button"
-              variant="solid"
-            %}
-              Save Changes
-            {% end_button %}
-        </div>
         <form id="contrib-update-form" action="{% url 'profile:contributor_update' %}" method="post" enctype='multipart/form-data'>
         {% csrf_token %}
-		<div id="Edit Contributor Profile" class="tabcontent" style="display:block">
-			<div class="select-tabs">
-				<button class="tablinksContrib rv-h3 rv-contributor-form_header" onclick="switchTabContrib(event, 'Degree and Affiliation')">Degree and Affiliation</button>
-				<button class="tablinksContrib rv-h3 rv-contributor-form_header" onclick="switchTabContrib(event, 'Topics')">Topics</button>
-				<button class="tablinksContrib rv-h3 rv-contributor-form_header" onclick="switchTabContrib(event, 'Professional Info')">Professional Info</button>
-			</div>
-			{% include 'partials/contributor_degree_and_affiliation.html' %}
-			{% include 'partials/contributor_topics.html' %}
-			{% include 'partials/contributor_professional_info.html' %}
-			<div class="rv-contributor-form_footer">
-				<span class="rv-contributor-form_footer--button" id="prevBtn_container">
-					{% button
-						id="prevBtn"
-						type="button"
-						color="primary"
-						variant="ghost"
-					%}
-						{% icon_arrow rotate="90" %}
-						Previous
-					{% end_button %}
-				</span>
-				<span class="rv-contributor-form_footer--button" id="nextBtn_container">
-					{% button
-					  id="nextBtn"
-					  type="button"
-					  variant="ghost"
-					%}
-					  Next
-					  {% icon_arrow rotate="270" %}
-					{% end_button %}
-				</span>
-			</div>
-		{# Temp hide this for the demo #}
-		<button style="display: none;" type="button" id="save">Save</button>
-		</div>
-		<div id="Edit User Profile" class="tabcontent">
-			<div class="uk-container uk-margin-top">
+        {% button color="dark"
+            id="cancelBtn"
+            href="profile:contributor_profile"
+        %}
+          Discard Changes
+        {% end_button %}
+        {% button
+          id="submitBtn"
+          variant="solid"
+        %}
+          Save Changes
+        {% end_button %}
+
+        {% tab_list %}
+          {% tab_panel title="Edit Contributor Profile" %}
+                {% include 'partials/contributor_degree_and_affiliation.html' %}
+                {% include 'partials/contributor_topics.html' %}
+                {% include 'partials/contributor_professional_info.html' %}
+            {# Temp hide this for the demo #}
+            <button style="display: none;" type="button" id="save">Save</button>
+          {% end_tab_panel %}
+          {% tab_panel title="Edit User Profile" %}
+            <div class="uk-container uk-margin-top">
                 <div class="uk-form-row">
                     <label class="uk-form-label uk-text-bold">
                         {{ form.first_name.label }}<span class="orange">*</span>
@@ -136,7 +106,8 @@
                     </li>
                 </ul>
 			</div>
-		</div>
+          {% end_tab_panel %}
+        {% end_tab_list %}
         </form>
 </div>
 <input type="hidden" id="contributor_temp_save" name="variable" value="{% url 'profile:contributor_temp_save' %}">

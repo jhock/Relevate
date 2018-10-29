@@ -7,81 +7,12 @@
 {% load text_area_tags %}
 {% load text_input_tags %}
 
-<div id="Professional Info" class="tabcontentContrib" style="display:block">
-    <div class="rv-contributor-form_progress">
-        {% progress %}
-            {% progress_item status="complete" %}Degree and Affiliation{% end_progress_item %}
-            {% progress_item status="complete" %}Topics{% end_progress_item %}
-        {% progress_item status="active" %}Professional Info{% end_progress_item %}
-        {% end_progress %}
-    </div>
-    <div class="rv-contributor-form_box">
-        <h4 class="rv-contributor-form_subheader with-margin">Professional Information</h4>
-        <div class="rv-contributor-form_content">
-            <div class="rv-contributor-form_box-row--borderless">
-                <div class="rv-contributor-form_table--item">
-                    {% text_input
-                        label=form.address.label
-                        input=form.address
-                    %}
-                </div>
-                <div class="rv-contributor-form_table--item">
-                    {% text_input
-                        label=form.city.label
-                        input=form.city
-                    %}
-                </div>
-            </div>
-            <div class="rv-contributor-form_box-row--borderless">
-                <div class="rv-contributor-form_table--item quarter">
-                    {{ form.state }}
-                </div>
-                <div class="rv-contributor-form_table--item quarter">
-                    {% text_input
-                        label=form.zipcode.label
-                        input=form.zipcode
-                    %}
-                </div>
-                <div class="rv-contributor-form_table--item">
-                    {{ form.country }}
-                </div>
-            </div>
-            <div class="rv-contributor-form_box-row--borderless">
-                <div class="rv-contributor-form_table--item half">
-                    {% text_input
-                        label=form.website_url.label
-                        input=form.website_url
-                    %}
-                </div>
-            </div>
-            <div class="rv-contributor-form_separator"></div>
-            <div class="rv-contributor-form_box-row--borderless">
-                <div class="rv-contributor-form_table--item">
-                    {% file_input
-                        label=form.cv.label
-                        input=form.cv
-                        accept=".pdf"
-                        name=form.cv.name
-                    %}
-                </div>
-                <div class="rv-contributor-form_table--item">
-                    {% file_input
-                        label=form.avatar.label
-                        input=form.avatar
-                        accept=".jpg,.jpeg,.png"
-                        name=form.avatar.name
-                    %}
-                </div>
-            </div>
-            <div class="rv-contributor-form_separator"></div>
-            <div class="rv-contributor-form_separator"></div>
-            <div class="rv-contributor-form_box-row--borderless">
-                {% text_area
-                    label=form.biography.label
-                    input=form.biography
-                    description="Please provide a brief background about who you are! What are your special interests? Why do you want to be a contributor for Relevate? Are there any other things you want readers to know about you? If approved, this biography will go on your contributor profile page, so be sure to write it thought you are speaking directly to the users of Relevate who may explore and view your profile. This means avoiding jargon and acronyms, and writing at a lower reading level."
-                %}
-            </div>
-        </div>
+<div class="rv-contributor-form_box">
+    <h4 class="rv-contributor-form_subheader">Expertise Topics</h4>
+    <div class="rv-contributor-form_content">
+        <p class="rv-contributor-form_subheader--caption">
+            Select as many topics as you feel qualified to write about.
+        </p>
+        {{ form.area_of_expertise }}
     </div>
 </div>

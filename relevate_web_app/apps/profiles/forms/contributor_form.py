@@ -224,18 +224,20 @@ class ContributorUpdateForm(forms.Form):
 		required=True
 	)
 
-	state = forms.CharField(widget=SelectWidget(
-		options=[state[0] for state in get_states()],
-		label='State',
-		placeholder='Choose your state'
-	))
+	state = forms.ChoiceField(
+		widget=forms.Select(),
+		choices=get_states(),
+		initial="Alabama",
+		label='State'
+	)
 
-	country = forms.CharField(widget=SelectWidget(
-		options=[country[1] for country in get_countries()],
-		label='Country',
-		default_value='United States',
-		placeholder='Choose your country'
-	))
+
+	country = forms.ChoiceField(
+		widget=forms.Select(),
+		choices=get_countries(),
+		initial="United States",
+		label='Country'
+	)
 
 	zipcode = forms.CharField(
 		label="Zip Code",
@@ -290,7 +292,7 @@ class ContributorUpdateForm(forms.Form):
 		label='Level of Study',
 		placeholder='Enter your level of study',
 		editable='False'
-	))
+	),			required=False)
 
 	# degree = forms.ChoiceField(
 	# 	choices=[(degree, degree) for degree in Degree.objects.all().values_list('name', flat=True)],
@@ -325,10 +327,6 @@ class ContributorUpdateForm(forms.Form):
 				'accept': '.png,.jpg,.jpeg'
 			}
 		)
-	)
-
-	accept_terms = forms.BooleanField(
-		widget=forms.CheckboxInput()
 	)
 
 	certification = forms.CharField(

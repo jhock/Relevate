@@ -2,6 +2,7 @@
 {% load staticfiles %}
 
 {% load button_tags %}
+{% load tab_list_tags %}
 
 {% block head %}
 	{{ block.super }}
@@ -12,23 +13,20 @@
 {% block content %}
 
 <div class="uk-container uk-margin-top uk-clearfix">
-	<div class="select-tabs">
-  		<button class="tablinks rv-h3 rv-contributor-form_header" onclick="switchTab(event, 'Edit Contributor Profile')">Contributor Profile</button>
-  		<button class="tablinks rv-h3 rv-contributor-form_header" onclick="switchTab(event, 'Edit User Profile')">User Profile</button>
-		{% button
-		  id="update-btn"
-		  type="button"
-		  variant="solid"
-		%}
-		  Update Profile
-		{% end_button %}
-	</div>
 	<form id="contrib-update-form" action="{% url 'profile:contributor_update' %}" method="post" enctype='multipart/form-data'>
 	{% csrf_token %}
-	<div id="Edit Contributor Profile" class="tabcontent" style="display:block">
+	{% button
+	  id="update-btn"
+	  type="button"
+	  variant="solid"
+	%}
+	  Update Profile
+	{% end_button %}
+	{% tab_list %}
+	  {% tab_panel title="Contributor Profile" %}
 		{% include 'partials/contributor_info_display.html' %}
-	</div>
-	<div id="Edit User Profile" class="tabcontent">
+	  {% end_tab_panel %}
+	  {% tab_panel title="User Profile" %}
 		<div class="uk-container uk-margin-top">
 			<div>
 				<label class="uk-text-bold">First Name:</label>
@@ -58,7 +56,8 @@
 				</li>
 			</ul>
 		</div>
-	</div>
+	  {% end_tab_panel %}
+	{% end_tab_list %}
 </div>
 
 <script>

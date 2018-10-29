@@ -415,7 +415,7 @@ class ContributorUpdateView(LoginRequiredMixin, View):
         Performs the update of the contributor profile after checking the
         validity of the form.
         '''
-        form = ContributorForm(request.POST, request.FILES)
+        form = ContributorUpdateForm(request.POST, request.FILES, data_list=organization_list)
         user_prof = UserProfile.objects.get(user=request.user)
         cp = ContributorProfile.objects.get(user_profile=user_prof)
         academics_req = request.POST.get('hiddenAcaTable')
@@ -434,6 +434,8 @@ class ContributorUpdateView(LoginRequiredMixin, View):
             user_prof.user.first_name = form.cleaned_data.get('first_name')
             user_prof.user.last_name = form.cleaned_data.get('last_name')
             user_prof.user.email = form.cleaned_data.get('email')
+            if form.cleaned_data.get('password1'):
+                user_prof.user.set_password(form.cleaned_data.get('password1'))
             user_prof.user.save()
             # Address Stuff
             cp.address.street_address = form.cleaned_data.get('address')
@@ -499,25 +501,9 @@ class ContributorUpdateView(LoginRequiredMixin, View):
                 adviser_id = -1
             for t in topics:
                 already_sel.append(t)
-            form = ContributorForm({
-                'user_profile': user_prof,
-                'address': cp.address.street_address,
-                'city': cp.address.city,
-                'state': cp.address.state,
-                'country': cp.address.country,
-                'zipcode': cp.address.zipcode,
-                'website_url': cp.website_url,
-                'interests': cp.interests,
-                'area_of_expertise': already_sel,
-                'avatar': cp.avatar,
-                'adviser': adviser_id,
-                'biography': cp.biography_text,
-                'accept_terms': cp.accept_terms,
-            }, data_list=organization_list)
             return render(request, 'contributor_update.html',
                           {
                               'form': form,
-                              'user_form': user_form,
                               'user_prof': user_prof,
                               'already_sel': cp.expertise_topics.all().order_by('-name'),
                               'contrib_prof': cp,
@@ -554,7 +540,7 @@ class ContributorProfileView(LoginRequiredMixin, View):
                           {
                               "user_prof": user_prof,
                               "user":user,
-                              "contrib_prof": contributor_profile,
+                              "contributor_prof": contributor_profile,
                               "expertise_topics": expertise_topics,
                               "academic_prof": academic_prof,
                               "certifications": certifications,

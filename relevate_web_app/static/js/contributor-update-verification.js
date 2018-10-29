@@ -46,16 +46,7 @@ $(document).ready(function()
 //					message: "You must complete the professional interests section",
 //				},
 			},
-		},
-		terms: {
-			sectionDone: $('#id_accept_terms').prop('checked'),
-			elems: {
-				checkbox: {
-					done: $('#id_accept_terms').prop('checked'),
-					message: "You must accept the terms and conditions.",
-				}
-			}
-		},
+		}
 	};
 
 	function verifySection(section)

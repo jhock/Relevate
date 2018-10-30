@@ -1,8 +1,32 @@
-var trigger = null
+var trayTrigger = null
+var trayListener = null
+var closeTray = null
+
+function handleDocumentClick (event) {
+  var tray = document.querySelector('.rv-tray')
+
+  if (!tray.contains(event.target)) {
+    closeTray(tray)
+  }
+}
+
+closeTray = function (tray) {
+  tray.classList.remove('rv-tray--open')
+  tray.setAttribute('aria-hidden', 'true')
+  trayTrigger.focus()
+
+  var hideTray = function () {
+    tray.classList.add('rv-tray--closed')
+  }.bind(this)
+
+  window.setTimeout(hideTray, 200)
+
+  document.removeEventListener('click', handleDocumentClick)
+}
 
 function handleTrayTriggerClick (event) {
-  trigger = event.target
-  var tray = trigger.parentElement.querySelector('.rv-tray')
+  trayTrigger = event.target
+  var tray = trayTrigger.parentElement.querySelector('.rv-tray')
   if (!tray.classList.contains('rv-tray--open')) {
     tray.classList.remove('rv-tray--closed')
     tray.setAttribute('aria-hidden', 'false')
@@ -14,19 +38,17 @@ function handleTrayTriggerClick (event) {
     }.bind(this)
 
     window.setTimeout(showTray, 0)
+
+    var appendDocumentListener = function () {
+      trayListener = document.addEventListener('click', handleDocumentClick)
+    }.bind(this)
+
+    window.setTimeout(appendDocumentListener, 0)
   }
 }
 
 function handleTrayCloseButtonClick (event) {
   var closeButton = event.target
   var tray = closeButton.parentElement.parentElement
-  tray.classList.remove('rv-tray--open')
-  tray.setAttribute('aria-hidden', 'true')
-  trigger.focus()
-
-  var hideTray = function () {
-    tray.classList.add('rv-tray--closed')
-  }.bind(this)
-
-  window.setTimeout(hideTray, 200)
+  closeTray(tray)
 }

@@ -5,8 +5,9 @@
   position: fixed;
   top: 0;
   height: 100%;
-  padding: 1rem;
+  padding: 0 1rem;
   transition: transform 200ms;
+  overflow-y: scroll;
 }
 
 .rv-tray--start {

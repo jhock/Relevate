@@ -20,24 +20,26 @@ def button(parser, token):
   children, _ = parse_tag(parser, token, 'end_button')
   props = token.split_contents()[1:]
 
-  picked_props, button_props = split_props(['variant', 'color', 'fluid_width', 'href', 'margin'], props)
+  picked_props, button_props = split_props(['variant', 'color', 'fluid_width', 'href', 'margin', 'className'], props)
 
   variant = get_prop_value('variant', picked_props, 'solid')
   color = get_prop_value('color', picked_props, 'primary')
   fluid_width = get_prop_value('fluid_width', picked_props, 'False')
   href = get_prop_value('href', picked_props, None)
   margin = get_prop_value('margin', picked_props, '0')
+  className = get_prop_value('className', picked_props, None)
 
-  return Button(children, variant, color, fluid_width, href, margin, button_props)
+  return Button(children, variant, color, fluid_width, href, className, margin, button_props)
 
 
 class Button(Node):
-  def __init__(self, children, variant, color, fluid_width, href, margin, button_props):
+  def __init__(self, children, variant, color, fluid_width, href, className, margin, button_props):
     self.children = children
     self.variant = variant
     self.color = color
     self.fluid_width = fluid_width if fluid_width == 'True' else None
     self.href = href
+    self.className = className
     self.margin = margin
     self.button_props = button_props
 
@@ -51,6 +53,7 @@ class Button(Node):
       'button_color': resolve_variable(self.color, context),
       'button_fluid_width' : resolve_variable(self.fluid_width, context),
       'button_href': resolve_variable(self.href, context),
+      'button_className': resolve_variable(self.className, context),
       'button_margin': resolve_variable(self.margin, context)
     })
     markup = button_html.render(context)

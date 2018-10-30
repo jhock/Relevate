@@ -1,7 +1,7 @@
 {% load icon_tags %}
 
 <button
-  class="rv-button {{button_color}} {{button_variant}}{% if button_fluid_width %} fluid-width {% endif %}"
+  class="rv-button {{button_color}} {{button_variant}}{% if button_className %} {{button_className}}{% endif %}{% if button_fluid_width %}fluid-width{% endif %}"
   {% if button_href %} href="{% url button_href %}" {% endif %}
   style="margin: {{ button_margin }};"
 >

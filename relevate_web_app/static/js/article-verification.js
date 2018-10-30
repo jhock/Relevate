@@ -76,7 +76,6 @@ $(document).ready(function()
 			good = false;
 			errorMsg += "<li>" + flags.image.message + "</li>";
 		}
-
 		if ($(this).attr('name') == "save_and_publish")
 		{
 			$("#hidden-publish-checkbox").prop('checked', true);
@@ -125,14 +124,12 @@ $(document).ready(function()
 		$("#title_count").text(word);
 	});
 
-
 	 /* SCRIPT TO OPEN THE MODAL WITH THE PREVIEW */
       $("#id_image").change(function () {
         if (this.files && this.files[0]) {
           var reader = new FileReader();
           reader.onload = function (e) {
-            $("#image").attr("src", e.target.result);
-            $("#modalCrop").modal("show");
+            this.attr("src", e.target.result);
           }
           reader.readAsDataURL(this.files[0]);
         }
@@ -201,7 +198,6 @@ function fileIsImage(){
 	}
 	console.log(contentVal, ext);
 	if(isInArray(listOfExtensions, ext)){
-
 		 return true
 	}
 	if(!contentVal) {

@@ -3,6 +3,7 @@ from ..models.topic_model import Topics
 from ..modules.post_util import validate_file
 from PIL import Image
 
+import pdb
 
 class ArticleCreateForm(forms.Form):
 	"""

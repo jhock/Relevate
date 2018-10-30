@@ -1,6 +1,5 @@
 var trayTrigger = null
 var trayListener = null
-var closeTray = null
 
 function handleDocumentClick (event) {
   var tray = document.querySelector('.rv-tray')
@@ -10,7 +9,7 @@ function handleDocumentClick (event) {
   }
 }
 
-closeTray = function (tray) {
+function closeTray (tray) {
   tray.classList.remove('rv-tray--open')
   tray.setAttribute('aria-hidden', 'true')
   trayTrigger.focus()

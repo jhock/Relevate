@@ -89,10 +89,11 @@ class ArticleCreateView(LoginRequiredMixin, FormView):
 			title = form.cleaned_data['title']
 			content = form.cleaned_data.get('content')
 			topics = form.cleaned_data.get('topic_choices')
-			x = form.cleaned_data.get('x')
-			y = form.cleaned_data.get('y')
-			w = form.cleaned_data.get('width')
-			h = form.cleaned_data.get('height')
+			# image cropping is commented out until a design is decided upon.
+			# x = form.cleaned_data.get('x')
+			# y = form.cleaned_data.get('y')
+			# w = form.cleaned_data.get('width')
+			# h = form.cleaned_data.get('height')
 			image = form.cleaned_data.get('image')
 			url_image = form.cleaned_data.get('url_image')
 			blurb = form.cleaned_data.get('blurb')
@@ -109,6 +110,9 @@ class ArticleCreateView(LoginRequiredMixin, FormView):
 				new_article.save()
 				#If user inputs image file instead of url
 				if image:
+					new_article.image = image
+					#following commented out as part of image cropping, replaced with simply setting image to form.image.
+					"""
 					#Gets the original image to be cropped
 					photo = Image.open(form.cleaned_data.get('image'))
 					#Cropps the image using values x,y,w,and h from the form
@@ -117,6 +121,7 @@ class ArticleCreateView(LoginRequiredMixin, FormView):
 					filename, file_extension = os.path.splitext(os.path.basename(urlparse(new_article.image.url).path))
 					cropped_image.save(settings.BASE_DIR+"/media/articles/images/"+filename+file_extension)
 					new_article.image = "articles/images/"+filename+file_extension
+					"""
 				#If user inputs url instead of image file
 				elif url_image:
 					img_temp = NamedTemporaryFile(delete=True)
@@ -260,10 +265,11 @@ class ArticleUpdateView(LoginRequiredMixin, View):
 			article.references = form.cleaned_data.get('references')
 			image = form.cleaned_data.get("image")
 
-			x = form.cleaned_data.get('x')
-			y = form.cleaned_data.get('y')
-			w = form.cleaned_data.get('width')
-			h = form.cleaned_data.get('height')
+			#The following is commented out until a design for cropping is decided upon.
+			# x = form.cleaned_data.get('x')
+			# y = form.cleaned_data.get('y')
+			# w = form.cleaned_data.get('width')
+			# h = form.cleaned_data.get('height')
 
 			blurb = form.cleaned_data.get('blurb')
 			article.blurb = blurb
@@ -271,6 +277,8 @@ class ArticleUpdateView(LoginRequiredMixin, View):
 			# If user inputs image file instead of url
 			if image:
 				article.image = image
+				# The following is commented out until a design for cropping is decided upon.
+				"""
 				# Gets the original image to be cropped
 				photo = Image.open(image)
 				# Crops the image using values x,y,w,and h from the form
@@ -279,6 +287,7 @@ class ArticleUpdateView(LoginRequiredMixin, View):
 				filename, file_extension = os.path.splitext(os.path.basename(urlparse(image.name).path))
 				cropped_image.save(settings.BASE_DIR + "/media/articles/images/" + filename + file_extension)
 				article.image = "articles/images/" + filename + file_extension
+				"""
 			article.save()
 			post.updateDate = datetime.utcnow()
 			for each_topic in list_of_topics:

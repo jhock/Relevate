@@ -21,22 +21,22 @@
 			<div class="rv-article_author">
 				<div class="rv-article_avatar">
 					{% avatar 
-						name=post.contributor.user_profile
-						src=post.contributor.avatar_image_url
+						name=p.contributor
+						src=p.contributor.avatar_image_url
 					%}
 				</div>
 				<div class="rv-article_author--text">
 					<div>
-						{{ post.contributor.user_profile.user.first_name }} {{ post.contributor.user_profile.user.last_name }}
+						{{ p.contributor.user_profile.user.first_name }} {{ p.contributor.user_profile.user.last_name }}
 					</div>
 					<div class="rv-article_author--degree">
-						{% if post.contributor.organizationalaffiliation_set.all %}
-						  {% for organizational_affiliation in post.contributor.organizationalaffiliation_set.all %}
+						{% if p.contributor.organizationalaffiliation_set.all %}
+						  {% for organizational_affiliation in p.contributor.organizationalaffiliation_set.all %}
 							{{ organizational_affiliation.name_of_affiliation }}{% if not forloop.last %},
 							{% endif %}
 						  {% endfor %}
 						{% else %}
-							{% for academicprofile in post.contributor.academicprofile_set.all %}
+							{% for academicprofile in p.contributor.academicprofile_set.all %}
 								{{ academicprofile.degree }} at {{ academicprofile.institution }}{% if not forloop.last %},
 							{% endif %}
 						  {% endfor %}
@@ -46,7 +46,7 @@
 			</div>
 			<div class="rv-article_like">
 				<div class="rv-article_like--content">
-					<div class="rv-article_like--number">{{ post.likes }}</div>
+					<div class="rv-article_like--number">{{ p.likes }}</div>
 					<div class="rv-article_like--icon">
 						{% icon_like size="medium" %}
 					</div>

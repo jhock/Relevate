@@ -309,3 +309,24 @@ class UserContributorQuestionView(LoginRequiredMixin, View):
 	def get(self, request):
 		return render(request, 'user_contributor_question.html')
 
+def UserLogin(request):
+	if request.user.is_authenticated():
+		return HttpResponseRedirect(reverse('contribution:home'))
+
+	if request.method == 'GET':
+		return render(request, 'registration/login.html', {'form': LoginForm()})
+
+	if request.method == 'POST':
+		username = request.POST.get('username')
+		password = request.POST.get('password')
+		user = authenticate(username=username, password=password)
+
+		if user is not None:
+			# correct username and password login the user
+			login(request, user)
+			return HttpResponseRedirect(reverse('contribution:home'))
+
+		else:
+			messages.error(request, 'Incorrect username or password, please try again.')
+
+	return render(request, 'registration/login.html', {'form': LoginForm()})

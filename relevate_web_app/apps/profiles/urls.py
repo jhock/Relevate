@@ -11,7 +11,7 @@ urlpatterns = [
 
 	# User Registration/Login
 	url(r'registration/', authentication_views.RegisterUserView.as_view(), name='registration'),
-	url(r'^login/$', django_auth_views.login,  name='login'),
+	url(r'^login/$', authentication_views.UserLogin,  name='login'),
 	url(r'^logged_out/$', django_auth_views.logout, name='logged_out'),
 	url(r'inactive-user/', authentication_views.DeactivatedAccountView.as_view(), name='deactivated_account'),
 	url(r'confirmation/', authentication_views.ConfirmationView.as_view(), name='confirmation'),

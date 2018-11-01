@@ -13,17 +13,16 @@
 			{% text_input 
 				label="Email"
 				placeholder="Enter your email address"
-				id=form.username.id_for_label 
-				name=form.username.html_name 
+				input=form.username
+				name=form.username.name
 				maxlength="30" 
 			%}
 			{% text_input 
 				variant="password"
 				placeholder="Enter your password"
-				label="Password" 
-				id=form.password.id_for_label 
-				name=form.password.html_name 
-				maxlength="30" 
+				label=form.password.label
+				input=form.password
+				maxlength="30"
 			%}
 			<div class="rv-box-form_submit">
 				{% button fluid_width="True" type="submit" %}

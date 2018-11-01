@@ -78,29 +78,15 @@ class LoginForm(forms.Form):
 	my_default_errors = {
 		'invalid': 'Make sure email and password are correct'
 	}
-	email = forms.CharField(label='Email', max_length=100, required=True,
+	username = forms.CharField(label='Username', max_length=100, required=True,
 			widget=forms.TextInput(attrs={'class': 'uk-input uk-form-width-large'}),)
 	password = forms.CharField(label='Password', error_messages=my_default_errors,
 			widget=forms.PasswordInput(attrs={'class': 'uk-input uk-form-width-large'}))
 
 	def clean(self):
 		cleaned_data = super(LoginForm, self).clean()
-		email = self.cleaned_data['email']
+		username = self.cleaned_data['username']
 		password = self.cleaned_data['password']
-		try:
-			user = User.objects.get(username=email)
-			if user.is_active:
-				user_authen = authenticate(username=email, password=password)
-				if not user_authen:
-					msg = "The email and password combination is incorrect"
-					self.add_error('email', msg)
-		except User.DoesNotExist:
-			msg = "The email is incorrect"
-			self.add_error('email', msg)
-			print("Why are you failing %s" % password)
-			pass
-		finally:
-			return self.cleaned_data
 
 
 class PasswordChangeForm(forms.Form):

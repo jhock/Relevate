@@ -1,6 +1,6 @@
 function ddmenuHandleMenuTriggerClick (trigger) {
   var menu = trigger.parentElement.getElementsByClassName('rv-dropdown-menu')[0]
-  var arrow = menu.parentElement.getElementsByTagName('svg')[0]
+  var arrow = menu.parentElement.querySelector('svg[name="menu_arrow"]')
 
   menu.style.display = 'initial'
   menu.setAttribute('aria-hidden', 'false')
@@ -20,7 +20,7 @@ function ddmenuHandleMenuItemKeyDown (event, item) {
   var menu = item.parentElement.parentElement
   var items = menu.getElementsByClassName('rv-dropdown-menu_item')
   var trigger = menu.parentElement.getElementsByClassName('rv-dropdown-menu_trigger')[0]
-  var arrow = menu.parentElement.getElementsByTagName('svg')[0]
+  var arrow = menu.parentElement.querySelector('svg[name="menu_arrow"]')
 
   if (event.key === 'Escape') {
     menu.style.display = 'none'
@@ -76,7 +76,7 @@ function ddmenuHandleMenuItemBlur (event, item) {
   var menu = item.parentElement.parentElement
   var items = menu.getElementsByClassName('rv-dropdown-menu_item')
   var trigger = menu.parentElement.getElementsByClassName('rv-dropdown-menu_trigger')[0]
-  var arrow = menu.parentElement.getElementsByTagName('svg')[0]
+  var arrow = menu.parentElement.querySelector('svg[name="menu_arrow"]')
 
   setTimeout(function () {
     for (var i = 0; i < items.length; i++) {

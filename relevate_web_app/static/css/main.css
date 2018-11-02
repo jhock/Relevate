@@ -694,13 +694,13 @@
 .rv-dropdown-menu_icon {
   width: 0.4rem;
   margin-left: 0.5rem; }
-  .rv-dropdown-menu_icon svg {
+  .rv-dropdown-menu_icon svg[name="menu_arrow"] {
     -webkit-transform: rotate(0deg);
             transform: rotate(0deg);
     transition: -webkit-transform 100ms ease-in;
     transition: transform 100ms ease-in;
     transition: transform 100ms ease-in, -webkit-transform 100ms ease-in; }
-    .rv-dropdown-menu_icon svg g {
+    .rv-dropdown-menu_icon svg[name="menu_arrow"] g {
       fill: #246FF2; }
 
 .rv-dropdown-menu_item {

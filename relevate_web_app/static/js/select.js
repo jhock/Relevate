@@ -72,7 +72,7 @@ function handleSelectKeyUp (event) {
   var tab = event.keyCode === 9
   var shift = event.keyCode === 16
   var space = event.keyCode === 32
-
+  
   if (enter || esc || up || down || tab || shift || space) {
     return
   }
@@ -276,7 +276,7 @@ function addHighlight (item) {
   var menu = item.parentElement
   clearHighlightedOption(menu)
   item.classList.add('rv-select_option--highlighted')
-
+  
   var currentIndex = getHighlightedIndex(menu)
   var maxOptions = 6
   var optionHeight = 32

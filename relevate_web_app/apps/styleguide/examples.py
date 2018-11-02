@@ -28,13 +28,13 @@ for example in examples:
   componentCssDir = 'apps/components/templates/' + example
   componentCssDirAbs = join(dirname(dirname(dirname(__file__))), componentCssDir)
   componentCssFiles = listdir(componentCssDirAbs)
-  cssFileName = example + '.scss'
+  cssFileName = 'styles.scss'
   cssFilePath = appName + '/' + componentCssDir + '/' + cssFileName
 
   if cssFileName not in componentCssFiles:
     cssFilePath = None
 
-  componentJsDir = 'apps/components/static/js'
+  componentJsDir = 'static/js'
   componentJsDirAbs = join(dirname(dirname(dirname(__file__))), componentJsDir)
   componentJsFiles = listdir(componentJsDirAbs)
   jsFileName = example + '.js'

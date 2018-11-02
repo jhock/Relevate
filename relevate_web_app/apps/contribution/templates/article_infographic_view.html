@@ -1,68 +1,110 @@
 {% extends "base-titlebar.html" %}
 {% load staticfiles %}
 
+{% load avatar_tags %}
+{% load icon_tags %}
+{% load button_tags %}
+
 {% block head %}
 	{{ block.super }}
 	<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=59d698fcf466510012f7fead&product=sticky-share-buttons"></script>
 {% endblock %}
 
 {% block content %}
-<div class='uk-container uk-margin-top'>
-	<div hidden id="error-message" class="uk-alert uk-alert-danger">
-		<p>Sorry Something went wrong try again, or reload page</p>
-	</div>
-	 <div hidden id="publish-message" class="uk-alert uk-alert-success">
-		<p>Article has been published!</p>
-	</div>
-	 <div hidden id="unpublish-message" class="uk-alert uk-alert-success">
-		<p>Article has been unpublished!</p>
-	</div>
-	<div uk-grid>
-		<div class="uk-width-1-2">
-			<h4>Article Title: {{ infographic.title }}</h4>
+<div class='rv-content-layout rv-content-layout--marginless'>
+	<div class='rv-content-layout_children'>
+		<div hidden id="error-message" class="uk-alert uk-alert-danger">
+			<p>Sorry Something went wrong try again, or reload page</p>
 		</div>
-	</div>
-	<br>
-
-    <div class='uk-form-row'>
-            <label class='uk-form-label uk-text-bold'>{{ form.blurb.label }} <span id="blurb_count"></span></label>
-            <div class='uk-form-controls'>
-                {{ form.blurb }}
-            </div>
-    </div>
+		 <div hidden id="publish-message" class="uk-alert uk-alert-success">
+			<p>Article has been published!</p>
+		</div>
+		 <div hidden id="unpublish-message" class="uk-alert uk-alert-success">
+			<p>Article has been unpublished!</p>
+		</div>
     <br>
-	{% if is_user_article %}
-	<form method="post" action=".">{% csrf_token %}
-		<div uk-grid>
-			<div class="uk-width-1-3">
-				{% if post.isPublished %}
-					<button class="uk-button uk-button-primary" value="Make Live" type="submit" name="change_publish_false">Unpublish</button>
-				{% else %}
-					<button class="uk-button uk-button-success" value="Make Live" type="submit" name="change_publish_true">Make Live</button>
-				{% endif %}
+		{% if is_user_article %}
+			<form method="post" action=".">{% csrf_token %}
+				<div class="rv-article_controls rv-infographic_controls">
+					{% if post.isPublished %}
+						{% button
+							variant="ghost"
+							color="dark"
+							value="Make Live"
+							type="submit"
+							name="change_publish_false"
+							margin="0 0.25rem 0 0"
+						%}
+							Unpublish Article
+						{% end_button %}
+					{% else %}
+						{% button
+							variant="ghost"
+							color="primary"
+							type="submit"
+							value="Make Live"
+							name="change_publish_true"
+							margin="0 0.25rem 0 0"
+						%}
+							Publish Article
+						{% end_button %}
+					{% endif %}
+					{% button
+						variant="ghost"
+						color="warning"
+						name="change_publish_true"
+						onclick="confirmDeletion()"
+					%}
+						{% icon_trash %}
+						Delete
+					{% end_button %}
+				</div>
+			</form>
+		{% endif %}
+		<h1 class="rv-article_header rv-infographic_header">{{ infographic.title }}</h4>
+    <div>
+      <label class='uk-form-label uk-text-bold'>{{ form.blurb.label }}<span id="blurb_count"></span></label>
+      <div class='uk-form-controls'>
+        {{ form.blurb }}
+      </div>
+    </div>
+		<div class="rv-article_details rv-infographic_details">
+			<div class="rv-article_author">
+				<div class="rv-article_avatar">
+					{% avatar 
+						name=post.contributor.user_profile
+						src=post.contributor.avatar_image_url
+					%}
+				</div>
+				<div class="rv-article_author--text">
+					<div>
+						{{ post.contributor.user_profile.user.first_name }} {{ post.contributor.user_profile.user.last_name }}
+					</div>
+					<div class="rv-article_author--degree">
+						{% for academicprofile in post.contributor.academicprofile_set.all %}
+							{% if forloop.last %}
+								{{ academicprofile.degree }} at {{ academicprofile.institution }}
+							{% endif %}
+					  {% endfor %}
+					</div>
+				</div>
 			</div>
-			<div class="uk-width-1-3">
-				<button class="uk-button uk-button-danger" onclick="confirmDeletion()">Remove</button>
+			<div class="rv-article_like">
+				<div class="rv-article_like--content">
+					<div class="rv-article_like--number">{{ post.likes }}</div>
+					<div class="rv-article_like--icon">
+						{% icon_like size="medium" %}
+					</div>
+				</div>
 			</div>
-			<hr>
 		</div>
-	</form>
-	{% endif %}
-	<div class="uk-grid">
-		<div class="uk-width-1-3">
-			<h3>Views: {{ post.views }}</h3>
-		</div>
-		<div class="uk-width-1-3">
-			<h3>Likes:  {{ post.likes }}</h3>
-		</div>
-	</div>
-	{% with i=infographic %}
-		{% with p=post %}
-			{% include 'partials/infographic_partial.html' %}
+		<div>
+		{% with i=infographic %}
+			{% with p=post %}
+				{% include 'partials/infographic_partial.html' %}
+			{% endwith %}
 		{% endwith %}
-	{% endwith %}
-	<br>
-
+	</div>
 	<script>
 		function confirmDeletion(){
 			var message = "Are you sure you want to delete this infographic article?";

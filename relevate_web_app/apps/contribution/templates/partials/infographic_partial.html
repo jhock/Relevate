@@ -1,44 +1,32 @@
 {% load staticfiles %}
-<div class='uk-card uk-card-default uk-box-shadow-large'>
-	<div class='uk-card-body'>
-		<div class='uk-clearfix uk-grid'>
-			<div class='uk-panel-title uk-width-1-2'>
-				<h3>Infographic: <a href="{% url 'contribution:infographic_view' p.slug %}">{{ i.title }}</a></h3>
-			</div>
-			<div class='uk-width-1-2'>
-				{% if p.contributor == contrib_prof or superuser_override %}
-				<form class='uk-float-right' action="{% url 'contribution:post_remove' p.pk %}" method="post">
-					{% csrf_token %}
-					<a style='color: white;' class='uk-button uk-button-primary' href="{% url 'contribution:infographic_update_view' p.slug %}">
-						Edit
-					</a>
-					<input style='color: white; background-color: red;' class='uk-button uk-button-primary' type="submit" value="Delete" />
-				</form>
-				{% endif %}
-			</div>
-		</div>
-		<br>
-		<a href="{% url 'contribution:infographic_view' p.slug %}">
-			<div class=".uk-container-center">
-				<img style="max-width:70%;" src="{{ i.image.url }}">
-			</div>
-		</a>
-		<p>
-			{{ i.blurb | safe }}
-		</p>
-		<hr>
-		<small>Topics: </small>
-		<div uk-grid>	
-			{% for topic in i.topics.all %}
-				<div class='uk-width-1-6'>
-					<a href="#"><small>{{ topic.name }}</small></a>
-					<div class="uk-dropdown uk-dropdown-small">
-						<span>{{ topic.description }}</span>
-					</div>
-				</div>
-			{% endfor %}
-		</div>
-		<hr>
-		<a href="{% url 'contribution:infographic_view' p.slug %}">Read more...</a>
+{% load tag_tags %}
+
+<div>
+	<div>
+		{% if p.contributor == contrib_prof or superuser_override %}
+		<form class='uk-float-right' action="{% url 'contribution:post_remove' p.pk %}" method="post">
+			{% csrf_token %}
+			<a style='color: white;' class='uk-button uk-button-primary' href="{% url 'contribution:infographic_update_view' p.slug %}">
+				Edit
+			</a>
+			<input style='color: white; background-color: red;' class='uk-button uk-button-primary' type="submit" value="Delete" />
+		</form>
+		{% endif %}
+	</div>
+	<div class="rv-infographic_image--container">
+		<img class="rv-infographic_image" src="{{ i.image.url }}">
+	</div>
+	<div class="rv-infographic_content">
+		{{ i.blurb | safe }}
+	</div>
+	<h6 class="rv-article_topics rv-infographic_topics">Related Topics:</h6>
+	<div class="rv-article_tag--container rv-infographic_tag--container">	
+		{% for topic in i.topics.all %}
+			{% tag 
+				href="#"
+				title=topic.name
+				margin="0 0.5rem 0.5rem 0"
+			%}
+		{% endfor %}
 	</div>
 </div>

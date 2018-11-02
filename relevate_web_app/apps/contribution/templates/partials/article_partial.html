@@ -30,17 +30,11 @@
 						{{ p.contributor.user_profile.user.first_name }} {{ p.contributor.user_profile.user.last_name }}
 					</div>
 					<div class="rv-article_author--degree">
-						{% if p.contributor.organizationalaffiliation_set.all %}
-						  {% for organizational_affiliation in p.contributor.organizationalaffiliation_set.all %}
-							{{ organizational_affiliation.name_of_affiliation }}{% if not forloop.last %},
+						{% for academicprofile in post.contributor.academicprofile_set.all %}
+							{% if forloop.last %}
+								{{ academicprofile.degree }} at {{ academicprofile.institution }}
 							{% endif %}
-						  {% endfor %}
-						{% else %}
-							{% for academicprofile in p.contributor.academicprofile_set.all %}
-								{{ academicprofile.degree }} at {{ academicprofile.institution }}{% if not forloop.last %},
-							{% endif %}
-						  {% endfor %}
-						{% endif %}
+					  {% endfor %}
 					</div>
 				</div>
 			</div>

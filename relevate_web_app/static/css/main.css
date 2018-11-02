@@ -3718,6 +3718,28 @@ h6,
 .rv-home_welcome {
   text-align: center; }
 
+.rv-infographic_image--container {
+  margin-bottom: 1rem;
+  text-align: center; }
+
+.rv-infographic_image {
+  max-width: 100%; }
+
+.rv-infographic_header {
+  margin-top: 0; }
+
+@media only screen and (max-width: 480px) {
+  .rv-infographic_header {
+    margin-bottom: 1rem; }
+  .rv-infographic_details,
+  .rv-infographic_header,
+  .rv-infographic_tag--container,
+  .rv-infographic_topics,
+  .rv-infographic_content,
+  .rv-infographic_controls {
+    margin-left: 1rem;
+    margin-right: 1rem; } }
+
 .rv-new-post_header {
   font-size: 2rem;
   margin-top: 2rem;

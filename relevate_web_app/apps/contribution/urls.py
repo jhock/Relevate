@@ -59,6 +59,9 @@ url(r'^ck$', content_creation_views.ckeditor_form_view, name='ck'),
 	# Search
 	url(r'^search_results/$', base_views.SearchView.as_view(), name="search_results"),
 
+	# Posts by Tag
+	url(r'^posts_by_tag/(?P<tag>\w+)$', post_views.PostsByTag.as_view(), name="posts_by_tag"),
+
 	# Resources
 	url(r'^using_relevate/$', resources_views.UsingRelevateView.as_view(), name="using_relevate"),
 	url(r'^public_scholarship/$', resources_views.PublicScholarshipView.as_view(), name="public_scholarship"),

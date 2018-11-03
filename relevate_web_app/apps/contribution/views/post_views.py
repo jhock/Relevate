@@ -5,10 +5,15 @@ from django.views.generic import View
 from ...profiles.models.user_models import UserProfile
 from ...profiles.models.contributor_model import ContributorProfile
 from ..models.post_model import Post
+from ..models.article_model import Article
+from ..models.infographic_model import Infographic
+from ..models.link_model import Link
+from ..models.topic_model import Topics
 import json
 from braces.views import LoginRequiredMixin
 from django.views.generic import DeleteView
 from django.core.exceptions import PermissionDenied
+from itertools import chain
 
 
 class PostListView(LoginRequiredMixin, View):
@@ -107,6 +112,20 @@ class PostUnpublishView(View):
         except (AttributeError, ValueError, KeyError):
             response["Published"] = True
         return HttpResponse(json.dumps(response))
+
+class PostsByTag(View):
+    def get(self, request, tag):
+
+        topic = Topics.objects.get(name=tag)
+        tagged_articles = Post.objects.filter(article__article_topics=topic)
+        tagged_links = Post.objects.filter(link__topics=topic)
+        tagged_infographics = Post.objects.filter(infographic__topics=topic)
+        all_tagged = list(chain(tagged_articles, tagged_infographics, tagged_links))
+        return render(request, 'home.html', {'published_posts': all_tagged})
+
+
+
+
 
 
 

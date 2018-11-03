@@ -22,10 +22,10 @@
 	<h6 class="rv-article_topics rv-infographic_topics">Related Topics:</h6>
 	<div class="rv-article_tag--container rv-infographic_tag--container">	
 		{% for topic in i.topics.all %}
-			{% tag 
-				href="#"
+			{% tag
 				title=topic.name
 				margin="0 0.5rem 0.5rem 0"
+				href="#"
 			%}
 		{% endfor %}
 	</div>

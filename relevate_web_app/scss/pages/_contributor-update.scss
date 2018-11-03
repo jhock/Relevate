@@ -1,0 +1,17 @@
+.rv-contributor-update {
+  position: relative;
+}
+
+.rv-contributor-update_controls {
+  position: absolute;
+  top: 0;
+  right: 1rem;
+}
+
+@media only screen and (max-width: $rv-breakpoint-tablet) {
+  .rv-contributor-update_controls {
+    position: relative;
+    margin-left: 2rem;
+    margin-bottom: 0.5rem;
+  } 
+}

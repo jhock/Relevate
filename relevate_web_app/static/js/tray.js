@@ -1,7 +1,7 @@
 var trayTrigger = null
 var trayListener = null
 
-function handleDocumentClick (event) {
+function handleTrayDocumentClick (event) {
   var tray = document.querySelector('.rv-tray')
 
   if (!tray.contains(event.target)) {
@@ -20,7 +20,7 @@ function closeTray (tray) {
 
   window.setTimeout(hideTray, 200)
 
-  document.removeEventListener('click', handleDocumentClick)
+  document.removeEventListener('click', handleTrayDocumentClick)
 }
 
 function handleTrayTriggerClick (event) {
@@ -39,7 +39,7 @@ function handleTrayTriggerClick (event) {
     window.setTimeout(showTray, 0)
 
     var appendDocumentListener = function () {
-      trayListener = document.addEventListener('click', handleDocumentClick)
+      trayListener = document.addEventListener('click', handleTrayDocumentClick)
     }.bind(this)
 
     window.setTimeout(appendDocumentListener, 0)

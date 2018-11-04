@@ -23,27 +23,33 @@
 
 {% block content %}
 
-<div id="contributorApplication" class="rv-contributor-form">
+<div class="rv-contributor-update">
         <form id="contrib-update-form" action="{% url 'profile:contributor_update' %}" method="post" enctype='multipart/form-data'>
         {% csrf_token %}
-        {% button color="dark"
+        <div class="rv-contributor-update_controls">
+          {% button
+            id="submitBtn"
+            margin="0 0 0.5rem 0"
+          %}
+            Save Changes
+          {% end_button %}
+          {% button
+            color="warning"
+            variant="ghost"
             id="cancelBtn"
             href="profile:contributor_profile"
-        %}
-          Discard Changes
-        {% end_button %}
-        {% button
-          id="submitBtn"
-          variant="solid"
-        %}
-          Save Changes
-        {% end_button %}
-
+            margin="0 0 0.5rem 0"
+          %}
+            Discard Changes
+          {% end_button %}
+        </div>
         {% tab_list %}
           {% tab_panel title="Edit Contributor Profile" %}
-                {% include 'partials/contributor_degree_and_affiliation.html' %}
-                {% include 'partials/contributor_topics.html' %}
-                {% include 'partials/contributor_professional_info.html' %}
+            <div id="contributorApplication" class="rv-contributor-form">
+              {% include 'partials/contributor_degree_and_affiliation.html' %}
+              {% include 'partials/contributor_topics.html' %}
+              {% include 'partials/contributor_professional_info.html' %}
+            </div>
             {# Temp hide this for the demo #}
             <button style="display: none;" type="button" id="save">Save</button>
           {% end_tab_panel %}

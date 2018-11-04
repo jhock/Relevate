@@ -12,16 +12,18 @@
 
 {% block content %}
 
-<div class="uk-container uk-margin-top uk-clearfix">
+<div class="rv-contributor-profile">
 	<form id="contrib-update-form" action="{% url 'profile:contributor_update' %}" method="post" enctype='multipart/form-data'>
 	{% csrf_token %}
-	{% button
-	  id="update-btn"
-	  type="button"
-	  variant="solid"
-	%}
-	  Update Profile
-	{% end_button %}
+	<div class="rv-contributor-update_controls">
+		{% button
+		  id="update-btn"
+		  type="button"
+		  variant="solid"
+		%}
+		  Update Profile
+		{% end_button %}
+	</div>
 	{% tab_list %}
 	  {% tab_panel title="Contributor Profile" %}
 		{% include 'partials/contributor_info_display.html' %}

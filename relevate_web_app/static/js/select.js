@@ -118,14 +118,14 @@ function filterOptions (menu, input) {
 }
 
 function handleSelectInputFocus (event) {
-  document.body.addEventListener('mousedown', handleDocumentClick, false)
+  document.body.addEventListener('mousedown', handleSelectDocumentClick, false)
 }
 
 function handleSelectInputBlur (event) {
-  document.body.removeEventListener('mousedown', handleDocumentClick, false)
+  document.body.removeEventListener('mousedown', handleSelectDocumentClick, false)
 }
 
-function handleDocumentClick (event) {
+function handleSelectDocumentClick (event) {
   var target = event.target
 
   // In theory, the only thing the active element

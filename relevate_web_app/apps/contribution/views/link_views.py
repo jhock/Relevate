@@ -53,10 +53,12 @@ class LinkCreateView(LoginRequiredMixin, View):
 		if form.is_valid():
 			createdDate = datetime.utcnow()
 			image = form.cleaned_data.get('image')
-			x = form.cleaned_data.get('x')
-			y = form.cleaned_data.get('y')
-			w = form.cleaned_data.get('width')
-			h = form.cleaned_data.get('height')
+
+			#The following is commented out until a design for cropping is decided upon.
+			# x = form.cleaned_data.get('x')
+			# y = form.cleaned_data.get('y')
+			# w = form.cleaned_data.get('width')
+			# h = form.cleaned_data.get('height')
 			link = Link(
 				title = form.cleaned_data.get('title'),
 				image = image,
@@ -65,6 +67,9 @@ class LinkCreateView(LoginRequiredMixin, View):
 				)
 			link.save()
 			if image:
+				link.image = image
+				# The following is commented out until a design for cropping is decided upon.
+				"""
 				# Gets the original image to be cropped
 				photo = Image.open(form.cleaned_data.get('image'))
 				# Cropps the image using values x,y,w,and h from the form
@@ -74,6 +79,7 @@ class LinkCreateView(LoginRequiredMixin, View):
 					os.path.basename(urlparse(link.image.url).path))
 				cropped_image.save(settings.BASE_DIR + "/media/links/images/" + filename + file_extension)
 				link.image = "links/images/" + filename + file_extension
+				"""
 			topics = form.cleaned_data.get('topic_choices')
 			for each_topic in topics:
 				link.topics.add(each_topic)
@@ -175,15 +181,19 @@ class LinkUpdateView(LoginRequiredMixin, View):
 			link.title = form.cleaned_data.get('title')
 			link.description = form.cleaned_data.get('blurb')
 			image = form.cleaned_data.get('image')
-			x = form.cleaned_data.get('x')
-			y = form.cleaned_data.get('y')
-			w = form.cleaned_data.get('width')
-			h = form.cleaned_data.get('height')
+			# The following is commented out until a design for cropping is decided upon.
+			# x = form.cleaned_data.get('x')
+			# y = form.cleaned_data.get('y')
+			# w = form.cleaned_data.get('width')
+			# h = form.cleaned_data.get('height')
 			if image:
 				print("has image")
 				# Gets the original image to be cropped
 
 				try:
+					link.image = image
+					# The following is commented out until a design for cropping is decided upon.
+					"""
 					photo = Image.open(image)
 					# Cropps the image using values x,y,w,and h from the form
 					cropped_image = photo.crop((x, y, w + x, h + y))
@@ -192,6 +202,7 @@ class LinkUpdateView(LoginRequiredMixin, View):
 						os.path.basename(urlparse(link.image.url).path))
 					cropped_image.save(settings.BASE_DIR + "/media/links/images/" + filename + file_extension)
 					link.image = "links/images/" + filename + file_extension
+					"""
 				except:
 					print("there was an error")
 			print (link.image.url)

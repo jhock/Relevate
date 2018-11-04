@@ -16,7 +16,7 @@ class LinkCreateForm(forms.Form):
 	topic_choices = forms.ModelMultipleChoiceField(label="Topics:", queryset= Topics.objects.all(),
 			widget=forms.CheckboxSelectMultiple(), required=True)
 	#fields for cropping images
-	x = forms.FloatField(required=True)
+	x = forms.FloatField(required=False)
 	y = forms.FloatField(required=False)
 	width = forms.FloatField(required=False)
 	height = forms.FloatField(required=False)

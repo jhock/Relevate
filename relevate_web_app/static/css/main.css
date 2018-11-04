@@ -3729,6 +3729,8 @@ h6,
   max-width: 100%; }
 
 @media only screen and (max-width: 560px) {
+  .rv-contributor-profile_content {
+    margin: 0rem; }
   .rv-contributor-profile_banner {
     display: block; }
   .rv-contributor-profile_avatar--container {

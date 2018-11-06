@@ -40,22 +40,32 @@
     </li>
   {% else %}
     <li class="rv-navbar_avatar-container">
-      {% if user.is_contributor %}
+      {% if user_prof.is_contributor %}
         <div class="rv-navbar_avatar">
-          {% avatar
-            src=contrib_prof.avatar_image_url
-            name=contrib_prof.contributor
-          %}
+          {% if contrib_prof %}
+            {% avatar
+              src=contrib_prof.avatar_image_url
+              name=user.userprofile
+            %}
+          {% elif contributor_prof %}
+            {% avatar
+              src=contributor_prof.avatar_image_url
+              name=user.userprofile
+            %}
+          {% else %}
+            {% avatar
+              name=user.userprofile
+            %}
+          {% endif %}
         </div>
-        <div class="rv-navbar_avatar-title">{{contrib_prof.contributor}}</div>
       {% else %}
         <div class="rv-navbar_avatar">
           {% avatar
             name=user.userprofile
           %}
         </div>
-        <div class="rv-navbar_avatar-title">{{user.userprofile}}</div>
       {% endif %}
+      <div class="rv-navbar_avatar-title">{{user.userprofile}}</div>
     </li>
     <li class="rv-navbar_submenu-responsive">
       <div class="rv-navbar_subheader">Profile</div>

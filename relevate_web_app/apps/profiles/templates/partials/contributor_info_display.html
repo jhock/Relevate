@@ -89,13 +89,16 @@
 		<h4>Expertise Topics</h4>
 		<div class="rv-contributor-profile_tags">
 			{% for topic in contributor_prof.expertise_topics.all %}
-				{% tag title=topic.name %}
+				{% tag
+					margin="0.25rem 0 0 0"
+					title=topic.name
+				%}
 			{% endfor %}
 		</div>
 	</div>
 	<div class="rv-contributor-profile_section">
 		<h4>Professional Interests, Experience, and Expertise</h4>
-		<div class="uk-panel-scrollable uk-height-small uk-height-max-small">
+		<div>
 			{{ contributor_prof.biography_text | safe }}
 		</div>
 	</div>

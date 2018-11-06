@@ -178,11 +178,24 @@
           id="main_navbar_ddmenu_7"
           className="rv-navbar_option"
         %}
-          {% if user.is_contributor %}
-            {% avatar
-              src=contrib_prof.avatar_image_url
-              name=contrib_prof.contributor
-            %}
+          {% if user_prof.is_contributor %}
+            <div class="rv-navbar_avatar">
+              {% if contrib_prof %}
+                {% avatar
+                  src=contrib_prof.avatar_image_url
+                  name=user.userprofile
+                %}
+              {% elif contributor_prof %}
+                {% avatar
+                  src=contributor_prof.avatar_image_url
+                  name=user.userprofile
+                %}
+              {% else %}
+                {% avatar
+                  name=user.userprofile
+                %}
+              {% endif %}
+            </div>
           {% else %}
             <div class="rv-navbar_avatar">
               {% avatar

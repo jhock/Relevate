@@ -49,6 +49,7 @@ urlpatterns = [
 	
 	# Links
 	url(r'^link_create/$', link_views.LinkCreateView.as_view(), name="link_create"),
+	#This version of link-create
 	url(r'^link_create(?P<slug>[-\w\d\ ]+)/$', link_views.LinkCreateView.as_view(), name="link_create"),
 	url(r'^link-update/(?P<slug>[-\w\d\ ]+)/$', link_views.LinkUpdateView.as_view(), name="link_update"),
 	url(r'^link-preview$', link_views.LinkPreview.as_view(), name='link_preview'),

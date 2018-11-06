@@ -7,8 +7,6 @@ from ..utils import (
   resolve_variable,
 )
 
-import pdb
-
 register = template.Library()
 
 @register.tag('avatar')

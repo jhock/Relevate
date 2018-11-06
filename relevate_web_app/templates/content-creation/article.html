@@ -19,7 +19,7 @@
 
 <div class="rv-content-layout">
   <div class="rv-content-layout_children">
-    <form id="formUpload" action="{% url 'contribution:article_create' %}" method="post" enctype='multipart/form-data'>
+    <form id="formUpload" action="{% url form_action_type pslug %}" method="post" enctype='multipart/form-data'>
       {% csrf_token %}
       <h1 class="rv-create-content_header">{{article_create_title}}</h1>
       <div class="rv-create-content_input">

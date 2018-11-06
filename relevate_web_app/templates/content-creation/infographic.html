@@ -19,7 +19,7 @@
 
 <div class='rv-content-layout'>
   <div class='rv-content-layout_children'>
-    <form action="{% url 'contribution:infographic_create_view' %}" enctype='multipart/form-data',
+    <form action="{% url form_action_type pslug %}" enctype='multipart/form-data',
         method="post">
       {% csrf_token %}
       <h1 class="rv-create-content_header">{{infographic_create_title}}</h1>

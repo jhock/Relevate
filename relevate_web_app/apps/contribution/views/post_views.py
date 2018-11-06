@@ -114,6 +114,8 @@ class PostUnpublishView(View):
         return HttpResponse(json.dumps(response))
 
 class PostsByTag(View):
+    """View handing selecting posts for a selected tag. Directs to home page currently, will eventually
+    direct to topic_sort.html. 'tag' value provides the name of the selected tag."""
     def get(self, request, tag):
 
         topic = Topics.objects.get(name=tag)

@@ -42,7 +42,7 @@ class LinkCreateView(LoginRequiredMixin, View):
 				'last_name':request.user.last_name
 			})
 
-	def post(self, request):
+	def post(self, request, *args, **kwargs):
 		'''
 		Checks form validity, then creates a new post object of type
 		link.

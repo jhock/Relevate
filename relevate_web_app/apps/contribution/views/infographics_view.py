@@ -41,7 +41,7 @@ class InfographicCreateView(LoginRequiredMixin, View):
 
 			})
 
-	def post(self, request):
+	def post(self, request, *args, **kwargs):
 		'''
 		Actually creates the new infographic
 
@@ -171,9 +171,9 @@ class InfographicUpdateView(LoginRequiredMixin, View):
 				thumb_name = slugify(name) + '.png'
 				t = get_infographic_crop(content, thumb_name)
 				infographic_post.thumbnail.name = settings.MEDIA_URL + 'media/article_infographic/thumbnails/' + thumb_name
-				infographic_post.save()
 			isPublished = form.cleaned_data.get('isPublished')
 			infographic_post.title = title
+			infographic_post.save()
 			contributor_profile = user_can_contribute(request.user)
 			post_.save()
 			if isPublished:

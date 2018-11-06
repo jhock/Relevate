@@ -25,6 +25,8 @@ class HomeView(View):
         """
         Returns the home page.
         """
+        #Posts are ordered by date created. Preferably this should be date published, but it was not working.
+        #More research required.
         posts = Post.objects.all().order_by('-createdDate')
         published = posts.filter(isPublished=True)
 
@@ -38,8 +40,9 @@ class HomeView(View):
         except EmptyPage:
             published_posts = paginator.page(paginator.num_pages)
 
-        for p in published_posts:
-            print(p.createdDate)
+        #Following two lines used for testing.
+        # for p in published_posts:
+        #     print(p.createdDate)
 
         search_form = SearchForm()
         if request.user.is_authenticated:
@@ -53,16 +56,18 @@ class HomeView(View):
                 already_sel = contrib_prof.expertise_topics.all().order_by('-name')
                 preference_posts = posts.filter(article__article_topics__in=already_sel).distinct() | posts.filter(link__topics__in=already_sel).distinct() | posts.filter(infographic__topics__in=already_sel).distinct()
                 published_posts = Post.objects.exclude(id__in=preference_posts)
+                #Code for displaying topics used to select posts selected based on user preferences. Needed if we decide
+                #to add that back in.
                 #    topics = contrib_prof.expertise_topics.all()
-             #    already_sel = []
-             #    count = 0
-             #    for t in topics:
-             #        already_sel.append(t)
-             #        print t
-             #        count=count+1
-             #    count=len(already_sel)
-             #    for r in already_sel:
-             #        print r
+                 #    already_sel = []
+                 #    count = 0
+                 #    for t in topics:
+                 #        already_sel.append(t)
+                 #        print t
+                 #        count=count+1
+                 #    count=len(already_sel)
+                 #    for r in already_sel:
+                 #        print r
                 return render(request, "home.html", {'preference_posts': preference_posts, 'already_sel': already_sel, 'user_prof': user_prof, 'contrib_prof': contrib_prof, 'published_posts': published_posts, "search_form": search_form})
             else:
                 return render(request, "home.html", {'preference_posts': preference_posts, 'already_sel': already_sel, 'user_prof': user_prof, 'published_posts': published_posts, "search_form": search_form})

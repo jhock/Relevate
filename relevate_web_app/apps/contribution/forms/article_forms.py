@@ -80,7 +80,7 @@ class ArticleUpdateForm(forms.Form):
 		widget=forms.TextInput(attrs={'placeholder': 'Title', 'class': 'uk-input uk-form-width-large'}))
 
 	image = forms.FileField(
-		label='Upload Infographics',
+		label='Upload a picture for your article',
 		required=False,
 		validators=[validate_file],
 		widget=forms.FileInput(attrs={'accept': '.png,.jpg,.jpeg'}))

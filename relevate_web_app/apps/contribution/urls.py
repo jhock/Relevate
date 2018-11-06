@@ -17,11 +17,12 @@ urlpatterns = [
 	url(r'^new_post/$', article_views.NewPostView.as_view(), name='new_post'),
 	# Articles
 	# url(r'^articles/$', article_views.ArticleListView.as_view(), name="articles"),
+	url(r'^article_create/(?P<slug>[-\w\d\ ]+)/$', article_views.ArticleCreateView.as_view(), name="article_create"),
 	url(r'^article_create/$', article_views.ArticleCreateView.as_view(), name="article_create"),
 	url(r'^articles_update/(?P<slug>[-\w\d\ ]+)/$', article_views.ArticleUpdateView.as_view(), name="article_update"),
 	url(r'^article/(?P<slug>[-\w\d\ ]+)/$', article_views.ArticleIndividualView.as_view(), name="article_view"),
 
-url(r'^ck$', content_creation_views.ckeditor_form_view, name='ck'),
+	url(r'^ck$', content_creation_views.ckeditor_form_view, name='ck'),
 
 	#About
 	url(r'^about/$', about_views.AboutView.as_view(), name='about'),
@@ -39,13 +40,16 @@ url(r'^ck$', content_creation_views.ckeditor_form_view, name='ck'),
 
 	# Infographics
 	url(r'^infographic/(?P<slug>[-\w\d\ ]+)/$', infographics_view.InfographicView.as_view(), name="infographic_view"),
+	url(r'^article-infographics-create/(?P<slug>[-\w\d\ ]+)$', infographics_view.InfographicCreateView.as_view(),
+			name="infographic_create_view"),
 	url(r'^article-infographics-create/$', infographics_view.InfographicCreateView.as_view(),
 		name="infographic_create_view"),
 	url(r'^article-infographics-update/(?P<slug>[-\w\d\ ]+)/$',
 		infographics_view.InfographicUpdateView.as_view(), name="infographic_update_view"),
 	
 	# Links
-	url(r'^link_create$', link_views.LinkCreateView.as_view(), name="link_create"),
+	url(r'^link_create/$', link_views.LinkCreateView.as_view(), name="link_create"),
+	url(r'^link_create(?P<slug>[-\w\d\ ]+)/$', link_views.LinkCreateView.as_view(), name="link_create"),
 	url(r'^link-update/(?P<slug>[-\w\d\ ]+)/$', link_views.LinkUpdateView.as_view(), name="link_update"),
 	url(r'^link-preview$', link_views.LinkPreview.as_view(), name='link_preview'),
 

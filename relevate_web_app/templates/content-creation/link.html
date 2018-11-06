@@ -23,7 +23,7 @@
 
 <div class="rv-content-layout">
   <div class="rv-content-layout_children">
-    <form id='link-form' action="{% url 'contribution:link_create' %}" method="post" enctype='multipart/form-data'>
+    <form id='link-form' action="{% url form_action_type pslug %}" method="post" enctype='multipart/form-data'>
       {% csrf_token %}
       <h1 class="rv-create-content_header">{{link_create_title}}</h1>
       <div class="rv-create-content_input--row">

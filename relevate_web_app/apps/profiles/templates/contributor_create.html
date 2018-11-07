@@ -28,7 +28,8 @@
 					{% progress %}
 						{% progress_item status="active" %}Degree and Affiliation{% end_progress_item %}
 						{% progress_item %}Professional Info{% end_progress_item %}
-					{% progress_item %}Topics{% end_progress_item %}
+						{% progress_item %}Topics{% end_progress_item %}
+						{% progress_item %}Terms and Conditions{% end_progress_item %}
 					{% end_progress %}
 				</div>
 				{% include 'partials/contributor_degree_and_affiliation.html' %}
@@ -38,7 +39,8 @@
 					{% progress %}
 						{% progress_item status="complete" %}Degree and Affiliation{% end_progress_item %}
 						{% progress_item status="active" %}Topics{% end_progress_item %}
-					{% progress_item %}Professional Info{% end_progress_item %}
+						{% progress_item %}Professional Info{% end_progress_item %}
+						{% progress_item %}Terms and Conditions{% end_progress_item %}
 					{% end_progress %}
 				</div>
 				{% include 'partials/contributor_topics.html' %}
@@ -48,7 +50,8 @@
 					{% progress %}
 						{% progress_item status="complete" %}Degree and Affiliation{% end_progress_item %}
 						{% progress_item status="complete" %}Topics{% end_progress_item %}
-					{% progress_item status="active" %}Professional Info{% end_progress_item %}
+						{% progress_item status="active" %}Professional Info{% end_progress_item %}
+						{% progress_item %}Terms and Conditions{% end_progress_item %}
 					{% end_progress %}
 				</div>
 				{% include 'partials/contributor_professional_info.html' %}

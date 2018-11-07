@@ -1,6 +1,9 @@
 {#
   `article_create_title` -- the title text to read at the top of the create page
   `article_create_type`  -- indicates if we are creating or updating. One of `create` or `update`
+  This page handles both creation and deletion. 'form_action_type' is the url, 'pslug' is either 'post.slug' if the
+  post is being updated or a junk value if the post is being created. The junk value is needed because the page cannot
+  be parsed properly without it, and prevents the need for two separate pages.
 #}
 
 {% extends "base-titlebar.html" %}

@@ -2,7 +2,6 @@ from django.db import models
 from datetime import datetime
 from .adviser_model import Adviser
 from ...contribution.models.topic_model import Topics
-from .user_models import UserProfile
 from django.templatetags.static import static
 
 

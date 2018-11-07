@@ -57,13 +57,13 @@ class ContributorForm(forms.Form):
 	)
 
 	state = forms.CharField(widget=SelectWidget(
-		options=[state[0] for state in get_states()], 
+		options=[state for state in get_states()], 
 		label='State', 
 		placeholder='Choose your state'
 	))
 
 	country = forms.CharField(widget=SelectWidget(
-		options=[country[1] for country in get_countries()], 
+		options=[country for country in get_countries()], 
 		label='Country', 
 		default_value='United States',
 		placeholder='Choose your country'

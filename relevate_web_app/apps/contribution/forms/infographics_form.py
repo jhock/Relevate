@@ -27,7 +27,7 @@ class ArticleInfographicsCreate(forms.Form):
 
 	blurb = forms.CharField(
 		label="Short Description of Infographic",
-		max_length=150,
+		max_length=400,
 		required=True,
 		widget=forms.Textarea())
 

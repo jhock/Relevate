@@ -170,7 +170,10 @@ class InfographicUpdateView(LoginRequiredMixin, View):
 				name = title + str(createdDate)
 				thumb_name = slugify(name) + '.png'
 				t = get_infographic_crop(content, thumb_name)
-				infographic_post.thumbnail.name = settings.MEDIA_URL + 'media/article_infographic/thumbnails/' + thumb_name
+				if not (os.environ['DJANGO_SETTINGS_MODULE'] == 'settings.local'):
+					infographic_post.thumbnail.name = settings.MEDIA_URL + 'media/article_infographic/thumbnails/' + thumb_name
+				else:
+					infographic_post.thumbnail.name = settings.MEDIA_URL + '/article_infographic/thumbnails/' + thumb_name
 			isPublished = form.cleaned_data.get('isPublished')
 			infographic_post.title = title
 			infographic_post.save()

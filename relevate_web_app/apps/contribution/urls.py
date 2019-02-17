@@ -53,6 +53,7 @@ urlpatterns = [
 	url(r'^link_create(?P<slug>[-\w\d\ ]+)/$', link_views.LinkCreateView.as_view(), name="link_create"),
 	url(r'^link-update/(?P<slug>[-\w\d\ ]+)/$', link_views.LinkUpdateView.as_view(), name="link_update"),
 	url(r'^link-preview$', link_views.LinkPreview.as_view(), name='link_preview'),
+	url(r'^link/(?P<slug>[-\w\d\ ]+)/$', link_views.LinkIndividualView.as_view(), name="link_view"),
 
 	# Other
 	url(r'^all_posts/$', post_views.PostListView.as_view(), name="all_posts"),
@@ -70,4 +71,5 @@ urlpatterns = [
 	# Resources
 	url(r'^using_relevate/$', resources_views.UsingRelevateView.as_view(), name="using_relevate"),
 	url(r'^public_scholarship/$', resources_views.PublicScholarshipView.as_view(), name="public_scholarship"),
+	url(r'^report_error/$', resources_views.ReportErrorView.as_view(), name="report_error")
 ]

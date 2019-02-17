@@ -1,0 +1,107 @@
+{% extends "base-titlebar.html" %}
+{% load staticfiles %}
+{% load button_tags %}
+{% load icon_tags %}
+
+{% block head %}
+	{{ block.super }}
+	<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=59d698fcf466510012f7fead&product=sticky-share-buttons"></script>
+{% endblock %}
+
+{% block content %}
+<div class='rv-content-layout rv-content-layout--marginless'>
+	<div class='rv-content-layout_children'>
+		<div hidden id="error-message" class="uk-alert uk-alert-danger">
+			<p>Sorry Something went wrong try again, or reload page</p>
+		</div>
+		 <div hidden id="publish-message" class="uk-alert uk-alert-success">
+			<p>Link has been published!</p>
+		</div>
+		 <div hidden id="unpublish-message" class="uk-alert uk-alert-success">
+			<p>Link has been unpublished!</p>
+		</div>
+		<br>
+		<form method="post" action=".">{% csrf_token %}
+			{% if is_user_link %}
+				<div class="rv-article_controls">
+					{% if post.isPublished %}
+						{% button
+							variant="ghost"
+							color="dark"
+							value="Make Live"
+							type="submit"
+							name="change_publish_false"
+							margin="0 0.25rem 0 0"
+						%}
+							Unpublish Link
+						{% end_button %}
+					{% else %}
+						{% button
+							variant="ghost"
+							color="primary"
+							type="submit"
+							value="Make Live"
+							name="change_publish_true"
+							margin="0 0.25rem 0 0"
+						%}
+							Publish Article
+						{% end_button %}
+					{% endif %}
+					{% button
+						variant="ghost"
+						color="warning"
+						name="change_publish_true"
+						onclick="confirmDeletion()"
+					%}
+						{% icon_trash %}
+						Delete
+					{% end_button %}
+				</div>
+			{% endif %}
+		</form>
+		{% with l=link p=post %}
+			{% include 'partials/link_partial.html' %}
+		{% endwith %}
+	  <div id="preview-modal" uk-modal>
+	      {% include 'previews/link_preview.html' %}
+	  </div>
+		<script>
+			function confirmDeletion(){
+				var message = "Are you sure you want to delete this article?";
+				if(confirm(message)){
+					removeArticle();
+				}
+			}
+			function removeArticle()
+			{
+				$.ajaxSetup({
+					data: {csrfmiddlewaretoken: '{{ csrf_token }}'}
+				});
+				var slug_var = '{{ post.slug }}';
+				$.ajax({
+					url: "{% url 'contribution:post_remove' %}",
+					type: "POST",
+					data: { slug: slug_var },
+					success: function(data)
+					{
+						var res_data = JSON.parse(data);
+						if (res_data.deleted == true){
+							window.location.replace('{% url 'contribution:all_posts' %}');
+						}
+						else{
+							$("#error-message").show();
+							console.log("something went wrong" + res_data.deleted);
+						}
+					},
+					error: function(xhr)
+					{
+						// $("#error-message").text(xhr.responseText).show();
+						$("#error-message").show();
+						console.log("ERROR: " + xhr.responseText);
+					}
+				})
+			}
+		</script>
+	</div>
+</div>
+{% endblock %}

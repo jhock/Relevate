@@ -28,7 +28,7 @@ SENDGRID_USER = sendgrid_user
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'www.relevate.com']
+ALLOWED_HOSTS = ['*']
 LOGIN_REDIRECT_URL = 'contribution:home'
 
 # Application definition
@@ -158,7 +158,7 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 STATIC_URL = '/static/'
 STATIC_DIRS = (os.path.join(BASE_DIR, 'static'))
-STATIC_ROOT = (os.path.join(BASE_DIR,'static_assets'))
+STATIC_ROOT = (os.path.join(BASE_DIR, 'static_assets'))
 COMPRESS_ROOT = (os.path.join(BASE_DIR, 'static/__cache__'))
 
 STATICFILES_DIRS = [

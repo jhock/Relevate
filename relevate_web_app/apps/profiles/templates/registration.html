@@ -16,7 +16,7 @@
 <div class="rv-box-layout">
 	<div class="rv-box-layout_box">
 		<h2 class="rv-box-form_header">Create account</h2>
-		<form action="{% url 'profile:registration' %}" method="post" class="uk-form-horizontal">
+		<form action="{% url 'profile:registration' %}" method="post" class="uk-form-horizontal" enctype='multipart/form-data'>
 			{% csrf_token %}
 			<div>
 				{% text_input

@@ -9,8 +9,9 @@ from django.views.generic import View
 from datetime import datetime
 from ..models.link_model import Link
 from ..models.post_model import Post, PendingPost
-from django.template.defaultfilters import slugify
 from ..models.topic_model import Topics
+from django.core.exceptions import ObjectDoesNotExist
+from ...profiles.modules.contributor_util import user_can_contribute
 from django.contrib import messages
 from ..modules.post_util import display_error
 try:
@@ -249,6 +250,81 @@ class LinkUpdateView(LoginRequiredMixin, View):
 					'first_name':request.user.first_name,
 					'last_name':request.user.last_name
 				})
+
+
+class LinkIndividualView( View):
+	"""
+		Class for view individual link
+	"""
+
+	def get(self, request, slug):
+		"""
+		The get request for the view
+		Login no longer required, non-users can now access posts.
+
+		:param slug: this is a unique url identifier for each link
+
+		"""
+		try:
+			post = Post.objects.get(slug=str(slug), is_deleted=False)
+			link = post.link
+			is_user_link = False
+			if request.user.is_authenticated():
+				user_prof = UserProfile.objects.get(user=request.user)
+				contributor = user_can_contribute(request.user)
+				if user_prof.is_contributor == True:
+					if contributor.id is post.contributor.id or user_prof.user.email == "relevate@outlook.com":
+						is_user_link = True
+				else:
+					post.views = post.views + 1
+					post.save()
+				return render(request, 'link_view.html',
+					{
+						'link':link,
+						'is_user_link':is_user_link,
+						'user_prof':user_prof,
+						'post': post,
+						'first_name':request.user.first_name,
+						'last_name':request.user.last_name
+					})
+			else:
+				return render(request, 'link_view.html',
+							  {
+								  'link': link,
+								  'is_user_link': is_user_link,
+								  'post': post
+							  })
+		except ObjectDoesNotExist:
+			return HttpResponseRedirect(reverse('contribution:all_posts'))
+
+	def post(self, request, slug):
+		"""
+		The post request to make changes to the individual link
+
+		:param slug: the unique url identifier
+
+		"""
+		user_prof = UserProfile.objects.get(user=request.user)
+		try:
+			post = Post.objects.get(slug=str(slug), is_deleted=False)
+			link = post.link
+			if request.POST.get('change_publish_true'):
+				post.isPublished = True
+			elif request.POST.get('change_publish_false'):
+				post.isPublished = False
+			post.save()
+			return render(request, 'link_view.html',
+				{
+					'link':link,
+					'is_user_link':True,
+					'user_prof':user_prof,
+					'post': post,
+					'first_name':request.user.first_name,
+					'last_name':request.user.last_name
+				})
+		except ObjectDoesNotExist:
+			pass
+		return HttpResponseRedirect(reverse('contribution:all_posts'))
 
 
 

@@ -33,7 +33,7 @@ class ArticleCreateForm(forms.Form):
 		required=True)
 
 	blurb = forms.CharField(
-		max_length=3000,
+		max_length=400,
 		label='Short Description of Article',
 		widget=forms.Textarea(attrs={'placeholder': 'Insert Article Here', 'class': 'uk-textarea', 'rows':'5'}),
 		required=True)

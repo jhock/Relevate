@@ -164,6 +164,10 @@ class ContributorCreateView(LoginRequiredMixin, View):
             w = form.cleaned_data.get('width')
             h = form.cleaned_data.get('height')
             avatar = form.cleaned_data.get('avatar')
+            #Here we clean the naming for the avatar file. If the file has % or + in it, AWS will not return the file.
+            #It's still on the server, but noone has the authority to access it.
+            if (form.cleaned_data.get('avatar')):
+                avatar = avatar.translate(None, '%+')
             address = Address(
                 street_address=form.cleaned_data.get('address'),
                 city=form.cleaned_data.get('city'),
@@ -179,7 +183,7 @@ class ContributorCreateView(LoginRequiredMixin, View):
                 biography_text=form.cleaned_data.get('biography'),
                 address=address,
                 interests=form.cleaned_data.get('interests'),
-                avatar=form.cleaned_data.get('avatar'),
+                avatar=avatar,
                 accept_terms=form.cleaned_data.get('accept_terms'),
             )
             if (form.cleaned_data.get('avatar')):

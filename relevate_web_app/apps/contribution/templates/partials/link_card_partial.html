@@ -4,16 +4,16 @@
  <!--var colors = ['red', 'green', 'blue', 'orange', 'yellow'];-->
  <!--$('.item').css('background-color', colors[Math.floor(Math.random() * colors.length)]);</script>-->
 <div class="rv-content-card">
-	<a href="{{ l.url }}">
+	<a href="{% url 'contribution:link_view' p.slug %}" >
     <img class="rv-content-card_img" src="{{ l.image.url }}">
   </a>
   <div class="rv-content-card_content">
-    <a target="_blank" href="{{ l.url }}" class="rv-content-card_heading-link">
+    <a target="_blank" href="{% url 'contribution:link_view' p.slug %}" class="rv-content-card_heading-link">
       <h4 class="rv-content-card_heading">
     		{{ l.title }}
     	</h4>
     </a>
-    <a class='uk-text-primary' target="_blank" href="{{ l.url }}">
+    <a class='uk-text-primary' target="_blank" href="{% url 'contribution:link_view' p.slug %}">
       <span class="rv-content-card_link"></span>
     </a>
     <div class="rv-content-card_contributor-info">
@@ -31,7 +31,7 @@
       <hr class="rv-content-card_contributor-rule" />
     </div>
     <div class="rv-content-card_preview">
-        <p>{{ l.description | safe }}<a target="_blank" href="{{ l.url }}" class="rv-content-card_heading-link">Read More...</a></p>
+        <p>{{ l.description | safe }}<a target="_blank" href="{% url 'contribution:link_view' p.slug %}" class="rv-content-card_heading-link">Read More...</a></p>
     </div>
   </div>
   <div class="rv-content-card_topics">

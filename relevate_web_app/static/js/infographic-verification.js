@@ -15,7 +15,7 @@ $(document).ready(function()
 			},
 			blurb: {
 				done: validBlurbLength(),
-				message: "Description must be between 1 and 150 characters"
+				message: "Description must be between 1 and 400 characters"
 			},
 			file: {
 				done: fileIsImage(),
@@ -70,7 +70,7 @@ $(document).ready(function()
 
 	CKEDITOR.instances['id_blurb'].on('key', function(event){
 		    var count = CKEDITOR.instances['id_blurb'].getData().length;
-			var left = 150 - count;
+			var left = 400 - count;
 			var word = "(" + left + " characters left )";
 		    $("#blurb_count").text('');
 		    $("#blurb_count").text(word);

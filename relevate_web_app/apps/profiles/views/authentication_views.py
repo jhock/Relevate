@@ -39,7 +39,7 @@ class RegisterUserView(View):
 	def get(self, request):
 		if request.user.is_authenticated():
 			return HttpResponseRedirect(reverse('contribution:home'))
-		return render(request, 'registration.html', {'form': RegistrationForm()}, RequestContext(request, locals()))
+		return render(request, 'registration.html', {'form': RegistrationForm()})
 
 	"""
 	If the form is valid, a ``User`` object is created as well as a ``PendingAdvisers``
@@ -101,7 +101,8 @@ class RegisterUserView(View):
 				login(request, user)
 				return HttpResponseRedirect(reverse('profile:confirmation'))
 			#Error for account creation. (To Do: specific errors)
-		return render(request, 'registration.html', {'form': form}, RequestContext(request, locals()))
+			#RequestContext(request, locals()) was removed from the following line. May be needed for displaying error messages.
+		return render(request, 'registration.html', {'form': form})
 
 
 class DeactivatedAccountView(View):

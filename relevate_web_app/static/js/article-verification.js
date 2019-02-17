@@ -27,7 +27,7 @@ $(document).ready(function()
 			},
 			blurb: {
 				done: validBlurbLength(),
-				message: "Short description must have content between 0 and 150 characters"
+				message: "Short description must have content between 0 and 400 characters"
 			},
 			references: {
 				done: validReferencesLength(),
@@ -94,7 +94,7 @@ $(document).ready(function()
 
 	CKEDITOR.instances['id_blurb'].on('change', function(event){
 		    var count = CKEDITOR.instances['id_blurb'].getData().length;
-			var left = 150 - count;
+			var left = 400 - count;
 			var word = left + " characters remaining";
 		    $("#blurb_count").text('');
 		    $("#blurb_count").text(word);

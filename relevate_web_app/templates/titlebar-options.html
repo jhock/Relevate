@@ -180,26 +180,15 @@
         %}
           {% if user_prof.is_contributor %}
             <div class="rv-navbar_avatar">
-              {% if contrib_prof %}
-                {% avatar
-                  src=contrib_prof.avatar_image_url
-                  name=user.userprofile
-                %}
-              {% elif contributor_prof %}
-                {% avatar
-                  src=contributor_prof.avatar_image_url
-                  name=user.userprofile
-                %}
-              {% else %}
-                {% avatar
-                  name=user.userprofile
-                %}
-              {% endif %}
+              {% avatar
+                src=user.userprofile.get_associated_contributor.avatar_image_url
+                name=user.userprofile.full_name
+              %}
             </div>
           {% else %}
             <div class="rv-navbar_avatar">
               {% avatar
-                name=user.userprofile
+                name=user.userprofile.full_name
               %}
             </div>
           {% endif %}

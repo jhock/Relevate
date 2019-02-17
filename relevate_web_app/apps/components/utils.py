@@ -2,6 +2,8 @@ from django import template
 from django.template.base import TemplateSyntaxError
 import re
 
+import pdb
+
 def parse_tag(parser, token, closetag):
   nodelist = parser.parse((closetag,))
   arguments = token.split_contents()
@@ -98,7 +100,7 @@ def resolve_variable(prop_value, context):
   variable = template.Variable(variable)
   try:
     resolved = variable.resolve(context)
-    return resolved
+    return resolved if resolved is not None else ''
   except template.VariableDoesNotExist:
     return prop_value
 
@@ -108,8 +110,10 @@ def resolve_prop_variables(props, context):
 
   for i in range(0, len(props)):
     parsed = parse_prop(props[i])
+
     if parsed[1] is not None:
       props[i] = parsed[0] + '=' + resolve_variable(parsed[1], context)
+
   return props
 
 def convert_props_to_html(props):

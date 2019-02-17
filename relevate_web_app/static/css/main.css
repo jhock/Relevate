@@ -3310,6 +3310,12 @@ h6,
 .rv-box-form_links {
   text-align: center; }
 
+.rv-box-form_content {
+  text-align: center; }
+
+.rv-box-form_bold {
+  font-weight: 700; }
+
 .rv-create-content_header {
   margin-top: 1rem;
   font-size: 2rem; }

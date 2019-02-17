@@ -2,12 +2,12 @@
 {% load i18n %}
 
 {% block content %}
-<div class='uk-container uk-width-1-1 uk-margin-top'>
-	<div class='uk-flex uk-flex-center uk-text-center'>
-		<div style="width: 40%; border: 5px solid #2FA6F5; border-radius: 6px; padding: 15px; background:#FFFFFF">
-                <p>{% trans "Logged out" %}</p>
-                <a href="{% url 'contribution:home' %}">Home</a></li>
-        </div>
+<div class="rv-box-layout">
+  <div class="rv-box-layout_box">
+    <div class="rv-box-form_content">
+      <p class="rv-box-form_bold">{% trans "Successfully logged out" %}</p>
+      <a class="rv-link" href="{% url 'contribution:home' %}">Go back to the home page</a>
+    </div>
 	</div>
 </div>
 {% endblock %}

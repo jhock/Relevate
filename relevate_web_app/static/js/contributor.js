@@ -3,9 +3,9 @@
 	* Function that rely on this script include select button and adding academic credentials dynamically
 
 **/
-	var academicId;
-	var certId;
-	var affiliationId;
+	var contribCreate_academicId = 0;
+	var contribCreate_certId = 0;
+	var contribCreate_affiliationId = 0;
 	var academicTable;
 	var certificationTable;
 	var affiliationTable;
@@ -18,13 +18,13 @@ console.log("document ready");
     console.log
     if('{{academics_req}}'){
         console.log('academics');
-        var tableId = academicId;
+        var tableId = contribCreate_academicId;
         var res = '{{academics_req}}';
         while(res.length > 0){
             var res = res.split(/[,|]/);
             res[1] = res[1].substring(2);
             res[2] = res[2].substring(2);
-                    var academicGrid = "<tr class='rv-contributor-form_box-row acaRow' id=acaProf"+academicId+">" +
+                    var academicGrid = "<tr class='rv-contributor-form_box-row acaRow' id=acaProf"+contribCreate_academicId+">" +
                     "<td class='rv-contributor-form_table--item'>" +
                         "<div>" +
                             "<div class='rv-contributor-form_table--item-label'>Program</div>" +
@@ -69,8 +69,8 @@ console.log("document ready");
                     "</td>" +
                 "</tr>"
             $("#acaProf").append(academicGrid);
-            mentorDegreeIds.push(academicId);
-            academicId++;
+            mentorDegreeIds.push(contribCreate_academicId);
+            contribCreate_academicId++;
             updateTablesUpdateInfo(true);
             $("#id_program").val("");
             $("#id_institution").val("");
@@ -91,9 +91,9 @@ console.log("document ready");
 		var institution = $("#id_institution").val();
 		console.log(institution);
 
-		var tableId = academicId;
+		var tableId = contribCreate_academicId;
 		if(academicProgram && degree && institution){
-			var academicGrid = "<tr class='rv-contributor-form_box-row acaRow' id=acaProf"+academicId+">" +
+			var academicGrid = "<tr class='rv-contributor-form_box-row acaRow' id=acaProf"+contribCreate_academicId+">" +
 					"<td class='rv-contributor-form_table--item'>" +
 						"<div>" +
 							"<div class='rv-contributor-form_table--item-label'>Program</div>" +
@@ -138,8 +138,8 @@ console.log("document ready");
 					"</td>" +
 				"</tr>"
 			$("#acaProf").append(academicGrid);
-			mentorDegreeIds.push(academicId);
-			academicId++;
+			mentorDegreeIds.push(contribCreate_academicId);
+			contribCreate_academicId++;
 			updateTablesUpdateInfo(true);
 			$("#id_program").val("");
 			$("#id_institution").val("");
@@ -157,7 +157,7 @@ console.log("document ready");
 		Add Certification Row
 	*/
 		var certificate = $("#id_certification").val();
-		var certTableId = certId;
+		var certTableId = contribCreate_certId;
 console.log('cert');
 		if(certificate){
 		    console.log('cert yes');
@@ -194,7 +194,7 @@ console.log('cert');
 				"</td>" +
 			"</tr>"
 			$("#addCert").append(certGrid);
-			certId++;
+			contribCreate_certId++;
             console.log('cert end');
 			updateTablesUpdateInfo(false);
 			$("#id_certification").val("");
@@ -207,7 +207,7 @@ console.log('cert');
 		Add Attribute Row
 	*/
 		var affiliation = $("#id_organizational_affiliation").val();
-		var affiliationTableId = affiliationId;
+		var affiliationTableId = contribCreate_affiliationId;
 
 		if(affiliation){
 			var affiliationGrid = "<tr class='rv-contributor-form_box-row affiliationRow' id=addAffiliation"+affiliationTableId+">" +
@@ -243,7 +243,7 @@ console.log('cert');
 				"</td>" +
 			"</tr>"
 			$("#addAffiliation").append(affiliationGrid);
-			affiliationId++;
+			contribCreate_affiliationId++;
 
 			updateTablesUpdateInfo(false);
 			$("#id_organizational_affiliation").val("");
@@ -454,7 +454,7 @@ console.log('cert');
 
 	function saveAffiliationEdit (id) {
 		var row = document.getElementById('addAffiliation' + id)
-		var rowItems = row.getElementsByClassName('rv-contributor-form_table--item-content')
+		var rowItems = row.getElementsByClassName('rv-contributor-form_table--item')
 
 		showLabels(row)
 

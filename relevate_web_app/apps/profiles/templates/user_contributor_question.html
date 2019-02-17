@@ -1,25 +1,29 @@
 {% extends "base-titlebar.html" %}
 {% load staticfiles %}
+{% load button_tags %}
 
 {% block head %}
 	{{ block.super }}
 {% endblock head %}
 
 {% block content %}
-<div class='uk-container uk-width-1-1 uk-margin-top'>
-	<div class='uk-flex uk-flex-center uk-text-center'>
-		<div style="width: 600px; border: 5px solid #2FA6F5; border-radius: 6px; padding: 15px; background:#FFFFFF">
-			<h1>Welcome to Relevate!</h1>
-            Are you here to become a contributor to this site?
-            <div style="white-space: nowrap; padding: 15px;" class="inline">
-            <a style='color: white;' class='uk-button uk-button-primary' href="{% url 'profile:contributor_create' %}">
-				Yes, continue to application
+<div class="rv-box-layout">
+  <div class="rv-box-layout_box">
+			<h2>Welcome to Relevate!</h2>
+      While you're here, sign up to become a contributor.
+      {% button
+        variant="ghost"
+        color="primary"
+        href="profile:contributor_create"
+        fluid_width="True"
+        margin="1rem 0 1rem 0"
+      %}
+        Contributor application
+      {% end_button %}
+      Or, if you'd like to complete this step later, you can
+      <a class="rv-link" href="{% url 'contribution:home' %}">
+				continue to the home page.
 			</a>
-            <a style='color: white;' class='uk-button uk-button-primary' href="{% url 'contribution:home' %}">
-				No, continue to home page
-			</a>
-            </div>
-		</div>
 	</div>
 </div>
 {% endblock %}

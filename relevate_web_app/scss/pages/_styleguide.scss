@@ -48,7 +48,7 @@ $styleguide-nav-width: 12rem;
     font-weight: $rv-font-weight-black;
 
     &::before {
-      content: "•"; 
+      content: "•";
       position: absolute;
       color: $rv-color-white;
       left: -1rem;
@@ -83,22 +83,18 @@ $styleguide-nav-width: 12rem;
 }
 
 .rv-styleguide-nav_logo {
+  display: flex;
+  align-items: center;
   margin-right: 0.5rem;
   border-right: 2px solid $rv-color-white;
   padding-right: 0.5rem;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.25rem;
+  margin-top: .25rem;
+  height: 1.5rem;
 
   &:active,
   &:focus {
     outline: none;
-  }
-
-  svg {
-    width: 1.5rem;
-    g {
-      fill: $rv-color-white; 
-      stroke: $rv-color-primary;
-    }
   }
 }
 
@@ -106,14 +102,6 @@ $styleguide-nav-width: 12rem;
   width: 100%;
   margin-top: 5rem;
   text-align: center;
-
-  svg {
-    width: 5rem;
-    g {
-      fill: $rv-color-dark; 
-      stroke: $rv-color-white;
-    }
-  }
 }
 
 .rv-styleguide-index_content {

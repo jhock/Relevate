@@ -997,6 +997,9 @@
   .rv-icon.x-large {
     width: 3.5rem;
     height: 3.5rem; }
+  .rv-icon.xx-large {
+    width: 7rem;
+    height: 7rem; }
   .rv-icon.fill {
     width: 100%;
     height: 100%; }
@@ -1748,6 +1751,8 @@
   line-height: 1.6rem; }
   .rv-text-area_input::-webkit-input-placeholder {
     font-weight: 400; }
+  .rv-text-area_input::-moz-placeholder {
+    font-weight: 400; }
   .rv-text-area_input:-ms-input-placeholder {
     font-weight: 400; }
   .rv-text-area_input::-ms-input-placeholder {
@@ -1869,6 +1874,8 @@
   padding-right: 1.25rem;
   transition: all 0.1s ease-in; }
   .rv-text-input_input::-webkit-input-placeholder {
+    font-weight: 400; }
+  .rv-text-input_input::-moz-placeholder {
     font-weight: 400; }
   .rv-text-input_input:-ms-input-placeholder {
     font-weight: 400; }
@@ -2612,6 +2619,7 @@ h6,
   margin: 0 1.5rem 3rem 1.5rem;
   box-shadow: 0 0.3rem 0.3rem rgba(0, 0, 0, 0.3);
   -webkit-column-break-inside: avoid;
+     -moz-column-break-inside: avoid;
           break-inside: avoid;
   display: inline-block;
   border: 1px solid #D6D6D6;
@@ -2726,13 +2734,7 @@ h6,
   justify-content: center; }
 
 .rv-home-header_logo {
-  text-align: center;
-  margin-bottom: 1em; }
-  .rv-home-header_logo svg {
-    width: 4em; }
-    .rv-home-header_logo svg g {
-      fill: #246FF2;
-      stroke: #ffffff; }
+  text-align: center; }
 
 .rv-home-header_description {
   text-align: center;
@@ -2870,11 +2872,10 @@ h6,
   .rv-navbar_logo-link:before {
     border-radius: 999rem; }
 
-.rv-navbar_logo svg {
-  width: 1.5rem; }
-  .rv-navbar_logo svg g {
-    fill: #246FF2;
-    stroke: #ffffff; }
+.rv-navbar_logo {
+  display: flex;
+  align-items: center;
+  width: 2.5rem; }
 
 .rv-navbar_shadow {
   box-shadow: 0 0.3rem 0.3rem rgba(0, 0, 0, 0.2); }
@@ -3999,27 +4000,21 @@ h6,
   color: #ffffff; }
 
 .rv-styleguide-nav_logo {
+  display: flex;
+  align-items: center;
   margin-right: 0.5rem;
   border-right: 2px solid #ffffff;
   padding-right: 0.5rem;
-  padding-bottom: 0.5rem; }
+  padding-bottom: 0.25rem;
+  margin-top: .25rem;
+  height: 1.5rem; }
   .rv-styleguide-nav_logo:active, .rv-styleguide-nav_logo:focus {
     outline: none; }
-  .rv-styleguide-nav_logo svg {
-    width: 1.5rem; }
-    .rv-styleguide-nav_logo svg g {
-      fill: #ffffff;
-      stroke: #246FF2; }
 
 .rv-styleguide-index_header {
   width: 100%;
   margin-top: 5rem;
   text-align: center; }
-  .rv-styleguide-index_header svg {
-    width: 5rem; }
-    .rv-styleguide-index_header svg g {
-      fill: #3A3A3A;
-      stroke: #ffffff; }
 
 .rv-styleguide-index_content {
   text-align: center;

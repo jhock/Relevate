@@ -26,7 +26,7 @@
     width: 100%;
     height: 100%;
   }
-  
+
   //------------
   //  size
   //------------
@@ -48,6 +48,10 @@
 
   &.x-large {
     @include iconSize(3.5rem);
+  }
+
+  &.xx-large {
+    @include iconSize(7rem);
   }
 
   &.fill {

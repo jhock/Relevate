@@ -3115,6 +3115,9 @@ h6,
     -webkit-transform: rotate(450deg);
             transform: rotate(450deg); } }
 
+.rv-about-tablist {
+  margin-top: 3rem; }
+
 /**
 ----------------
   Font Size

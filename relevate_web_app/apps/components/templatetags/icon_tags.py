@@ -87,6 +87,10 @@ def icon_menu(parser, token):
 def icon_like(parser, token):
   return create_icon(parser, token, 'relevate_logo')
 
+@register.tag('icon_wildcat')
+def icon_like(parser, token):
+    return create_icon(parser, token, 'wildcat')
+
 @register.tag('icon_save')
 def icon_save(parser, token):
   return create_icon(parser, token, 'save')

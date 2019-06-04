@@ -1,6 +1,7 @@
 {% extends "base-titlebar.html" %}
 {% load staticfiles %}
 {% load tab_list_tags %}
+{% load icon_tags %}
 
 {% block head %}
 	<link rel="stylesheet" type="text/css" href="{% static 'css/about.css' %}">
@@ -110,69 +111,56 @@
 						</div>
 						<br>
 					{% endfor %}
-					<div class='uk-card uk-card-default uk-box-shadow-large' uk-grid>
-						<div class='uk-width-auto uk-card-media-left uk-conver-container'>
-							<img class='uk-height-medium' src="https://twibbon.s3.amazonaws.com/2012/66/temp_6bad0fce-dcdd-405f-b133-fd3c5a00227a.gif">
 
+					<div class="rv-about-content">
+					<div class='rv-about-card'>
+						<div class='rv-about-avatar'>
+							{% icon_wildcat title="wildcat" size="x-large" %}
 						</div>
-						<div class='uk-card-body uk-width-expand'>
-							<h4 class='uk-card-title'>
-								<span class='uk-icon-small uk-icon-user'></span> Nic Johnson
-							</h4>
-						</div>
+						<h4>
+							Steve Jensen
+						</h4>
 					</div>
-					<br>
-					<div class='uk-card uk-card-default uk-box-shadow-large' uk-grid>
-						<div class='uk-width-auto uk-card-media-left uk-conver-container'>
-							<img class='uk-height-medium' src="https://twibbon.s3.amazonaws.com/2012/66/temp_6bad0fce-dcdd-405f-b133-fd3c5a00227a.gif">
+					<div class='rv-about-card'>
+						<div class='rv-about-avatar'>
+							{% icon_wildcat title="wildcat" size="x-large" %}
+						</div>
+						<h4>
+							Joshua Hock
+						</h4>
+					</div>
+					<div class='rv-about-card'>
+						<div class='rv-about-avatar'>
+							{% icon_wildcat title="wildcat" size="x-large" %}
+						</div>
+						<h4>
+							John Chapple
+						</h4>
+					</div>
+					</div>
 
-						</div>
-						<div class='uk-card-body uk-width-expand'>
-							<h4 class='uk-card-title'>
-								<span class='uk-icon-small uk-icon-user'></span> Uzzi Emuchay
-							</h4>
-						</div>
-					</div>
-					<br>
-					<div class='uk-card uk-card-default uk-box-shadow-large' uk-grid>
-						<div class='uk-width-auto uk-card-media-left uk-conver-container'>
-							<img class='uk-height-medium' src="https://twibbon.s3.amazonaws.com/2012/66/temp_6bad0fce-dcdd-405f-b133-fd3c5a00227a.gif">
-
-						</div>
-						<div class='uk-card-body uk-width-expand'>
-							<h4 class='uk-card-title'>
-								<span class='uk-icon-small uk-icon-user'></span> Josh Hock
-							</h4>
-						</div>
-					</div>
+					<div class="rv-about-content">
 					<h2>Previous Engineers</h2>
 					<p>These are the current software engineers bringing this project to life.</p>
-					{% for a in previous_engineers %}
-						<div class='uk-card uk-card-default uk-box-shadow-large' uk-grid>
-														{% if a.image %}
-							<div class='uk-width-auto uk-card-media-left uk-conver-container'>
-								<img class='about-image' src="{{ a.image.url}}">
-							</div>
-														{% endif %}
-							<div class='uk-card-body uk-width-expand'>
-								<h4 class='uk-card-title'>
-									<span class='uk-icon-small uk-icon-user'></span> {{ a.name }}
-									{% if can_edit %}
-									<a style='color: white;' class='uk-button uk-button-primary' href="{% url 'contribution:about_update' a.slug %}">
-									Edit </a>
-									<form class='uk-float-right' action="{% url 'contribution:about_remove' a.pk %}" method="post">
-										{% csrf_token %}
-										<input style='color: white; background-color: red;' class='uk-button uk-button-primary' type="submit" value="Delete" />
-									</form>
-									{% endif %}
-								</h4>
-								{% autoescape off %}
-									{{ a.content }}
-								{% endautoescape %}
-							</div>
+
+					<div class='rv-about-card'>
+						<div class='rv-about-avatar'>
+							{% icon_wildcat title="wildcat" size="x-large" %}
 						</div>
-						<br>
-					{% endfor %}
+						<h4>
+							Nic Johnson
+						</h4>
+					</div>
+					<div class='rv-about-card'>
+						<div class='rv-about-avatar'>
+							{% icon_wildcat title="wildcat" size="x-large" %}
+						</div>
+						<h4>
+							Uzzi Emuchay
+						</h4>
+					</div>
+					</div>
+
 			  {% end_tab_panel %}
 			  {% tab_panel title="Official Advisers" %}
 					<h2>Official Advisers</h2>

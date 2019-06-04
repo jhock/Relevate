@@ -674,7 +674,7 @@
   position: absolute;
   width: 14rem;
   background: #ffffff;
-  box-shadow: 0 0.3rem 0.3rem rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.1rem 0.4rem rgba(0, 0, 0, 0.2);
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
   left: 50%;
@@ -1373,7 +1373,7 @@
   background: #ffffff;
   border-radius: 0.25rem;
   border: 1px solid #D6D6D6;
-  box-shadow: 0 0.3rem 0.3rem rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.1rem 0.4rem rgba(0, 0, 0, 0.2);
   top: 2.25rem;
   left: 0;
   right: 0;
@@ -1751,8 +1751,6 @@
   line-height: 1.6rem; }
   .rv-text-area_input::-webkit-input-placeholder {
     font-weight: 400; }
-  .rv-text-area_input::-moz-placeholder {
-    font-weight: 400; }
   .rv-text-area_input:-ms-input-placeholder {
     font-weight: 400; }
   .rv-text-area_input::-ms-input-placeholder {
@@ -1874,8 +1872,6 @@
   padding-right: 1.25rem;
   transition: all 0.1s ease-in; }
   .rv-text-input_input::-webkit-input-placeholder {
-    font-weight: 400; }
-  .rv-text-input_input::-moz-placeholder {
     font-weight: 400; }
   .rv-text-input_input:-ms-input-placeholder {
     font-weight: 400; }
@@ -2474,7 +2470,7 @@ h6,
     margin-top: 3rem; }
   .rv-box-layout_box {
     border: 1px solid #D6D6D6;
-    box-shadow: 0 0.3rem 0.3rem rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0.1rem 0.4rem rgba(0, 0, 0, 0.2);
     padding: 2rem 2rem; } }
 
 .rv-content-layout {
@@ -2619,7 +2615,6 @@ h6,
   margin: 0 1.5rem 3rem 1.5rem;
   box-shadow: 0 0.3rem 0.3rem rgba(0, 0, 0, 0.3);
   -webkit-column-break-inside: avoid;
-     -moz-column-break-inside: avoid;
           break-inside: avoid;
   display: inline-block;
   border: 1px solid #D6D6D6;
@@ -2878,7 +2873,7 @@ h6,
   width: 2.5rem; }
 
 .rv-navbar_shadow {
-  box-shadow: 0 0.3rem 0.3rem rgba(0, 0, 0, 0.2); }
+  box-shadow: 0 0.1rem 0.4rem rgba(0, 0, 0, 0.2); }
 
 .rv-navbar_submenu {
   display: flex;
@@ -3117,6 +3112,21 @@ h6,
 
 .rv-about-tablist {
   margin-top: 3rem; }
+
+.rv-about-avatar {
+  margin-right: 2rem;
+  display: flex;
+  align-items: center; }
+
+.rv-about-card {
+  display: flex;
+  align-items: center;
+  box-shadow: 0 0.1rem 0.4rem rgba(0, 0, 0, 0.2);
+  padding: 1rem 2rem;
+  margin-top: 1rem; }
+
+.rv-about-content {
+  margin-bottom: 2rem; }
 
 /**
 ----------------
@@ -3627,7 +3637,7 @@ h6,
   flex-wrap: wrap; }
 
 .rv-contributor-list_card {
-  box-shadow: 0 0.3rem 0.3rem rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.1rem 0.4rem rgba(0, 0, 0, 0.2);
   padding: 2rem;
   margin-right: 1rem;
   margin-bottom: 2rem;

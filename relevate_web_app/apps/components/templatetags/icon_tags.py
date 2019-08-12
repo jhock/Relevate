@@ -7,7 +7,7 @@ from os import listdir
 from os.path import dirname, join
 
 from ..utils import (
-  enforce_required_props, 
+  enforce_required_props,
   get_prop_value,
   split_props,
   resolve_variable
@@ -19,7 +19,7 @@ def create_icon(parser, token, variant):
   props = token.split_contents()[1:]
 
   picked_props, input_props = split_props(['title', 'size', 'color', 'rotate'], props)
-  
+
   title = get_prop_value('title', picked_props, None)
   size = get_prop_value('size', picked_props, 'small')
   color = get_prop_value('color', picked_props, 'dark')
@@ -82,6 +82,14 @@ def icon_link(parser, token):
 @register.tag('icon_menu')
 def icon_menu(parser, token):
   return create_icon(parser, token, 'menu')
+
+@register.tag('icon_relevate_logo')
+def icon_like(parser, token):
+  return create_icon(parser, token, 'relevate_logo')
+
+@register.tag('icon_wildcat')
+def icon_like(parser, token):
+    return create_icon(parser, token, 'wildcat')
 
 @register.tag('icon_save')
 def icon_save(parser, token):

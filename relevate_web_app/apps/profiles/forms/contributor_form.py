@@ -32,53 +32,53 @@ class SelectWidget(forms.TextInput):
 class ContributorForm(forms.Form):
 	# Changed to false to prevent update page from throwing a fit
 	cv = forms.FileField(
-		label='Upload your CV (PDF)', 
-		required=False, 
+		label='Upload your CV (PDF)',
+		required=False,
 		widget=forms.FileInput(attrs={'accept': '.pdf'})
 	)
-	
+
 	adviser = AdviserModelChoiceField(
-		label="Select Your Adviser", 
-		queryset=Adviser.objects.filter(is_available=True), 
-		widget=forms.Select(attrs={'class': 'uk-select'}), 
+		label="Select Your Adviser",
+		queryset=Adviser.objects.filter(is_available=True),
+		widget=forms.Select(attrs={'class': 'uk-select'}),
 		empty_label="No Mentor"
 	)
 
 	address = forms.CharField(
-		label="Professional Address", 
+		label="Professional Address",
 		widget=forms.TextInput(attrs={'placeholder': 'Enter your address'}),
 		required=True
 	)
 
 	city = forms.CharField(
-		label="City", 
+		label="City",
 		widget=forms.TextInput(attrs={'placeholder': 'Enter your city'}),
 		required=True
 	)
 
 	state = forms.CharField(widget=SelectWidget(
-		options=[state for state in get_states()], 
-		label='State', 
+		options=[state for state in get_states()],
+		label='State',
 		placeholder='Choose your state'
 	))
 
 	country = forms.CharField(widget=SelectWidget(
-		options=[country for country in get_countries()], 
-		label='Country', 
+		options=[country for country in get_countries()],
+		label='Country',
 		default_value='United States',
 		placeholder='Choose your country'
 	))
 
 	zipcode = forms.CharField(
-		label="Zip Code", 
+		label="Zip Code",
 		max_length=5,
-		widget=forms.TextInput(attrs={'placeholder': 'Zip Code'}), 
+		widget=forms.TextInput(attrs={'placeholder': 'Zip Code'}),
 		required=True
 	)
-	
+
 	# @US_TODO: Turn this into a choices field for recommendation system etc
 	program = forms.CharField(
-		label="Program", 
+		label="Program",
 		required=False,
 		widget=forms.TextInput(
 			attrs={
@@ -98,12 +98,12 @@ class ContributorForm(forms.Form):
 	)
 
 	website_url = forms.URLField(
-		label="Website", 
+		label="Website",
 		widget=forms.TextInput(
 			attrs={
 				'placeholder': 'Website URL'
 			}
-		), 
+		),
 		required=False
 	)
 
@@ -132,25 +132,25 @@ class ContributorForm(forms.Form):
 	# )
 
 	area_of_expertise = forms.ModelMultipleChoiceField(
-		label="Area of Expertise Relevant to Romantic Relationships", 
+		label="Area of Expertise Relevant to Romantic Relationships",
 		queryset=Topics.objects.all(),
 		widget=forms.CheckboxSelectMultiple(attrs={'class': 'expertise-checkbox'}),
 		required=True
 	)
 
 	interests = forms.CharField(
-		label="Professional Interests, Experience, and Expertise",  
+		label="Professional Interests, Experience, and Expertise",
 		widget=forms.Textarea(
 			attrs={
 				'style':'overflow:scroll;resize:none;'
 			}
-		), 
+		),
 		required=False
 	)
 
 	# Changed to false to prevent update page from throwing a fit
 	avatar = forms.ImageField(
-		label="Upload your profile picture", 
+		label="Upload your profile picture",
 		required=False,
 		widget=forms.FileInput(
 			attrs={
@@ -191,8 +191,8 @@ class ContributorForm(forms.Form):
 		super(ContributorForm, self).__init__(*args, **kwargs)
 
 		self.fields['organizational_affiliation'].widget = SelectWidget(
-			options=[org for org in _organization_list], 
-			label='Organizational Affiliations', 
+			options=[org for org in _organization_list],
+			label='Organizational Affiliations',
 			placeholder='Ex. NCFR'
 		)
 
@@ -293,12 +293,12 @@ class ContributorUpdateForm(forms.Form):
 		editable='False'
 	),			required=False)
 
-	# degree = forms.ChoiceField(
-	# 	choices=[(degree, degree) for degree in Degree.objects.all().values_list('name', flat=True)],
-	# 		label='Level of Study',
-	# 		widget=forms.Select,
-	# 		required=False
-	# )
+	degree = forms.ChoiceField(
+		choices=[(degree, degree) for degree in Degree.objects.all().values_list('name', flat=True)],
+			label='Level of Study',
+			widget=forms.Select,
+			required=False
+	)
 
 	area_of_expertise = forms.ModelMultipleChoiceField(
 		label="Area of Expertise Relevant to Romantic Relationships",

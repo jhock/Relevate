@@ -35,13 +35,9 @@
 }
 
 .rv-navbar_logo {
-  svg {
-    width: 1.5rem;
-    g {
-      fill: $rv-color-primary; 
-      stroke: $rv-color-white;
-    }
-  }
+  display: flex;
+  align-items: center;
+  width: 2.5rem;
 }
 
 .rv-navbar_shadow {

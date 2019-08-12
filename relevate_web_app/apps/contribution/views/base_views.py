@@ -4,6 +4,7 @@ from django.views.generic import View
 from django.urls import reverse
 from ...profiles.models.user_models import UserProfile
 from ...profiles.models.contributor_model import ContributorProfile
+from ..models.content_creation_model import ContentCreation
 from braces.views import LoginRequiredMixin
 from ..models.post_model import Post
 from ..forms.search_forms import SearchForm
@@ -109,6 +110,7 @@ class SearchView(View):
     """
     def get(self, request):
 
+        print("regular search")
         search_query = request.GET.get('searchbox', None)
         # searches using the search util for post title, topics, contributor first and last name.
         article_title_result = get_query(search_query, ['article__title', 'article__article_topics__name', 'contributor__user_profile__user__first_name', 'contributor__user_profile__user__last_name'])
@@ -134,6 +136,99 @@ class SearchView(View):
                                                        'published_link_posts': published_link_posts,
                                                        'published_infographic_posts': published_infographic_posts,
                                                        'count': count})
+
+
+class AdvancedSearchView(View):
+    """
+    Display a Blog List page filtered by the search query.
+    """
+
+    def get(self, request):
+
+        print("advanced search")
+        search_filter = request.GET.get('search_filter', None)
+        search_query = request.GET.get('searchbox', None)
+        if search_filter == "Post":
+            # searches using the search util for post title, topics, contributor first and last name.
+            article_title_result = get_query(search_query, ['article__title'])
+            link_title_result = get_query(search_query, ['link__title'])
+            infographic_title_result = get_query(search_query, ['infographic__title'])
+            posts = Post.objects.all()
+            published_article_posts = posts.filter(is_article=True, isPublished=True)
+            published_article_posts = published_article_posts.filter(article_title_result).distinct()
+            published_link_posts = posts.filter(is_link=True, isPublished=True)
+            published_link_posts = published_link_posts.filter(link_title_result).distinct()
+            published_infographic_posts = posts.filter(is_infographic=True, isPublished=True)
+            published_infographic_posts = published_infographic_posts.filter(infographic_title_result).distinct()
+            count = published_article_posts.count() + published_infographic_posts.count() + published_link_posts.count()
+            if request.user.is_authenticated:
+                user_prof = UserProfile.objects.get(user=request.user)
+                if user_prof.is_contributor:
+                    contrib_prof = ContributorProfile.objects.get(user_profile=user_prof)
+                    return render(request, "search_results.html", {'user_prof': user_prof, 'contrib_prof': contrib_prof,
+                                                                   'published_article_posts': published_article_posts,
+                                                                   'published_link_posts': published_link_posts,
+                                                                   'published_infographic_posts': published_infographic_posts,
+                                                                   'count': count})
+                else:
+                    return render(request, "search_results.html",
+                                  {'user_prof': user_prof, 'published_article_posts': published_article_posts,
+                                   'published_link_posts': published_link_posts,
+                                   'published_infographic_posts': published_infographic_posts, 'count': count})
+            else:
+                return render(request, "search_results.html", {'published_article_posts': published_article_posts,
+                                                               'published_link_posts': published_link_posts,
+                                                               'published_infographic_posts': published_infographic_posts,
+                                                               'count': count})
+        # searches for posts based on topic
+        elif search_filter == "Topic":
+            article_title_result = get_query(search_query, ['article__article_topics__name'])
+            link_title_result = get_query(search_query, ['link__topics__name'])
+            infographic_title_result = get_query(search_query, ['infographic__topics__name'])
+            posts = Post.objects.all()
+            published_article_posts = posts.filter(is_article=True, isPublished=True)
+            published_article_posts = published_article_posts.filter(article_title_result).distinct()
+            published_link_posts = posts.filter(is_link=True, isPublished=True)
+            published_link_posts = published_link_posts.filter(link_title_result).distinct()
+            published_infographic_posts = posts.filter(is_infographic=True, isPublished=True)
+            published_infographic_posts = published_infographic_posts.filter(infographic_title_result).distinct()
+            count = published_article_posts.count() + published_infographic_posts.count() + published_link_posts.count()
+            if request.user.is_authenticated:
+                user_prof = UserProfile.objects.get(user=request.user)
+                if user_prof.is_contributor:
+                    contrib_prof = ContributorProfile.objects.get(user_profile=user_prof)
+                    return render(request, "search_results.html", {'user_prof': user_prof, 'contrib_prof': contrib_prof,
+                                                                   'published_article_posts': published_article_posts,
+                                                                   'published_link_posts': published_link_posts,
+                                                                   'published_infographic_posts': published_infographic_posts,
+                                                                   'count': count})
+                else:
+                    return render(request, "search_results.html",
+                                  {'user_prof': user_prof, 'published_article_posts': published_article_posts,
+                                   'published_link_posts': published_link_posts,
+                                   'published_infographic_posts': published_infographic_posts, 'count': count})
+            else:
+                return render(request, "search_results.html", {'published_article_posts': published_article_posts,
+                                                               'published_link_posts': published_link_posts,
+                                                               'published_infographic_posts': published_infographic_posts,
+                                                               'count': count})
+        # search_filter == "Content_Creation"
+        else:
+            posts = ContentCreation.objects.all()
+            content_creation_posts = posts.filter(title__contains=search_query)
+            count = posts.count()
+            if request.user.is_authenticated:
+                user_prof = UserProfile.objects.get(user=request.user)
+                if user_prof.is_contributor:
+                    contrib_prof = ContributorProfile.objects.get(user_profile=user_prof)
+                    return render(request, "search_results.html", {'user_prof': user_prof, 'contrib_prof': contrib_prof,
+                                                                   'content_creation_posts': content_creation_posts,
+                                                                   'count': count})
+                else:
+                    return render(request, "search_results.html",
+                                  {'user_prof': user_prof, 'content_creation_posts': content_creation_posts, 'count': count})
+            else:
+                return render(request, "search_results.html", {'content_creation_posts': content_creation_posts, 'count': count})
 
 
 

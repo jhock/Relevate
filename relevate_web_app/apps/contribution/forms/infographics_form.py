@@ -17,7 +17,7 @@ class ArticleInfographicsCreate(forms.Form):
 		label="Tag appropiate choices",
 		queryset=Topics.objects.all(),
 		widget=forms.CheckboxSelectMultiple(attrs={'type':'hidden', 'id':'selected_item'}),
-    required=False)
+    required=True)
 
 	contents = forms.FileField(
 		label='Upload Infographics',

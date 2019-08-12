@@ -1,50 +1,59 @@
 {% load staticfiles %}
+{% load avatar_tags %}
 
-<div class="uk-card uk-card-default uk-box-shadow-large item">
-	<div class='uk-card-body'>
-		<div class='uk-clearfix uk-card-title uk-text-center'>
-            <a href="{% url 'contribution:content_creation_view' p.slug %}">{{ p.title }}</a>
-			{% if p.public_scholarship_or_content_creation == False %}
-            <span class="uk-badge">{{  p.level }}</span>
-			{% endif %}
-		</div>
-        <div class="uk-grid">
-            <div class="uk-width-1-2">
-                <p class='uk-text-center' style="font-size: 125%;">
-                        <img style="max-width: 50px;" class="profile_avatar uk-border-circle" src="{{ p.contributor.avatar_image_url }}">
-                    {{ p.contributor }}
-                </p>
-                <div class='grey-bg'>
-                    <img class='post-img uk-align-center' src="{{ p.image.url }}">
-                </div>
-            </div>
-            <div class="uk-width-1-2">
-                <p style="display:inline">{{ p.blurb | safe }}<a href="{% url 'contribution:content_creation_view' p.slug %}">Read more...</a>
-                </p>
-            </div>
-        </div>
-		{% if p.contributor == contrib_prof or superuser_override %}
-		<div class='uk-float-right'>
-			{% csrf_token %}
-			<a style='color: white;' class='uk-button uk-button-primary' href="{% url 'contribution:content_creation_update' p.slug %}">
-				Edit
-			</a>
-			<button class="uk-button uk-button-default uk-margin-small-right" type="button" uk-toggle="target: #modal-example">Delete</button>
-				<div id="modal-example" uk-modal>
-					<div class="uk-modal-dialog uk-modal-body">
-						<h2 class="uk-modal-title">Warning!</h2>
-						<p>This post will be permanently deleted. If you would like to unpublish the post, click the "Edit" button, then unpublish.</p>
-						<p class="uk-text-right">
-							<button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
-							<form class='uk-float-right' action="{% url 'contribution:content_creation_remove' p.pk %}" method="post">
-								{% csrf_token %}
-								<input style='color: white; background-color: red;' class='uk-button uk-button-primary' type="submit" value="Delete" />
-							</form>
-						</p>
-					</div>
+<div class="rv-content-card">
+
+	{% if p.public_scholarship_or_content_creation == False %}
+	<span class="uk-badge">{{  p.level }}</span>
+	{% endif %}
+  <a href="{% url 'contribution:content_creation_view' p.slug %}">
+    <img class="rv-content-card_img" src="{{ p.image.url }}" alt="Image for post">
+  </a>
+  <div class="rv-content-card_content">
+    <a href="{% url 'contribution:content_creation_view' p.slug %}" class="rv-content-card_heading-link">
+      <h4 class="rv-content-card_heading">{{ p.title }}</h4>
+    </a>
+    <a href="{% url 'contribution:content_creation_view' p.slug %}">
+      <span class="rv-content-card_link"></span>
+    </a>
+    <div class="rv-content-card_contributor-info">
+  		<div class="rv-content-card_avatar">
+        {% avatar
+          src=p.contributor.avatar_image_url
+          name=p.contributor
+        %}
+      </div>
+      <div class="rv-content-card_contributor-name">
+          <a href="{% url 'profile:public_contributor_profile' p.contributor.id %}" style="text-decoration:none; color :inherit;">
+              {{ p.contributor }}
+          </a>
+      </div>
+      <hr class="rv-content-card_contributor-rule" />
+    </div>
+    <div class="rv-content-card_preview">
+        <p>{{ a.blurb | safe }}<a href="{% url 'contribution:content_creation_view' p.slug %}" class="rv-content-card_heading-link">Read More...</a></p>
+    </div>
+  </div>
+	{% if p.contributor == contrib_prof or superuser_override %}
+	<div class='uk-float-right'>
+		{% csrf_token %}
+		<a style='color: white;' class='uk-button uk-button-primary' href="{% url 'contribution:content_creation_update' p.slug %}">
+			Edit
+		</a>
+		<button class="uk-button uk-button-default uk-margin-small-right" type="button" uk-toggle="target: #modal-example">Delete</button>
+			<div id="modal-example" uk-modal>
+				<div class="uk-modal-dialog uk-modal-body">
+					<h2 class="uk-modal-title">Warning!</h2>
+					<p>This post will be permanently deleted. If you would like to unpublish the post, click the "Edit" button, then unpublish.</p>
+					<p class="uk-text-right">
+						<button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+						<form class='uk-float-right' action="{% url 'contribution:content_creation_remove' p.pk %}" method="post">
+							{% csrf_token %}
+							<input style='color: white; background-color: red;' class='uk-button uk-button-primary' type="submit" value="Delete" />
+						</form>
+					</p>
 				</div>
-		</div>
-		{% endif %}
+			</div>
 	</div>
+	{% endif %}
 </div>
-

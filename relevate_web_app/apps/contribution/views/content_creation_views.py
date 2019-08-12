@@ -62,6 +62,66 @@ class ContentCreationView(View):
             return render(request, "home.html")
 
 
+class ContentCreationTagView(View):
+    '''
+    View for the main Content Creation page. Lists all Content Creation posts. Returns a regular user to the
+    home page since it is not directed towards them, allows contributors access, and allows the user "relevate@outlook.com"
+    to edit, delete, and create posts.
+    '''
+
+    def get(self, request, slug):
+        if request.user.is_authenticated:
+            user = request.user
+            user_prof = UserProfile.objects.get(user=user)
+            if user_prof.is_contributor:
+                contrib_prof = ContributorProfile.objects.get(user_profile=user_prof)
+                can_edit = False
+                posts = ContentCreation.objects.all()
+                # checks the group "Content Creation Contributor" for the user. If this group has not yet been created, create
+                # and assign users in the admin page.
+                public_scholarship_or_content_creation = "content_creation"
+                if user.groups.filter(name='Content Creation Contributor').exists():
+                    can_edit = True
+                posts = posts.filter(type=str(slug))
+                return render(request, "content_creation.html",
+                              {'user_prof': user_prof, 'contrib_prof': contrib_prof, 'can_edit': can_edit,
+                               'posts': posts})
+            else:
+                return render(request, "home.html", {'user_prof': user_prof})
+        else:
+            return render(request, "home.html")
+
+
+class ContentCreationLevelView(View):
+    '''
+    View for the main Content Creation page. Lists all Content Creation posts. Returns a regular user to the
+    home page since it is not directed towards them, allows contributors access, and allows the user "relevate@outlook.com"
+    to edit, delete, and create posts.
+    '''
+
+    def get(self, request, slug):
+        if request.user.is_authenticated:
+            user = request.user
+            user_prof = UserProfile.objects.get(user=user)
+            if user_prof.is_contributor:
+                contrib_prof = ContributorProfile.objects.get(user_profile=user_prof)
+                can_edit = False
+                posts = ContentCreation.objects.all()
+                # checks the group "Content Creation Contributor" for the user. If this group has not yet been created, create
+                # and assign users in the admin page.
+                public_scholarship_or_content_creation = "content_creation"
+                if user.groups.filter(name='Content Creation Contributor').exists():
+                    can_edit = True
+                posts = posts.filter(level=str(slug))
+                return render(request, "content_creation.html",
+                              {'user_prof': user_prof, 'contrib_prof': contrib_prof, 'can_edit': can_edit,
+                               'posts': posts})
+            else:
+                return render(request, "home.html", {'user_prof': user_prof})
+        else:
+            return render(request, "home.html")
+
+
 class ContentCreationCreateView(LoginRequiredMixin, View):
     '''
     View for creating a new Content Creation Post, only relevate@outlook.com or user in permissions group will return

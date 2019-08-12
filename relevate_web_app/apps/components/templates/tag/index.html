@@ -1,5 +1,8 @@
 {% load staticfiles %}
 
-<a class="rv-tag" href="{{ href }}" style="margin: {{ margin }};">
+<a class="rv-tag" {% if internal_href and tag_slug %} href="{% url internal_href slug=tag_slug %}"
+   {% elif internal_href %} href="{% url internal_href %}"
+   {% else %} href="{{ href }}"
+   {% endif %} style="margin: {{ margin }};">
   {{ title }}
 </a>

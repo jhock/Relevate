@@ -7,14 +7,13 @@
   {#      
     TODO: With the text input updates the input no longer fits within the navbar.
     We will bring this back, but we need to come up with an alternative that will fit
-
+  #}
     <li class="rv-navbar_option-text-input">
       <form action="{% url 'contribution:search_results' %}" method="get">
         {% csrf_token %}
-        <input class="rv-text-input" id="searchbox" name="searchbox" type="text" placeholder="Search">
+        <input class="rv-text-input" id="searchbox" name="searchbox" type="text" placeholder="Search" required>
       </form>
     </li>
-   #}
   {% if not user.is_authenticated %}
     <li class="rv-navbar_submenu-responsive">
       {% button
@@ -107,11 +106,9 @@
       <a class="rv-nav_responsive-link" href="{% url 'contribution:all_posts' %}">Posts To Date</a>
     </li>
 
+    <br>
     <li class="rv-navbar_submenu-responsive">
-      <div class="rv-navbar_subheader">Resource Collective</div>
       <a class="rv-nav_responsive-link" href="{% url 'contribution:using_relevate' %}">Using Relevate</a>
-      <a class="rv-nav_responsive-link" href="{% url 'contribution:public_scholarship' %}">Public Scholarship</a>
-      <a class="rv-nav_responsive-link" href="{% url 'contribution:content_creation' %}">Content Creation</a>
     </li>
   {% else %}
     <li class="rv-navbar_submenu-responsive">

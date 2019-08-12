@@ -3,6 +3,19 @@
 
 {% block content %}
 <div class='uk-container uk-margin-top'>
+	<form action="{% url 'contribution:advanced_search_results' %}" method="get">
+		{% csrf_token %}
+		  <div class="rv-searchbar">
+			  <select name="search_filter" required>
+				 <option value="" disabled selected>Select search option</option>
+				 <option value="Post">Post</option>
+				 <option value="Topic">Topic</option>
+				 <option value="Content_Creation">Content Creation</option>
+			</select>
+			<input class="rv-search-input" id="searchbox" name="searchbox" type="text" placeholder="Search..." required>
+			<button class="rv-search-icon"><i class="fas fa-search"></i></button>
+		  </div>
+	  </form>
 	<div data-uk-grid>
 		{% for p in published_article_posts %}
 			<div class="uk-width-1-2">
@@ -23,6 +36,11 @@
 				{% with l=p.link %}
 					{% include 'partials/link_card_partial.html' %}
 				{% endwith %}
+			</div>
+		{% endfor %}
+		{% for p in content_creation_posts %}
+			<div class="uk-width-1-2">
+				{% include 'partials/content_create_card_partial.html' %}
 			</div>
 		{% endfor %}
 		{% if count == 0 %}

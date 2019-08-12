@@ -35,6 +35,8 @@ urlpatterns = [
 
 	#Content Creation
 	url(r'^content_creation/$', content_creation_views.ContentCreationView.as_view(), name="content_creation"),
+	url(r'^content_creation/(?P<slug>[-\w\d\D\ ]+)$', content_creation_views.ContentCreationTagView.as_view(), name="content_creation"),
+	url(r'^content_creation_level/(?P<slug>[-\w\d\D\ ]+)$', content_creation_views.ContentCreationLevelView.as_view(), name="content_creation_level"),
 	url(r'^content_creation_create/(?P<slug>[-\w\d\ ]+)/$', content_creation_views.ContentCreationCreateView.as_view(), name="content_creation_create"),
 	url(r'^content_creation_create/$', content_creation_views.ContentCreationCreateView.as_view(), name="content_creation_create"),
 	url(r'^content_creation/(?P<slug>[-\w\d\ ]+)/$', content_creation_views.ContentCreationIndividualView.as_view(), name="content_creation_view"),
@@ -70,6 +72,7 @@ urlpatterns = [
 
 	# Search
 	url(r'^search_results/$', base_views.SearchView.as_view(), name="search_results"),
+	url(r'^advanced_search_results/$', base_views.AdvancedSearchView.as_view(), name="advanced_search_results"),
 
 	# Posts by Tag
 	url(r'^posts_by_tag/(?P<tag>\w+)$', post_views.PostsByTag.as_view(), name="posts_by_tag"),

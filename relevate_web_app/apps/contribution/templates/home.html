@@ -1,5 +1,6 @@
 {% extends "base-titlebar.html" %}
 {% load staticfiles %}
+{% load button_tags %}
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'uikit-old/css/components/accordion.min.css' %}" />
@@ -12,14 +13,19 @@
 <body onload="return ran_col()">
 	<div class="rv-home_body">
 		{% if user.is_authenticated %}
-			<div class="rv-home_body_top">
-				<div><h2 class="rv-home_welcome"> Welcome {{ user.first_name }}</h2></div>
-				{% if not user_prof.confirmed %}
-				<!--TODO: we should provide some useful feedback here. How do they go about confirming the account? -->
-				<p class="uk-badge uk-badge-notification uk-badge-danger">Looks like you still need to confirm your account</p>
-				{% endif %}
-			</div>
-			</div>
+		<div class="rv-home_body_top">
+			<div><h2 class="rv-home_welcome"> Welcome {{ user.first_name }}</h2></div>
+			{% if not user_prof.confirmed %}
+			<!--TODO: we should provide some useful feedback here. How do they go about confirming the account? -->
+			<p class="uk-badge uk-badge-notification uk-badge-danger">Looks like you still need to confirm your account</p>
+			{% endif %}
+			{% if user_prof.is_contributor %}
+			{% button href="contribution:content_creation" id="filter-content-creation"%}
+			  Filter Content Creation
+			{% end_button %}
+			{% endif %}
+		</div>
+	</div>
 		<br>
 		{% else %}
 			{% include 'partials/home_header_partial.html' %}

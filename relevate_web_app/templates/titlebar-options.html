@@ -1,20 +1,23 @@
 {% load staticfiles %}
 {% load avatar_tags %}
 {% load button_tags %}
+{% load text_input_tags %}
+{% load select_tags %}
 {% load dropdown_menu_tags %}
 
-<ul class="rv-navbar_options-container">
-  {#      
-    TODO: With the text input updates the input no longer fits within the navbar.
-    We will bring this back, but we need to come up with an alternative that will fit
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
-    <li class="rv-navbar_option-text-input">
+<ul class="rv-navbar_options-container">
+  <li class="rv-navbar_option-text-input">
       <form action="{% url 'contribution:search_results' %}" method="get">
         {% csrf_token %}
-        <input class="rv-text-input" id="searchbox" name="searchbox" type="text" placeholder="Search">
+          <div class="rv-searchbar">
+            <input class="rv-search-input" id="searchbox" name="searchbox" type="text" placeholder="Search..." required>
+            <button class="rv-search-icon"><i class="fas fa-search"></i></button>
+          </div>
       </form>
-    </li>
-   #}
+  </li>
   {% if user.is_staff %}
   <li class="rv-navbar_submenu">
     {% dropdown_menu %}
@@ -109,21 +112,7 @@
     </li>
 
     <li class="rv-navbar_submenu">
-      {% dropdown_menu %}
-        {% dm_trigger with
-          id="main_navbar_ddmenu_5"
-          className="rv-navbar_option"
-          withArrow="True"
-        %}
-          <span>Resource Collective</span>
-        {% end_dm_trigger %}
-
-        {% dm_content %}
-          {% dm_item with href="contribution:using_relevate" %}Using Relevate{% end_dm_item %}
-          {% dm_item with href="contribution:public_scholarship" %}Public Scholarship{% end_dm_item %}
-          {% dm_item with href="contribution:content_creation" %}Content Creation{% end_dm_item %}
-        {% end_dm_content %}
-      {% end_dropdown_menu %}
+      <a class="rv-navbar_option" href="{% url 'contribution:using_relevate' %}">Using Relevate</a>
     </li>
   {% else %}
     <li class="rv-navbar_submenu">

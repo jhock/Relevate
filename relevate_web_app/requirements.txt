@@ -27,7 +27,7 @@ docopt==0.6.2
 docutils==0.13.1
 imagesize==0.7.1
 itsdangerous==0.24
-Jinja2==2.9.4
+Jinja2==2.11.3
 jmespath==0.9.0
 libsass==0.13.4
 MarkupSafe==0.23

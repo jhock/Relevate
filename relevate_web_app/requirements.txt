@@ -1,6 +1,6 @@
 alabaster==0.7.9
 awsebcli==3.9.0
-Babel==2.3.4
+Babel==2.9.1
 backports.ssl-match-hostname==3.5.0.1
 beautifulsoup4==4.5.1
 blessed==1.9.5
